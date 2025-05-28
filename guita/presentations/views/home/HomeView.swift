@@ -17,7 +17,7 @@ struct HomeView: View {
         Button("기타 학습") {
           router.push(.curriculum)
         }
-        
+
         Button("Development") {
           router.push(.dev)
         }

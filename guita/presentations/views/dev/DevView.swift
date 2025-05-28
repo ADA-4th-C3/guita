@@ -3,18 +3,21 @@
 import SwiftUI
 
 struct DevView: View {
+  @EnvironmentObject var router: Router
+  
   var body: some View {
     BaseView(
       create: { DevViewModel() }
-    ) { viewModel, state in
+    ) { _, _ in
       VStack {
         // MARK: Toolbar
         Toolbar(title: "Development")
-        
+
         Form {
           // MARK: Features
           Section(header: Text("Features")) {
-            Tile(title: "플랫 주파수 분석") {
+            Tile(title: "Pitch Classification") {
+              router.push(.pitchClassification)
             }
           }
         }
