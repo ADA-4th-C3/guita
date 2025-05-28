@@ -28,5 +28,8 @@ struct BaseView<Content: View, State: Any, ViewModel: BaseViewModel<State>>: Vie
         .navigationBarBackButtonHidden(navigationBarBackButtonHidden)
         .navigationBarHidden(navigationBarHidden)
     }
+    .onDisappear {
+      viewModel.dispose()
+    }
   }
 }

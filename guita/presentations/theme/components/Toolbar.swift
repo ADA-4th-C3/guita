@@ -48,6 +48,7 @@ struct Toolbar<Leading: View, Trailing: View>: View {
       // MARK: Title
       if !title.isEmpty {
         Text(title)
+          .foregroundColor(.primary)
       }
     }
     .frame(height: 56)

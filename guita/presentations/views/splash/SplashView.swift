@@ -10,9 +10,7 @@ struct SplashView: View {
       create: { SplashViewModel() }
     ) { viewModel, _ in
       VStack {
-        ProgressView()
-          .progressViewStyle(CircularProgressViewStyle())
-          .tint(.blue)
+        Loading()
       }
       .onAppear {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {

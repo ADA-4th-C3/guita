@@ -18,4 +18,6 @@ class BaseViewModel<State>: ObservableObject {
       }
     }
   }
+
+  func dispose() {}
 }
