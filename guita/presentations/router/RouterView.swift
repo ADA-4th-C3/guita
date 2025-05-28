@@ -25,6 +25,7 @@ struct RouterView: View {
         .navigationDestination(for: SubPage.self) { subPage in
           switch subPage {
           case .curriculum: CurriculumView()
+          case .dev: DevView()
           }
         }
         .toolbarBackground(.hidden, for: .navigationBar)

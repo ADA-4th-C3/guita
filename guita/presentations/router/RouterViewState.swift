@@ -7,6 +7,7 @@ enum RootPage {
 
 enum SubPage {
   case curriculum
+  case dev
 }
 
 struct RouterViewState {
