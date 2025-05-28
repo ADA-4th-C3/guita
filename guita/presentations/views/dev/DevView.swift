@@ -22,6 +22,9 @@ struct DevView: View {
             Tile(title: "Code Classification") {
               router.push(.codeClassification)
             }
+            Tile(title: "Voice Control") {
+              router.push(.voiceControl)
+            }
           }
         }
       }

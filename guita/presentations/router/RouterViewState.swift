@@ -10,6 +10,7 @@ enum SubPage {
   case dev
   case pitchClassification
   case codeClassification
+  case voiceControl
 }
 
 struct RouterViewState {

@@ -28,6 +28,7 @@ struct RouterView: View {
           case .dev: DevView()
           case .pitchClassification: PitchClassificationView()
           case .codeClassification: CodeClassificationView()
+          case .voiceControl: VoiceControlView()
           }
         }
         .toolbarBackground(.hidden, for: .navigationBar)
