@@ -27,6 +27,7 @@ struct RouterView: View {
           case .curriculum: CurriculumView()
           case .dev: DevView()
           case .pitchClassification: PitchClassificationView()
+          case .codeClassification: CodeClassificationView()
           }
         }
         .toolbarBackground(.hidden, for: .navigationBar)

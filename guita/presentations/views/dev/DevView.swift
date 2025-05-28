@@ -4,7 +4,7 @@ import SwiftUI
 
 struct DevView: View {
   @EnvironmentObject var router: Router
-  
+
   var body: some View {
     BaseView(
       create: { DevViewModel() }
@@ -18,6 +18,9 @@ struct DevView: View {
           Section(header: Text("Features")) {
             Tile(title: "Pitch Classification") {
               router.push(.pitchClassification)
+            }
+            Tile(title: "Code Classification") {
+              router.push(.codeClassification)
             }
           }
         }

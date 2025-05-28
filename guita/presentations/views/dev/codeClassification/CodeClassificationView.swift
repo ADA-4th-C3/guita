@@ -2,14 +2,14 @@
 
 import SwiftUI
 
-struct PitchClassificationView: View {
+struct CodeClassificationView: View {
   var body: some View {
     BaseView(
-      create: { PitchClassificationViewModel() }
+      create: { CodeClassificationViewModel() }
     ) { _, _ in
       VStack {
         // MARK: Toolbar
-        Toolbar(title: "Pitch Classification")
+        Toolbar(title: "Code Classification")
         Spacer()
       }
     }
@@ -18,6 +18,6 @@ struct PitchClassificationView: View {
 
 #Preview {
   BasePreview {
-    PitchClassificationView()
+    CodeClassificationView()
   }
 }

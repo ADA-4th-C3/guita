@@ -9,6 +9,7 @@ enum SubPage {
   case curriculum
   case dev
   case pitchClassification
+  case codeClassification
 }
 
 struct RouterViewState {
