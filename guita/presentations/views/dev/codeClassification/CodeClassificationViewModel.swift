@@ -1,7 +1,69 @@
 //  Copyright © 2025 ADA 4th Challenge3 Team1. All rights reserved.
 
+import AVFoundation
+import SwiftUI
+
 final class CodeClassificationViewModel: BaseViewModel<CodeClassificationViewState> {
+  private let audioManager: AudioManager = .shared
+  private let codeClassification = CodeClassification() //기타코드 크로마 벡터 등등과 관련된 로직이 들어가있음
+  
   init() {
-    super.init(state: .init())
+    super.init(state: .init(
+      recordPermissionState : audioManager.getRecordPermissionState(),
+      code: "",
+      confidence: 0.0,
+      selectedCodes: ["E", "A", "B7"],
+      allMatches: []
+    ))
+  }
+  
+  private func startRecording() {
+    audioManager.start() { [weak self] buffer, _ in
+      guard let self = self else { return }
+      
+      // buffer 단위로 감지하고, 결과가 없으면 리턴
+      guard let rawResult = self.codeClassification.detectCode(buffer: buffer, windowSize: self.audioManager.windowSize) else {
+        return
+      }
+      
+      // 선택된 곡의 활성 코드만 필터링
+      let active = self.state.selectedCodes
+      if !active.contains(rawResult.code) { return }
+      let codeName = rawResult.code
+      let matches = rawResult.allMatches.filter { active.contains($0.code) }
+      
+      // UI 업데이트
+      DispatchQueue.main.async {
+        self.emit(self.state.copy(
+          code: codeName,
+          allMatches: matches
+        ))
+      }
+    }
+  }
+  
+  func requestRecordPermission() {
+    audioManager.requestRecordPermission { isGranted in
+      self.emit(self.state.copy(
+        recordPermissionState: isGranted ? .granted : .denied
+      ))
+      
+      if isGranted {
+        self.startRecording()
+      }
+    }
+  }
+  
+  func openSettings() {
+    if let url = URL(string: UIApplication.openSettingsURLString),
+       UIApplication.shared.canOpenURL(url)
+    {
+      UIApplication.shared.open(url)
+    }
+  }
+  
+  override func dispose() {
+    audioManager.stop()
   }
 }
+
