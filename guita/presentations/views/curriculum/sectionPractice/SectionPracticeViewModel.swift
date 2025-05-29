@@ -7,24 +7,24 @@ import AVFAudio
 /// 구간별 코드 진행과 실시간 오디오 인식을 관리
 final class SectionPracticeViewModel: BaseViewModel<SectionPracticeViewState> {
   
-  // MARK: - Dependencies
-  
   private let audioManager = AudioManager.shared
   private let codeClassification = CodeClassification()
-  
-  // MARK: - Private Properties
-  
   private var practiceTimer: Timer?
   private var isAudioSetup = false
   
-  // MARK: - Initializer
-  
   init() {
-    super.init(state: SectionPracticeViewState())
+    super.init(state: SectionPracticeViewState(
+      currentSection: 1,
+      totalSections: 12,
+      currentChordProgression: ["A", "A", "E", "E"],
+      currentChordIndex: 0,
+      playbackSpeed: 1.0,
+      recognizedCode: "",
+      isListening: false
+    ))
     Logger.d("SectionPracticeViewModel 초기화")
   }
   
-  // MARK: - Public Methods
   
   /// 구간 연습 시작
   func startPractice() {
@@ -91,7 +91,6 @@ final class SectionPracticeViewModel: BaseViewModel<SectionPracticeViewState> {
     restartChordProgressionTimer() // 새로운 속도로 타이머 재시작
   }
   
-  // MARK: - Private Methods
   
   /// 오디오 인식 설정
   private func setupAudioRecognition() {

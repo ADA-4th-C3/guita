@@ -7,25 +7,25 @@ import AVFoundation
 /// 단계별 코드 학습 진행과 실시간 오디오 인식을 관리
 final class CodeDetailViewModel: BaseViewModel<CodeDetailViewState> {
   
-  // MARK: - Dependencies
-  
   private let codeType: CodeType
   private let audioManager = AudioManager.shared
   private let codeClassification = CodeClassification()
-  
-  // MARK: - Private Properties
-  
   private var isAudioSetup = false
-  
-  // MARK: - Initializer
   
   init(codeType: CodeType) {
     self.codeType = codeType
-    super.init(state: CodeDetailViewState(codeType: codeType))
+    super.init(state: CodeDetailViewState(
+      codeType: codeType,
+      currentStep: 1,
+      totalSteps: 6,
+      currentInstruction: "",
+      recognizedCode: "",
+      isListening: false,
+      canProceed: false
+    ))
     Logger.d("CodeDetailViewModel 초기화: \(codeType.rawValue)")
   }
   
-  // MARK: - Public Methods
   
   /// 학습 시작 - 오디오 세션 설정 및 코드 인식 시작
   func startLearning() {
@@ -86,7 +86,6 @@ final class CodeDetailViewModel: BaseViewModel<CodeDetailViewState> {
     nextStep()
   }
   
-  // MARK: - Private Methods
   
   /// 오디오 인식 설정
   private func setupAudioRecognition() {

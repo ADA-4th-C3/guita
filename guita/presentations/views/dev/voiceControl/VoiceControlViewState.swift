@@ -11,24 +11,6 @@ struct VoiceControlViewState {
   let totalTime: TimeInterval
   let volume: Float
   
-  init(
-    recordPermissionState: PermissionState = .undetermined,
-    isListening: Bool = false,
-    recognizedText: String = "",
-    isPlaying: Bool = false,
-    currentTime: TimeInterval = 0.0,
-    totalTime: TimeInterval = 0.0,
-    volume: Float = 1.0
-  ) {
-    self.recordPermissionState = recordPermissionState
-    self.isListening = isListening
-    self.recognizedText = recognizedText
-    self.isPlaying = isPlaying
-    self.currentTime = currentTime
-    self.totalTime = totalTime
-    self.volume = volume
-  }
-  
   func copy(
     recordPermissionState: PermissionState? = nil,
     isListening: Bool? = nil,

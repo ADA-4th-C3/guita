@@ -13,7 +13,15 @@ final class VoiceControlViewModel: BaseViewModel<VoiceControlViewState> {
   private var currentRecognitionRequest: SFSpeechAudioBufferRecognitionRequest?
   
   init() {
-    super.init(state: VoiceControlViewState())
+    super.init(state: VoiceControlViewState(
+      recordPermissionState: .undetermined,
+      isListening: false,
+      recognizedText: "",
+      isPlaying: false,
+      currentTime: 0.0,
+      totalTime: 0.0,
+      volume: 1.0
+    ))
     setupFeatures()
     checkPermissions()
   }
