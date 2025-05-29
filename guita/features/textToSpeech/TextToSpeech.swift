@@ -5,7 +5,7 @@ import AVFoundation
 
 /// 텍스트를 음성으로 변환하는 TTS(Text-To-Speech) 기능을 제공하는 클래스
 /// VoiceRecognition과 유사한 패턴으로 설계되어 일관성 있는 사용법을 제공한다
-final class TextToSpeech {
+final class TextToSpeech: NSObject {
   
   
   /// AVSpeechSynthesizer 인스턴스 - 실제 TTS 작업을 수행
@@ -27,7 +27,8 @@ final class TextToSpeech {
   private var speechErrorHandler: ((Error) -> Void)?
   
   
-  init() {
+  override init() {
+    super.init()
     setupSynthesizer()
   }
   
