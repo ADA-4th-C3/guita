@@ -126,7 +126,7 @@ final class VoiceControlViewModel: BaseViewModel<VoiceControlViewState> {
   
   /// AudioManager를 통해 마이크 입력 시작 및 음성 인식 버퍼에 연결
   private func startAudioRecording() {
-    audioManager.start(bufferSize: 4096) { [weak self] buffer, _ in
+    audioManager.start() { [weak self] buffer, _ in
       self?.recognitionRequest?.append(buffer)
     }
   }
