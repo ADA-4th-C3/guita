@@ -147,25 +147,6 @@ final class CodeClassification {
     return CodeResult(code: code, confidence: best.1, allMatches: all)
   }
   
-  // MARK: - 노래별 코드 맵
-  var songCodeMap: [String:[String]] {
-    ["여행을 떠나요":["A","E","B7"],
-     "노래A":["Am","Em","D"],
-     "노래B":["E","A","B"]]
-  }
-  
-  // MARK: - 노래별 감지
-  func detectCode(forSong song: String,
-                  from audioData: [Float],
-                  sampleRate: Float = 22050) -> CodeResult {
-    let active = songCodeMap[song] ?? Array(codeTemplates.keys)
-    let chroma = extractChromaFeatures(from: audioData, sampleRate: sampleRate)
-    // 템플릿 필터
-    let filtered = codeTemplates.filter{ active.contains($0.key) }
-    // 필터드 버전 매칭
-    return matchCode(chromaFeatures: chroma, templates: filtered)
-  }
-  
   // Overload된 매칭
   private func matchCode(chromaFeatures:[Float],
                          templates: [String:[Float]]) -> CodeResult {

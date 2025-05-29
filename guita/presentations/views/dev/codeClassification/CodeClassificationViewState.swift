@@ -4,6 +4,7 @@ struct CodeClassificationViewState {
   let recordPermissionState: PermissionState //녹음 권한
   let code: String // 화면상에 나올 코드 !
   let confidence: Float
+  let selectedCodes: [String]
   let allMatches: [(code: String, confidence: Float)]
   
   
@@ -11,12 +12,14 @@ struct CodeClassificationViewState {
     recordPermissionState: PermissionState? = nil,
     code: String? = nil,
     confidence: Float? = nil,
+    selectedCodes: [String]? = nil,
     allMatches: [(code: String, confidence: Float)]? = nil
   ) -> CodeClassificationViewState {
     return CodeClassificationViewState(
       recordPermissionState: recordPermissionState ?? self.recordPermissionState,
       code: code ?? self.code,
       confidence: confidence ?? self.confidence,
+      selectedCodes: selectedCodes ?? self.selectedCodes,
       allMatches: allMatches ?? self.allMatches
     )
   }
