@@ -18,6 +18,18 @@ struct HomeView: View {
           router.push(.codeClassification)
         } .padding(.top, 16)
         
+        // 메인 기타 학습 버튼
+        Button("기타 학습") {
+          router.push(.guitarLearning)
+        }
+        .font(.headline)
+        .fontWeight(.semibold)
+        .foregroundColor(.black)
+        .padding(.vertical, 18)
+        .padding(.horizontal, 40)
+        .background(Color.yellow)
+        .cornerRadius(12)
+        
         Button("기타 학습") {
           router.push(.curriculum)
         }
