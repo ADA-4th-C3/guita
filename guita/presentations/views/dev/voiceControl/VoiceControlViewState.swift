@@ -1,3 +1,51 @@
 //  Copyright © 2025 ADA 4th Challenge3 Team1. All rights reserved.
 
-struct VoiceControlViewState {}
+import Foundation
+
+struct VoiceControlViewState {
+  let recordPermissionState: PermissionState
+  let isListening: Bool
+  let recognizedText: String
+  let isPlaying: Bool
+  let currentTime: TimeInterval
+  let totalTime: TimeInterval
+  let volume: Float
+  
+  init(
+    recordPermissionState: PermissionState = .undetermined,
+    isListening: Bool = false,
+    recognizedText: String = "",
+    isPlaying: Bool = false,
+    currentTime: TimeInterval = 0.0,
+    totalTime: TimeInterval = 0.0,
+    volume: Float = 1.0
+  ) {
+    self.recordPermissionState = recordPermissionState
+    self.isListening = isListening
+    self.recognizedText = recognizedText
+    self.isPlaying = isPlaying
+    self.currentTime = currentTime
+    self.totalTime = totalTime
+    self.volume = volume
+  }
+  
+  func copy(
+    recordPermissionState: PermissionState? = nil,
+    isListening: Bool? = nil,
+    recognizedText: String? = nil,
+    isPlaying: Bool? = nil,
+    currentTime: TimeInterval? = nil,
+    totalTime: TimeInterval? = nil,
+    volume: Float? = nil
+  ) -> VoiceControlViewState {
+    return VoiceControlViewState(
+      recordPermissionState: recordPermissionState ?? self.recordPermissionState,
+      isListening: isListening ?? self.isListening,
+      recognizedText: recognizedText ?? self.recognizedText,
+      isPlaying: isPlaying ?? self.isPlaying,
+      currentTime: currentTime ?? self.currentTime,
+      totalTime: totalTime ?? self.totalTime,
+      volume: volume ?? self.volume
+    )
+  }
+}
