@@ -28,28 +28,36 @@ final class CodeClassification {
   }
   
   // MARK: - 버퍼 입력 감지
-  func detectCode(buffer: AVAudioPCMBuffer) -> CodeResult? {
+  func detectCode(buffer: AVAudioPCMBuffer, windowSize: Int) -> CodeResult? {
     guard let data = buffer.floatChannelData?[0] else { return nil }
     let frameLength = Int(buffer.frameLength)
     let audioArray = Array(UnsafeBufferPointer(start: data, count: frameLength))
-    let chroma = extractChromaFeatures(from: audioArray, sampleRate: Float(buffer.format.sampleRate))
+    let chroma = extractChromaFeatures(
+      from: audioArray,
+      sampleRate: Float(buffer.format.sampleRate),
+      windowSize: windowSize,
+      hopSize: Int(windowSize/2) // 4로 나누면 75% 오버렙, 2로 나누면 50% 오버렙
+    )
     return matchCode(chromaFeatures: chroma)
   }
   
   // MARK: - 크로마 특성 추출
-  private func extractChromaFeatures(from audioData: [Float], sampleRate: Float) -> [Float] {
-    let frameSize = 4096
-    let hopSize = 1024
-    let frames = max(1, (audioData.count - frameSize) / hopSize + 1)
+  private func extractChromaFeatures(
+    from audioData: [Float],
+    sampleRate: Float,
+    windowSize: Int,
+    hopSize: Int
+  ) -> [Float] {
+    let frames = max(1, (audioData.count - windowSize) / hopSize + 1)
     var sumChroma = Array(repeating: Float(0), count: 12)
     var valid = 0
     
     for i in 0..<frames {
       let start = i * hopSize
-      let end = min(start + frameSize, audioData.count)
+      let end = min(start + windowSize, audioData.count)
       var frame = Array(audioData[start..<end])
-      if frame.count < frameSize {
-        frame += Array(repeating: 0, count: frameSize - frame.count)
+      if frame.count < windowSize {
+        frame += Array(repeating: 0, count: windowSize - frame.count)
       }
       let spec = performFFT(frame)
       let chroma = spectrumToChroma(spec, sampleRate: sampleRate)

@@ -3,7 +3,6 @@
 import AVFoundation
 
 struct PitchClassification {
-  let windowSize: Int
   private let noteFrequencies: [(name: String, freq: Double)] = [
     ("E2", 82.41), ("F2", 87.31), ("F#2/Gb2", 92.50), ("G2", 98.00), ("G#2/Ab2", 103.83), ("A2", 110.00), ("A#2/Bb2", 116.54), ("B2", 123.47), ("C3", 130.81), ("C#3/Db3", 138.59),
     ("D3", 146.83), ("D#3/Eb3", 155.56), ("E3", 164.81), ("F3", 174.61), ("F#3/Gb3", 185.00),
@@ -14,10 +13,6 @@ struct PitchClassification {
     ("D#5/Eb5", 622.25), ("E5", 659.26), ("F5", 698.46), ("F#5/Gb5", 739.99), ("G5", 783.99),
     ("G#5/Ab5", 830.61), ("A5", 880.00), ("A#5/Bb5", 932.33), ("B5", 987.77), ("C6", 1046.50),
   ]
-
-  init(windowSize: Int = 8192) {
-    self.windowSize = windowSize
-  }
 
   private func getClosestNoteName(for frequency: Double) -> String {
     var minDiff = Double.infinity
@@ -35,6 +30,7 @@ struct PitchClassification {
   func run(
     buffer: AVAudioPCMBuffer,
     sampleRate: Double,
+    windowSize: Int,
     minVolumeThreshold: Double = 0.01
   ) -> (note: String, frequency: Double)? {
     // Audio data in buffer

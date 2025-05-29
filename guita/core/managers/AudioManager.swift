@@ -8,6 +8,7 @@ final class AudioManager {
   private var inputNode: AVAudioInputNode?
   var inputFormat: AVAudioFormat?
   let sampleRate: Double = 48000
+  let windowSize: Int = 8192
 
   private init() {}
 
@@ -26,7 +27,7 @@ final class AudioManager {
     AVAudioApplication.requestRecordPermission(completionHandler: completion)
   }
 
-  func start(bufferSize: Int, handler: @escaping AVAudioNodeTapBlock) {
+  func start(handler: @escaping AVAudioNodeTapBlock) {
     do {
       let session = AVAudioSession.sharedInstance()
       try session.setCategory(.playAndRecord, mode: .default, options: [.defaultToSpeaker])
@@ -38,7 +39,7 @@ final class AudioManager {
 
     inputNode = audioEngine.inputNode
     inputFormat = inputNode!.outputFormat(forBus: 0)
-    inputNode?.installTap(onBus: 0, bufferSize: AVAudioFrameCount(bufferSize), format: inputFormat, block: handler)
+    inputNode?.installTap(onBus: 0, bufferSize: AVAudioFrameCount(windowSize), format: inputFormat, block: handler)
     try? audioEngine.start()
   }
 

@@ -27,8 +27,12 @@ final class PitchClassificationViewModel: BaseViewModel<PitchClassificationViewS
   }
 
   func startRecording() {
-    audioManager.start(bufferSize: pitchClassification.windowSize) { buffer, _ in
-      guard let result = self.pitchClassification.run(buffer: buffer, sampleRate: self.audioManager.sampleRate) else {
+    audioManager.start() { buffer, _ in
+      guard let result = self.pitchClassification.run(
+        buffer: buffer,
+        sampleRate: self.audioManager.sampleRate,
+        windowSize: self.audioManager.windowSize
+      ) else {
         return
       }
       self.emit(self.state.copy(

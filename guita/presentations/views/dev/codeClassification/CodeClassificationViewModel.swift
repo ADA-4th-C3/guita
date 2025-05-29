@@ -17,13 +17,12 @@ final class CodeClassificationViewModel: BaseViewModel<CodeClassificationViewSta
     ))
   }
   
-  private let bufferSize = 8192
   private func startRecording() {
-    audioManager.start(bufferSize: bufferSize) { [weak self] buffer, _ in
+    audioManager.start() { [weak self] buffer, _ in
       guard let self = self else { return }
       
       // buffer 단위로 감지하고, 결과가 없으면 리턴
-      guard let rawResult = self.codeClassification.detectCode(buffer: buffer) else {
+      guard let rawResult = self.codeClassification.detectCode(buffer: buffer, windowSize: self.audioManager.windowSize) else {
         return
       }
       
