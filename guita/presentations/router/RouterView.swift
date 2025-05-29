@@ -26,7 +26,7 @@ struct RouterView: View {
           switch subPage {
           case .curriculum: CurriculumView()
           case .dev: DevView()
-          case .pitchClassification: PitchClassificationView()
+          case .noteClassification: NoteClassificationView()
           case .codeClassification: CodeClassificationView()
           case .voiceControl: VoiceControlView()
           }

@@ -2,14 +2,14 @@
 
 import SwiftUI
 
-struct PitchClassificationView: View {
+struct NoteClassificationView: View {
   var body: some View {
     BaseView(
-      create: { PitchClassificationViewModel() }
+      create: { NoteClassificationViewModel() }
     ) { viewModel, state in
       VStack {
         // MARK: Toolbar
-        Toolbar(title: "Pitch Classification")
+        Toolbar(title: "Note Classification")
         Spacer()
 
         switch state.recordPermissionState {
@@ -28,9 +28,15 @@ struct PitchClassificationView: View {
             .buttonStyle(.borderedProminent)
           }
         case .granted:
-          Text(state.note)
-            .font(.headline)
-            .foregroundStyle(.blue)
+          Group {
+            if let note = state.note {
+              Text("\(note)")
+            } else {
+              Text("")
+            }
+          }
+          .font(.headline)
+          .foregroundStyle(.blue)
         }
 
         Spacer()
@@ -44,6 +50,6 @@ struct PitchClassificationView: View {
 
 #Preview {
   BasePreview {
-    PitchClassificationView()
+    NoteClassificationView()
   }
 }

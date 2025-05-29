@@ -2,7 +2,7 @@
 
 import AVFoundation
 
-struct PitchClassification {
+struct NoteClassification {
   private let noteFrequencies: [(name: String, freq: Double)] = [
     ("E2", 82.41), ("F2", 87.31), ("F#2/Gb2", 92.50), ("G2", 98.00), ("G#2/Ab2", 103.83), ("A2", 110.00), ("A#2/Bb2", 116.54), ("B2", 123.47), ("C3", 130.81), ("C#3/Db3", 138.59),
     ("D3", 146.83), ("D#3/Eb3", 155.56), ("E3", 164.81), ("F3", 174.61), ("F#3/Gb3", 185.00),
@@ -14,14 +14,14 @@ struct PitchClassification {
     ("G#5/Ab5", 830.61), ("A5", 880.00), ("A#5/Bb5", 932.33), ("B5", 987.77), ("C6", 1046.50),
   ]
 
-  private func getClosestNoteName(for frequency: Double) -> String {
+  private func getClosestNoteName(for frequency: Double) -> Note? {
     var minDiff = Double.infinity
-    var closestNote = ""
-    for note in noteFrequencies {
-      let diff = abs(note.freq - frequency)
+    var closestNote: Note? = nil
+    for note in Note.allCases {
+      let diff = abs(note.frequency - frequency)
       if diff < minDiff {
         minDiff = diff
-        closestNote = note.name
+        closestNote = note
       }
     }
     return closestNote
@@ -32,7 +32,7 @@ struct PitchClassification {
     sampleRate: Double,
     windowSize: Int,
     minVolumeThreshold: Double = 0.01
-  ) -> (note: String, frequency: Double)? {
+  ) -> Note? {
     // Audio data in buffer
     guard let channelData = buffer.floatChannelData?[0] else { return nil }
     let frameLength = Int(buffer.frameLength)
@@ -109,9 +109,9 @@ struct PitchClassification {
 
     if let maxIndex = searchRange.max(by: { hps[$0] < hps[$1] }) {
       let frequency = Double(maxIndex) * sampleRate / Double(N)
-      let note = getClosestNoteName(for: frequency)
+      guard let note = getClosestNoteName(for: frequency) else { return nil }
       Logger.d("Frequency: \(frequency) Hz, Note: \(note)")
-      return (note, frequency)
+      return note
     } else {
       return nil
     }
