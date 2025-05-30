@@ -8,7 +8,7 @@ enum RootPage {
 enum SubPage {
   case curriculum
   case dev
-  case pitchClassification
+  case noteClassification
   case codeClassification
   case voiceControl
 }

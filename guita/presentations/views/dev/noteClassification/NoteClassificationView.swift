@@ -2,16 +2,16 @@
 
 import SwiftUI
 
-struct CodeClassificationView: View {
+struct NoteClassificationView: View {
   var body: some View {
     BaseView(
-      create: { CodeClassificationViewModel() }
+      create: { NoteClassificationViewModel() }
     ) { viewModel, state in
       VStack {
         // MARK: Toolbar
-        Toolbar(title: "Code Classification")
+        Toolbar(title: "Note Classification")
         Spacer()
-        
+
         switch state.recordPermissionState {
         case .undetermined:
           Loading()
@@ -21,18 +21,25 @@ struct CodeClassificationView: View {
               .font(.headline)
               .multilineTextAlignment(.center)
               .padding()
-            
+
             Button("설정으로 이동") {
               viewModel.openSettings()
             }
             .buttonStyle(.borderedProminent)
           }
         case .granted:
-          Text(state.code)
-            .font(.headline)
-            .foregroundStyle(.blue)
-          
+          if let note = state.note {
+            VStack {
+              Text("\(note)")
+                .font(.headline)
+                .foregroundStyle(.blue)
+              Guitar(input: NoteOrChord.note(note))
+            }
+          } else {
+            Text("")
+          }
         }
+
         Spacer()
       }
       .onAppear {
@@ -44,6 +51,6 @@ struct CodeClassificationView: View {
 
 #Preview {
   BasePreview {
-    CodeClassificationView()
+    NoteClassificationView()
   }
 }

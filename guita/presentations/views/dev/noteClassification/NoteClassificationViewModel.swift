@@ -2,15 +2,14 @@
 
 import SwiftUI
 
-final class PitchClassificationViewModel: BaseViewModel<PitchClassificationViewState> {
+final class NoteClassificationViewModel: BaseViewModel<NoteClassificationViewState> {
   let audioManager: AudioManager = .shared
-  let pitchClassification: PitchClassification = .init()
+  let noteClassification: NoteClassification = .init()
 
   init() {
     super.init(state: .init(
       recordPermissionState: audioManager.getRecordPermissionState(),
-      note: "",
-      frequency: 0
+      note: nil
     ))
   }
 
@@ -27,18 +26,15 @@ final class PitchClassificationViewModel: BaseViewModel<PitchClassificationViewS
   }
 
   func startRecording() {
-    audioManager.start() { buffer, _ in
-      guard let result = self.pitchClassification.run(
+    audioManager.start { buffer, _ in
+      guard let note = self.noteClassification.run(
         buffer: buffer,
         sampleRate: self.audioManager.sampleRate,
         windowSize: self.audioManager.windowSize
       ) else {
         return
       }
-      self.emit(self.state.copy(
-        note: result.note,
-        frequency: result.frequency
-      ))
+      self.emit(self.state.copy(note: { note }))
     }
   }
 

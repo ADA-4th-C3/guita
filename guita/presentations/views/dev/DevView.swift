@@ -16,8 +16,8 @@ struct DevView: View {
         Form {
           // MARK: Features
           Section(header: Text("Features")) {
-            Tile(title: "Pitch Classification") {
-              router.push(.pitchClassification)
+            Tile(title: "Note Classification") {
+              router.push(.noteClassification)
             }
             Tile(title: "Code Classification") {
               router.push(.codeClassification)

@@ -2,14 +2,14 @@
 
 import SwiftUI
 
-struct PitchClassificationView: View {
+struct ChordClassificationView: View {
   var body: some View {
     BaseView(
-      create: { PitchClassificationViewModel() }
+      create: { ChordClassificationViewModel() }
     ) { viewModel, state in
       VStack {
         // MARK: Toolbar
-        Toolbar(title: "Pitch Classification")
+        Toolbar(title: "Code Classification")
         Spacer()
 
         switch state.recordPermissionState {
@@ -28,11 +28,17 @@ struct PitchClassificationView: View {
             .buttonStyle(.borderedProminent)
           }
         case .granted:
-          Text(state.note)
-            .font(.headline)
-            .foregroundStyle(.blue)
+          if let chord = state.chord {
+            VStack {
+              Text("\(chord)")
+                .font(.headline)
+                .foregroundStyle(.blue)
+              Guitar(input: NoteOrChord.chord(chord))
+            }
+          } else {
+            Text("")
+          }
         }
-
         Spacer()
       }
       .onAppear {
@@ -44,6 +50,6 @@ struct PitchClassificationView: View {
 
 #Preview {
   BasePreview {
-    PitchClassificationView()
+    ChordClassificationView()
   }
 }
