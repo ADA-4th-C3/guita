@@ -6,9 +6,12 @@ import Foundation
 final class CodeLearningListViewModel: BaseViewModel<CodeLearningListViewState> {
   
   init() {
-    super.init(state: CodeLearningListViewState())
+    super.init(state: CodeLearningListViewState(
+      lessons: [],
+      isLoading: true,
+      selectedLessonId: nil
+    ))
   }
-  
   // MARK: - Public Methods
   
   /// 레슨 목록을 로드하여 상태를 업데이트
@@ -75,31 +78,3 @@ final class CodeLearningListViewModel: BaseViewModel<CodeLearningListViewState> 
   }
 }
 
-/// 코드 학습 목록 화면의 상태
-struct CodeLearningListViewState {
-  let lessons: [LessonModel]      // 레슨 목록
-  let isLoading: Bool             // 로딩 상태
-  let selectedLessonId: String?   // 현재 선택된 레슨 ID
-  
-  init(
-    lessons: [LessonModel] = [],
-    isLoading: Bool = true,
-    selectedLessonId: String? = nil
-  ) {
-    self.lessons = lessons
-    self.isLoading = isLoading
-    self.selectedLessonId = selectedLessonId
-  }
-  
-  func copy(
-    lessons: [LessonModel]? = nil,
-    isLoading: Bool? = nil,
-    selectedLessonId: String? = nil
-  ) -> CodeLearningListViewState {
-    return CodeLearningListViewState(
-      lessons: lessons ?? self.lessons,
-      isLoading: isLoading ?? self.isLoading,
-      selectedLessonId: selectedLessonId ?? self.selectedLessonId
-    )
-  }
-}
