@@ -1,13 +1,12 @@
 //  Copyright © 2025 ADA 4th Challenge3 Team1. All rights reserved.
 
 struct ChordClassificationViewState {
-  let recordPermissionState: PermissionState //녹음 권한
+  let recordPermissionState: PermissionState // 녹음 권한
   let chord: Chord? // 화면상에 나올 코드 !
   let confidence: Float
   let selectedCodes: [Chord]
   let allMatches: [(chord: Chord, confidence: Float)]
-  
-  
+
   func copy(
     recordPermissionState: PermissionState? = nil,
     chord: (() -> Chord?)? = nil,

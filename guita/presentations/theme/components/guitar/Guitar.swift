@@ -5,21 +5,21 @@ import SwiftUI
 enum NoteOrChord {
   case note(Note)
   case chord(Chord)
-  
+
   var coordinates: [(string: Int, fret: Int, finger: Int?)] {
     switch self {
-    case .note(let note):
+    case let .note(note):
       return note.coordinates.map { (string: $0.string, fret: $0.fret, finger: nil) }
-    case .chord(let chord):
+    case let .chord(chord):
       return chord.coordinates.flatMap { group in
         group.0.map { (string: $0.string, fret: $0.fret, finger: group.finger) }
       }
     }
   }
-  
+
   var label: String {
     switch self {
-    case .note(let note):
+    case let .note(note):
       return "\(note)"
     case .chord:
       return ""
@@ -36,15 +36,15 @@ struct Guitar: View {
       let openFretOffset: CGFloat = 1.0
       let notePositions = input.coordinates
       let markerFrets: Set<Int> = [3, 5, 7, 9, 12, 15, 17]
-      
+
       let width = geometry.size.width
       let height = geometry.size.height
       let fretSpacing = height / CGFloat(fretCount + Int(openFretOffset))
       let stringSpacing = width / CGFloat(stringCount + 1)
-      
+
       ZStack {
         // Draw strings
-        ForEach(1...stringCount, id: \.self) { string in
+        ForEach(1 ... stringCount, id: \.self) { string in
           let x = CGFloat(string) * stringSpacing
           Path { path in
             path.move(to: CGPoint(x: x, y: 0))
@@ -53,9 +53,9 @@ struct Guitar: View {
           .stroke(lineWidth: CGFloat(7 - string))
           .foregroundStyle(.gray)
         }
-        
+
         // Draw frets
-        ForEach(1...fretCount, id: \.self) { fret in
+        ForEach(1 ... fretCount, id: \.self) { fret in
           let y = CGFloat(fret) * fretSpacing + (openFretOffset * fretSpacing)
           Path { path in
             path.move(to: CGPoint(x: fretSpacing, y: y))
@@ -63,7 +63,7 @@ struct Guitar: View {
           }
           .stroke(lineWidth: 1)
         }
-        
+
         // Draw fret markers
         ForEach(markerFrets.sorted(), id: \.self) { fret in
           let y = (CGFloat(fret) + openFretOffset + 0.5) * fretSpacing
@@ -72,11 +72,11 @@ struct Guitar: View {
             .frame(width: 10, height: 10)
             .position(x: width / 2, y: y)
         }
-        
+
         // Draw note/chord positions
         ForEach(Array(notePositions.enumerated()), id: \.offset) { _, position in
           let x = width - (CGFloat(position.string) * stringSpacing)
-          let y = (CGFloat(position.fret) + openFretOffset) * fretSpacing + fretSpacing/2
+          let y = (CGFloat(position.fret) + openFretOffset) * fretSpacing + fretSpacing / 2
           if let finger = position.finger {
             Circle()
               .fill(Color.red)

@@ -26,7 +26,7 @@ final class NoteClassificationViewModel: BaseViewModel<NoteClassificationViewSta
   }
 
   func startRecording() {
-    audioManager.start() { buffer, _ in
+    audioManager.start { buffer, _ in
       guard let note = self.noteClassification.run(
         buffer: buffer,
         sampleRate: self.audioManager.sampleRate,
@@ -34,7 +34,7 @@ final class NoteClassificationViewModel: BaseViewModel<NoteClassificationViewSta
       ) else {
         return
       }
-      self.emit(self.state.copy(note: {note}))
+      self.emit(self.state.copy(note: { note }))
     }
   }
 

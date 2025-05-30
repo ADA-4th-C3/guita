@@ -5,7 +5,7 @@ import AVFoundation
 struct NoteClassification {
   private func getClosestNoteName(for frequency: Double) -> Note? {
     var minDiff = Double.infinity
-    var closestNote: Note? = nil
+    var closestNote: Note?
     for note in Note.allCases {
       let diff = abs(note.frequency - frequency)
       if diff < minDiff {

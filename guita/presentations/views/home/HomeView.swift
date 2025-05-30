@@ -16,8 +16,8 @@ struct HomeView: View {
 
         Button("코드 학습") {
           router.push(.codeClassification)
-        } .padding(.top, 16)
-        
+        }.padding(.top, 16)
+
         Button("기타 학습") {
           router.push(.curriculum)
         }
