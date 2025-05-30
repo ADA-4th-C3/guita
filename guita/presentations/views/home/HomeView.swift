@@ -4,7 +4,7 @@ import SwiftUI
 
 struct HomeView: View {
   @EnvironmentObject var router: Router
-
+  
   var body: some View {
     BaseView(
       create: { HomeViewModel() }
@@ -13,12 +13,8 @@ struct HomeView: View {
         // MARK: Toolbar
         Toolbar(title: "Guita", isPopButton: false)
         Spacer()
-
-        Button("코드 학습") {
-          router.push(.codeClassification)
-        } .padding(.top, 16)
         
-        // 메인 기타 학습 버튼
+        // 메인 기타 학습 버튼 - 바로 이동
         Button("기타 학습") {
           router.push(.guitarLearning)
         }
@@ -30,15 +26,6 @@ struct HomeView: View {
         .background(Color.yellow)
         .cornerRadius(12)
         
-        Button("기타 학습") {
-          router.push(.curriculum)
-        }
-
-        Button("Development") {
-          router.push(.dev)
-        }
-        .padding(.top, 16)
-
         Spacer()
       }
     }

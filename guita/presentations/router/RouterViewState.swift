@@ -6,32 +6,31 @@ enum RootPage {
 }
 
 enum SubPage: Hashable, Equatable {
-  case curriculum
   case dev
   case pitchClassification
   case codeClassification
   case voiceControl
   
-  // 기타 학습 관련 화면들
   case guitarLearning        // 기타 학습 메인
-  case songList             // 노래 목록 (새로 추가)
+  
+  // 1 기타 학습 관련 화면들
   case learningOptions(SongModel)  // 학습 옵션 선택 (노래 정보 포함)
   
-  // 코드 러닝
+  // 2 코드 러닝
   case codeLearningList            // 코드 러닝 리스트
   case codeDetail(SongModel, CodeType)  // 코드 상세 학습
   case codeHelp(CodeType)    // 코드 도움말
   
-  // 주법 학습
+  // 2 주법 학습
   case techniqueDetail(SongModel)       // 주법 학습
   case techniqueList
   case techniqueHelp         // 주법 도움말
   
-  // 구간 학습
+  // 2 구간 학습
   case sectionPractice(SongModel)       // 곡 구간 학습
   case sectionPracticeHelp   // 곡 구간 학습 도움말
   
-  // 곡 전체 학습
+  // 2 곡 전체 학습
   case fullSongPractice(SongModel)      // 곡 전체 학습
   case fullSongPracticeHelp  // 곡 전체 학습 도움말
 }

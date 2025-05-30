@@ -2,7 +2,7 @@
 
 import SwiftUI
 
-/// 기타 학습 메인 화면 - 4개의 학습 옵션을 제공
+/// 기타 학습 메인 화면 - 곡 목록과 개발자 도구를 제공
 struct GuitarLearningView: View {
   @EnvironmentObject var router: Router
   
@@ -12,40 +12,133 @@ struct GuitarLearningView: View {
     ) { viewModel, state in
       VStack(spacing: 0) {
         // 상단 툴바
-        Toolbar(title: "기타 학습")
+        customToolbar
         
         // 메인 콘텐츠
-        VStack(spacing: 20) {
-          Spacer()
+        VStack(spacing: 0) {
+          // 개발자 도구 섹션 (상단 고정)
+          developerToolsSection
           
-          // 기타 아이콘
-          Text("🎸")
-            .font(.system(size: 80))
-            .padding(.bottom, 20)
-          
-          // 제목
-          Text("기타 학습")
-            .font(.title)
-            .fontWeight(.bold)
-            .foregroundColor(.white)
-            .padding(.bottom, 40)
-          
-          // 곡 선택 버튼
-          VStack(spacing: 16) {
-            LearningOptionButton(
-              title: "곡 선택하기",
-              subtitle: "연습할 곡을 선택하고\n다양한 방법으로 학습해보세요",
-              isHighlighted: true
-            ) {
-              router.push(.songList)
-            }
-            
-            Spacer()
-          }
-          .padding(.horizontal, 24)
+          // 곡 목록 섹션
+          songListSection(viewModel: viewModel, state: state)
         }
-        .background(Color.black)
+      }
+      .background(Color.black)
+      .onAppear {
+        viewModel.loadSongs()
       }
     }
+  }
+  
+  // MARK: - Custom Toolbar
+  
+  private var customToolbar: some View {
+    HStack {
+      Spacer()
+      
+      Text("기타 학습")
+        .font(.headline)
+        .fontWeight(.semibold)
+        .foregroundColor(.white)
+      
+      Spacer()
+    }
+    .padding(.horizontal, 16)
+    .frame(height: 56)
+  }
+  
+  // MARK: - Developer Tools Section
+  
+  private var developerToolsSection: some View {
+    VStack(spacing: 12) {
+      // 개발자 도구 헤더
+      HStack {
+        Text("개발자 도구")
+          .font(.caption)
+          .foregroundColor(.gray)
+        
+        Spacer()
+      }
+      .padding(.horizontal, 20)
+      
+      // 개발자 도구 버튼들
+      HStack(spacing: 12) {
+        Button("코드 학습") {
+          router.push(.codeClassification)
+        }
+        .font(.caption)
+        .padding(.horizontal, 12)
+        .padding(.vertical, 6)
+        .background(Color.gray.opacity(0.3))
+        .foregroundColor(.white)
+        .cornerRadius(6)
+        
+        Button("Development") {
+          router.push(.dev)
+        }
+        .font(.caption)
+        .padding(.horizontal, 12)
+        .padding(.vertical, 6)
+        .background(Color.gray.opacity(0.3))
+        .foregroundColor(.white)
+        .cornerRadius(6)
+        
+        Spacer()
+      }
+      .padding(.horizontal, 20)
+      
+      // 구분선
+      Rectangle()
+        .frame(height: 1)
+        .foregroundColor(.gray.opacity(0.2))
+        .padding(.horizontal, 20)
+        .padding(.top, 8)
+    }
+    .padding(.top, 16)
+  }
+  
+  // MARK: - Song List Section
+  
+  private func songListSection(
+    viewModel: GuitarLearningViewModel,
+    state: GuitarLearningViewState
+  ) -> some View {
+    VStack(spacing: 0) {
+      // 곡 목록 헤더
+      HStack {
+        Text("연습할 곡을 선택해주세요")
+          .font(.headline)
+          .fontWeight(.semibold)
+          .foregroundColor(.white)
+        
+        Spacer()
+      }
+      .padding(.horizontal, 20)
+      .padding(.top, 20)
+      
+      // 곡 목록
+      ScrollView {
+        LazyVStack(spacing: 1) {
+          ForEach(state.songs) { song in
+            SongRowView(song: song) {
+              handleSongTap(song: song)
+            }
+          }
+        }
+      }
+      .padding(.top, 16)
+    }
+  }
+  
+  // MARK: - Private Methods
+  
+  private func handleSongTap(song: SongModel) {
+    guard song.isUnlocked else {
+      Logger.d("잠금된 곡 선택됨: \(song.title)")
+      return
+    }
+    
+    Logger.d("곡 선택됨: \(song.title)")
+    router.push(.learningOptions(song))
   }
 }

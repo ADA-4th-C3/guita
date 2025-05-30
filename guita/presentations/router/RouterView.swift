@@ -25,7 +25,6 @@ struct RouterView: View {
         .navigationDestination(for: SubPage.self) { subPage in
           switch subPage {
             // 기본 화면들
-          case .curriculum: CurriculumView()
           case .dev: DevView()
           case .pitchClassification: PitchClassificationView()
           case .codeClassification: CodeClassificationView()
@@ -33,7 +32,6 @@ struct RouterView: View {
             
             // 기타 학습 관련 화면들
           case .guitarLearning: GuitarLearningView()        // 기타 학습 메인
-          case .songList: SongListView()                    // 노래 목록
           case .learningOptions(let song): LearningOptionsView(song: song)  // 학습 옵션 선택
             
             // 코드 학습
