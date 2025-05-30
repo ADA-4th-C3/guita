@@ -114,6 +114,19 @@ struct CodeLearningListView: View {
     }
     
     Logger.d("레슨 선택됨: \(lesson.title)")
-    router.push(.codeDetail(lesson.codeType))
+    
+    // 기본 노래 모델 생성 (레슨용)
+    let defaultSong = SongModel(
+      id: lesson.id,
+      title: lesson.title,
+      artist: "기본",
+      difficulty: .beginner,
+      requiredCodes: [lesson.codeType],
+      audioFileName: "forStudyGuitar",
+      isUnlocked: true,
+      isCompleted: false
+    )
+    
+    router.push(.codeDetail(defaultSong, lesson.codeType))
   }
 }

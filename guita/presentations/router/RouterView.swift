@@ -24,23 +24,35 @@ struct RouterView: View {
         // MARK: Sub page
         .navigationDestination(for: SubPage.self) { subPage in
           switch subPage {
+            // 기본 화면들
           case .curriculum: CurriculumView()
           case .dev: DevView()
           case .pitchClassification: PitchClassificationView()
           case .codeClassification: CodeClassificationView()
           case .voiceControl: VoiceControlView()
             
-            // 새로 추가되는 케이스들
-          case .guitarLearning: GuitarLearningView()
+            // 기타 학습 관련 화면들
+          case .guitarLearning: GuitarLearningView()        // 기타 학습 메인
+          case .songList: SongListView()                    // 노래 목록
+          case .learningOptions(let song): LearningOptionsView(song: song)  // 학습 옵션 선택
+            
+            // 코드 학습
           case .codeLearningList: CodeLearningListView()
-          case .techniqueList: Text("주법 학습") // 구현 예정
-          case .sectionPractice: SectionPracticeView()
-          case .fullSongPractice: FullSongPracticeView()
-          case .codeDetail(let codeType): CodeDetailView(codeType: codeType)
-          case .codeHelp(let codeType): Text("\(codeType.rawValue) 도움말") // 구현 예정
-          case .techniqueHelp: Text("주법 도움말") // 구현 예정
-          case .sectionPracticeHelp: Text("곡 구간 학습 도움말") // 구현 예정
-          case .fullSongPracticeHelp: Text("곡 전체 학습 도움말") // 구현 예정
+          case .codeDetail(let song, let codeType): CodeDetailView(song: song, codeType: codeType)
+          case .codeHelp(let codeType): CodeHelpView(codeType: codeType)
+            
+            // 주법 학습
+          case .techniqueDetail(let song): TechniqueDetailView(song: song)
+          case .techniqueList: TechniqueListView()
+          case .techniqueHelp: TechniqueHelpView()
+            
+            // 구간 학습
+          case .sectionPractice(let song): SectionPracticeView(song: song)
+          case .sectionPracticeHelp: SectionPracticeHelpView()
+            
+            // 곡 전체 학습
+          case .fullSongPractice(let song): FullSongPracticeView(song: song)
+          case .fullSongPracticeHelp: FullSongPracticeHelpView()
           }
         }
         .toolbarBackground(.hidden, for: .navigationBar)

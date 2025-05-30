@@ -9,6 +9,7 @@ struct Main: App {
   var body: some Scene {
     WindowGroup {
       RouterView()
+        .preferredColorScheme(.dark) //다크 모드
     }
     .environmentObject(router)
   }

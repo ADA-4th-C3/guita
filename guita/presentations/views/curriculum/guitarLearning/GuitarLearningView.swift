@@ -30,43 +30,22 @@ struct GuitarLearningView: View {
             .foregroundColor(.white)
             .padding(.bottom, 40)
           
-          // 학습 옵션 버튼들
+          // 곡 선택 버튼
           VStack(spacing: 16) {
             LearningOptionButton(
-              title: "코드 학습",
-              subtitle: "기본 코드를 배워보세요",
+              title: "곡 선택하기",
+              subtitle: "연습할 곡을 선택하고\n다양한 방법으로 학습해보세요",
               isHighlighted: true
             ) {
-              router.push(.codeLearningList)
+              router.push(.songList)
             }
             
-            LearningOptionButton(
-              title: "주법 학습",
-              subtitle: "다양한 연주 기법을 익혀보세요"
-            ) {
-              router.push(.techniqueList)
-            }
-            
-            LearningOptionButton(
-              title: "곡 구간 학습",
-              subtitle: "곡의 일부분을 집중 연습하세요"
-            ) {
-              router.push(.sectionPractice)
-            }
-            
-            LearningOptionButton(
-              title: "곡 전체 학습",
-              subtitle: "완전한 곡을 연주해보세요"
-            ) {
-              router.push(.fullSongPractice)
-            }
+            Spacer()
           }
-          
-          Spacer()
+          .padding(.horizontal, 24)
         }
-        .padding(.horizontal, 24)
+        .background(Color.black)
       }
-      .background(Color.black)
     }
   }
 }

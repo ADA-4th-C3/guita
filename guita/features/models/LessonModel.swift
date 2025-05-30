@@ -5,7 +5,6 @@ import Foundation
 /// 레슨 모델 - 개별 기타 학습 레슨의 정보를 담는 데이터 모델
 struct LessonModel: Identifiable {
   
-  // MARK: - Properties
   
   let id: String                    // 고유 식별자
   let title: String                 // 레슨 제목
@@ -16,7 +15,6 @@ struct LessonModel: Identifiable {
   let codeType: CodeType            // 주요 코드 타입
   let difficulty: LessonDifficulty  // 난이도
   
-  // MARK: - Initializer
   
   init(
     id: String,

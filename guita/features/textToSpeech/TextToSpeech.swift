@@ -32,7 +32,6 @@ final class TextToSpeech: NSObject {
     setupSynthesizer()
   }
   
-  // MARK: - Public Methods
   
   /// TTS 시작 이벤트 핸들러를 설정한다
   /// - Parameter handler: TTS가 시작될 때 호출될 클로저

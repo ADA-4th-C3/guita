@@ -6,6 +6,7 @@ import SwiftUI
 /// 코드 진행을 단계별로 연습하며 실시간 코드 인식을 제공
 struct SectionPracticeView: View {
   @EnvironmentObject var router: Router
+  let song: SongModel
   
   var body: some View {
     BaseView(

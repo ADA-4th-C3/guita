@@ -6,6 +6,7 @@ import SwiftUI
 /// 완전한 음악 파일을 재생하며 전체 곡 연습을 제공
 struct FullSongPracticeView: View {
   @EnvironmentObject var router: Router
+  let song: SongModel
   
   var body: some View {
     BaseView(

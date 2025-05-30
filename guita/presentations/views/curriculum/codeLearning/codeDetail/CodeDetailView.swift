@@ -8,14 +8,18 @@ struct CodeDetailView: View {
   
   // MARK: - Properties
   
-  let codeType: CodeType
+  let song: SongModel           // 선택된 노래 정보
+  let codeType: CodeType        // 학습할 코드 타입
   @EnvironmentObject var router: Router
+  @State private var showingPermissionFlow = false
   
   // MARK: - Body
   
   var body: some View {
     BaseView(
-      create: { CodeDetailViewModel(codeType: codeType) }
+      create: {
+        CodeDetailViewModel.create(song: song, codeType: codeType)
+      }
     ) { viewModel, state in
       VStack(spacing: 0) {
         // 커스텀 툴바
@@ -26,10 +30,18 @@ struct CodeDetailView: View {
       }
       .background(Color.black)
       .onAppear {
-        viewModel.startLearning()
+        checkPermissionsAndStart(viewModel: viewModel)
       }
       .onDisappear {
         viewModel.stopLearning()
+      }
+      .fullScreenCover(isPresented: $showingPermissionFlow) {
+        PermissionFlowView { success in
+          showingPermissionFlow = false
+          if success {
+            viewModel.startLearning()
+          }
+        }
       }
     }
   }
@@ -45,10 +57,16 @@ struct CodeDetailView: View {
       
       Spacer()
       
-      Text(codeType.displayName)
-        .font(.headline)
-        .fontWeight(.semibold)
-        .foregroundColor(.white)
+      VStack(spacing: 2) {
+        Text(song.displayTitle)
+          .font(.caption)
+          .foregroundColor(.gray)
+        
+        Text(codeType.displayName)
+          .font(.headline)
+          .fontWeight(.semibold)
+          .foregroundColor(.white)
+      }
       
       Spacer()
       
@@ -101,15 +119,7 @@ struct CodeDetailView: View {
     state: CodeDetailViewState
   ) -> some View {
     VStack(spacing: 24) {
-      if state.currentStep <= 2 {
-        // 권한 요청 단계
-        PermissionRequestView(
-          step: state.currentStep,
-          codeType: codeType
-        ) {
-          viewModel.handlePermissionGranted()
-        }
-      } else if state.currentStep == state.totalSteps {
+      if state.currentStep == state.totalSteps {
         // 완료 단계
         CompletionView(codeType: codeType)
       } else {
@@ -173,5 +183,16 @@ struct CodeDetailView: View {
     }
     .disabled(!isEnabled)
     .opacity(isEnabled ? 1.0 : 0.3)
+  }
+  
+  // MARK: - Private Methods
+  
+  /// 권한 확인 후 학습 시작
+  private func checkPermissionsAndStart(viewModel: CodeDetailViewModel) {
+    if PermissionManager.shared.needsPermissions {
+      showingPermissionFlow = true
+    } else {
+      viewModel.startLearning()
+    }
   }
 }

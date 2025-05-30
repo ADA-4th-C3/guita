@@ -1,5 +1,6 @@
 //  Copyright © 2025 ADA 4th Challenge3 Team1. All rights reserved.
 
+import SwiftUI
 
 /// 곡 구간 학습 도움말 화면
 struct SectionPracticeHelpView: View {
