@@ -30,7 +30,7 @@ struct NoteClassificationView: View {
         case .granted:
           Group {
             if let note = state.note {
-              Text("\(note)")
+              GuitarNeck(note: note)
             } else {
               Text("")
             }
