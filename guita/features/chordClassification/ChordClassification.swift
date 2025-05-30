@@ -1,30 +1,14 @@
 //  Copyright © 2025 ADA 4th Challenge3 Team1. All rights reserved.
 
+import Foundation
 import Accelerate
 import AVFoundation
-import Foundation
 
-final class CodeClassification {
-  // MARK: - 템플릿 및 노트 이름
-  private let codeTemplates: [String: [Float]] = [
-    "C":    [1.0, 0.0, 0.2, 0.0, 0.8, 0.0, 0.1, 0.9, 0.0, 0.0, 0.1, 0.0],
-    "Dm":   [0.0, 0.1, 0.9, 0.0, 0.0, 0.8, 0.0, 0.0, 0.2, 1.0, 0.0, 0.0],
-    "Em":   [0.0, 0.0, 0.1, 0.0, 0.9, 0.0, 0.0, 0.8, 0.0, 0.0, 0.2, 1.0],
-    "F":    [0.8, 0.0, 0.0, 0.1, 0.0, 1.0, 0.0, 0.0, 0.2, 0.9, 0.0, 0.0],
-    "G":    [0.2, 0.0, 0.8, 0.0, 0.0, 0.1, 0.0, 1.0, 0.0, 0.0, 0.3, 0.9],
-    "Am":   [0.9, 0.0, 0.0, 0.2, 0.0, 0.0, 0.1, 0.0, 0.8, 1.0, 0.0, 0.0],
-    "Bdim": [0.0, 0.0, 0.8, 0.0, 0.0, 0.9, 0.0, 0.0, 0.1, 0.0, 0.2, 1.0],
-    "A":    [0.0, 0.1, 0.0, 0.2, 0.8, 0.0, 0.0, 0.1, 0.0, 1.0, 0.0, 0.0],
-    "D":    [0.0, 0.0, 1.0, 0.0, 0.1, 0.0, 0.8, 0.0, 0.0, 0.9, 0.0, 0.0],
-    "E":    [0.0, 0.0, 0.0, 0.1, 1.0, 0.0, 0.0, 0.2, 0.8, 0.0, 0.0, 0.9],
-    "B7":   [0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.2, 0.0, 1.0]
-  ]
-  private let noteNames = ["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"]
-  
+final class ChordClassification {
   struct CodeResult {
-    let code: String
+    let chord: Chord
     let confidence: Float
-    let allMatches: [(code: String, confidence: Float)]
+    let allMatches: [(chord: Chord, confidence: Float)]
   }
   
   // MARK: - 버퍼 입력 감지
@@ -139,37 +123,20 @@ final class CodeClassification {
   
   // MARK: - 매칭
   private func matchCode(chromaFeatures: [Float]) -> CodeResult {
-    var matches: [(String,Float)] = []
-    for (name, tpl) in codeTemplates {
+    var matches: [(Chord, Float)] = []
+    for chord in Chord.allCases {
+      let tpl = chord.chroma
       let ntpl = normalizeVector(tpl)
       let cosSim = dotProduct(chromaFeatures, ntpl)
-      let dist = zip(chromaFeatures,ntpl).map{ pow($0-$1,2) }.reduce(0,+)
-      let euclid = max(0,1-sqrt(dist)/Float(sqrt(2)))
-      let conf = cosSim*0.7 + euclid*0.3
-      matches.append((name,conf))
+      let dist = zip(chromaFeatures, ntpl).map { pow($0 - $1, 2) }.reduce(0, +)
+      let euclid = max(0, 1 - sqrt(dist) / Float(sqrt(2)))
+      let conf = cosSim * 0.7 + euclid * 0.3
+      matches.append((chord, conf))
     }
-    matches.sort{ $0.1>$1.1 }
-    let best = matches.first ?? ("Unknown",0)
-    let code = best.1>0.3 ? best.0 : "Unknown"
-    let all = matches.map{ (code:$0.0,confidence:$0.1) }
-    return CodeResult(code: code, confidence: best.1, allMatches: all)
-  }
-  
-  // Overload된 매칭
-  private func matchCode(chromaFeatures:[Float],
-                         templates: [String:[Float]]) -> CodeResult {
-    var list: [(String,Float)] = []
-    for (name,tpl) in templates {
-      let nt = normalizeVector(tpl)
-      let cs = dotProduct(chromaFeatures, nt)
-      let d = zip(chromaFeatures,nt).map{ pow($0-$1,2) }.reduce(0,+)
-      let eu = max(0,1-sqrt(d)/Float(sqrt(2)))
-      list.append((name, cs*0.7+eu*0.3))
-    }
-    list.sort{ $0.1>$1.1 }
-    let b = list.first ?? ("Unknown",0)
-    let ch = b.1>0.3 ? b.0 : "Unknown"
-    let all = list.map{ (code:$0.0,confidence:$0.1) }
-    return CodeResult(code:ch, confidence:b.1, allMatches:all)
+    matches.sort { $0.1 > $1.1 }
+    let best = matches.first ?? (.C, 0)
+    let chord = best.1 > 0.3 ? best.0 : .C
+    let all = matches.map { (chord: $0.0, confidence: $0.1) }
+    return CodeResult(chord: chord, confidence: best.1, allMatches: all)
   }
 }

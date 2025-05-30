@@ -3,16 +3,16 @@
 import AVFoundation
 import SwiftUI
 
-final class CodeClassificationViewModel: BaseViewModel<CodeClassificationViewState> {
+final class ChordClassificationViewModel: BaseViewModel<ChordClassificationViewState> {
   private let audioManager: AudioManager = .shared
-  private let codeClassification = CodeClassification() //기타코드 크로마 벡터 등등과 관련된 로직이 들어가있음
+  private let chordClassification = ChordClassification() //기타코드 크로마 벡터 등등과 관련된 로직이 들어가있음
   
   init() {
     super.init(state: .init(
       recordPermissionState : audioManager.getRecordPermissionState(),
-      code: "",
+      chord: nil,
       confidence: 0.0,
-      selectedCodes: ["E", "A", "B7"],
+      selectedCodes: Chord.allCases,
       allMatches: []
     ))
   }
@@ -22,20 +22,20 @@ final class CodeClassificationViewModel: BaseViewModel<CodeClassificationViewSta
       guard let self = self else { return }
       
       // buffer 단위로 감지하고, 결과가 없으면 리턴
-      guard let rawResult = self.codeClassification.detectCode(buffer: buffer, windowSize: self.audioManager.windowSize) else {
+      guard let rawResult = self.chordClassification.detectCode(buffer: buffer, windowSize: self.audioManager.windowSize) else {
         return
       }
       
       // 선택된 곡의 활성 코드만 필터링
       let active = self.state.selectedCodes
-      if !active.contains(rawResult.code) { return }
-      let codeName = rawResult.code
-      let matches = rawResult.allMatches.filter { active.contains($0.code) }
+      if !active.contains(rawResult.chord) { return }
+      let chord = rawResult.chord
+      let matches = rawResult.allMatches.filter { active.contains($0.chord) }
       
       // UI 업데이트
       DispatchQueue.main.async {
         self.emit(self.state.copy(
-          code: codeName,
+          chord: { chord },
           allMatches: matches
         ))
       }

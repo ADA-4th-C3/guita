@@ -27,7 +27,7 @@ struct RouterView: View {
           case .curriculum: CurriculumView()
           case .dev: DevView()
           case .noteClassification: NoteClassificationView()
-          case .codeClassification: CodeClassificationView()
+          case .codeClassification: ChordClassificationView()
           case .voiceControl: VoiceControlView()
           }
         }

@@ -2,10 +2,10 @@
 
 import SwiftUI
 
-struct CodeClassificationView: View {
+struct ChordClassificationView: View {
   var body: some View {
     BaseView(
-      create: { CodeClassificationViewModel() }
+      create: { ChordClassificationViewModel() }
     ) { viewModel, state in
       VStack {
         // MARK: Toolbar
@@ -28,10 +28,16 @@ struct CodeClassificationView: View {
             .buttonStyle(.borderedProminent)
           }
         case .granted:
-          Text(state.code)
-            .font(.headline)
-            .foregroundStyle(.blue)
-          
+          if let chord = state.chord {
+            VStack {
+              Text("\(chord)")
+                .font(.headline)
+                .foregroundStyle(.blue)
+              Guitar(input: NoteOrChord.chord(chord))
+            }
+          } else {
+            Text("")
+          }
         }
         Spacer()
       }
@@ -44,6 +50,6 @@ struct CodeClassificationView: View {
 
 #Preview {
   BasePreview {
-    CodeClassificationView()
+    ChordClassificationView()
   }
 }

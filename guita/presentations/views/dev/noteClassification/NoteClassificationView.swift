@@ -28,15 +28,16 @@ struct NoteClassificationView: View {
             .buttonStyle(.borderedProminent)
           }
         case .granted:
-          Group {
-            if let note = state.note {
-              GuitarNeck(note: note)
-            } else {
-              Text("")
+          if let note = state.note {
+            VStack {
+              Text("\(note)")
+                .font(.headline)
+                .foregroundStyle(.blue)
+              Guitar(input: NoteOrChord.note(note))
             }
+          } else {
+            Text("")
           }
-          .font(.headline)
-          .foregroundStyle(.blue)
         }
 
         Spacer()
