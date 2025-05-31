@@ -10,7 +10,15 @@ struct SplashView: View {
       create: { SplashViewModel() }
     ) { viewModel, _ in
       VStack {
-        // 기타학습 텍스트 추가
+        Spacer()
+        
+        // 기타 아이콘 추가
+        Image(systemName: "guitars")
+          .font(.system(size: 80))
+          .foregroundColor(.yellow)
+          .padding(.bottom, 20)
+        
+        // 기타학습 텍스트 표시
         Text("기타 학습")
           .font(.headline)
           .fontWeight(.semibold)
@@ -20,17 +28,19 @@ struct SplashView: View {
           .background(Color.yellow)
           .cornerRadius(12)
         
-        Spacer().frame(height: 20)
+        Spacer().frame(height: 40)
         
         Loading()
+        
+        Spacer()
       }
       .onAppear {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { // 시간 늘림
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { // 2초간 기타학습 텍스트 보여줌
           viewModel.onLoaded()
-          router.setRoot(.home)
+          router.setRoot(.home) // 홈으로 이동 후
           
-          // 추가 딜레이 후 자동으로 기타학습으로 이동
-          DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+          // 바로 기타학습으로 자동 이동
+          DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             router.push(.guitarLearning)
           }
         }

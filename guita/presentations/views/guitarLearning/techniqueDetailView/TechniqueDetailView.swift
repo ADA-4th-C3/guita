@@ -23,7 +23,15 @@ struct TechniqueDetailView: View {
     ) { viewModel, state in
       VStack(spacing: 0) {
         // 커스텀 툴바
-        customToolbar
+        Toolbar(
+          title: "주법 학습",
+          subtitle: song.displayTitle,
+          trailing: {
+            IconButton("info.circle") {
+              router.push(.techniqueHelp)
+            }
+          }
+        )
         
         // 메인 콘텐츠
         mainContent(viewModel: viewModel, state: state)
@@ -39,37 +47,6 @@ struct TechniqueDetailView: View {
     }
   }
   
-  // MARK: - Custom Toolbar
-  
-  /// 뒤로가기 버튼과 도움말 버튼이 있는 커스텀 툴바
-  private var customToolbar: some View {
-    HStack {
-      IconButton("chevron.left") {
-        router.pop()
-      }
-      
-      Spacer()
-      
-      VStack(spacing: 2) {
-        Text(song.displayTitle)
-          .font(.caption)
-          .foregroundColor(.gray)
-        
-        Text("주법 학습")
-          .font(.headline)
-          .fontWeight(.semibold)
-          .foregroundColor(.white)
-      }
-      
-      Spacer()
-      
-      IconButton("info.circle") {
-        router.push(.techniqueHelp)
-      }
-    }
-    .padding(.horizontal, 16)
-    .frame(height: 56)
-  }
   
   // MARK: - Main Content
   

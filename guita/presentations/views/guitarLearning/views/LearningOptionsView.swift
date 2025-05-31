@@ -113,17 +113,20 @@ struct LearningOptionsView: View {
   ) {
     viewModel.selectLearningOption(option)
     
-    switch option {
-    case .code:
-      if let firstCode = viewModel.firstCodeToLearn {
-        router.push(.codeDetail(state.selectedSong, firstCode))
+    // 0.3초 딜레이 후 해당 화면으로 이동 (선택 효과를 보여주기 위해)
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+      switch option {
+      case .code:
+        if let firstCode = viewModel.firstCodeToLearn {
+          router.push(.codeDetail(state.selectedSong, firstCode))
+        }
+      case .technique:
+        router.push(.techniqueDetail(state.selectedSong))
+      case .section:
+        router.push(.sectionPractice(state.selectedSong))
+      case .fullSong:
+        router.push(.fullSongPractice(state.selectedSong))
       }
-    case .technique:
-      router.push(.techniqueDetail(state.selectedSong))
-    case .section:
-      router.push(.sectionPractice(state.selectedSong))
-    case .fullSong:
-      router.push(.fullSongPractice(state.selectedSong))
     }
   }
 }
@@ -136,7 +139,7 @@ struct LearningOptionsView: View {
       song: SongModel(
         id: "song_01",
         title: "여행을 떠나요",
-        artist: "쿨",
+        artist: "조용필",
         difficulty: .beginner,
         requiredCodes: [.A, .E, .B7],
         audioFileName: "forStudyGuitar",

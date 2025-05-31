@@ -8,6 +8,7 @@ struct Toolbar<Leading: View, Trailing: View>: View {
   @EnvironmentObject var router: Router
 
   let title: String
+  let subtitle: String?
   let titleColor: Color?
   let leading: () -> Leading
   let trailing: () -> Trailing
@@ -16,11 +17,13 @@ struct Toolbar<Leading: View, Trailing: View>: View {
   init(
     title: String = "",
     titleColor: Color? = nil,
+    subtitle: String? = nil,
     isPopButton: Bool = true,
     @ViewBuilder leading: @escaping () -> Leading = { EmptyView() },
     @ViewBuilder trailing: @escaping () -> Trailing = { EmptyView() }
   ) {
     self.title = title
+    self.subtitle = subtitle
     self.titleColor = titleColor
     self.leading = leading
     self.trailing = trailing

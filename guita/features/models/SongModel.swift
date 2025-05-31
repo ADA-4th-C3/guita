@@ -42,7 +42,7 @@ struct SongDataFactory {
       SongModel(
         id: "song_01",
         title: "여행을 떠나요",
-        artist: "쿨",
+        artist: "조용필",
         difficulty: .beginner,
         requiredCodes: [.A, .E, .B7],
         audioFileName: "forStudyGuitar",

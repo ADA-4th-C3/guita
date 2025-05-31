@@ -31,7 +31,8 @@ struct RouterView: View {
           case .voiceControl: VoiceControlView()
             
             // 기타 학습 관련 화면들
-          case .guitarLearning: GuitarLearningView()        // 기타 학습 메인
+          case .guitarLearning: GuitarLearningView()
+              .gesture(DragGesture())  // 기타 학습 메인
           case .learningOptions(let song): LearningOptionsView(song: song)  // 학습 옵션 선택
             
             // 코드 학습

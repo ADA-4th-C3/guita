@@ -23,7 +23,15 @@ struct CodeDetailView: View {
     ) { viewModel, state in
       VStack(spacing: 0) {
         // 커스텀 툴바
-        customToolbar
+        Toolbar(
+          title: "\(chord) 코드",
+          subtitle: song.displayTitle,
+          trailing: {
+            IconButton("info.circle") {
+              router.push(.codeHelp(chord))
+            }
+          }
+        )
         
         // 메인 콘텐츠
         mainContent(viewModel: viewModel, state: state)
@@ -37,39 +45,7 @@ struct CodeDetailView: View {
       }
     }
   }
-  
-  // MARK: - Custom Toolbar
-  
-  /// 뒤로가기 버튼과 도움말 버튼이 있는 커스텀 툴바
-  private var customToolbar: some View {
-    HStack {
-      IconButton("chevron.left") {
-        router.pop()
-      }
-      
-      Spacer()
-      
-      VStack(spacing: 2) {
-        Text(song.displayTitle)
-          .font(.caption)
-          .foregroundColor(.gray)
-        
-        Text("\(chord) 코드")
-          .font(.headline)
-          .fontWeight(.semibold)
-          .foregroundColor(.white)
-      }
-      
-      Spacer()
-      
-      IconButton("info.circle") {
-        router.push(.codeHelp(chord))
-      }
-    }
-    .padding(.horizontal, 16)
-    .frame(height: 56)
-  }
-  
+
   // MARK: - Main Content
   
   /// 메인 콘텐츠 섹션

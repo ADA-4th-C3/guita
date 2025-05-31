@@ -123,8 +123,12 @@ final class LearningOptionsViewModel: BaseViewModel<LearningOptionsViewState> {
   
   /// 학습 옵션이 하이라이트되어야 하는지 여부
   func isOptionHighlighted(_ option: LearningOption) -> Bool {
-    guard let firstRecommended = recommendedLearningOrder.first else { return false }
-    return option == firstRecommended
+    if let selectedOption = state.selectedOption {
+      return option == selectedOption
+    } else {
+      guard let firstRecommended = recommendedLearningOrder.first else { return false }
+      return option == firstRecommended
+    }
   }
   
   /// 코드 학습 시 추가 정보 제공

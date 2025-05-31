@@ -14,17 +14,8 @@ struct HomeView: View {
         Toolbar(title: "Guita", isPopButton: false)
         Spacer()
         
-        // 메인 기타 학습 버튼 - 바로 이동
-        Button("기타 학습") {
-          router.push(.guitarLearning)
-        }
-        .font(.headline)
-        .fontWeight(.semibold)
-        .foregroundColor(.black)
-        .padding(.vertical, 18)
-        .padding(.horizontal, 40)
-        .background(Color.yellow)
-        .cornerRadius(12)
+        // 기타학습 버튼 제거하거나 숨김 처리
+        // 필요시 다른 UI 요소들 추가
         
         Spacer()
       }
