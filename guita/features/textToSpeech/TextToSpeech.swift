@@ -70,9 +70,10 @@ final class TextToSpeech: NSObject, ObservableObject, @unchecked Sendable {
     // AVAudioSession 설정
     do {
       let session = AVAudioSession.sharedInstance()
-      try session.setCategory(.playback, mode: .default, options: [.mixWithOthers])
+      // 카테고리를 playback으로 변경하여 TTS가 마이크로 들어가지 않도록 함
+      try session.setCategory(.playback, mode: .default, options: [.duckOthers])
       try session.setActive(true)
-      Logger.d("TTS: AVAudioSession 설정 완료")
+      Logger.d("TTS: AVAudioSession playback 모드로 설정 완료")
     } catch {
       Logger.e("TTS: AVAudioSession 설정 실패 - \(error)")
     }
@@ -148,13 +149,6 @@ final class TextToSpeech: NSObject, ObservableObject, @unchecked Sendable {
     // 재생 시작
     synthesizer.speak(utterance)
     
-    // 혹시 delegate가 호출되지 않을 경우를 대비한 타이머
-    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-      if self.isSpeaking {
-        self.speechStartHandler?(text)
-        Logger.d("TTS: 강제 시작 핸들러 호출")
-      }
-    }
   }
   
   /// 현재 TTS 재생을 일시정지한다

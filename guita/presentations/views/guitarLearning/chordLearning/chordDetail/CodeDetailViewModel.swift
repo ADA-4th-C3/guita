@@ -1,228 +1,211 @@
+//  Copyright © 2025 ADA 4th Challenge3 Team1. All rights reserved.
+
 import Foundation
 import AVFoundation
 
-/// 코드 상세 학습 화면의 ViewModel
-final class CodeDetailViewModel: BaseViewModel<CodeDetailViewState> {
-  
+/// 코드 상세 학습 화면의 ViewModel - BaseAudioLearningViewModel 상속
+final class CodeDetailViewModel: BaseAudioLearningViewModel<CodeDetailViewState> {
   
   private let song: SongModel
   private let chord: Chord
-  private let audioManager: AudioManager
-  private let codeClassification: CodeClassification
-  private var isAudioSetup = false
+  private var learningSteps: [LearningStep] = []
   
   static func create(song: SongModel, chord: Chord) -> CodeDetailViewModel {
-    return CodeDetailViewModel(
-      song: song,
-      chord: chord,
-      audioManager: AudioManager.shared,
-      codeClassification: CodeClassification()
-    )
+    return CodeDetailViewModel(song: song, chord: chord)
   }
   
-  private init(
-    song: SongModel,
-    chord: Chord,
-    audioManager: AudioManager,
-    codeClassification: CodeClassification
-  ) {
+  private init(song: SongModel, chord: Chord) {
     self.song = song
     self.chord = chord
-    self.audioManager = audioManager
-    self.codeClassification = codeClassification
     
-    // ViewState 초기화를 ViewModel에서 처리
+    // 학습 단계 데이터 로드
+    self.learningSteps = ChordLearningStepFactory.createStepsForChord(chord)
+    
+    // ViewState 초기화
     let initialState = CodeDetailViewState(
       song: song,
       chord: chord,
       currentStep: 1,
-      totalSteps: 4,
+      totalSteps: learningSteps.count,
       currentInstruction: "",
       recognizedCode: "",
       isListening: false,
-      canProceed: false
+      canProceed: false,
+      audioState: .idle,
+      lastContentTTS: nil
     )
     
     super.init(state: initialState)
     Logger.d("CodeDetailViewModel 초기화: \(song.title) - \(chord.rawValue)")
-  }
-  
-  // MARK: - Public Methods
-  
-  /// 학습 시작 - 오디오 세션 설정 및 코드 인식 시작
-  func startLearning() {
-    Logger.d("코드 학습 시작")
     
-    let permissionManager = PermissionManager.shared
-    if permissionManager.microphonePermission == .granted &&
-        permissionManager.speechPermission == .granted {
-      setupAudioRecognition()
-    } else {
-      // 권한 완료 후 오디오 시작하도록 콜백 설정
-      permissionManager.onPermissionsCompleted = { [weak self] in
-        self?.setupAudioRecognition()
-      }
-    }
-    
-    updateInstructionForCurrentStep()
+    // 타겟 코드 설정
+    setTargetChordFilter(chord)
   }
   
+  // MARK: - BaseAudioLearningViewModel 추상 메서드 구현
   
-  /// 권한 허용 완료 후 호출되는 메서드
-  func onPermissionsGranted() {
-    Logger.d("권한 허용 완료 - 오디오 및 음성인식 시작")
-    setupAudioRecognition()
-    setupVoiceRecognition()
-  }
-  
-  /// 학습 종료 - 오디오 세션 정리
-  func stopLearning() {
-    Logger.d("코드 학습 종료: \(song.title) - \(chord.rawValue)")
-    audioManager.stop()
-    isAudioSetup = false
-  }
-  
-  /// 다음 단계로 진행
-  func nextStep() {
-    guard state.canProceed else {
-      Logger.d("다음 단계 진행 불가 - canProceed: false")
-      return
-    }
-    
-    guard state.currentStep < state.totalSteps else {
+  override func onNextCommand() {
+    guard currentStepIndex < learningSteps.count - 1 else {
       Logger.d("이미 마지막 단계")
       return
     }
     
-    let newStep = state.currentStep + 1
-    Logger.d("다음 단계로 진행: \(state.currentStep) -> \(newStep)")
+    currentStepIndex += 1
+    Logger.d("다음 단계로 진행: \(currentStepIndex + 1)/\(learningSteps.count)")
     
-    emit(state.copy(
-      currentStep: newStep,
-      currentInstruction: getInstructionForStep(newStep),
-      canProceed: shouldAllowProceedForStep(newStep)
-    ))
+    updateCurrentStep()
+    executeCurrentStep()
   }
   
   /// 이전 단계로 돌아가기
-  func previousStep() {
-    guard state.currentStep > 1 else {
+  override func onPreviousCommand() {
+    guard currentStepIndex > 0 else {
       Logger.d("이미 첫 번째 단계")
       return
     }
     
-    let newStep = state.currentStep - 1
-    Logger.d("이전 단계로 돌아가기: \(state.currentStep) -> \(newStep)")
+    currentStepIndex -= 1
+    Logger.d("이전 단계로 돌아가기: \(currentStepIndex + 1)/\(learningSteps.count)")
     
+    updateCurrentStep()
+    executeCurrentStep()
+  }
+  
+  override func getCurrentLearningSteps() -> [LearningStep] {
+    return learningSteps
+  }
+  
+  override func updateStateWithAudio(_ audioState: AudioState, lastTTS: String?) {
     emit(state.copy(
-      currentStep: newStep,
-      currentInstruction: getInstructionForStep(newStep),
-      canProceed: shouldAllowProceedForStep(newStep)
+      isListening: audioState == .listeningVoice, audioState: audioState,
+      lastContentTTS: lastTTS
     ))
   }
   
-  // MARK: - Setup
-  
-  /// 오디오 인식 설정
-  private func setupAudioRecognition() {
-    guard !isAudioSetup else {
-      Logger.d("오디오 이미 설정됨")
-      return
-    }
-    
-    audioManager.start { [weak self] buffer, _ in
-      self?.processAudioBuffer(buffer)
-    }
-    
-    isAudioSetup = true
-    Logger.d("오디오 인식 설정 완료")
+  override func updateRecognizedChord(_ chord: String) {
+    emit(state.copy(
+      recognizedCode: chord,
+      canProceed: shouldAllowProceed(recognizedChord: chord)
+    ))
   }
   
-  private func setupVoiceRecognition() {
-    Logger.d("음성인식 설정 완료")
+  func onAudioRecoveryFailed() {
+    Logger.e("오디오 복구 실패 - 사용자에게 알림")
+    // TODO: 에러 상태를 ViewState에 추가하여 UI에서 에러 메시지 표시
   }
   
-  /// 오디오 버퍼 처리 및 코드 인식
-  private func processAudioBuffer(_ buffer: AVAudioPCMBuffer) {
-    guard let result = codeClassification.detectCode(
-      buffer: buffer,
-      windowSize: audioManager.windowSize
-    ) else {
-      return
-    }
+  // MARK: - Public Methods
+  
+  /// 학습 시작
+  func startLearning() {
+    Logger.d("코드 학습 시작: \(chord.rawValue)")
     
-    DispatchQueue.main.async { [weak self] in
-      guard let self = self else { return }
-      
-      let isCorrectCode = result.code == self.chord.rawValue
-      let shouldAllowProceed = self.shouldAllowProceedBasedOnRecognition(
-        recognizedCode: result.code,
-        isCorrect: isCorrectCode
-      )
-      
-      self.emit(self.state.copy(
-        recognizedCode: result.code,
-        isListening: true,
-        canProceed: shouldAllowProceed
-      ))
-      
-      if isCorrectCode {
-        Logger.d("올바른 코드 인식됨: \(result.code)")
+    let permissionManager = PermissionManager.shared
+    if permissionManager.microphonePermission == .granted &&
+        permissionManager.speechPermission == .granted {
+      setupVoiceRecognition()
+      executeCurrentStep()
+    } else {
+      permissionManager.onPermissionsCompleted = { [weak self] in
+        self?.setupVoiceRecognition()
+        self?.executeCurrentStep()
       }
     }
+    
+    updateCurrentStep()
   }
   
-  /// 현재 단계의 안내 문구 업데이트
-  private func updateInstructionForCurrentStep() {
-    let instruction = getInstructionForStep(state.currentStep)
-    emit(state.copy(currentInstruction: instruction))
+  /// 학습 종료
+  func stopLearning() {
+    Logger.d("코드 학습 종료: \(song.title) - \(chord.rawValue)")
+    stopVoiceRecognition()
+    stopAllAudio()
   }
   
-  /// 단계별 안내 문구 반환
-  private func getInstructionForStep(_ step: Int) -> String {
-    switch step {
-    case 1:
-      return "\(chord)코드는 2번 프렛 위에\n검지, 중지, 약지\n총 3 손가락을\n사용하는 코드입니다."
-    case 2:
-      return "검지를 2번 프렛\n4번 줄에 올리고\n해당 줄을 한번 쳐보세요."
-    case 3:
-      return "중지를 2번 프렛\n3번 줄에 올리고\n해당 줄을 한번 쳐보세요."
-    case 4:
-      return "약지를 2번 프렛\n2번 줄에 올리고\n해당 줄을 한번 쳐보세요."
-    default:
-      return ""
+  /// 권한 허용 완료 후 호출
+  func onPermissionsGranted() {
+    Logger.d("권한 허용 완료 - 오디오 및 음성인식 시작")
+    setupVoiceRecognition()
+    executeCurrentStep()
+  }
+  
+  /// 다음 단계로 진행 (UI에서 호출)
+  func nextStep() {
+    onNextCommand()
+  }
+  
+  /// 이전 단계로 돌아가기 (UI에서 호출)
+  func previousStep() {
+    onPreviousCommand()
+  }
+  
+  // MARK: - Private Methods
+  
+  /// 현재 단계 정보 업데이트
+  private func updateCurrentStep() {
+    guard currentStepIndex < learningSteps.count else { return }
+    
+    let currentStep = learningSteps[currentStepIndex]
+    let instruction = getCurrentInstruction()
+    let canProceed = shouldAllowProceedForCurrentStep()
+    
+    emit(state.copy(
+      currentStep: currentStepIndex + 1,
+      currentInstruction: instruction,
+      canProceed: canProceed
+    ))
+  }
+  
+  /// 현재 단계의 안내 문구 반환
+  private func getCurrentInstruction() -> String {
+    guard currentStepIndex < learningSteps.count else { return "" }
+    
+    let step = learningSteps[currentStepIndex]
+    
+    // TTS 콘텐츠 중 content 타입만 추출하여 표시
+    let contentTexts = step.ttsContents
+      .filter { $0.type == .content }
+      .map { $0.text }
+    
+    return contentTexts.joined(separator: " ")
+  }
+  
+  /// 현재 단계에서 진행 가능 여부 판단
+  private func shouldAllowProceedForCurrentStep() -> Bool {
+    guard currentStepIndex < learningSteps.count else { return false }
+    
+    let step = learningSteps[currentStepIndex]
+    
+    switch step.stepType.expectedInputType {
+    case .voiceCommandOnly:
+      return true // 개요 단계는 항상 진행 가능
+    case .chordRecognition:
+      return false // 코드 인식 필요 - 올바른 코드 인식 시에만 가능
+    case .rhythmPattern:
+      return false // 리듬 패턴 인식 필요
     }
   }
   
-  /// 단계별 진행 가능 여부 판단
-  private func shouldAllowProceedForStep(_ step: Int) -> Bool {
-    switch step {
-    case 1:
-      return true // 설명 단계는 항상 진행 가능
-    case 2, 3, 4:
-      return false // 실제 연주 단계는 코드 인식 후 진행 가능
-    default:
-      return false
-    }
-  }
-  
-  /// 코드 인식 결과에 따른 진행 가능 여부 판단
-  private func shouldAllowProceedBasedOnRecognition(
-    recognizedCode: String,
-    isCorrect: Bool
-  ) -> Bool {
-    // 실제 연주 단계(2-4)에서만 코드 인식 검증
-    guard state.currentStep >= 2 && state.currentStep <= 4 else {
-      return shouldAllowProceedForStep(state.currentStep)
+  /// 코드 인식 결과에 따른 진행 가능 여부
+  private func shouldAllowProceed(recognizedChord: String) -> Bool {
+    guard currentStepIndex < learningSteps.count else { return false }
+    
+    let step = learningSteps[currentStepIndex]
+    
+    // 코드 인식이 필요한 단계에서만 검증
+    if step.stepType.expectedInputType == .chordRecognition {
+      return recognizedChord.uppercased() == chord.rawValue.uppercased()
     }
     
-    return isCorrect
+    return shouldAllowProceedForCurrentStep()
   }
+  
   
   // MARK: - Cleanup
   
   override func dispose() {
     stopLearning()
+    clearTargetChordFilter()
     super.dispose()
   }
 }

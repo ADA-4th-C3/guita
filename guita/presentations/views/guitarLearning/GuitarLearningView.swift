@@ -143,6 +143,46 @@ struct GuitarLearningView: View {
       
       // 곡 목록
       ScrollView {
+        // 기존 TTS 테스트 버튼 아래에 추가
+        Button("A코드 학습 테스트") {
+          let testSong = SongModel(
+            id: "test_a_chord",
+            title: "A코드 테스트",
+            artist: "테스트",
+            difficulty: .beginner,
+            requiredCodes: [.A],
+            audioFileName: "forStudyGuitar",
+            isUnlocked: true,
+            isCompleted: false
+          )
+          router.push(.codeDetail(testSong, .A))
+        }
+        .font(.caption)
+        .padding(.horizontal, 12)
+        .padding(.vertical, 6)
+        .background(Color.green.opacity(0.3))
+        .foregroundColor(.white)
+        .cornerRadius(6)
+        
+        Button("E코드 학습 테스트") {
+          let testSong = SongModel(
+            id: "test_e_chord",
+            title: "E코드 테스트",
+            artist: "테스트",
+            difficulty: .beginner,
+            requiredCodes: [.E],
+            audioFileName: "forStudyGuitar",
+            isUnlocked: true,
+            isCompleted: false
+          )
+          router.push(.codeDetail(testSong, .E))
+        }
+        .font(.caption)
+        .padding(.horizontal, 12)
+        .padding(.vertical, 6)
+        .background(Color.blue.opacity(0.3))
+        .foregroundColor(.white)
+        .cornerRadius(6)
         LazyVStack(spacing: 1) {
           ForEach(state.songs) { song in
             SongRowView(song: song) {

@@ -19,7 +19,7 @@ struct CodeDetailView: View {
       create: {
         CodeDetailViewModel.create(song: song, chord: chord)
       },
-      needsPermissions: true  // 이것만 추가
+      needsPermissions: true
     ) { viewModel, state in
       VStack(spacing: 0) {
         // 커스텀 툴바
@@ -45,7 +45,7 @@ struct CodeDetailView: View {
       }
     }
   }
-
+  
   // MARK: - Main Content
   
   /// 메인 콘텐츠 섹션
@@ -58,6 +58,9 @@ struct CodeDetailView: View {
       
       // 단계 표시
       stepIndicator(state: state)
+      
+      // 오디오 상태 표시 (디버그용)
+      audioStateIndicator(state: state)
       
       // 단계별 콘텐츠
       stepContent(viewModel: viewModel, state: state)
@@ -74,9 +77,57 @@ struct CodeDetailView: View {
   
   /// 현재 단계를 표시하는 인디케이터
   private func stepIndicator(state: CodeDetailViewState) -> some View {
-    Text("\(state.currentStep)/\(state.totalSteps) 단계")
-      .font(.caption)
-      .foregroundColor(.gray)
+    VStack(spacing: 8) {
+      Text("\(state.currentStep)/\(state.totalSteps) 단계")
+        .font(.caption)
+        .foregroundColor(.gray)
+      
+      // 진행률 바
+      ProgressView(value: Double(state.currentStep), total: Double(state.totalSteps))
+        .progressViewStyle(LinearProgressViewStyle(tint: .yellow))
+        .frame(width: 200)
+    }
+  }
+  
+  // MARK: - Audio State Indicator (디버그용)
+  
+  /// 오디오 상태 표시 (개발/테스트용)
+  private func audioStateIndicator(state: CodeDetailViewState) -> some View {
+    HStack(spacing: 16) {
+      // 오디오 상태
+      Text(audioStateText(state.audioState))
+        .font(.caption)
+        .padding(.horizontal, 8)
+        .padding(.vertical, 4)
+        .background(audioStateColor(state.audioState))
+        .cornerRadius(4)
+      
+      // 마지막 TTS
+      if let lastTTS = state.lastContentTTS {
+        Text("마지막: \(lastTTS.prefix(20))...")
+          .font(.caption2)
+          .foregroundColor(.gray)
+          .lineLimit(1)
+      }
+    }
+  }
+  
+  private func audioStateText(_ audioState: AudioState) -> String {
+    switch audioState {
+    case .idle: return "대기"
+    case .playingTTS: return "TTS 재생"
+    case .playingSound: return "사운드 재생"
+    case .listeningVoice: return "음성인식 중"
+    }
+  }
+  
+  private func audioStateColor(_ audioState: AudioState) -> Color {
+    switch audioState {
+    case .idle: return .gray
+    case .playingTTS: return .blue
+    case .playingSound: return .orange
+    case .listeningVoice: return .green
+    }
   }
   
   // MARK: - Step Content
@@ -97,7 +148,34 @@ struct CodeDetailView: View {
           chord: chord
         )
       }
+      
+      // 코드 인식 상태 표시
+      if !state.recognizedCode.isEmpty {
+        recognizedCodeDisplay(state: state)
+      }
     }
+  }
+  
+  /// 인식된 코드 표시
+  private func recognizedCodeDisplay(state: CodeDetailViewState) -> some View {
+    HStack {
+      Text("인식된 코드:")
+        .font(.caption)
+        .foregroundColor(.gray)
+      
+      Text(state.recognizedCode)
+        .font(.headline)
+        .fontWeight(.bold)
+        .foregroundColor(isCorrectChord(state) ? .green : .red)
+    }
+    .padding(.horizontal, 16)
+    .padding(.vertical, 8)
+    .background(Color.gray.opacity(0.1))
+    .cornerRadius(8)
+  }
+  
+  private func isCorrectChord(_ state: CodeDetailViewState) -> Bool {
+    return state.recognizedCode.uppercased() == chord.rawValue.uppercased()
   }
   
   // MARK: - Bottom Navigation
@@ -107,33 +185,62 @@ struct CodeDetailView: View {
     viewModel: CodeDetailViewModel,
     state: CodeDetailViewState
   ) -> some View {
-    HStack(spacing: 0) {
-      // 이전 버튼
-      navigationButton(
-        iconName: "chevron.left",
-        isEnabled: state.currentStep > 1,
-        action: { viewModel.previousStep() }
-      )
+    VStack(spacing: 20) {
+      // 음성 명령 안내
+      voiceCommandGuide()
       
-      Spacer()
-      
-      // 음성 시각화 및 인식된 코드 표시
-      AudioVisualizationView(
-        isListening: state.isListening,
-        recognizedCode: state.recognizedCode
-      )
-      
-      Spacer()
-      
-      // 다음 버튼
-      navigationButton(
-        iconName: "chevron.right",
-        isEnabled: state.canProceed,
-        action: { viewModel.nextStep() }
-      )
+      // 네비게이션 버튼들
+      HStack(spacing: 40) {
+        // 이전 버튼
+        navigationButton(
+          iconName: "chevron.left",
+          text: "이전",
+          isEnabled: state.currentStep > 1,
+          action: { viewModel.previousStep() }
+        )
+        
+        // 음성 시각화
+        AudioVisualizationView(
+          isListening: state.isListening,
+          recognizedCode: state.recognizedCode
+        )
+        
+        // 다음 버튼
+        navigationButton(
+          iconName: "chevron.right",
+          text: "다음",
+          isEnabled: state.canProceed,
+          action: { viewModel.nextStep() }
+        )
+      }
     }
-    .padding(.horizontal, 40)
+    .padding(.horizontal, 20)
     .padding(.bottom, 40)
+  }
+  
+  /// 음성 명령 안내
+  private func voiceCommandGuide() -> some View {
+    VStack(spacing: 4) {
+      Text("음성 명령어")
+        .font(.caption)
+        .foregroundColor(.gray)
+      
+      HStack(spacing: 16) {
+        commandText("다음")
+        commandText("이전")
+        commandText("다시")
+        commandText("정지")
+      }
+    }
+  }
+  
+  private func commandText(_ command: String) -> some View {
+    Text(command)
+      .font(.caption2)
+      .padding(.horizontal, 6)
+      .padding(.vertical, 2)
+      .background(Color.yellow.opacity(0.2))
+      .cornerRadius(3)
   }
   
   // MARK: - Navigation Button
@@ -141,16 +248,21 @@ struct CodeDetailView: View {
   /// 네비게이션 버튼 (이전/다음)
   private func navigationButton(
     iconName: String,
+    text: String,
     isEnabled: Bool,
     action: @escaping () -> Void
   ) -> some View {
     Button(action: action) {
-      Image(systemName: iconName)
-        .font(.title)
-        .foregroundColor(isEnabled ? .white : .gray)
+      VStack(spacing: 4) {
+        Image(systemName: iconName)
+          .font(.title2)
+        
+        Text(text)
+          .font(.caption)
+      }
+      .foregroundColor(isEnabled ? .white : .gray)
     }
     .disabled(!isEnabled)
     .opacity(isEnabled ? 1.0 : 0.3)
   }
-  
 }

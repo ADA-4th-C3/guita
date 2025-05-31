@@ -30,7 +30,8 @@ final class AudioManager {
   func start(handler: @escaping AVAudioNodeTapBlock) {
     do {
       let session = AVAudioSession.sharedInstance()
-      try session.setCategory(.playAndRecord, mode: .default, options: [.defaultToSpeaker])
+//      try session.setCategory(.playAndRecord, mode: .default, options: [.defaultToSpeaker])
+      try session.setCategory(.record, mode: .default, options: [])
       try session.setPreferredSampleRate(sampleRate)
       try session.setActive(true)
     } catch {
