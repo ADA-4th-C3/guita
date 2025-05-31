@@ -43,7 +43,6 @@ struct LessonDetailView: View {
                   .frame(width: boxWidth, height: boxHeight)
                   .background(Color.black)
                   .foregroundColor(.white)
-                
               }
               Button(action: {
                 router.push(.technique) //임시로 라우팅 해둠
