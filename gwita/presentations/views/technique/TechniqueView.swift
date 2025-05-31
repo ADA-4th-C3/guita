@@ -12,32 +12,29 @@ struct TechniqueView: View {
       VStack {
         // MARK: Toolbar
         Toolbar(title:"주법 학습")
+        
         Spacer()
         
+        // MARK: Step/TotalStep
+        Text("\(viewModel.state.currentStep.step)/\(viewModel.state.currentStep.totalSteps) 단계")
+          .foregroundStyle(.gray)
+          .font(.system(size:22))
+        
+        // MARK: description
         VStack{
-          Text("\(viewModel.state.currentStep.step)/\(viewModel.state.currentStep.totalSteps) 단계")
-            .foregroundStyle(.gray)
-            .font(.system(size:22))
-            .padding(.vertical, 54)
-            .offset(y: -70)
-          VStack{
-            Text(viewModel.state.currentStep.description)
-              .foregroundStyle(.white)
-              .fontWeight(.bold)
-              .offset(y: -70)
-              .foregroundStyle(.white)
-              .font(.system(size:26))
-              .padding(.horizontal, 30)
-            
-            
-          }
+          Text(viewModel.state.currentStep.description)
+            .foregroundStyle(.white)
+            .fontWeight(.bold)
+          
+            .foregroundStyle(.white)
+            .font(.system(size:26))
+            .padding(.horizontal, 30)
+          
         }
         .frame(width:393, height:550)
         .background(Color.black)
         
-        
-        Spacer()
-        
+        // MARK: Button(back/play/next)
         HStack{
           Button(action: {
             viewModel.previousStep()
@@ -64,9 +61,9 @@ struct TechniqueView: View {
               .padding(.horizontal, 42)
             
           }
+          .padding(.vertical,15)
+          .background(Color.black)
         }
-        .padding(.vertical,15)
-        .background(Color.black)
       }
     }
   }
