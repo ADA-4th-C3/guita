@@ -12,3 +12,9 @@ enum PermissionFlowStep {
   case speechRequest    // 음성인식 권한 요청
   case completed        // 완료
 }
+
+enum PermissionDialogType {
+  case permissionIntroduction 
+  case microphoneDenied
+  case speechDenied
+}

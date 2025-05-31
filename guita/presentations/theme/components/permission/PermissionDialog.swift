@@ -150,7 +150,12 @@ struct PermissionDialog: View {
       // 버튼 영역
       HStack(spacing: 0) {
         Button("취소") {
-          permissionManager.permissionDialogType = .permissionIntroduction
+          if permissionManager.permissionDialogType == .microphoneDenied {
+            permissionManager.currentStep = .microphoneRequest
+          } else if permissionManager.permissionDialogType == .speechDenied {
+            permissionManager.currentStep = .speechRequest
+          }
+          permissionManager.proceedToNextStep()
         }
         .frame(maxWidth: .infinity)
         .frame(height: 50)
@@ -207,12 +212,6 @@ struct PermissionDialog: View {
   }
 }
 
-/// 권한 다이얼로그 타입
-enum PermissionDialogType {
-  case permissionIntroduction  // 권한 안내
-  case microphoneDenied
-  case speechDenied
-}
 
 // MARK: - Preview
 

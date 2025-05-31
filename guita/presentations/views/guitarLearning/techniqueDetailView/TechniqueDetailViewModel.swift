@@ -34,11 +34,21 @@ final class TechniqueDetailViewModel: BaseViewModel<TechniqueDetailViewState> {
   
   /// 학습 시작 - 오디오 세션 설정 및 인식 시작
   func startLearning() {
-    Logger.d("주법 학습 시작: \(song.title)")
-    setupAudioRecognition()
+    Logger.d("주법 학습 시작")
+    
+    let permissionManager = PermissionManager.shared
+    if permissionManager.microphonePermission == .granted &&
+        permissionManager.speechPermission == .granted {
+      setupAudioRecognition()
+    } else {
+      // 권한 완료 후 오디오 시작하도록 콜백 설정
+      permissionManager.onPermissionsCompleted = { [weak self] in
+        self?.setupAudioRecognition()
+      }
+    }
+    
     updateInstructionForCurrentStep()
   }
-  
   /// 학습 종료 - 오디오 세션 정리
   func stopLearning() {
     Logger.d("주법 학습 종료: \(song.title)")
@@ -87,7 +97,7 @@ final class TechniqueDetailViewModel: BaseViewModel<TechniqueDetailViewState> {
     ))
   }
   
-  // MARK: - Private Methods
+  // MARK: - Setup
   
   /// 오디오 인식 설정
   private func setupAudioRecognition() {
@@ -102,6 +112,16 @@ final class TechniqueDetailViewModel: BaseViewModel<TechniqueDetailViewState> {
     
     isAudioSetup = true
     Logger.d("오디오 인식 설정 완료")
+  }
+  
+  private func setupVoiceRecognition() {
+    Logger.d("음성인식 설정 완료")
+  }
+  
+  func onPermissionsGranted() {
+    Logger.d("권한 허용 완료 - 오디오 및 음성인식 시작")
+    setupAudioRecognition()
+    setupVoiceRecognition()
   }
   
   /// 오디오 버퍼 처리
