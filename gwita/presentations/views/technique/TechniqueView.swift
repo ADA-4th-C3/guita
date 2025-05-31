@@ -42,7 +42,7 @@ struct TechniqueView: View {
           Button(action: {
             viewModel.previousStep()
           }) {
-            Image("BackButton")
+            Image("guitar-back")
               .resizable()
               .frame(width:75, height:75)
               .padding(.horizontal, 42)
@@ -50,7 +50,7 @@ struct TechniqueView: View {
           }
           Button(action: {
           }) {
-            Image("GuitarPlay")
+            Image("guitar-play")
               .resizable()
               .frame(width:95, height:95)
             
@@ -58,7 +58,7 @@ struct TechniqueView: View {
           Button(action: {
             viewModel.nextStep()
           }) {
-            Image("NextButton")
+            Image("guitar-next")
               .resizable()
               .frame(width:75, height:75)
               .padding(.horizontal, 42)

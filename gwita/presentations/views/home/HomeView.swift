@@ -17,7 +17,7 @@ struct HomeView: View {
           router.push(.curriculum)
         } label: {
           VStack {
-            Image("Guitarpick")
+            Image("pick")
               .resizable()
               .frame(width: 46.95, height: 54.17)
               .padding(.vertical, 9.17)
