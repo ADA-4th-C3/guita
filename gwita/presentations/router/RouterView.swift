@@ -29,7 +29,7 @@ struct RouterView: View {
           case .noteClassification: NoteClassificationView()
           case .codeClassification: ChordClassificationView()
           case .voiceControl: VoiceControlView()
-          case .lesson : LessonDetailView()
+          case .lesson(let item) : LessonDetailView(item: item)
           }
         }
         .toolbarBackground(.hidden, for: .navigationBar)
