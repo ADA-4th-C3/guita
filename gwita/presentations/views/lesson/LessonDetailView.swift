@@ -3,25 +3,18 @@
 import SwiftUI
 
 struct LessonDetailView: View {
+  let item : CurriculumViewState
   var body: some View {
-    
+   
     BaseView(
-      create: { LessonDetailViewModel() }
+      create: { LessonDetailViewModel(item: item) }
     ) { viewModel, _ in
       VStack {
         // MARK: Toolbar
-        Toolbar(title: "초급")
+        Toolbar(title: item.level)
         Spacer()
     
         }
       }
     }
   }
-
-
-#Preview {
-  BasePreview {
-    CurriculumView()
-  }
-}
-
