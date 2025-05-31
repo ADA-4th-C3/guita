@@ -9,6 +9,7 @@ struct Main: App {
   var body: some Scene {
     WindowGroup {
       RouterView()
+        .modifier(FontKoddi(size: 16, weight: .regular))
     }
     .environmentObject(router)
   }
