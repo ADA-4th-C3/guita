@@ -3,10 +3,12 @@
 import SwiftUI
 
 struct CurriculumView: View {
+  @EnvironmentObject var router: Router
+  
   var body: some View {
     BaseView(
       create: { CurriculumViewModel() }
-    ) { _, _ in
+    ) { viewModel, _ in
       VStack {
         // MARK: Toolbar
         Toolbar(title: "학습 목록")
@@ -15,89 +17,41 @@ struct CurriculumView: View {
         ScrollView {
           LazyVStack(alignment:.leading, spacing:8)
           {
-            HStack {
-              HStack {
-                Text("[초급 1]")
-                  .font(.system(size:18))
-                  .fontWeight(.bold)
-                Text("여행을 떠나요")
-                  .font(.system(size:18))
-                  .fontWeight(.bold)
-              }.padding(.horizontal,30)
-              Spacer()
+            
+            ForEach(viewModel.state) { item in
               
               HStack {
-                Text ("A")
-                  .font(.system(size:17))
-                  .foregroundColor(.black)
-                  .padding(.horizontal,6)
-                  .background(Color.white)
-                  .cornerRadius(5)
+                HStack {
+                  Text(item.level)
+                    .font(.system(size:18))
+                    .fontWeight(.bold)
+                  Text(item.title)
+                    .font(.system(size:18))
+                    .fontWeight(.bold)
+                }.padding(.horizontal,30)
                 
+                Spacer()
                 
-                Text ("A")
-                  .font(.system(size:17))
-                  .padding(.horizontal,6)
-                  .foregroundColor(.black)
-                  .background(Color.white)
-                  .cornerRadius(5)
-                
-                
-                Text ("A")
-                  .font(.system(size:17))
-                  .foregroundColor(.black)
-                  .padding(.horizontal,6)
-                  .background(Color.white)
-                  .cornerRadius(5)
+                HStack {
+                  ForEach (item.chords, id: \.self) {chord in
+                    Text (chord)
+                      .font(.system(size:17))
+                      .foregroundColor(.black)
+                      .padding(.horizontal,6)
+                      .background(Color.white)
+                      .cornerRadius(5)
+                  }
+                }
+                .padding(.horizontal)
               }
-              .padding(.horizontal)
+              .frame(width:393, height:110)
             }
-            .frame(width:393, height:110)
-            
-            HStack {
-              HStack {
-                Text("[초급 1]")
-                  .font(.system(size:18))
-                  .fontWeight(.bold)
-                Text("여행을 떠나요")
-                  .font(.system(size:18))
-                  .fontWeight(.bold)
-              }.padding(.horizontal,30)
-              Spacer()
-              
-              HStack {
-                Text ("A")
-                  .font(.system(size:17))
-                  .foregroundColor(.black)
-                  .padding(.horizontal,6)
-                  .background(Color.white)
-                  .cornerRadius(5)
-                
-                
-                Text ("A")
-                  .font(.system(size:17))
-                  .padding(.horizontal,6)
-                  .foregroundColor(.black)
-                  .background(Color.white)
-                  .cornerRadius(5)
-                
-                
-                Text ("A")
-                  .font(.system(size:17))
-                  .foregroundColor(.black)
-                  .padding(.horizontal,6)
-                  .background(Color.white)
-                  .cornerRadius(5)
-              }
-              .padding(.horizontal)
-            }
-            .frame(width:393, height:110)
-            
-            
+          }.onTapGesture{
+            router.push(.lesson)
           }
         }
       }
-    } 
+    }
   }
 }
 
