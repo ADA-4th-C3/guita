@@ -17,6 +17,7 @@ struct FontKoddi: ViewModifier {
     content
       .font(.custom(weight.rawValue, size: size))
       .foregroundColor(color)
+      .lineSpacing(1.4)
   }
 }
 

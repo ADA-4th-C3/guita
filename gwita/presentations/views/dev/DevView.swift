@@ -19,6 +19,9 @@ struct DevView: View {
             Tile(title: "Config") {
               router.push(.config)
             }
+            Tile(title: "Permission") {
+              router.push(.devPermission)
+            }
           }
 
           // MARK: Features
