@@ -3,6 +3,8 @@
 import AVFoundation
 
 struct NoteClassification {
+  let festFourierTransform = FestFourierTransform()
+
   private func getClosestNoteName(for frequency: Double) -> Note? {
     var minDiff = Double.infinity
     var closestNote: Note?
@@ -60,7 +62,7 @@ struct NoteClassification {
     // - windowSize 크기의 배열
     // - Frequency Resolution(5.86Hz) = Sample Rage(48000) / windowSize(8192)
     // - 0번째 index : 0 ~ 5.86Hz 사이 주파수 성분의 크기(magnitude)와 위상(phase)을 표현
-    let fftResult = FestFourierTransform().run(fftInput)
+    let fftResult = festFourierTransform.run(fftInput)
 
     // 크기(Magnitude, 신호가 그 주파수에서 얼마나 강한지 나타냄) = 루트(실수부^2 + 허수부^2)
     // 위상(Phase, 그 주파수 성분의 시간적 위치나 진행 상태) = arctan(허수부 / 실수부)
