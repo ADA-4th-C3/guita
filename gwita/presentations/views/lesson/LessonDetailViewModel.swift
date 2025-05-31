@@ -4,6 +4,7 @@
 
 final class LessonDetailViewModel: BaseViewModel<LessonDetailViewState> {
   init(item: SongInfo) {
+
     super.init(state: .init())
   }
 }

@@ -14,5 +14,6 @@ struct SongInfo :Identifiable, Hashable {
       title: title ?? self.title,
       chords: chords ?? self.chords
     )
+  
   }
 }

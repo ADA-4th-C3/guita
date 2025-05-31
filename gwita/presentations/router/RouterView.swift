@@ -31,6 +31,7 @@ struct RouterView: View {
           case .voiceControl: VoiceControlView()
           case .lesson(let item) : LessonDetailView(item: item)
           case .technique: TechniqueView()
+          case .config: ConfigView()
           }
         }
         .toolbarBackground(.hidden, for: .navigationBar)

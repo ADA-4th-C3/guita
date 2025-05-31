@@ -7,10 +7,9 @@ struct LessonDetailView: View {
   @EnvironmentObject var router: Router
   
   var body: some View {
-    
     BaseView(
       create: { LessonDetailViewModel(item: item) }
-    ) { viewModel, _ in
+    ) { _, _ in
       VStack {
         // MARK: Toolbar
         Toolbar(title: item.level)
@@ -92,3 +91,4 @@ struct LessonDetailView: View {
     ))
   }
 }
+

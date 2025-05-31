@@ -2,15 +2,24 @@
 
 import AVFoundation
 
-final class AudioManager {
+final class AudioManager: BaseViewModel<AudioManagerState> {
   static let shared = AudioManager()
   private var audioEngine = AVAudioEngine()
   private var inputNode: AVAudioInputNode?
-  var inputFormat: AVAudioFormat?
+  private var inputFormat: AVAudioFormat?
   let sampleRate: Double = 48000
   let windowSize: Int = 8192
 
-  private init() {}
+  private init() {
+    super.init(state: AudioManagerState(
+      permission: .undetermined,
+      isRecording: false
+    ))
+
+    emit(state.copy(
+      permission: getRecordPermissionState()
+    ))
+  }
 
   /// 마이크 접근 권한 상태 확인
   func getRecordPermissionState() -> PermissionState {
@@ -24,10 +33,15 @@ final class AudioManager {
 
   /// 마이크 접근 권한 요청
   func requestRecordPermission(completion: @escaping (_ isGranted: Bool) -> Void) {
-    AVAudioApplication.requestRecordPermission(completionHandler: completion)
+    AVAudioApplication.requestRecordPermission { isGranted in
+      completion(isGranted)
+      self.emit(self.state.copy(permission: isGranted ? .granted : .denied))
+    }
   }
 
   func start(handler: @escaping AVAudioNodeTapBlock) {
+    if state.isRecording { return }
+
     do {
       let session = AVAudioSession.sharedInstance()
       try session.setCategory(.playAndRecord, mode: .default, options: [.defaultToSpeaker])
@@ -41,10 +55,12 @@ final class AudioManager {
     inputFormat = inputNode!.outputFormat(forBus: 0)
     inputNode?.installTap(onBus: 0, bufferSize: AVAudioFrameCount(windowSize), format: inputFormat, block: handler)
     try? audioEngine.start()
+    emit(state.copy(isRecording: true))
   }
 
   func stop() {
     inputNode?.removeTap(onBus: 0)
     audioEngine.stop()
+    emit(state.copy(isRecording: false))
   }
 }

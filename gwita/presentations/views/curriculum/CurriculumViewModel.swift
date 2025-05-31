@@ -12,7 +12,4 @@ final class CurriculumViewModel: BaseViewModel<[SongInfo]> {
       SongInfo (level: "[초급2]", title: "바람이 불어오는 곳", chords: ["G", "C", "D"])
     ]
   }
-
 }
-
-
