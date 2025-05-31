@@ -9,19 +9,19 @@ enum Koddi: String {
 }
 
 struct FontKoddi: ViewModifier {
-    var size: CGFloat
-    var color: Color?
-    var weight: Koddi
+  var size: CGFloat
+  var color: Color?
+  var weight: Koddi
 
-    func body(content: Content) -> some View {
-        content
-            .font(.custom(weight.rawValue, size: size))
-            .foregroundColor(color)
-    }
+  func body(content: Content) -> some View {
+    content
+      .font(.custom(weight.rawValue, size: size))
+      .foregroundColor(color)
+  }
 }
 
 extension View {
-    func fontKoddi(_ size: CGFloat, color: Color? = nil, weight: Koddi = .regular) -> some View {
-        self.modifier(FontKoddi(size: size, color: color, weight: weight))
-    }
+  func fontKoddi(_ size: CGFloat, color: Color? = nil, weight: Koddi = .regular) -> some View {
+    modifier(FontKoddi(size: size, color: color, weight: weight))
+  }
 }

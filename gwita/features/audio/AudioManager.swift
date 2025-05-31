@@ -15,7 +15,7 @@ final class AudioManager: BaseViewModel<AudioManagerState> {
       permission: .undetermined,
       isRecording: false
     ))
-    
+
     emit(state.copy(
       permission: getRecordPermissionState()
     ))
@@ -33,7 +33,7 @@ final class AudioManager: BaseViewModel<AudioManagerState> {
 
   /// 마이크 접근 권한 요청
   func requestRecordPermission(completion: @escaping (_ isGranted: Bool) -> Void) {
-    AVAudioApplication.requestRecordPermission() { isGranted in
+    AVAudioApplication.requestRecordPermission { isGranted in
       completion(isGranted)
       self.emit(self.state.copy(permission: isGranted ? .granted : .denied))
     }
@@ -41,7 +41,7 @@ final class AudioManager: BaseViewModel<AudioManagerState> {
 
   func start(handler: @escaping AVAudioNodeTapBlock) {
     if state.isRecording { return }
-    
+
     do {
       let session = AVAudioSession.sharedInstance()
       try session.setCategory(.playAndRecord, mode: .default, options: [.defaultToSpeaker])

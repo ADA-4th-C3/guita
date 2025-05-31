@@ -6,11 +6,17 @@ struct CurriculumView: View {
   var body: some View {
     BaseView(
       create: { CurriculumViewModel() }
-    ) { _, _ in
+    ) { viewModel, _ in
       VStack {
-        // MARK: Toolbar
-        Toolbar(title: "Curriculum")
+        Toolbar(title: "학습 목록")
         Spacer()
+        ScrollView {
+          LazyVStack(alignment: .leading, spacing: 8) {
+            ForEach(viewModel.state) { item in
+              CurriculumItemCell(item: item)
+            }
+          }
+        }
       }
     }
   }
