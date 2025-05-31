@@ -11,7 +11,7 @@ enum SubPage: Hashable {
   case noteClassification
   case codeClassification
   case voiceControl
-  case lesson(item: CurriculumViewState)
+  case lesson(item: SongInfo)
 }
 
 struct RouterViewState {

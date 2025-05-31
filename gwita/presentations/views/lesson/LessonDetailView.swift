@@ -3,7 +3,7 @@
 import SwiftUI
 
 struct LessonDetailView: View {
-  let item : CurriculumViewState
+  let item : SongInfo
   @EnvironmentObject var router: Router
   
   var body: some View {
@@ -86,7 +86,7 @@ struct LessonDetailView: View {
 
 #Preview {
   BasePreview {
-    LessonDetailView(item: CurriculumViewState(
+    LessonDetailView(item: SongInfo(
       level: "[초급1]",
       title: "여행을 떠나요",
       chords: ["A", "B", "C"]
