@@ -13,19 +13,19 @@ struct SplashView: View {
         Spacer()
         
         // 기타 아이콘 추가
-        Image(systemName: "guitars")
-          .font(.system(size: 80))
+        Image("LaunchIcon")
+          .font(.koddiRegular18)
           .foregroundColor(.yellow)
-          .padding(.bottom, 20)
-        
+          .padding(.bottom, 5)
+          .scaledToFit()
+          .scaleEffect(0.5)
+
         // 기타학습 텍스트 표시
         Text("기타 학습")
-          .font(.headline)
+          .font(.koddiBold32)
           .fontWeight(.semibold)
-          .foregroundColor(.black)
-          .padding(.vertical, 18)
+          .foregroundColor(.white)
           .padding(.horizontal, 40)
-          .background(Color.yellow)
           .cornerRadius(12)
         
         Spacer().frame(height: 40)

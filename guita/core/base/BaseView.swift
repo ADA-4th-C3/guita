@@ -35,6 +35,7 @@ struct BaseView<Content: View, State: Any, ViewModel: BaseViewModel<State>>: Vie
         .overlay(
           needsPermissions ? permissionManager.permissionDialogOverlay() : nil
         )
+        .environment(\.font, .koddiRegular18)
     }
     .onAppear {
       if needsPermissions {

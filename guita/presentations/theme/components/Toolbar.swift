@@ -51,6 +51,7 @@ struct Toolbar<Leading: View, Trailing: View>: View {
       // MARK: Title
       if !title.isEmpty {
         Text(title)
+          .font(.koddiRegular24)
           .foregroundColor(.primary)
       }
     }

@@ -10,6 +10,7 @@ struct Main: App {
     WindowGroup {
       RouterView()
         .preferredColorScheme(.dark) //다크 모드
+        .environment(\.font, .koddiRegular18) // KoddiUD 기본 폰트 설정
     }
     .environmentObject(router)
   }
