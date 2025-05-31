@@ -5,12 +5,14 @@ enum RootPage {
   case home
 }
 
-enum SubPage {
+enum SubPage: Hashable {
   case curriculum
   case dev
   case noteClassification
   case codeClassification
   case voiceControl
+  case lesson(item: SongInfo)
+  case technique
 }
 
 struct RouterViewState {
