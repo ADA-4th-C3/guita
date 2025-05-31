@@ -13,5 +13,8 @@
 			<string>KoddiUDOnGothic-ExtraBold.ttf</string>
 			<string>KoddiUDOnGothic-Regular.ttf</string>
 	</array>
+	<!-- DarkMode -->
+	<key>UIUserInterfaceStyle</key>
+	<string>Dark</string>
 </dict>
 </plist>
