@@ -11,6 +11,7 @@ enum SubPage {
   case noteClassification
   case codeClassification
   case voiceControl
+  case lesson
 }
 
 struct RouterViewState {
