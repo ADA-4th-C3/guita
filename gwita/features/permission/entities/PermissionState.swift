@@ -4,4 +4,5 @@ enum PermissionState {
   case undetermined
   case denied
   case granted
+  case restricted
 }
