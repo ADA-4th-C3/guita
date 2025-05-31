@@ -15,6 +15,7 @@ struct TechniqueView: View {
         
         Spacer()
         
+        
         // MARK: Step/TotalStep
         Text("\(viewModel.state.currentStep.step)/\(viewModel.state.currentStep.totalSteps) 단계")
           .foregroundStyle(.gray)
@@ -22,6 +23,14 @@ struct TechniqueView: View {
         
         // MARK: description
         VStack{
+          
+          if let image = viewModel.currentImage() {
+            image
+              .resizable()
+              .scaledToFit()
+              .frame(width:87, height:95)
+          }
+          
           Text(viewModel.state.currentStep.description)
             .foregroundStyle(.white)
             .fontWeight(.bold)

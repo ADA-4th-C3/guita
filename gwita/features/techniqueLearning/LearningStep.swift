@@ -3,4 +3,5 @@ struct LearningStep{
   let step : Int
   let totalSteps : Int
   let description : String
+  let imageName: String?
 }
