@@ -52,7 +52,7 @@ final class LearningOptionsViewModel: BaseViewModel<LearningOptionsViewState> {
   }
   
   /// 첫 번째 학습할 코드
-  var firstCodeToLearn: CodeType? {
+  var firstCodeToLearn: Chord? {
     return song.requiredCodes.first
   }
   

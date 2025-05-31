@@ -18,8 +18,8 @@ enum SubPage: Hashable, Equatable {
   
   // 코드 학습 (ChordLessonModel 기반)
   case chordLearningList           // 코드 학습 리스트 (기존 codeLearningList 대체)
-  case codeDetail(SongModel, CodeType)  // 코드 상세 학습
-  case codeHelp(CodeType)    // 코드 도움말
+  case codeDetail(SongModel, Chord)  // 코드 상세 학습
+  case codeHelp(Chord)    // 코드 도움말
   
   // 주법 학습
   case techniqueDetail(SongModel)       // 주법 학습

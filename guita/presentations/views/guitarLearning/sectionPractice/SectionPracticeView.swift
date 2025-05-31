@@ -10,7 +10,8 @@ struct SectionPracticeView: View {
   
   var body: some View {
     BaseView(
-      create: { SectionPracticeViewModel() }
+      create: { SectionPracticeViewModel() },
+      needsPermissions: true
     ) { viewModel, state in
       VStack(spacing: 0) {
         // 커스텀 툴바

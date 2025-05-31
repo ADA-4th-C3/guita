@@ -9,7 +9,7 @@ struct LearningContentView: View {
   // MARK: - Properties
   
   let instruction: String             // 표시할 안내 문구
-  let codeType: CodeType             // 학습 중인 코드 타입
+  let chord: Chord             // 학습 중인 코드 타입
   
   // MARK: - Body
   
@@ -48,7 +48,7 @@ struct LearningContentView: View {
         .font(.caption)
         .foregroundColor(.gray)
       
-      Text(codeType.rawValue)
+      Text(chord.rawValue)
         .font(.largeTitle)
         .fontWeight(.bold)
         .foregroundColor(.yellow)
@@ -68,7 +68,7 @@ struct CompletionView: View {
   
   // MARK: - Properties
   
-  let codeType: CodeType
+  let chord: Chord
   
   // MARK: - Body
   
@@ -79,7 +79,7 @@ struct CompletionView: View {
         .font(.system(size: 60))
       
       // 완료 메시지
-      Text("\(codeType.rawValue)코드 학습이\n종료되었습니다.")
+      Text("\(chord)코드 학습이\n종료되었습니다.")
         .font(.title2)
         .fontWeight(.medium)
         .multilineTextAlignment(.center)
@@ -101,7 +101,7 @@ struct CompletionView: View {
         .fontWeight(.bold)
         .foregroundColor(.black)
       
-      Text(codeType.displayName)
+      Text("\(chord) 코드")
         .font(.caption)
         .foregroundColor(.black.opacity(0.7))
     }
@@ -119,13 +119,13 @@ struct CompletionView: View {
     // 학습 콘텐츠 프리뷰
     LearningContentView(
       instruction: "검지를 2번 프렛\n4번 줄에 올리고\n해당 줄을 한번 쳐보세요.",
-      codeType: .a
+      chord: .A
     )
     
     Divider()
     
     // 완료 화면 프리뷰
-    CompletionView(codeType: .a)
+    CompletionView(chord: .A)
   }
   .padding()
   .background(Color.black)

@@ -115,7 +115,7 @@ struct SongRowView: View {
         title: "여행을 떠나요",
         artist: "쿨",
         difficulty: .beginner,
-        requiredCodes: [.a, .e, .b7],
+        requiredCodes: [.A, .E, .B7],
         audioFileName: "forStudyGuitar",
         isUnlocked: true,
         isCompleted: true
@@ -130,7 +130,7 @@ struct SongRowView: View {
         title: "바람이 불어오는 곳",
         artist: "이승환",
         difficulty: .beginner,
-        requiredCodes: [.g, .c, .d],
+        requiredCodes: [.G, .C, .D],
         audioFileName: "song_02",
         isUnlocked: false,
         isCompleted: false

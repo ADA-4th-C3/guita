@@ -18,7 +18,8 @@ struct TechniqueDetailView: View {
     BaseView(
       create: {
         TechniqueDetailViewModel.create(song: song)
-      }
+      },
+      needsPermissions: true
     ) { viewModel, state in
       VStack(spacing: 0) {
         // 커스텀 툴바
@@ -28,20 +29,13 @@ struct TechniqueDetailView: View {
         mainContent(viewModel: viewModel, state: state)
       }
       .background(Color.black)
-      .onAppear {
-        checkPermissionsAndStart(viewModel: viewModel)
+      .onAppear(){
+        viewModel.startLearning()
       }
       .onDisappear {
         viewModel.stopLearning()
       }
-      .fullScreenCover(isPresented: $showingPermissionFlow) {
-        PermissionFlowView { success in
-          showingPermissionFlow = false
-          if success {
-            viewModel.startLearning()
-          }
-        }
-      }
+      
     }
   }
   
@@ -184,16 +178,6 @@ struct TechniqueDetailView: View {
     .opacity(isEnabled ? 1.0 : 0.3)
   }
   
-  // MARK: - Private Methods
-  
-  /// 권한 확인 후 학습 시작
-  private func checkPermissionsAndStart(viewModel: TechniqueDetailViewModel) {
-    if PermissionManager.shared.needsPermissions {
-      showingPermissionFlow = true
-    } else {
-      viewModel.startLearning()
-    }
-  }
 }
 
 /// 주법 학습 콘텐츠를 표시하는 컴포넌트

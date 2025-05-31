@@ -150,22 +150,16 @@ struct ChordLessonRowView: View {
 }
 
 // MARK: - Preview
-
 #Preview {
   VStack(spacing: 0) {
     ChordLessonRowView(
       chordLesson: ChordLessonModel(
         id: "chord_a",
-        chordType: .a,
-        fingerPositions: [
-          FingerPosition(finger: .index, fret: 2, string: 4),
-          FingerPosition(finger: .middle, fret: 2, string: 3),
-          FingerPosition(finger: .ring, fret: 2, string: 2)
-        ],
-        fretPositions: [0, 0, 2, 2, 2, 0],
-        difficulty: .beginner,
+        chordType: .A,                    // .a → .A 로 변경
+        difficulty: .beginner,            // fingerPositions, fretPositions 제거
         isUnlocked: true,
-        isCompleted: true
+        isCompleted: true,
+        description: "A 코드는 2번 프렛에 검지, 중지, 약지를 사용하는 기본 코드다"
       )
     ) {
       print("A 코드 레슨 선택됨")
@@ -173,21 +167,15 @@ struct ChordLessonRowView: View {
     
     ChordLessonRowView(
       chordLesson: ChordLessonModel(
-        id: "chord_f",
-        chordType: .f,
-        fingerPositions: [
-          FingerPosition(finger: .index, fret: 1, string: 6),
-          FingerPosition(finger: .middle, fret: 2, string: 3),
-          FingerPosition(finger: .ring, fret: 3, string: 5),
-          FingerPosition(finger: .pinky, fret: 3, string: 4)
-        ],
-        fretPositions: [1, 1, 2, 3, 3, 1],
-        difficulty: .advanced,
+        id: "chord_g",
+        chordType: .G,                    // .g → .G 로 변경
+        difficulty: .intermediate,        // fingerPositions, fretPositions 제거
         isUnlocked: false,
-        isCompleted: false
+        isCompleted: false,
+        description: "G 코드는 손가락을 넓게 펼쳐야 하는 중급 코드다"
       )
     ) {
-      print("F 코드 레슨 (잠금)")
+      print("잠금된 레슨")
     }
   }
   .background(Color.black)

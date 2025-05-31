@@ -9,17 +9,17 @@ struct CodeDetailView: View {
   // MARK: - Properties
   
   let song: SongModel           // 선택된 노래 정보
-  let codeType: CodeType        // 학습할 코드 타입
+  let chord: Chord        // 학습할 코드 타입
   @EnvironmentObject var router: Router
-  @State private var showingPermissionFlow = false
   
   // MARK: - Body
   
   var body: some View {
     BaseView(
       create: {
-        CodeDetailViewModel.create(song: song, codeType: codeType)
-      }
+        CodeDetailViewModel.create(song: song, chord: chord)
+      },
+      needsPermissions: true  // 이것만 추가
     ) { viewModel, state in
       VStack(spacing: 0) {
         // 커스텀 툴바
@@ -30,18 +30,10 @@ struct CodeDetailView: View {
       }
       .background(Color.black)
       .onAppear {
-        checkPermissionsAndStart(viewModel: viewModel)
+        viewModel.startLearning()
       }
       .onDisappear {
         viewModel.stopLearning()
-      }
-      .fullScreenCover(isPresented: $showingPermissionFlow) {
-        PermissionFlowView { success in
-          showingPermissionFlow = false
-          if success {
-            viewModel.startLearning()
-          }
-        }
       }
     }
   }
@@ -62,7 +54,7 @@ struct CodeDetailView: View {
           .font(.caption)
           .foregroundColor(.gray)
         
-        Text(codeType.displayName)
+        Text("\(chord) 코드")
           .font(.headline)
           .fontWeight(.semibold)
           .foregroundColor(.white)
@@ -71,7 +63,7 @@ struct CodeDetailView: View {
       Spacer()
       
       IconButton("info.circle") {
-        router.push(.codeHelp(codeType))
+        router.push(.codeHelp(chord))
       }
     }
     .padding(.horizontal, 16)
@@ -121,12 +113,12 @@ struct CodeDetailView: View {
     VStack(spacing: 24) {
       if state.currentStep == state.totalSteps {
         // 완료 단계
-        CompletionView(codeType: codeType)
+        CompletionView(chord: chord)
       } else {
         // 일반 학습 단계
         LearningContentView(
           instruction: state.currentInstruction,
-          codeType: codeType
+          chord: chord
         )
       }
     }
@@ -185,14 +177,4 @@ struct CodeDetailView: View {
     .opacity(isEnabled ? 1.0 : 0.3)
   }
   
-  // MARK: - Private Methods
-  
-  /// 권한 확인 후 학습 시작
-  private func checkPermissionsAndStart(viewModel: CodeDetailViewModel) {
-    if PermissionManager.shared.needsPermissions {
-      showingPermissionFlow = true
-    } else {
-      viewModel.startLearning()
-    }
-  }
 }

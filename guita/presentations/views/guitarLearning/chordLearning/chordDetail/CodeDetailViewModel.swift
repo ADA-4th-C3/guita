@@ -6,18 +6,15 @@ final class CodeDetailViewModel: BaseViewModel<CodeDetailViewState> {
   
   
   private let song: SongModel
-  private let codeType: CodeType
+  private let chord: Chord
   private let audioManager: AudioManager
   private let codeClassification: CodeClassification
-
-  
   private var isAudioSetup = false
   
-  
-  static func create(song: SongModel, codeType: CodeType) -> CodeDetailViewModel {
+  static func create(song: SongModel, chord: Chord) -> CodeDetailViewModel {
     return CodeDetailViewModel(
       song: song,
-      codeType: codeType,
+      chord: chord,
       audioManager: AudioManager.shared,
       codeClassification: CodeClassification()
     )
@@ -25,31 +22,43 @@ final class CodeDetailViewModel: BaseViewModel<CodeDetailViewState> {
   
   private init(
     song: SongModel,
-    codeType: CodeType,
+    chord: Chord,
     audioManager: AudioManager,
     codeClassification: CodeClassification
   ) {
     self.song = song
-    self.codeType = codeType
+    self.chord = chord
     self.audioManager = audioManager
     self.codeClassification = codeClassification
     
-    super.init(state: CodeDetailViewState(song: song, codeType: codeType))
-    Logger.d("CodeDetailViewModel 초기화: \(song.title) - \(codeType.rawValue)")
+    // ViewState 초기화를 ViewModel에서 처리
+    let initialState = CodeDetailViewState(
+      song: song,
+      chord: chord,
+      currentStep: 1,
+      totalSteps: 4,
+      currentInstruction: "",
+      recognizedCode: "",
+      isListening: false,
+      canProceed: false
+    )
+    
+    super.init(state: initialState)
+    Logger.d("CodeDetailViewModel 초기화: \(song.title) - \(chord.rawValue)")
   }
   
   // MARK: - Public Methods
   
   /// 학습 시작 - 오디오 세션 설정 및 코드 인식 시작
   func startLearning() {
-    Logger.d("코드 학습 시작: \(song.title) - \(codeType.rawValue)")
+    Logger.d("코드 학습 시작: \(song.title) - \(chord.rawValue)")
     setupAudioRecognition()
     updateInstructionForCurrentStep()
   }
   
   /// 학습 종료 - 오디오 세션 정리
   func stopLearning() {
-    Logger.d("코드 학습 종료: \(song.title) - \(codeType.rawValue)")
+    Logger.d("코드 학습 종료: \(song.title) - \(chord.rawValue)")
     audioManager.stop()
     isAudioSetup = false
   }
@@ -122,7 +131,7 @@ final class CodeDetailViewModel: BaseViewModel<CodeDetailViewState> {
     DispatchQueue.main.async { [weak self] in
       guard let self = self else { return }
       
-      let isCorrectCode = result.code == self.codeType.rawValue
+      let isCorrectCode = result.code == self.chord.rawValue
       let shouldAllowProceed = self.shouldAllowProceedBasedOnRecognition(
         recognizedCode: result.code,
         isCorrect: isCorrectCode
@@ -150,7 +159,7 @@ final class CodeDetailViewModel: BaseViewModel<CodeDetailViewState> {
   private func getInstructionForStep(_ step: Int) -> String {
     switch step {
     case 1:
-      return "\(codeType.rawValue)코드는 2번 프렛 위에\n검지, 중지, 약지\n총 3 손가락을\n사용하는 코드입니다."
+      return "\(chord)코드는 2번 프렛 위에\n검지, 중지, 약지\n총 3 손가락을\n사용하는 코드입니다."
     case 2:
       return "검지를 2번 프렛\n4번 줄에 올리고\n해당 줄을 한번 쳐보세요."
     case 3:

@@ -35,9 +35,7 @@ final class ChordLearningListViewModel: BaseViewModel<ChordLearningListViewState
       if lesson.id == lessonId {
         return ChordLessonModel(
           id: lesson.id,
-          chordType: lesson.chordType,
-          fingerPositions: lesson.fingerPositions,
-          fretPositions: lesson.fretPositions,
+          chordType: lesson.chordType,  // <#T##Chord#> 제거하고 lesson.chordType으로 수정
           difficulty: lesson.difficulty,
           isUnlocked: lesson.isUnlocked,
           isCompleted: true, // 완료 상태로 변경
@@ -66,8 +64,6 @@ final class ChordLearningListViewModel: BaseViewModel<ChordLearningListViewState
     updatedLessons[nextLessonIndex] = ChordLessonModel(
       id: nextLesson.id,
       chordType: nextLesson.chordType,
-      fingerPositions: nextLesson.fingerPositions,
-      fretPositions: nextLesson.fretPositions,
       difficulty: nextLesson.difficulty,
       isUnlocked: true, // 잠금 해제
       isCompleted: nextLesson.isCompleted,
@@ -79,8 +75,8 @@ final class ChordLearningListViewModel: BaseViewModel<ChordLearningListViewState
   }
   
   /// 특정 코드 타입의 레슨 반환
-  func getChordLesson(for codeType: CodeType) -> ChordLessonModel? {
-    return state.chordLessons.first { $0.chordType == codeType }
+  func getChordLesson(for chord: Chord) -> ChordLessonModel? {  // codeType: chord → chord: Chord
+    return state.chordLessons.first { $0.chordType == chord }
   }
   
   /// 난이도별 코드 레슨 필터링
@@ -88,3 +84,4 @@ final class ChordLearningListViewModel: BaseViewModel<ChordLearningListViewState
     return state.chordLessons.filter { $0.difficulty == difficulty }
   }
 }
+

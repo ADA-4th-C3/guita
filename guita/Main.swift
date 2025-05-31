@@ -5,7 +5,7 @@ import SwiftUI
 @main
 struct Main: App {
   @StateObject var router = Router()
-
+  
   var body: some Scene {
     WindowGroup {
       RouterView()

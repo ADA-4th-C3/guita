@@ -7,7 +7,7 @@ struct SongModel: Identifiable, Hashable {
   let title: String
   let artist: String
   let difficulty: DifficultyLevel
-  let requiredCodes: [CodeType]
+  let requiredCodes: [Chord]
   let audioFileName: String
   let isUnlocked: Bool
   let isCompleted: Bool
@@ -44,7 +44,7 @@ struct SongDataFactory {
         title: "여행을 떠나요",
         artist: "쿨",
         difficulty: .beginner,
-        requiredCodes: [.a, .e, .b7],
+        requiredCodes: [.A, .E, .B7],
         audioFileName: "forStudyGuitar",
         isUnlocked: true,
         isCompleted: false
@@ -54,7 +54,7 @@ struct SongDataFactory {
         title: "바람이 불어오는 곳",
         artist: "이승환",
         difficulty: .beginner,
-        requiredCodes: [.g, .c, .d],
+        requiredCodes: [.G, .C, .D],
         audioFileName: "song_02",
         isUnlocked: false,
         isCompleted: false
@@ -64,7 +64,7 @@ struct SongDataFactory {
         title: "그대에게",
         artist: "무한궤도",
         difficulty: .intermediate,
-        requiredCodes: [.c, .dm, .em, .f],
+        requiredCodes: [.C, .Dm, .Em, .F],
         audioFileName: "song_03",
         isUnlocked: false,
         isCompleted: false

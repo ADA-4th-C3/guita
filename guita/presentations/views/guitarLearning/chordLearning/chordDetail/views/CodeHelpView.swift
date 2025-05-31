@@ -4,13 +4,13 @@ import SwiftUI
 
 /// 코드 도움말 화면
 struct CodeHelpView: View {
-  let codeType: CodeType
+  let chord: Chord
   @EnvironmentObject var router: Router
   
   var body: some View {
     VStack(spacing: 0) {
       // 툴바
-      Toolbar(title: "\(codeType.rawValue) 코드 도움말")
+      Toolbar(title: "\(chord) 코드 도움말")
       
       ScrollView {
         VStack(alignment: .leading, spacing: 24) {
@@ -43,7 +43,7 @@ struct CodeHelpView: View {
         .fill(Color.gray.opacity(0.2))
         .frame(height: 200)
         .overlay(
-          Text("🎸\n\(codeType.rawValue) 코드 다이어그램")
+          Text("🎸\n\(chord) 코드 다이어그램")
             .font(.title2)
             .foregroundColor(.white)
             .multilineTextAlignment(.center)

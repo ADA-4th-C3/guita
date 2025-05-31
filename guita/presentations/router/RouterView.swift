@@ -36,8 +36,8 @@ struct RouterView: View {
             
             // 코드 학습
           case .chordLearningList: ChordLearningListView()  // 코드 학습 리스트
-          case .codeDetail(let song, let codeType): CodeDetailView(song: song, codeType: codeType)
-          case .codeHelp(let codeType): CodeHelpView(codeType: codeType)
+          case .codeDetail(let song, let chord): CodeDetailView(song: song, chord: chord)
+          case .codeHelp(let chord): CodeHelpView(chord: chord)
             
             // 주법 학습
           case .techniqueDetail(let song): TechniqueDetailView(song: song)

@@ -138,7 +138,7 @@ struct LearningOptionsView: View {
         title: "여행을 떠나요",
         artist: "쿨",
         difficulty: .beginner,
-        requiredCodes: [.a, .e, .b7],
+        requiredCodes: [.A, .E, .B7],
         audioFileName: "forStudyGuitar",
         isUnlocked: true,
         isCompleted: false
