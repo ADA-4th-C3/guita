@@ -14,7 +14,6 @@ struct SplashView: View {
         
         // 기타 아이콘 추가
         Image("LaunchIcon")
-          .font(.koddiRegular18)
           .foregroundColor(.yellow)
           .padding(.bottom, 5)
           .scaledToFit()
@@ -35,6 +34,8 @@ struct SplashView: View {
         Spacer()
       }
       .onAppear {
+        viewModel.onAppear()
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { // 2초간 기타학습 텍스트 보여줌
           viewModel.onLoaded()
           router.setRoot(.home) // 홈으로 이동 후
@@ -45,6 +46,11 @@ struct SplashView: View {
           }
         }
       }
+      .onDisappear {
+        // 페이드아웃 처리
+        viewModel.onDisappear()
+      }
+      
     }
   }
 }

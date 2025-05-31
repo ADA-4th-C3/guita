@@ -83,6 +83,31 @@ struct GuitarLearningView: View {
         .foregroundColor(.white)
         .cornerRadius(6)
         
+        Button("TTS 테스트") {
+          Logger.d("TTS 테스트 버튼 클릭됨")
+          
+          let tts = TextToSpeech.shared  // 싱글톤 사용
+
+                  
+          tts.setSpeechStartHandler { text in
+            Logger.d("✅ TTS 시작 성공: \(text)")
+          }
+          
+          tts.setSpeechFinishHandler { text in
+            Logger.d("✅ TTS 완료: \(text)")
+          }
+          
+          tts.setSpeechErrorHandler { error in
+            Logger.e("❌ TTS 오류: \(error)")
+          }
+          
+          Logger.d("TTS speak 메서드 호출 시작")
+          tts.speak(
+            "나 줄리엔인데, 아 배고프다 편의점 갈 사람."
+          )
+          Logger.d("TTS speak 메서드 호출 완료")
+        }
+        
         Spacer()
       }
       .padding(.horizontal, 20)

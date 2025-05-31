@@ -216,7 +216,7 @@ struct PermissionDialog: View {
 // MARK: - Preview
 
 #Preview("권한 안내") {
-  @State var isPresented = true
+  @Previewable @State var isPresented = true
   
   return PermissionDialog(
     isPresented: $isPresented,
@@ -228,7 +228,7 @@ struct PermissionDialog: View {
 }
 
 #Preview("마이크 권한 거부") {
-  @State var isPresented = true
+  @Previewable @State var isPresented = true
   
   return PermissionDialog(
     isPresented: $isPresented,
@@ -240,7 +240,7 @@ struct PermissionDialog: View {
 }
 
 #Preview("음성인식 권한 거부") {
-  @State var isPresented = true
+  @Previewable @State var isPresented = true
   
   return PermissionDialog(
     isPresented: $isPresented,

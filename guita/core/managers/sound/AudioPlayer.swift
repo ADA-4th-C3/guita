@@ -34,8 +34,14 @@ final class AudioPlayer {
     }
     
     do {
+      // AVAudioSession 설정 추가
+      let session = AVAudioSession.sharedInstance()
+      try session.setCategory(.playback, mode: .default, options: [])
+      try session.setActive(true)
+      
       player = try AVAudioPlayer(contentsOf: url)
       player?.prepareToPlay()
+      Logger.d("Audio setup successful: \(fileName).\(fileExtension)")
       return true
     } catch {
       Logger.e("Error loading audio: \(error)")

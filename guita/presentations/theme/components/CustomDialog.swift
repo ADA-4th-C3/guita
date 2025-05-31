@@ -54,7 +54,7 @@ struct RoundedCorner: Shape {
 }
 
 #Preview("권한 안내 다이얼로그") {
-  @State var isPresented = true
+  @Previewable @State var isPresented = true
   
   return CustomDialog(isPresented: $isPresented) {
     VStack(spacing: 0) {
@@ -134,7 +134,7 @@ struct RoundedCorner: Shape {
 }
 
 #Preview("권한 거부 다이얼로그") {
-  @State var isPresented = true
+  @Previewable @State var isPresented = true
   
   return CustomDialog(isPresented: $isPresented) {
     VStack(spacing: 0) {
@@ -195,7 +195,7 @@ struct RoundedCorner: Shape {
 }
 
 #Preview("간단한 다이얼로그") {
-  @State var isPresented = true
+  @Previewable @State var isPresented = true
   
   return CustomDialog(isPresented: $isPresented) {
     VStack(spacing: 20) {
