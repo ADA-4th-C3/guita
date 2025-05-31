@@ -6,11 +6,15 @@ struct VoiceControlView: View {
   var body: some View {
     BaseView(
       create: { VoiceControlViewModel() }
-    ) { _, _ in
-      VStack {
-        // MARK: Toolbar
-        Toolbar(title: "Voice Controll")
-        Spacer()
+    ) { _, state in
+      PermissionView {
+        VStack {
+          // MARK: Toolbar
+          Toolbar(title: "Voice Controll")
+          Spacer()
+          Text(state.text)
+          Spacer()
+        }
       }
     }
   }
