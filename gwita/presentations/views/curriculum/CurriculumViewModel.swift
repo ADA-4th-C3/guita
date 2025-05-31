@@ -8,10 +8,11 @@ final class CurriculumViewModel: BaseViewModel<[CurriculumViewState]> {
   
   static func guitarLessons() -> [CurriculumViewState] {
     return [
-      CurriculumViewState(level: "[초급1]", title: "여행을 떠나요", chords: ["A", "E", "B7"], isSelected: true),
-      CurriculumViewState(level: "[초급2]", title: "바람이 불어오는 곳", chords: ["G", "C", "D"], isSelected: false)
+      CurriculumViewState(level: "[초급1]", title: "여행을 떠나요", chords: ["A", "E", "B7"]),
+      CurriculumViewState(level: "[초급2]", title: "바람이 불어오는 곳", chords: ["G", "C", "D"])
     ]
   }
-  
-  
+
 }
+
+
