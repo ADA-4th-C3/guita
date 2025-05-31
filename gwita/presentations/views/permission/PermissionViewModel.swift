@@ -5,18 +5,20 @@ import UIKit
 
 final class PermissionViewModel: BaseViewModel<PermissionViewState> {
   private let audioManager = AudioManager.shared
-  private let onPermissionStatesChanged: ((PermissionStates) -> Void)?
+  private let speechToTextManager = SpeechToTextManager.shared
+  private let permissionStatesListener: ((_ isGranted: Bool) -> Void)?
 
   init(
     permissionCategories: [PermissionCategory],
-    onPermissionStatesChanged: ((PermissionStates) -> Void)?
+    permissionStatesListener: ((_ isGranted: Bool) -> Void)?
   ) {
-    self.onPermissionStatesChanged = onPermissionStatesChanged
+    self.permissionStatesListener = permissionStatesListener
     var permissions: [PermissionCategory: PermissionResult] = [:]
 
     for category in permissionCategories {
       permissions[category] = switch category {
       case .microphone: audioManager.getRecordPermissionState()
+      case .speechRecognition: speechToTextManager.getSpeechPermissionState()
       }
     }
 
@@ -27,18 +29,36 @@ final class PermissionViewModel: BaseViewModel<PermissionViewState> {
       showGuideDialog: showGuideDialog,
       showDeniedDialog: showDeniedDialog
     ))
+    permissionStatesListener?(state.isGranted)
   }
+  
+  func requestPermissions() {
+    let permissionCategories = Array(state.permissionStates.keys)
+    var updatedStates = state.permissionStates
+    var remaining = permissionCategories.count
 
-  func requestPermission() {
-    for category in state.permissionStates.keys {
+    for category in permissionCategories {
+      let handleResult: (Bool) -> Void = { isGranted in
+        updatedStates[category] = isGranted ? .granted : .denied
+        remaining -= 1
+
+        // 모든 요청이 끝난 경우
+        if remaining == 0 {
+          let showDeniedDialog = updatedStates.values.contains { $0 == .denied }
+          let newState = self.state.copy(
+            permissionStates: updatedStates,
+            showDeniedDialog: showDeniedDialog
+          )
+          self.emit(newState)
+          self.permissionStatesListener?(newState.isGranted)
+        }
+      }
+
       switch category {
       case .microphone:
-        audioManager.requestRecordPermission { isGranted in
-          self.emit(self.state.copy(
-            permissionStates: self.state.permissionStates.copy([category: isGranted ? .granted : .denied]),
-            showDeniedDialog: !isGranted
-          ))
-        }
+        audioManager.requestRecordPermission { handleResult($0) }
+      case .speechRecognition:
+        speechToTextManager.requestSpeechPermission { handleResult($0) }
       }
     }
   }

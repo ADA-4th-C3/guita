@@ -5,12 +5,14 @@ import SwiftUI
 struct DevPermissionView: View {
   var body: some View {
     BaseView(
-      create: { DevPermissionViewModel(permissionCategories: [.microphone]) }
+      create: {
+        DevPermissionViewModel(permissionCategories: PermissionCategory.allCases)
+      }
     ) { viewModel, state in
       PermissionView {
         VStack {
           Toolbar(title: "Permission")
-
+          
           Form {
             ForEach(Array(state.keys), id: \.self) { category in
               if let permissionState = state[category] {

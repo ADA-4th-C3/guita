@@ -5,9 +5,8 @@ final class VoiceControlViewModel: BaseViewModel<VoiceControlViewState> {
 
   init() {
     super.init(state: .init(text: ""))
-    start()
   }
-
+  
   func start() {
     speechToTextManager.start { text in
       self.emit(self.state.copy(text: text))

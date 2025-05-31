@@ -2,12 +2,14 @@
 
 final class DevPermissionViewModel: BaseViewModel<PermissionStates> {
   private let audioManager = AudioManager.shared
+  private let speechToTextManager = SpeechToTextManager.shared
 
   init(permissionCategories: [PermissionCategory]) {
     var permissionViewState: PermissionStates = [:]
     for category in permissionCategories {
       permissionViewState[category] = switch category {
       case .microphone: audioManager.getRecordPermissionState()
+      case .speechRecognition: speechToTextManager.getSpeechPermissionState()
       }
     }
     super.init(state: permissionViewState)
@@ -17,6 +19,10 @@ final class DevPermissionViewModel: BaseViewModel<PermissionStates> {
     switch category {
     case .microphone:
       audioManager.requestRecordPermission { isGranted in
+        self.emit(self.state.copy([category: isGranted ? .granted : .denied]))
+      }
+    case .speechRecognition:
+      speechToTextManager.requestSpeechPermission { isGranted in
         self.emit(self.state.copy([category: isGranted ? .granted : .denied]))
       }
     }

@@ -6,8 +6,14 @@ struct VoiceControlView: View {
   var body: some View {
     BaseView(
       create: { VoiceControlViewModel() }
-    ) { _, state in
-      PermissionView {
+    ) { viewModel, state in
+      PermissionView(
+        permissionStatesListener: { isGranted in
+          if isGranted {
+            viewModel.start()
+          }
+        }
+      ) {
         VStack {
           // MARK: Toolbar
           Toolbar(title: "Voice Controll")
