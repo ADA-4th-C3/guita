@@ -3,8 +3,6 @@
 import SwiftUI
 
 struct CurriculumView: View {
-  
-  
   var body: some View {
     BaseView(
       create: { CurriculumViewModel() }
@@ -13,7 +11,7 @@ struct CurriculumView: View {
         Toolbar(title: "학습 목록")
         Spacer()
         ScrollView {
-          LazyVStack(alignment:.leading, spacing:8) {
+          LazyVStack(alignment: .leading, spacing: 8) {
             ForEach(viewModel.state) { item in
               CurriculumItemCell(item: item)
             }
@@ -23,8 +21,6 @@ struct CurriculumView: View {
     }
   }
 }
-
-
 
 #Preview {
   BasePreview {

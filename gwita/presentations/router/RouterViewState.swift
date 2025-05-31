@@ -7,10 +7,13 @@ enum RootPage {
 
 enum SubPage: Hashable {
   case curriculum
+
+  // MARK: Dev
   case dev
   case noteClassification
   case codeClassification
   case voiceControl
+  case config
   case lesson(item: CurriculumViewState)
 }
 

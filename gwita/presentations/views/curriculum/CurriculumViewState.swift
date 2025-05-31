@@ -2,13 +2,13 @@
 
 import Foundation
 
-struct CurriculumViewState :Identifiable, Hashable {
+struct CurriculumViewState: Identifiable, Hashable {
   let id = UUID()
   let level: String
   let title: String
   let chords: [String]
-  
-  func copy(level: String? = nil,title: String? = nil,chords: [String]? = nil) -> CurriculumViewState {
+
+  func copy(level: String? = nil, title: String? = nil, chords: [String]? = nil) -> CurriculumViewState {
     return CurriculumViewState(
       level: level ?? self.level,
       title: title ?? self.title,
