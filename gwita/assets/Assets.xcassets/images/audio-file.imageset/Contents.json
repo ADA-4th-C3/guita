@@ -1,6 +1,7 @@
 {
-  "colors" : [
+  "images" : [
     {
+      "filename" : "audio-file.png",
       "idiom" : "universal"
     }
   ],
