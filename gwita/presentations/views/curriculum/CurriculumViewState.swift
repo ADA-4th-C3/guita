@@ -2,7 +2,7 @@
 
 import Foundation
 
-struct CurriculumViewState {
+struct CurriculumViewState :Identifiable {
   let id = UUID()
   let level: String
   let title: String
