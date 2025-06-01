@@ -131,7 +131,8 @@ class BaseAudioLearningViewModel<State>: BaseViewModel<State> {
     playTTSSequence(contents: step.ttsContents)
     
     if !step.soundFiles.isEmpty {
-      DispatchQueue.main.asyncAfter(deadline: .now() + calculateTTSDuration(step.ttsContents)) {
+      // TTS 완료 후 2초 후에 기타 소리 재생 (더 긴 딜레이)
+      DispatchQueue.main.asyncAfter(deadline: .now() + calculateTTSDuration(step.ttsContents) + 2.0) {
         self.playSoundFiles(step.soundFiles)
       }
     }
@@ -319,8 +320,22 @@ extension BaseAudioLearningViewModel: VoiceRecognitionDelegate {
       canRepeat: true
     )
     
-    playTTSSequence(contents: [replayContent])
-    Logger.d("마지막 콘텐츠 재생: \(lastTTSText)")
+    // TTS 먼저 재생
+      playTTSSequence(contents: [replayContent])
+      
+      // 현재 단계의 기타 소리도 함께 재생
+      let steps = getCurrentLearningSteps()
+      guard currentStepIndex < steps.count else { return }
+      let currentStep = steps[currentStepIndex]
+      
+      if !currentStep.soundFiles.isEmpty {
+        let ttsEstimatedDuration = Double(lastTTSText.count) * 0.1
+        DispatchQueue.main.asyncAfter(deadline: .now() + ttsEstimatedDuration + 2.0) {
+          self.playSoundFiles(currentStep.soundFiles)
+        }
+      }
+      
+      Logger.d("마지막 콘텐츠와 기타 소리 재생: \(lastTTSText)")
   }
   
 }

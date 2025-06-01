@@ -51,6 +51,7 @@ final class AudioPlayer {
       
       player = try AVAudioPlayer(contentsOf: url)
       player?.prepareToPlay()
+      player?.volume = 1.0
       Logger.d("Audio setup successful: \(fileName).\(fileExtension)")
       return true
     } catch {

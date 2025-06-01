@@ -24,6 +24,7 @@ final class SoundEffectHandler {
     delegate?.soundEffectWillStart()
     
     if soundPlayer.setupAudio(fileName: fileName, fileExtension: fileExtension) {
+      soundPlayer.volume = 1.0  // 볼륨 최대로 설정
       soundPlayer.play()
       
       soundPlayer.setStateChangeHandler { [weak self] isPlaying in
@@ -32,15 +33,7 @@ final class SoundEffectHandler {
         }
       }
       
-      // 사운드 재생 타임아웃 (10초)
-      DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
-        if self.soundPlayer.isPlaying {
-          Logger.d("사운드 재생 타임아웃 - 강제 완료")
-          self.delegate?.soundEffectDidComplete()
-        }
-      }
-      
-      Logger.d("사운드 재생 시작: \(fileName).\(fileExtension)")
+      Logger.d("사운드 재생 시작: \(fileName).\(fileExtension) (볼륨: 최대)")
     } else {
       Logger.e("사운드 재생 실패: \(fileName).\(fileExtension)")
       delegate?.soundEffectDidComplete()

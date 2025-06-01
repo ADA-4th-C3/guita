@@ -137,7 +137,21 @@ final class VoiceControlViewModel: BaseViewModel<VoiceControlViewState> {
     case .volumeDown: audioPlayer.volumeDown()
     case .seekForward: audioPlayer.seekForward()
     case .seekBackward: audioPlayer.seekBackward()
+    case .speedUp: handleSpeedIncrease()  // 새로 추가
+    case .speedDown: handleSpeedDecrease()  // 새로 추가
     }
+  }
+  
+  /// TTS 속도 증가 처리
+  private func handleSpeedIncrease() {
+      let tts = TextToSpeech.shared
+      tts.increaseTTSSpeed()
+  }
+
+  /// TTS 속도 감소 처리
+  private func handleSpeedDecrease() {
+      let tts = TextToSpeech.shared
+      tts.decreaseTTSSpeed()
   }
   
   private func temporarilyStopAndRestart() {

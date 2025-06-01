@@ -143,7 +143,36 @@ struct GuitarLearningView: View {
       
       // 곡 목록
       ScrollView {
+  
         // 기존 TTS 테스트 버튼 아래에 추가
+        Button("A-1.m4a 테스트") {
+          let audioPlayer = AudioPlayer()
+          if audioPlayer.setupAudio(fileName: "A-1", fileExtension: "m4a") {
+            Logger.d("✅ A-1.m4a 로드 성공")
+            Logger.d("파일 길이: \(audioPlayer.totalTime)초")
+            Logger.d("현재 볼륨: \(audioPlayer.volume)")
+            
+            audioPlayer.volume = 1.0  // 볼륨 최대로 설정
+            audioPlayer.play()
+            
+            Logger.d("재생 시작됨: \(audioPlayer.isPlaying)")
+            
+            // 2초 후 상태 확인
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+              Logger.d("2초 후 재생 상태: \(audioPlayer.isPlaying)")
+              Logger.d("현재 재생 시간: \(audioPlayer.currentTime)")
+            }
+          } else {
+            Logger.e("❌ A-1.m4a 로드 실패")
+          }
+        }
+        .font(.caption)
+        .padding(.horizontal, 12)
+        .padding(.vertical, 6)
+        .background(Color.red.opacity(0.3))
+        .foregroundColor(.white)
+        .cornerRadius(6)
+        
         Button("A코드 학습 테스트") {
           let testSong = SongModel(
             id: "test_a_chord",

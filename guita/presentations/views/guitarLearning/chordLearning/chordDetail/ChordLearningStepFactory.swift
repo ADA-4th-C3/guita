@@ -53,7 +53,7 @@ struct ChordLearningStepFactory {
             pauseAfter: 1.0
           )
         ],
-        soundFiles: ["A-6"],
+        soundFiles: ["A-6.m4a"],
         successSound: "success1",
         failSound: "fail1",
         navigationSound: "click1"
@@ -71,7 +71,7 @@ struct ChordLearningStepFactory {
             pauseAfter: 1.0
           )
         ],
-        soundFiles: ["A-5"],
+        soundFiles: ["A-5.m4a"],
         successSound: "success1",
         failSound: "fail1",
         navigationSound: "click1"
@@ -89,7 +89,7 @@ struct ChordLearningStepFactory {
             pauseAfter: 1.0
           )
         ],
-        soundFiles: ["A-4"],
+        soundFiles: ["A-4.m4a"],
         successSound: "success1",
         failSound: "fail1",
         navigationSound: "click1"
@@ -107,7 +107,7 @@ struct ChordLearningStepFactory {
             pauseAfter: 1.0
           )
         ],
-        soundFiles: ["A-3"],
+        soundFiles: ["A-3.m4a"],
         successSound: "success1",
         failSound: "fail1",
         navigationSound: "click1"
@@ -125,7 +125,7 @@ struct ChordLearningStepFactory {
             pauseAfter: 1.0
           )
         ],
-        soundFiles: ["A-2"],
+        soundFiles: ["A-2.m4a"],
         successSound: "success1",
         failSound: "fail1",
         navigationSound: "click1"
@@ -143,7 +143,7 @@ struct ChordLearningStepFactory {
             pauseAfter: 1.0
           )
         ],
-        soundFiles: ["A-1"],
+        soundFiles: ["A-1.m4a"],
         successSound: "success1",
         failSound: "fail1",
         navigationSound: "click1"
@@ -167,7 +167,7 @@ struct ChordLearningStepFactory {
             pauseAfter: 1.5
           )
         ],
-        soundFiles: ["A_full"],
+        soundFiles: ["A_full.m4a"],
         successSound: "success2",
         failSound: "fail1",
         navigationSound: "click1"
