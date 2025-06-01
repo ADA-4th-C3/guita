@@ -38,8 +38,6 @@ struct NoteClassificationView: View {
           } else {
             Text("")
           }
-        @unknown default:
-          Text("알 수 없는 상태입니다.")
         }
 
         Spacer()
