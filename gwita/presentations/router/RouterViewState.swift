@@ -13,6 +13,7 @@ enum SubPage: Hashable {
   case noteClassification
   case codeClassification
   case lesson(item: SongInfo)
+  case chord(songInfo: SongInfo)
   case technique
   case voiceCommand
   case config
