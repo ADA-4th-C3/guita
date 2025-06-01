@@ -16,6 +16,7 @@ enum SubPage: Hashable {
   case lesson(item: SongInfo)
   case technique
   case config
+  case devPermission
 }
 
 struct RouterViewState {

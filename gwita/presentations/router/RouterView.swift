@@ -25,6 +25,7 @@ struct RouterView: View {
         .navigationDestination(for: SubPage.self) { subPage in
           switch subPage {
           case .curriculum: CurriculumView()
+          case .devPermission: DevPermissionView()
           case .dev: DevView()
           case .noteClassification: NoteClassificationView()
           case .codeClassification: ChordClassificationView()

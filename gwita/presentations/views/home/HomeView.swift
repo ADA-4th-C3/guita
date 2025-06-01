@@ -11,7 +11,11 @@ struct HomeView: View {
     ) { _, _ in
       VStack {
         // MARK: Toolbar
-        Toolbar(title: "Guita", isPopButton: false)
+        Toolbar(title: "Guita", isPopButton: false, trailing: {
+          Button("Dev") {
+            router.push(.dev)
+          }
+        })
         Spacer()
         Button {
           router.push(.curriculum)
@@ -24,7 +28,7 @@ struct HomeView: View {
             Text("기타 학습")
               .fontWeight(.bold)
               .font(.system(size: 32))
-              .foregroundStyle(.white)
+              .foregroundStyle(.light)
           }.offset(y: -40)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
