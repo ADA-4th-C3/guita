@@ -36,7 +36,7 @@ struct SplashView: View {
       .onAppear {
         viewModel.onAppear()
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { // 2초간 기타학습 텍스트 보여줌
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { // 2초간 기타학습 텍스트 보여줌
           viewModel.onLoaded()
           router.setRoot(.home) // 홈으로 이동 후
           

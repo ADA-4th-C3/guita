@@ -14,10 +14,11 @@ final class VoiceRecognitionHandler {
     
     private var currentRecognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var isSetup = false
+    private var isManuallyPaused = false  // TTS 재생 중 일시중단 상태 추가
     
     /// 음성인식 활성화 상태를 외부에서 확인할 수 있는 속성
     var isRecognitionActive: Bool {
-        return currentRecognitionRequest != nil
+        return currentRecognitionRequest != nil && !isManuallyPaused
     }
     
     // MARK: - Initialization
@@ -51,23 +52,29 @@ final class VoiceRecognitionHandler {
         }
     }
     
-    // MARK: - Control
+    // MARK: - Control (수정된 부분)
     func startVoiceRecognition() {
-        Logger.d("startVoiceRecognition 호출됨 - available: \(voiceRecognitionManager.isAvailable)")
         guard voiceRecognitionManager.isAvailable else {
             Logger.e("음성인식 사용 불가")
             return
         }
         
+        // 수동 일시중단 해제
+        isManuallyPaused = false
+        
         // 이미 실행 중이면 중복 시작 방지
         if currentRecognitionRequest != nil {
             Logger.d("음성인식이 이미 실행 중 - 기존 세션 유지")
+            delegate?.voiceRecognitionDidStart()
             return
         }
         
+        Logger.d("음성인식 시작 시도")
+        
         currentRecognitionRequest = voiceRecognitionManager.startRecognition { [weak self] text in
+            guard let self = self, !self.isManuallyPaused else { return }
             Logger.d("음성인식 텍스트 수신: \(text)")
-            self?.handleRecognizedText(text)
+            self.handleRecognizedText(text)
         }
         
         guard currentRecognitionRequest != nil else {
@@ -75,34 +82,35 @@ final class VoiceRecognitionHandler {
             return
         }
         
-        // 오디오 매니저 시작 (한 번만)
+        // 오디오 매니저 시작
         startAudioManagerIfNeeded()
         
         delegate?.voiceRecognitionDidStart()
         Logger.d("음성인식 시작됨")
     }
     
-    /// 오디오 매니저를 필요한 경우에만 시작
-    private func startAudioManagerIfNeeded() {
-        // 이미 실행 중인지 확인하는 플래그나 상태가 없으므로 항상 시작
-        // AudioManager가 내부적으로 중복 시작을 방지해야 함
-        audioManager.start { [weak self] buffer, _ in
-            self?.delegate?.didReceiveAudioBuffer(buffer)
-            self?.currentRecognitionRequest?.append(buffer)
-        }
-    }
-    
     func stopVoiceRecognition() {
+        isManuallyPaused = true  // 수동 중지 플래그 설정
+        
         voiceRecognitionManager.stopRecognition()
         currentRecognitionRequest = nil
         audioManager.stop()
         delegate?.voiceRecognitionDidStop()
-        Logger.d("음성인식 중지됨")
+        Logger.d("음성인식 중지됨 (수동)")
     }
     
-    /// 음성인식이 실행 중인지 확인하는 메서드
+    /// 오디오 매니저를 필요한 경우에만 시작
+    private func startAudioManagerIfNeeded() {
+        audioManager.start { [weak self] buffer, _ in
+            guard let self = self, !self.isManuallyPaused else { return }
+            self.delegate?.didReceiveAudioBuffer(buffer)
+            self.currentRecognitionRequest?.append(buffer)
+        }
+    }
+    
+    /// 음성인식이 실행 중인지 확인하고 필요시 재시작
     func checkAndRestartIfNeeded() {
-        if !isRecognitionActive && isSetup {
+        if !isRecognitionActive && isSetup && !isManuallyPaused {
             Logger.d("음성인식이 중단된 상태 - 재시작 시도")
             startVoiceRecognition()
         }
@@ -110,6 +118,8 @@ final class VoiceRecognitionHandler {
     
     /// 인식된 텍스트 처리
     private func handleRecognizedText(_ text: String) {
+        guard !isManuallyPaused else { return }
+        
         // 텍스트 길이 제한
         if text.count > 100 {
             Logger.d("텍스트 길이 초과 - 텍스트 무시: \(text.count)자")

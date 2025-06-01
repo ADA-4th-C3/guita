@@ -216,8 +216,6 @@ extension BaseAudioLearningViewModel: VoiceRecognitionDelegate {
   private func handleVoiceCommand(_ command: VoiceCommand) {
     Logger.d("음성 명령 처리: \(command)")
     
-    // 명령어 처리 후 음성인식 재시작 로직 제거 - 지속적으로 유지
-    // restartVoiceRecognitionAfterCommand() // 이 줄 제거
     
     switch command {
     case .play:
@@ -252,11 +250,30 @@ extension BaseAudioLearningViewModel: VoiceRecognitionDelegate {
       Logger.d("뒤로 이동 명령")
     }
     
-    // 명령 처리 후 인식된 텍스트만 초기화 (음성인식은 계속 유지)
-    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-      self.updateRecognizedVoiceText("") // 텍스트만 초기화
-    }
+    updateRecognizedVoiceText("")
+
+    // 명령 처리 후 초기화 (음성인식은 계속 유지)
+//    DispatchQueue.main.asyncAfter(deadline: .now()) {
+//      self.restartVoiceRecognitionAfterCommand()
+//    }
   }
+  
+//  /// 명령어 처리 후 음성인식 재시작
+//  private func restartVoiceRecognitionAfterCommand() {
+//    Logger.d("음성인식 재시작 시작")
+//    
+//    // 음성인식 중지
+//    voiceRecognitionHandler.stopVoiceRecognition()
+//    
+//    // 인식된 텍스트 초기화
+//    updateRecognizedVoiceText("")
+//    
+//    // 짧은 딜레이 후 음성인식 재시작
+//    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//      self.voiceRecognitionHandler.startVoiceRecognition()
+//      Logger.d("음성인식 재시작 완료")
+//    }
+//  }
   
   /// 마지막 콘텐츠 TTS 다시 재생
   private func replayLastContent() {
@@ -277,17 +294,19 @@ extension BaseAudioLearningViewModel: VoiceRecognitionDelegate {
     Logger.d("마지막 콘텐츠 재생: \(lastTTSText)")
   }
   
-  // 기존 restartVoiceRecognitionAfterCommand 메서드 제거
-  // private func restartVoiceRecognitionAfterCommand() { ... } // 이 메서드 전체 제거
 }
 
 extension BaseAudioLearningViewModel: TTSHandlerDelegate {
   func ttsDidStart(_ text: String) {
+    // TTS 시작 시 음성인식 일시중단
+    voiceRecognitionHandler.stopVoiceRecognition()
     audioStateManager.updateAudioState(.playingTTS)
   }
   
   func ttsDidStop() {
     audioStateManager.updateAudioState(.listeningVoice)
+    // 음성인식 즉시 재시작
+    voiceRecognitionHandler.startVoiceRecognition()
   }
   
   func ttsContentDidPlay(_ text: String) {
@@ -295,20 +314,16 @@ extension BaseAudioLearningViewModel: TTSHandlerDelegate {
   }
   
   func ttsSequenceDidStart() {
+    // TTS 시퀀스 시작 시 음성인식 일시중단
+    voiceRecognitionHandler.stopVoiceRecognition()
     audioStateManager.updateAudioState(.playingTTS)
   }
   
   func ttsSequenceDidComplete() {
-    // TTS 완료 후 음성인식 상태로 복원하고 음성인식 재시작 확인
+    // TTS 시퀀스 완료 후 음성인식 즉시 재시작
     audioStateManager.updateAudioState(.listeningVoice)
-    
-    // 음성인식이 중단되었을 경우 재시작
-    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-      if !self.voiceRecognitionHandler.isRecognitionActive {
-        Logger.d("TTS 완료 후 음성인식 재시작")
-        self.voiceRecognitionHandler.startVoiceRecognition()
-      }
-    }
+    voiceRecognitionHandler.startVoiceRecognition()
+    Logger.d("TTS 완료 - 음성인식 즉시 재시작")
   }
 }
 

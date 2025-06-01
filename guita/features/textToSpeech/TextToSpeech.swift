@@ -52,7 +52,6 @@ final class TextToSpeech: NSObject, ObservableObject, @unchecked Sendable {
         pitch: Float = 1.0,                                // 기본 피치
         volume: Float = 1.0                                // 기본 볼륨
     ) {
-        Logger.d("TTS speak 호출됨 - 텍스트: '\(text)', 언어: \(language), 속도: \(rate)")
         
         // 빈 텍스트는 처리하지 않음
         guard !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
@@ -238,7 +237,7 @@ extension TextToSpeech: AVSpeechSynthesizerDelegate {
         DispatchQueue.main.async {
             self.isSpeaking = false
             let text = utterance.speechString
-            Logger.d("TTS Delegate: 음성 재생 완료 - '\(text)'")
+            Logger.d("TTS Delegate: 음성 재생 완료")
             self.speechFinishHandler?(text)
         }
     }

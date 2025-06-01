@@ -34,6 +34,21 @@ final class AudioPlayer {
     }
     
     do {
+      // AVAudioSession 설정 수정 - 기존 설정 유지
+      let session = AVAudioSession.sharedInstance()
+      
+      // 현재 카테고리가 playAndRecord면 그대로 유지
+      if session.category == .playAndRecord {
+        // 아무것도 변경하지 않음 - 기존 설정 유지
+        Logger.d("AudioPlayer: 기존 playAndRecord 설정 유지")
+      } else {
+        // playAndRecord가 아닐 때만 새로 설정
+        try session.setCategory(.playAndRecord, mode: .default, options: [.defaultToSpeaker, .mixWithOthers])
+        Logger.d("AudioPlayer: playAndRecord 설정 적용")
+      }
+      
+      try session.setActive(true)
+      
       player = try AVAudioPlayer(contentsOf: url)
       player?.prepareToPlay()
       Logger.d("Audio setup successful: \(fileName).\(fileExtension)")
