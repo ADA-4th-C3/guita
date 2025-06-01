@@ -7,24 +7,41 @@ struct DevTextToSpeechView: View {
     BaseView(
       create: { DevTextToSpeechViewModel() }
     ) { viewModel, state in
-      VStack {
-        Toolbar(title: "Text To Speech")
-        Form {
-          ForEach(state.samples.indices, id: \.self) { i in
-            Text(state.samples[i])
-              .fontKoddi(15, color: i == state.index ? .accent : nil)
+      PermissionView(
+        permissionListener: { isGranted in
+          if !isGranted { return }
+          if state.isVoiceCommandEnabled {
+            viewModel.startVoiceCommand()
           }
         }
-        Spacer()
-        HStack {
-          IconButton("chevron-left", color: .light, size: 95, isSystemImage: false) {
-            viewModel.goPrevious()
+      ) {
+        VStack {
+          Toolbar(title: "Text To Speech")
+          Form {
+            Section {
+              Tile(title: "음성명령", subtitle: state.isVoiceCommandEnabled ? "ON" : "OFF") {
+                state.isVoiceCommandEnabled ? viewModel.stopVoiceCommand() : viewModel.startVoiceCommand()
+              }
+
+              Text("재생 / 다시 / 다음 / 이전")
+            }
+
+            ForEach(state.samples.indices, id: \.self) { i in
+              Text(state.samples[i])
+                .fontKoddi(15, color: i == state.index ? .accent : nil)
+            }
           }
-          IconButton("play", size: 95, isSystemImage: false) {
-            viewModel.play()
-          }
-          IconButton("chevron-right", color: .light, size: 95, isSystemImage: false) {
-            viewModel.goNext()
+          Spacer()
+          HStack {
+            IconButton("chevron-left", color: .light, size: 95, isSystemImage: false) {
+              viewModel.goPrevious()
+            }
+            IconButton("play", size: 95, isSystemImage: false) {
+              viewModel.play()
+            }
+            IconButton("chevron-right", color: .light, size: 95, isSystemImage: false) {
+              viewModel.goNext()
+            }
           }
         }
       }
@@ -33,7 +50,7 @@ struct DevTextToSpeechView: View {
 }
 
 #Preview {
-  BasePreview{
+  BasePreview {
     DevTextToSpeechView()
   }
 }

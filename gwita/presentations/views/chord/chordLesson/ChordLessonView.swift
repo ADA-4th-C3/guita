@@ -7,9 +7,9 @@ struct ChordLessonView: View {
   var body: some View {
     BaseView(
       create: { ChordLessonViewModel(chord) }
-    ) { viewModel, state in
+    ) { _, state in
       PermissionView {
-        VStack(spacing: 0){
+        VStack(spacing: 0) {
           // MARK: Toolbar
           Toolbar(title: "\(state.chord) 코드")
           Spacer()
@@ -20,7 +20,7 @@ struct ChordLessonView: View {
 }
 
 #Preview {
-  BasePreview{
+  BasePreview {
     ChordLessonView(chord: .A)
   }
 }

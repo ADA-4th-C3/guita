@@ -2,10 +2,10 @@
 
 struct ChordLessonViewState {
   let chord: Chord
-  
+
   func copy(withChord newChord: Chord? = nil) -> ChordLessonViewState {
     return ChordLessonViewState(
-      chord: newChord ?? self.chord
+      chord: newChord ?? chord
     )
   }
 }

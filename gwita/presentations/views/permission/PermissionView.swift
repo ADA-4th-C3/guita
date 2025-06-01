@@ -4,7 +4,7 @@ import SwiftUI
 
 struct PermissionView<Content: View>: View {
   @EnvironmentObject var router: Router
-  var permissionStatesListener: ((_ isGranted: Bool) -> Void)?
+  var permissionListener: ((_ isGranted: Bool) -> Void)?
   var content: () -> Content
 
   var body: some View {
@@ -12,7 +12,7 @@ struct PermissionView<Content: View>: View {
       create: {
         PermissionViewModel(
           permissionCategories: PermissionCategory.allCases,
-          permissionStatesListener: permissionStatesListener
+          permissionStatesListener: permissionListener
         )
       }
     ) { viewModel, state in
@@ -47,7 +47,7 @@ struct PermissionView<Content: View>: View {
         }
       }
       .onAppear {
-        permissionStatesListener?(state.isGranted)
+        permissionListener?(state.isGranted)
       }
     }
   }
