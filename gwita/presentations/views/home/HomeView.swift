@@ -11,24 +11,27 @@ struct HomeView: View {
     ) { _, _ in
       VStack {
         // MARK: Toolbar
-        Toolbar(title: "Guita", isPopButton: false)
+        Toolbar(title: "Guita", isPopButton: false, trailing: {
+          Button("Dev") {
+            router.push(.dev)
+          }
+        })
         Spacer()
-        Button{
+        Button {
           router.push(.curriculum)
-        }label: {
-          VStack{
-            Image("Guitarpick")
+        } label: {
+          VStack {
+            Image("pick")
               .resizable()
-              .frame(width:46.95, height:54.17)
+              .frame(width: 46.95, height: 54.17)
               .padding(.vertical, 9.17)
             Text("기타 학습")
               .fontWeight(.bold)
-              .font(.system(size:32))
-              .foregroundStyle(.white)
+              .font(.system(size: 32))
+              .foregroundStyle(.light)
           }.offset(y: -40)
-          .frame(maxWidth: .infinity, maxHeight:.infinity)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        
       }
     }
   }

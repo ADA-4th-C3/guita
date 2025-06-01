@@ -49,6 +49,8 @@ struct Toolbar<Leading: View, Trailing: View>: View {
       if !title.isEmpty {
         Text(title)
           .foregroundColor(.primary)
+          .fontKoddi(24, weight: .bold)
+          .lineSpacing(1.4)
       }
     }
     .frame(height: 56)

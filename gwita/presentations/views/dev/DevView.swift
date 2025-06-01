@@ -14,6 +14,16 @@ struct DevView: View {
         Toolbar(title: "Development")
 
         Form {
+          // MARK: General
+          Section(header: Text("General")) {
+            Tile(title: "Config") {
+              router.push(.config)
+            }
+            Tile(title: "Permission") {
+              router.push(.devPermission)
+            }
+          }
+
           // MARK: Features
           Section(header: Text("Features")) {
             Tile(title: "Note Classification") {

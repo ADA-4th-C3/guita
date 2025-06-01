@@ -3,79 +3,73 @@
 import SwiftUI
 
 struct LessonDetailView: View {
-  let item : SongInfo
+  let item: SongInfo
   @EnvironmentObject var router: Router
-  
+
   var body: some View {
-    
     BaseView(
       create: { LessonDetailViewModel(item: item) }
-    ) { viewModel, _ in
+    ) { _, _ in
       VStack {
         // MARK: Toolbar
         Toolbar(title: item.level)
         Spacer()
-        
+
         // MARK: SongTitle & Code
-        VStack{
-          VStack{
+        VStack {
+          VStack {
             Text(item.title)
               .fontWeight(.bold)
-              .font(.system(size:32))
+              .font(.system(size: 32))
             Text(item.chords.joined(separator: ", "))
               .fontWeight(.semibold)
-              .font(.system(size:20))
+              .font(.system(size: 20))
               .foregroundColor(.gray)
           }
-          .frame(maxWidth: .infinity, maxHeight:220)
-          
+          .frame(maxWidth: .infinity, maxHeight: 220)
+
           // MARK: Learning Buttons
           GeometryReader { geometry in
             let boxWidth = geometry.size.width
             let boxHeight = geometry.size.height / 4
-            
+
             LazyVStack(spacing: 0) {
               Button(action: {
-                router.push(.curriculum) //임시로 라우팅 해둠
+                router.push(.curriculum) // 임시로 라우팅 해둠
               }) {
                 Text("코드 학습")
-                  .font(.system(size:20))
+                  .font(.system(size: 20))
                   .frame(width: boxWidth, height: boxHeight)
                   .background(Color.black)
                   .foregroundColor(.white)
-                
               }
               Button(action: {
-                router.push(.curriculum) //임시로 라우팅 해둠
+                router.push(.curriculum) // 임시로 라우팅 해둠
               }) {
                 Text("주법 학습")
-                  .font(.system(size:20))
+                  .font(.system(size: 20))
                   .frame(width: boxWidth, height: boxHeight)
                   .background(Color.black)
                   .foregroundColor(.white)
-                
               }
               Button(action: {
-                router.push(.curriculum) //임시로 라우팅 해둠
+                router.push(.curriculum) // 임시로 라우팅 해둠
               }) {
                 Text("곡 구간 학습")
-                  .font(.system(size:20))
+                  .font(.system(size: 20))
                   .frame(width: boxWidth, height: boxHeight)
                   .background(Color.black)
                   .foregroundColor(.white)
-                
               }
               Button(action: {
-                router.push(.curriculum) //임시로 라우팅 해둠
+                router.push(.curriculum) // 임시로 라우팅 해둠
               }) {
                 Text("곡 전체 학습")
-                  .font(.system(size:20))
+                  .font(.system(size: 20))
                   .frame(width: boxWidth, height: boxHeight)
                   .background(Color.black)
                   .foregroundColor(.white)
-                
               }
-
             }
           }
         }
