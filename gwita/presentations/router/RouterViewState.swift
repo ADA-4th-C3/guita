@@ -17,6 +17,7 @@ enum SubPage: Hashable {
   case technique
   case config
   case devPermission
+  case techniqueGuide
 }
 
 struct RouterViewState {

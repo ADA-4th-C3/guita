@@ -33,6 +33,7 @@ struct RouterView: View {
           case let .lesson(item): LessonDetailView(item: item)
           case .technique: TechniqueView()
           case .config: ConfigView()
+          case .techniqueGuide : TechniqueUserGuideView()
           }
         }
         .toolbarBackground(.hidden, for: .navigationBar)
