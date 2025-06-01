@@ -3,12 +3,13 @@
 import Foundation
 
 final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
-  private let chordLesson: ChordLesson
+  private var chordLesson: ChordLesson
   private var playTask: Task<Void, Never>? = nil
   
   init(_ chord: Chord) {
-    chordLesson = ChordLesson(chord)
-    super.init(state: .init(chord: chord, step: .introduction, currentStepPlayCount: 0, isPlay: false))
+    let state = ChordLessonViewState(chord: chord, index: 0, currentStepPlayCount: 0)
+    chordLesson = ChordLesson(chord, state.totalStep)
+    super.init(state: state)
   }
   
   private func cancelPlayTask() {
@@ -26,7 +27,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
       case .introduction:
         await chordLesson.startIntroduction(state.isReplay)
       case .lineByLine:
-        await chordLesson.startLineByLine(state.isReplay)
+        await chordLesson.startLineByLine(state.isReplay, index: state.index)
       case .fullChord:
         chordLesson.startFullChord(state.isReplay)
       case .finish:
@@ -39,8 +40,8 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
     cancelPlayTask()
     if state.step == .finish { return }
     emit(state.copy(
-      step: state.step.next,
-      currentStepPlayCount: 0
+      index: state.index + 1,
+      currentStepPlayCount: state.nextStep != state.step ? 0 : nil
     ))
     play()
   }
@@ -49,8 +50,8 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
     cancelPlayTask()
     if state.step == .introduction { return }
     emit(state.copy(
-      step: state.step.previous,
-      currentStepPlayCount: 0
+      index: state.index - 1,
+      currentStepPlayCount: state.prevStep != state.step ? 0 : nil
     ))
     play()
   }

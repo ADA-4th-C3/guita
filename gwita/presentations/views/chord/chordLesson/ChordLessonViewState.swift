@@ -1,27 +1,48 @@
 //  Copyright © 2025 ADA 4th Challenge3 Team1. All rights reserved.
 
 struct ChordLessonViewState {
+  /// 학습 중인 코드
   let chord: Chord
-  let step: ChordLessonStep
-  let currentStepPlayCount: Int
-  let isPlay: Bool
   
-  var isReplay: Bool {
-    currentStepPlayCount > 1
+  /// 현재 단계
+  let index: Int
+  
+  /// 현재 단계 반복 횟수 ([ChordLessonStep]가 바뀌는 경우에만 초기화 됨)
+  let currentStepPlayCount: Int
+  
+  /// 반복 실행 여부
+  var isReplay: Bool { currentStepPlayCount > 1 }
+  
+  /// 레슨 스탭
+  var step: ChordLessonStep { getStep(index) }
+  var nextStep: ChordLessonStep { getStep(index + 1) }
+  var prevStep: ChordLessonStep { getStep(index - 1) }
+  
+  /// 전체 스탭 개수
+  var totalStep: Int {
+    let intro = 1
+    let lineByLine = chord.coordinates.count
+    let fullChord = 1
+    let finish = 1
+    return intro + lineByLine + fullChord + finish
   }
-
+  
+  private func getStep(_ i: Int) -> ChordLessonStep {
+    i == 0 ? .introduction
+    : i == totalStep - 1 ? .finish
+    : i == totalStep - 2 ? .fullChord
+    : .lineByLine
+  }
   
   func copy(
     chord: Chord? = nil,
-    step: ChordLessonStep? = nil,
-    currentStepPlayCount: Int? = nil,
-    isPlay: Bool? = nil
+    index: Int? = nil,
+    currentStepPlayCount: Int? = nil
   ) -> ChordLessonViewState {
     return ChordLessonViewState(
       chord: chord ?? self.chord,
-      step: step ?? self.step,
-      currentStepPlayCount: currentStepPlayCount ?? self.currentStepPlayCount,
-      isPlay: isPlay ?? self.isPlay
+      index: index ?? self.index,
+      currentStepPlayCount: currentStepPlayCount ?? self.currentStepPlayCount
     )
   }
 }
