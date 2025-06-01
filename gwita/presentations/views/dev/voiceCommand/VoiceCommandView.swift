@@ -8,7 +8,7 @@ struct VoiceCommandView: View {
       create: { VoiceCommandViewModel() }
     ) { viewModel, state in
       PermissionView(
-        permissionStatesListener: { isGranted in
+        permissionListener: { isGranted in
           if isGranted {
             viewModel.start()
           }

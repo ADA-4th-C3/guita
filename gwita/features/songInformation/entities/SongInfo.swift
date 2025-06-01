@@ -6,9 +6,9 @@ struct SongInfo: Identifiable, Hashable {
   let id = UUID()
   let level: String
   let title: String
-  let chords: [String]
+  let chords: [Chord]
 
-  func copy(level: String? = nil, title: String? = nil, chords: [String]? = nil) -> SongInfo {
+  func copy(level: String? = nil, title: String? = nil, chords: [Chord]? = nil) -> SongInfo {
     return SongInfo(
       level: level ?? self.level,
       title: title ?? self.title,
