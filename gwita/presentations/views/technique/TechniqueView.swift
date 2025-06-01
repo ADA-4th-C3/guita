@@ -12,7 +12,11 @@ struct TechniqueView: View {
     ) { viewModel, _ in
       VStack {
         // MARK: Toolbar
-        Toolbar(title: "주법 학습")
+        CustomToolbar(title: "주법 학습", onBack: {
+          router.pop()
+        }, onInfo: {
+            //도움말 만들면 여기에 넣어야함
+        })
         
         Spacer()
         
