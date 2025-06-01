@@ -19,6 +19,7 @@ enum SubPage: Hashable {
   case voiceCommand
   case config
   case devPermission
+  case devTextToSpeech
 }
 
 struct RouterViewState {

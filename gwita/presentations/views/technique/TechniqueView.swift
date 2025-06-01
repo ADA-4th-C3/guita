@@ -44,20 +44,20 @@ struct TechniqueView: View {
           Button(action: {
             viewModel.previousStep()
           }) {
-            Image("guitar-back")
+            Image("chevron-left")
               .resizable()
               .frame(width: 75, height: 75)
               .padding(.horizontal, 42)
           }
           Button(action: {}) {
-            Image("guitar-play")
+            Image("play")
               .resizable()
               .frame(width: 95, height: 95)
           }
           Button(action: {
             viewModel.nextStep()
           }) {
-            Image("guitar-next")
+            Image("chevron-right")
               .resizable()
               .frame(width: 75, height: 75)
               .padding(.horizontal, 42)

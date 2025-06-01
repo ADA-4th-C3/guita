@@ -35,6 +35,9 @@ struct DevView: View {
             Tile(title: "Voice Command") {
               router.push(.voiceCommand)
             }
+            Tile(title: "Text To Speech") {
+              router.push(.devTextToSpeech)
+            }
           }
         }
       }

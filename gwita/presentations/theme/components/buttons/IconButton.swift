@@ -5,6 +5,7 @@ import SwiftUI
 struct IconButton: View {
   let icon: String
   let color: Color?
+  let size: CGFloat?
   let padding: CGFloat?
   let disabled: Bool
   let isSystemImage: Bool
@@ -18,6 +19,7 @@ struct IconButton: View {
   init(
     _ icon: String,
     color: Color? = nil,
+    size: CGFloat? = nil,
     padding: CGFloat? = nil,
     disabled: Bool = false,
     isSystemImage: Bool = true,
@@ -25,6 +27,7 @@ struct IconButton: View {
   ) {
     self.icon = icon
     self.color = color
+    self.size = size
     self.padding = padding
     self.disabled = disabled
     self.isSystemImage = isSystemImage
@@ -43,7 +46,7 @@ struct IconButton: View {
         .scaledToFit()
         .foregroundColor(_color)
         .padding(padding ?? (isSystemImage ? 20 : 16))
-        .frame(width: 56, height: 56)
+        .frame(width: size ?? 56, height: size ?? 56)
     }.disabled(disabled)
   }
 }
