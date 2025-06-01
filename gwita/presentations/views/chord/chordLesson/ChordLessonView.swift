@@ -8,7 +8,13 @@ struct ChordLessonView: View {
     BaseView(
       create: { ChordLessonViewModel(chord) }
     ) { viewModel, state in
-      PermissionView {
+      PermissionView(
+        permissionListener: { isGranted in
+          if isGranted {
+            viewModel.startVoiceCommand()
+          }
+        }
+      ) {
         VStack(spacing: 0) {
           // MARK: Toolbar
           Toolbar(title: "\(state.chord) 코드")

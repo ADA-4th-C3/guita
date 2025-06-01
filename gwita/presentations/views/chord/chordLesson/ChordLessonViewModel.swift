@@ -3,6 +3,7 @@
 import Foundation
 
 final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
+  private let voiceCommandManager = VoiceCommandManager.shared
   private var chordLesson: ChordLesson
   private var playTask: Task<Void, Never>? = nil
 
@@ -54,8 +55,20 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
     ))
     play()
   }
+  
+  func startVoiceCommand() {
+    voiceCommandManager.start(
+      commands: [
+        VoiceCommand(keyword: .play, handler: play),
+        VoiceCommand(keyword: .retry, handler: play),
+        VoiceCommand(keyword: .next, handler: goNext),
+        VoiceCommand(keyword: .previous, handler: goPrevious),
+      ]
+    )
+  }
 
   override func dispose() {
     cancelPlayTask()
+    voiceCommandManager.stop()
   }
 }
