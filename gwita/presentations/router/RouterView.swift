@@ -32,6 +32,7 @@ struct RouterView: View {
           case .voiceCommand: VoiceCommandView()
           case let .lesson(item): LessonDetailView(item: item)
           case let .chord(songInfo): ChordView(songInfo: songInfo)
+          case let .chordLesson(chord): ChordLessonView(chord: chord)
           case .technique: TechniqueView()
           case .config: ConfigView()
           }

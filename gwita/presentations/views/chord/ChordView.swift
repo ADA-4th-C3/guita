@@ -3,6 +3,7 @@
 import SwiftUI
 
 struct ChordView: View {
+  @EnvironmentObject var router: Router
   let songInfo: SongInfo
 
   var body: some View {
@@ -16,7 +17,7 @@ struct ChordView: View {
         // MARK: Chord Button
         dividerView()
         ForEach(state.songInfo.chords, id: \.self) { chord in
-          Button(action: {}) {
+          Button(action: { router.push(.chordLesson(chord: chord)) }) {
             VStack {
               Text("\(chord) 코드")
                 .fontKoddi(26, color: .darkGrey, weight: .bold)
