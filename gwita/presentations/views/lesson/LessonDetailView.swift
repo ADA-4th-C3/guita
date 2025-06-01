@@ -12,9 +12,7 @@ struct LessonDetailView: View {
     ) { _, _ in
       VStack {
         // MARK: Toolbar
-        CustomToolbar(title: item.level, onBack: {
-          router.pop()
-        }, showInfo: false)
+        Toolbar(title: item.level)
 
         Spacer()
 

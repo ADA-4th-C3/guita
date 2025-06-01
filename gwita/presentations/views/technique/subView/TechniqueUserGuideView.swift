@@ -11,9 +11,7 @@ struct TechniqueUserGuideView: View {
     ) { _, _ in
       VStack {
         // Toolbar
-        CustomToolbar(title: "도움말", onBack: {
-          router.pop()
-        }, showInfo: false)
+        Toolbar(title: "도움말")
 
         ScrollView {
           VStack(alignment: .leading, spacing: 20) {

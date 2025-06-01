@@ -9,9 +9,7 @@ struct CurriculumView: View {
       create: { CurriculumViewModel() }
     ) { viewModel, _ in
       VStack {
-        CustomToolbar(title: "학습 목록", onBack: {
-          router.pop()
-        }, showInfo: false)
+        Toolbar(title: "학습 목록")
 
         Spacer()
         ScrollView {

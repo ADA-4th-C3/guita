@@ -2,12 +2,12 @@
 
 struct TechniqueViewState {
   let currentStepIndex: Int
-  let steps: [LearningStep]
-  var currentStep: LearningStep {
+  let steps: [TechniqueStep]
+  var currentStep: TechniqueStep {
     steps[currentStepIndex]
   }
 
-  func copy(currentStepIndex: Int? = nil, steps: [LearningStep]? = nil) -> TechniqueViewState {
+  func copy(currentStepIndex: Int? = nil, steps: [TechniqueStep]? = nil) -> TechniqueViewState {
     return TechniqueViewState(
       currentStepIndex: currentStepIndex ?? self.currentStepIndex,
       steps: steps ?? self.steps

@@ -12,10 +12,10 @@ struct TechniqueView: View {
       ) { viewModel, _ in
         VStack {
           // MARK: Toolbar
-          CustomToolbar(title: "주법 학습", onBack: {
-            router.pop()
-          }, onInfo: {
-            router.push(.techniqueGuide)
+          Toolbar(title: "주법 학습", trailing: {
+            IconButton("info", color: .light, isSystemImage: false) {
+              router.push(.techniqueGuide)
+            }
           })
 
           Spacer()
@@ -44,31 +44,32 @@ struct TechniqueView: View {
           .frame(width: 393, height: 550)
           .background(Color.black)
 
-        // MARK: Button(back/play/next)
-        HStack {
-          Button(action: {
-            viewModel.previousStep()
-          }) {
-            Image("chevron-left")
-              .resizable()
-              .frame(width: 75, height: 75)
-              .padding(.horizontal, 42)
+          // MARK: Button(back/play/next)
+          HStack {
+            Button(action: {
+              viewModel.previousStep()
+            }) {
+              Image("chevron-left")
+                .resizable()
+                .frame(width: 75, height: 75)
+                .padding(.horizontal, 42)
+            }
+            Button(action: {}) {
+              Image("play")
+                .resizable()
+                .frame(width: 95, height: 95)
+            }
+            Button(action: {
+              viewModel.nextStep()
+            }) {
+              Image("chevron-right")
+                .resizable()
+                .frame(width: 75, height: 75)
+                .padding(.horizontal, 42)
+            }
+            .padding(.vertical, 15)
+            .background(Color.black)
           }
-          Button(action: {}) {
-            Image("play")
-              .resizable()
-              .frame(width: 95, height: 95)
-          }
-          Button(action: {
-            viewModel.nextStep()
-          }) {
-            Image("chevron-right")
-              .resizable()
-              .frame(width: 75, height: 75)
-              .padding(.horizontal, 42)
-          }
-          .padding(.vertical, 15)
-          .background(Color.black)
         }
       }
     }
