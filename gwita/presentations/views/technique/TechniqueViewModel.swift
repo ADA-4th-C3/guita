@@ -2,7 +2,6 @@
 import SwiftUI
 
 final class TechniqueViewModel: BaseViewModel<TechniqueViewState> {
-
   init() {
     let steps: [LearningStep] = [
       LearningStep(step: 1, totalSteps: 4, description: "주법은 기타를 치는 방법을 말합니다. 피크나 손가락으로 줄을 위아래로 튕기는 주법인 스트로크를 배워봅시다.", imageName: ""),
@@ -28,7 +27,7 @@ final class TechniqueViewModel: BaseViewModel<TechniqueViewState> {
       currentStepIndex: newIndex
     ))
   }
-  
+
   func currentImage() -> Image? {
     guard let imageName = state.currentStep.imageName, !imageName.isEmpty
     else {

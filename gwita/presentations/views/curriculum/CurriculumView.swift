@@ -4,11 +4,15 @@ import SwiftUI
 
 struct CurriculumView: View {
   var body: some View {
+    @EnvironmentObject var router: Router
     BaseView(
       create: { CurriculumViewModel() }
     ) { viewModel, _ in
       VStack {
-        Toolbar(title: "학습 목록")
+        CustomToolbar(title: "학습 목록", onBack: {
+          router.pop()
+        }, showInfo: false)
+
         Spacer()
         ScrollView {
           LazyVStack(alignment: .leading, spacing: 8) {

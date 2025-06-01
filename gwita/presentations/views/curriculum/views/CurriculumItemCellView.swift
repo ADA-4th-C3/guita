@@ -30,8 +30,8 @@ struct CurriculumItemCell: View {
         }
       }
       .padding(.horizontal)
-      .frame(height:110)
-      //padding 영역 조절하기
+      .frame(height: 110)
+      // padding 영역 조절하기
     }
     .contentShape(Rectangle())
     .onTapGesture {

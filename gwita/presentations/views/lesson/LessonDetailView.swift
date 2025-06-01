@@ -12,7 +12,10 @@ struct LessonDetailView: View {
     ) { _, _ in
       VStack {
         // MARK: Toolbar
-        Toolbar(title: item.level)
+        CustomToolbar(title: item.level, onBack: {
+          router.pop()
+        }, showInfo: false)
+
         Spacer()
 
         // MARK: SongTitle & Code
