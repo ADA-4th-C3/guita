@@ -2,13 +2,13 @@ enum Chord: CaseIterable {
   case C, D, E, F, G, A, B
   case Dm, Em, Am
   case B7
-  
+
   /// 사용하는 fret
   var frets: [Int] {
     let uniqueFrets = Set(coordinates.flatMap { $0.0.map { $0.fret } })
     return Array(uniqueFrets).sorted()
   }
-  
+
   /// 사용하는 손가락 개수
   var nFingers: Int {
     Set(coordinates.map { $0.finger }).count

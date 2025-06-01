@@ -6,11 +6,11 @@ final class AudioPlayerManager: BaseViewModel<AudioPlayerManagerState>, AVAudioP
   static let shared = AudioPlayerManager()
   private var audioPlayer: AVAudioPlayer?
   private var continuation: CheckedContinuation<Void, Never>?
-  
+
   private init() {
     super.init(state: .init(isPlaying: false))
   }
-  
+
   func start(audioFile: AudioFile) async {
     stop()
     await withTaskCancellationHandler {
@@ -36,15 +36,15 @@ final class AudioPlayerManager: BaseViewModel<AudioPlayerManagerState>, AVAudioP
       stop()
     }
   }
-  
+
   func stop() {
     audioPlayer?.stop()
     emit(state.copy(isPlaying: false))
     continuation?.resume()
     continuation = nil
   }
-  
-  func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+
+  func audioPlayerDidFinishPlaying(_: AVAudioPlayer, successfully _: Bool) {
     continuation?.resume()
     continuation = nil
     emit(state.copy(isPlaying: false))

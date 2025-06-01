@@ -24,7 +24,7 @@ final class ConfigViewModel: BaseViewModel<Config> {
       await textToSpeechManager.speak("코로나로 식욕이 사라졌던 줄리앤 블랙홀 처럼 모든 걸 빨아들이게 된 사연은? Feat. 아 배고프다 편의점 갈 사람?")
     }
   }
-  
+
   override func dispose() {
     textToSpeechManager.stop()
   }

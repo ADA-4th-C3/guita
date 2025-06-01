@@ -11,21 +11,10 @@ enum AudioFile: String {
   case A_4 = "A-4"
   case A_5 = "A-5"
   case A_6 = "A-6"
-  
-  var fileExtension: String {
-    switch self {
-    case .strokeDown: "m4a"
-    case .strokeUp: "m4a"
-    case .A_1: "m4a"
-    case .A_2: "m4a"
-    case .A_3: "m4a"
-    case .A_4: "m4a"
-    case .A_5: "m4a"
-    case .A_6: "m4a"
-    }
-  }
-  
+  case A_strokeDown = "A-stroke-down"
+  case A_strokeDownSlow = "A-stroke-down-slow"
+
   var fileURL: URL? {
-    Bundle.main.url(forResource: rawValue, withExtension: fileExtension)
+    Bundle.main.url(forResource: rawValue, withExtension: "m4a")
   }
 }

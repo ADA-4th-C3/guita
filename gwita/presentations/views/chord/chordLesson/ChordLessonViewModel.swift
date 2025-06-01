@@ -5,21 +5,20 @@ import Foundation
 final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
   private var chordLesson: ChordLesson
   private var playTask: Task<Void, Never>? = nil
-  
+
   init(_ chord: Chord) {
     let state = ChordLessonViewState(chord: chord, index: 0, currentStepPlayCount: 0)
     chordLesson = ChordLesson(chord, state.totalStep)
     super.init(state: state)
   }
-  
+
   private func cancelPlayTask() {
     playTask?.cancel()
   }
-  
-  
+
   func play() {
     cancelPlayTask()
-    self.emit(self.state.copy(
+    emit(state.copy(
       currentStepPlayCount: state.currentStepPlayCount + 1
     ))
     playTask = Task {
@@ -29,13 +28,13 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
       case .lineByLine:
         await chordLesson.startLineByLine(state.isReplay, index: state.index)
       case .fullChord:
-        chordLesson.startFullChord(state.isReplay)
+        await chordLesson.startFullChord(state.isReplay)
       case .finish:
         break
       }
     }
   }
-  
+
   func goNext() {
     cancelPlayTask()
     if state.step == .finish { return }
@@ -45,7 +44,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
     ))
     play()
   }
-  
+
   func goPrevious() {
     cancelPlayTask()
     if state.step == .introduction { return }
@@ -55,7 +54,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
     ))
     play()
   }
-  
+
   override func dispose() {
     cancelPlayTask()
   }

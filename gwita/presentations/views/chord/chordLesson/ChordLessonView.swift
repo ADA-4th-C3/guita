@@ -12,11 +12,17 @@ struct ChordLessonView: View {
         VStack(spacing: 0) {
           // MARK: Toolbar
           Toolbar(title: "\(state.chord) 코드")
-          
+
           Spacer()
+          Text("\(state.index + 1)/\(state.totalStep) 단계")
+            .fontKoddi(22, color: .darkGrey)
+            .padding(.bottom, 54)
+
           Text("\(state.step)")
+            .fontKoddi(26, color: .light)
+            .lineSpacing(1.45)
           Spacer()
-          
+
           // MARK: Controllers
           HStack {
             IconButton("chevron-left", color: .light, size: 95, isSystemImage: false) {
