@@ -25,31 +25,24 @@ final class VoiceRecognition {
     processVoiceCommand(text)
   }
   
-  private func processVoiceCommand(_ text: String) {
-    // 쿨다운 중이면 명령 무시
-    guard !commandCooldown else { return }
-    
-    let words = text.lowercased().components(separatedBy: " ")
-    Logger.d("음성 인식: '\(text)'")
-    
-    // 명령어 우선순위 (더 구체적인 명령어를 먼저 찾기)
-    let prioritizedCommands: [VoiceCommand] = [.seekForward, .seekBackward, .volumeUp, .volumeDown, .next, .previous, .play, .pause, .replay]
-    
-    for command in prioritizedCommands {
-      let commandWords = VoiceCommand.commandMap.compactMap { $0.value == command ? $0.key : nil }
-      
-      if words.contains(where: { commandWords.contains($0) }) {
-        Logger.d("인식된 명령어: \(command)")
-        commandHandler?(command)
+    private func processVoiceCommand(_ text: String) {
+        guard !commandCooldown else { return }
         
-        // 명령 실행 후 1초 쿨다운
-        startCommandCooldown()
-        return
-      }
+        let cleanText = text.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+        Logger.d("음성 인식: '\(text)'")
+        
+        // 정확한 명령어만 매칭
+        for (commandText, command) in VoiceCommand.commandMap {
+            if cleanText == commandText {  // 완전 일치만 허용
+                Logger.d("인식된 명령어: \(command)")
+                commandHandler?(command)
+                startCommandCooldown()
+                return
+            }
+        }
+        
+        Logger.d("인식된 명령어 없음")
     }
-    
-    Logger.d("인식된 명령어 없음")
-  }
   
   private func startCommandCooldown() {
     commandCooldown = true

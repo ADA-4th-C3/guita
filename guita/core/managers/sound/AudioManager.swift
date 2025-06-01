@@ -30,8 +30,8 @@ final class AudioManager {
   func start(handler: @escaping AVAudioNodeTapBlock) {
     do {
       let session = AVAudioSession.sharedInstance()
-//      try session.setCategory(.playAndRecord, mode: .default, options: [.defaultToSpeaker])
-      try session.setCategory(.record, mode: .default, options: [])
+      try session.setCategory(.playAndRecord, mode: .default, options: [.defaultToSpeaker, .mixWithOthers])
+//      try session.setCategory(.record, mode: .default, options: [])
       try session.setPreferredSampleRate(sampleRate)
       try session.setActive(true)
     } catch {
@@ -42,7 +42,7 @@ final class AudioManager {
     inputFormat = inputNode!.outputFormat(forBus: 0)
     inputNode?.installTap(onBus: 0, bufferSize: AVAudioFrameCount(windowSize), format: inputFormat, block: handler)
     try? audioEngine.start()
-  }
+}
 
   func stop() {
     inputNode?.removeTap(onBus: 0)

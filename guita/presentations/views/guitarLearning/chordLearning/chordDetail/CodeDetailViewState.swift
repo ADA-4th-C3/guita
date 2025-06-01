@@ -1,8 +1,5 @@
-//  Copyright © 2025 ADA 4th Challenge3 Team1. All rights reserved.
+// CodeDetailViewState.swift 수정
 
-import Foundation
-
-/// 코드 상세 학습 화면의 상태를 관리하는 ViewState
 struct CodeDetailViewState: AudioLearningState {
   
   // MARK: - Properties
@@ -12,7 +9,8 @@ struct CodeDetailViewState: AudioLearningState {
   let currentStep: Int                    // 현재 학습 단계 (1~5)
   let totalSteps: Int                     // 전체 학습 단계 수
   let currentInstruction: String          // 현재 단계의 안내 문구
-  let recognizedCode: String              // 인식된 코드명
+  let recognizedCode: String              // 인식된 코드명/노트명
+  let recognizedVoiceText: String         // 인식된 음성 텍스트
   let isListening: Bool                  // 오디오 인식 중인지 여부
   let canProceed: Bool                   // 다음 단계로 진행 가능한지 여부
   
@@ -29,6 +27,7 @@ struct CodeDetailViewState: AudioLearningState {
     currentStep: Int? = nil,
     currentInstruction: String? = nil,
     recognizedCode: String? = nil,
+    recognizedVoiceText: String? = nil,
     isListening: Bool? = nil,
     canProceed: Bool? = nil,
     audioState: AudioState? = nil,
@@ -41,6 +40,7 @@ struct CodeDetailViewState: AudioLearningState {
       totalSteps: self.totalSteps,
       currentInstruction: currentInstruction ?? self.currentInstruction,
       recognizedCode: recognizedCode ?? self.recognizedCode,
+      recognizedVoiceText: recognizedVoiceText ?? self.recognizedVoiceText,
       isListening: isListening ?? self.isListening,
       canProceed: canProceed ?? self.canProceed,
       audioState: audioState ?? self.audioState,

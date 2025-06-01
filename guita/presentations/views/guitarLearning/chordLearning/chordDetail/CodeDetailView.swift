@@ -151,22 +151,56 @@ struct CodeDetailView: View {
       
       // 코드 인식 상태 표시
       if !state.recognizedCode.isEmpty {
-        recognizedCodeDisplay(state: state)
+        recognizedInputDisplay(state: state)
+      }
+      
+      // 음성인식 텍스트 표시 (새로 추가)
+      if !state.recognizedVoiceText.isEmpty {
+        voiceRecognitionDisplay(state: state)
       }
     }
   }
   
+  /// 음성인식 텍스트 표시 (새로 추가)
+  private func voiceRecognitionDisplay(state: CodeDetailViewState) -> some View {
+    VStack(spacing: 8) {
+      HStack {
+        Text("음성인식:")
+          .font(.caption)
+          .foregroundColor(.gray)
+        
+        Spacer()
+      }
+      
+      Text(state.recognizedVoiceText)
+        .font(.body)
+        .foregroundColor(.white)
+        .padding(.horizontal, 12)
+        .padding(.vertical, 8)
+        .background(
+          RoundedRectangle(cornerRadius: 8)
+            .fill(Color.blue.opacity(0.1))
+            .overlay(
+              RoundedRectangle(cornerRadius: 8)
+                .stroke(Color.blue.opacity(0.3), lineWidth: 1)
+            )
+        )
+        .transition(.scale.combined(with: .opacity))
+        .animation(.spring(response: 0.3, dampingFraction: 0.6), value: state.recognizedVoiceText)
+    }
+  }
+  
   /// 인식된 코드 표시
-  private func recognizedCodeDisplay(state: CodeDetailViewState) -> some View {
+  private func recognizedInputDisplay(state: CodeDetailViewState) -> some View {
     HStack {
-      Text("인식된 코드:")
+      Text(getRecognitionTypeText(state))
         .font(.caption)
         .foregroundColor(.gray)
       
       Text(state.recognizedCode)
         .font(.headline)
         .fontWeight(.bold)
-        .foregroundColor(isCorrectChord(state) ? .green : .red)
+        .foregroundColor(isCorrectInput(state) ? .green : .yellow)
     }
     .padding(.horizontal, 16)
     .padding(.vertical, 8)
@@ -174,9 +208,44 @@ struct CodeDetailView: View {
     .cornerRadius(8)
   }
   
-  private func isCorrectChord(_ state: CodeDetailViewState) -> Bool {
-    return state.recognizedCode.uppercased() == chord.rawValue.uppercased()
+  /// 인식 타입에 따른 텍스트 반환 (새로 추가)
+  private func getRecognitionTypeText(_ state: CodeDetailViewState) -> String {
+    // 현재 단계가 개별 줄 학습인지 확인
+    if state.currentStep >= 2 && state.currentStep <= state.totalSteps - 1 {
+      return "인식된 노트:"
+    } else {
+      return "인식된 코드:"
+    }
   }
+
+  
+  /// 올바른 입력인지 확인
+  private func isCorrectInput(_ state: CodeDetailViewState) -> Bool {
+    // 현재 단계가 개별 줄 학습인지 확인
+    if state.currentStep >= 2 && state.currentStep <= state.totalSteps - 1 {
+      // 노트 인식 모드 - 특정 노트와 매칭
+      return isCorrectNoteForCurrentStep(state.recognizedCode, currentStep: state.currentStep)
+    } else {
+      // 코드 인식 모드
+      return state.recognizedCode.uppercased() == chord.rawValue.uppercased()
+    }
+  }
+  
+  /// 현재 단계에서 올바른 노트인지 확인 (새로 추가)
+  private func isCorrectNoteForCurrentStep(_ recognizedNote: String, currentStep: Int) -> Bool {
+    // A코드 예시: 2번 프렛 4번줄(F#), 3번줄(C#), 2번줄(E)
+    switch currentStep {
+    case 2: // 4번줄 학습
+      return recognizedNote.contains("F#") || recognizedNote.contains("Gb")
+    case 3: // 3번줄 학습
+      return recognizedNote.contains("C#") || recognizedNote.contains("Db")
+    case 4: // 2번줄 학습
+      return recognizedNote.contains("E")
+    default:
+      return false
+    }
+  }
+
   
   // MARK: - Bottom Navigation
   

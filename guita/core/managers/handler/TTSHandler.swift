@@ -80,7 +80,9 @@ final class TTSHandler {
     let currentContent = ttsQueue[currentTTSIndex]
     currentTTSIndex += 1
     
-    DispatchQueue.main.asyncAfter(deadline: .now() + currentContent.pauseAfter) {
+    let totalDelay = currentContent.pauseAfter + 0.5 // 0.5초 딜레이
+    
+    DispatchQueue.main.asyncAfter(deadline: .now() + totalDelay) {
       self.playNextTTS()
     }
   }
@@ -89,8 +91,12 @@ final class TTSHandler {
     isTTSSequencePlaying = false
     ttsQueue.removeAll()
     currentTTSIndex = 0
-    delegate?.ttsSequenceDidComplete()
-    Logger.d("TTS 시퀀스 완료")
+    
+    // TTS 완료 후 음성인식 상태로 복원하기 위해 딜레이 추가
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+      self.delegate?.ttsSequenceDidComplete()
+      Logger.d("TTS 시퀀스 완료 - 음성인식 복원")
+    }
   }
 }
 

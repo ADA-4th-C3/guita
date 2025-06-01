@@ -107,6 +107,7 @@ struct PermissionDialog: View {
       .background(Color.yellow)
       .foregroundColor(.black)
       .font(.system(size: 16, weight: .medium))
+      .contentShape(Rectangle()) // 영역 명시
     }
   }
   
@@ -162,6 +163,8 @@ struct PermissionDialog: View {
         .background(Color.gray.opacity(0.1))
         .foregroundColor(.gray)
         .font(.system(size: 16, weight: .medium))
+        .contentShape(Rectangle()) // 영역 명시
+
         
         Button("설정으로 이동") {
           isPresented = false
@@ -172,6 +175,8 @@ struct PermissionDialog: View {
         .background(Color.yellow)
         .foregroundColor(.black)
         .font(.system(size: 16, weight: .medium))
+        .contentShape(Rectangle()) // 영역 명시
+
       }
     }
   }

@@ -23,9 +23,10 @@ final class ChordRecognitionHandler {
   
   // MARK: - Public Methods
   func processAudioBuffer(_ buffer: AVAudioPCMBuffer, audioState: AudioState) {
-    // MP3 재생 중이면 코드 인식 건너뛰기
-    guard audioState != .playingSound else { return }
+    // MP3, TTS 재생 중이면 코드 인식 건너뛰기
+    guard audioState != .playingSound && audioState != .playingTTS else { return }
     
+      
     // 쿨다운 체크
     let now = Date()
     guard now.timeIntervalSince(lastCodeRecognitionTime) >= codeRecognitionCooldown else {

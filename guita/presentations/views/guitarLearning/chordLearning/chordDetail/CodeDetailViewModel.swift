@@ -29,6 +29,7 @@ final class CodeDetailViewModel: BaseAudioLearningViewModel<CodeDetailViewState>
       totalSteps: learningSteps.count,
       currentInstruction: "",
       recognizedCode: "",
+      recognizedVoiceText: "",
       isListening: false,
       canProceed: false,
       audioState: .idle,
@@ -41,6 +42,8 @@ final class CodeDetailViewModel: BaseAudioLearningViewModel<CodeDetailViewState>
     // 타겟 코드 설정
     setTargetChordFilter(chord)
   }
+  
+  
   
   // MARK: - BaseAudioLearningViewModel 추상 메서드 구현
   
@@ -87,6 +90,16 @@ final class CodeDetailViewModel: BaseAudioLearningViewModel<CodeDetailViewState>
       recognizedCode: chord,
       canProceed: shouldAllowProceed(recognizedChord: chord)
     ))
+  }
+  override func updateRecognizedNote(_ note: String, frequency: Double) {
+      emit(state.copy(
+          recognizedCode: note,
+          canProceed: shouldAllowProceed(recognizedChord: note)
+      ))
+  }
+
+  override func updateRecognizedVoiceText(_ text: String) {
+      emit(state.copy(recognizedVoiceText: text))
   }
   
   func onAudioRecoveryFailed() {

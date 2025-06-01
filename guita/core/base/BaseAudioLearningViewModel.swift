@@ -6,16 +6,20 @@ import AVFoundation
 /// 오디오 기반 학습 화면들의 공통 기능을 제공하는 Base ViewModel (리팩토링됨)
 class BaseAudioLearningViewModel<State>: BaseViewModel<State> {
   
+  
   // MARK: - Handlers
   internal var audioStateManager: AudioStateManager!
   internal var voiceRecognitionHandler: VoiceRecognitionHandler!
   internal var ttsHandler: TTSHandler!
   internal var chordRecognitionHandler: ChordRecognitionHandler!
+  internal var pitchRecognitionHandler: PitchRecognitionHandler!
   internal var soundEffectHandler: SoundEffectHandler!
   
   // MARK: - State
   internal var currentStepIndex = 0
   internal var isVoiceRecognitionSetup = false
+  internal var recognitionMode: RecognitionMode = .chord
+  
   
   // MARK: - Initialization
   override init(state: State) {
@@ -28,6 +32,7 @@ class BaseAudioLearningViewModel<State>: BaseViewModel<State> {
     voiceRecognitionHandler = VoiceRecognitionHandler(delegate: self)
     ttsHandler = TTSHandler(delegate: self)
     chordRecognitionHandler = ChordRecognitionHandler(delegate: self)
+    pitchRecognitionHandler = PitchRecognitionHandler(delegate: self)
     soundEffectHandler = SoundEffectHandler(delegate: self)
   }
   
@@ -52,7 +57,33 @@ class BaseAudioLearningViewModel<State>: BaseViewModel<State> {
     Logger.d("인식된 코드 업데이트: \(chord)")
   }
   
-  // MARK: - Public Methods
+  func updateRecognizedPitch(_ note: String, frequency: Double) {  // 새로 추가
+    Logger.d("인식된 음정 업데이트: \(note) (\(frequency)Hz)")
+  }
+  
+  func updateRecognizedVoiceText(_ text: String) {  // 새로 추가
+    Logger.d("인식된 음성 텍스트 업데이트: \(text)")
+  }
+  
+  // MARK: - Note Control
+  func setRecognitionMode(_ mode: RecognitionMode) {
+    recognitionMode = mode
+    Logger.d("인식 모드 변경: \(mode)")
+  }
+  
+  func setTargetNote(_ note: Note) {
+    pitchRecognitionHandler.setTargetNote(note)
+  }
+  
+  func clearTargetNote() {
+    pitchRecognitionHandler.clearTargetNote()
+  }
+  
+  func updateRecognizedNote(_ note: String, frequency: Double) {  // 수정됨
+    Logger.d("인식된 노트 업데이트: \(note) (\(frequency)Hz)")
+  }
+  
+  // MARK: - VoiceRecogition
   func setupVoiceRecognition() {
     guard !isVoiceRecognitionSetup else { return }
     isVoiceRecognitionSetup = true
@@ -135,25 +166,7 @@ extension BaseAudioLearningViewModel: AudioStateManagerDelegate {
   func audioStateDidChange(_ state: AudioState, lastTTS: String?) {
     updateStateWithAudio(state, lastTTS: lastTTS)
   }
-}
-
-extension BaseAudioLearningViewModel: VoiceRecognitionDelegate {
-  func didRecognizeText(_ text: String) {
-    // 음성 명령 처리 로직
-  }
   
-  func didReceiveAudioBuffer(_ buffer: AVAudioPCMBuffer) {
-    let currentState = audioStateManager.getCurrentState().0
-    chordRecognitionHandler.processAudioBuffer(buffer, audioState: currentState)
-  }
-  
-  func voiceRecognitionDidStart() {
-    audioStateManager.updateAudioState(.listeningVoice)
-  }
-  
-  func voiceRecognitionDidStop() {
-    audioStateManager.updateAudioState(.idle)
-  }
   // MARK: - 음성 명령어 처리 메서드 추가
   private func processRecognizedText(_ text: String) {
     Logger.d("음성인식 결과: \(text)")
@@ -168,9 +181,43 @@ extension BaseAudioLearningViewModel: VoiceRecognitionDelegate {
     }
   }
   
-  /// 음성 명령 처리
+}
+
+extension BaseAudioLearningViewModel: VoiceRecognitionDelegate {
+  func didRecognizeText(_ text: String) {
+    updateRecognizedVoiceText(text)  // 새로 추가
+    processRecognizedText(text)
+  }
+  
+  func didReceiveAudioBuffer(_ buffer: AVAudioPCMBuffer) {
+    let currentState = audioStateManager.getCurrentState().0
+    
+    // 인식 모드에 따라 다른 핸들러 사용
+    switch recognitionMode {
+    case .note:
+      pitchRecognitionHandler.processAudioBuffer(buffer, audioState: currentState)
+    case .chord:
+      chordRecognitionHandler.processAudioBuffer(buffer, audioState: currentState)
+    }
+    
+  }
+  
+  
+  
+  func voiceRecognitionDidStart() {
+    audioStateManager.updateAudioState(.listeningVoice)
+  }
+  
+  func voiceRecognitionDidStop() {
+    audioStateManager.updateAudioState(.idle)
+  }
+  
+  /// 음성 명령 처리 - 수정된 버전 (음성인식 재시작 로직 제거)
   private func handleVoiceCommand(_ command: VoiceCommand) {
     Logger.d("음성 명령 처리: \(command)")
+    
+    // 명령어 처리 후 음성인식 재시작 로직 제거 - 지속적으로 유지
+    // restartVoiceRecognitionAfterCommand() // 이 줄 제거
     
     switch command {
     case .play:
@@ -204,6 +251,11 @@ extension BaseAudioLearningViewModel: VoiceRecognitionDelegate {
     case .seekBackward:
       Logger.d("뒤로 이동 명령")
     }
+    
+    // 명령 처리 후 인식된 텍스트만 초기화 (음성인식은 계속 유지)
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+      self.updateRecognizedVoiceText("") // 텍스트만 초기화
+    }
   }
   
   /// 마지막 콘텐츠 TTS 다시 재생
@@ -224,6 +276,9 @@ extension BaseAudioLearningViewModel: VoiceRecognitionDelegate {
     playTTSSequence(contents: [replayContent])
     Logger.d("마지막 콘텐츠 재생: \(lastTTSText)")
   }
+  
+  // 기존 restartVoiceRecognitionAfterCommand 메서드 제거
+  // private func restartVoiceRecognitionAfterCommand() { ... } // 이 메서드 전체 제거
 }
 
 extension BaseAudioLearningViewModel: TTSHandlerDelegate {
@@ -244,9 +299,31 @@ extension BaseAudioLearningViewModel: TTSHandlerDelegate {
   }
   
   func ttsSequenceDidComplete() {
+    // TTS 완료 후 음성인식 상태로 복원하고 음성인식 재시작 확인
     audioStateManager.updateAudioState(.listeningVoice)
+    
+    // 음성인식이 중단되었을 경우 재시작
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+      if !self.voiceRecognitionHandler.isRecognitionActive {
+        Logger.d("TTS 완료 후 음성인식 재시작")
+        self.voiceRecognitionHandler.startVoiceRecognition()
+      }
+    }
   }
 }
+
+// MARK: - PitchRecognitionDelegate Implementation
+extension BaseAudioLearningViewModel: PitchRecognitionDelegate {
+  func didRecognizeNote(_ note: String, frequency: Double) {
+    updateRecognizedNote(note, frequency: frequency)
+  }
+  
+  func didValidateNote(_ recognized: String, expected: Note, isCorrect: Bool) {
+    // 노트 검증 결과 처리
+    Logger.d("노트 검증: \(recognized) vs \(expected) = \(isCorrect)")
+  }
+}
+
 
 extension BaseAudioLearningViewModel: ChordRecognitionDelegate {
   func didRecognizeChord(_ chord: String, confidence: Float) {
@@ -260,15 +337,11 @@ extension BaseAudioLearningViewModel: ChordRecognitionDelegate {
 
 extension BaseAudioLearningViewModel: SoundEffectDelegate {
   func soundEffectWillStart() {
-    voiceRecognitionHandler.stopVoiceRecognition()
     audioStateManager.updateAudioState(.playingSound)
   }
   
   func soundEffectDidComplete() {
     audioStateManager.updateAudioState(.listeningVoice)
-    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-      self.voiceRecognitionHandler.startVoiceRecognition()
-    }
   }
   
   func soundEffectDidStop() {

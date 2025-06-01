@@ -46,14 +46,9 @@ struct BaseView<Content: View, State: Any, ViewModel: BaseViewModel<State>>: Vie
       viewModel.dispose()
     }
     .onReceive(permissionManager.$microphonePermission.combineLatest(permissionManager.$speechPermission)) { mic, speech in
-      // 권한이 모두 허용되면 ViewModel에 알림
-      if needsPermissions && mic == .granted && speech == .granted {
-        if let codeViewModel = viewModel as? CodeDetailViewModel {
-          codeViewModel.onPermissionsGranted()
-        } else if let techniqueViewModel = viewModel as? TechniqueDetailViewModel {
-          techniqueViewModel.onPermissionsGranted()
+        if needsPermissions && mic == .granted && speech == .granted {
+            permissionManager.onPermissionsCompleted?()
         }
-      }
     }
   }
 }

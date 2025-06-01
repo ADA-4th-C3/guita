@@ -28,146 +28,101 @@ final class PermissionManager: ObservableObject {
   }
   
   /// 다음 단계로 진행
-  func proceedToNextStep() {
-    switch currentStep {
-    case .introduction:
-      Logger.d("권한 안내 다이얼로그에서 확인 버튼 클릭")
-      showingPermissionDialog = false
-      
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-        Logger.d("권한 요청 단계 시작")
-        self.checkCurrentPermissions()
-        Logger.d("현재 권한 상태 - 마이크: \(self.microphonePermission), 음성인식: \(self.speechPermission)")
+    func proceedToNextStep() {
+        switch currentStep {
+        case .introduction:
+            showingPermissionDialog = false
+            checkAndRequestPermissions()
+            
+        case .microphoneRequest, .speechRequest:
+            showingPermissionDialog = false
+            // 재요청 로직 단순화
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.checkAndRequestPermissions()
+            }
+            
+        case .completed:
+            showingPermissionDialog = false
+            onPermissionsCompleted?()
+        }
+    }
+    
+    private func checkAndRequestPermissions() {
+        checkCurrentPermissions()
         
-        if self.microphonePermission == .undetermined {
-          Logger.d("마이크 권한이 미결정 상태 - 권한 요청 시작")
-          self.currentStep = .microphoneRequest
-          self.requestMicrophonePermission { granted in
-            Logger.d("마이크 권한 요청 결과: \(granted)")
-            if granted {
-              Logger.d("마이크 권한 허용됨 - 음성인식 권한 확인")
-              // 마이크 허용됨 - 음성인식 권한 확인
-              if self.speechPermission == .undetermined {
-                Logger.d("음성인식 권한이 미결정 상태 - 권한 요청 시작")
-                self.currentStep = .speechRequest
-                self.requestSpeechPermission { speechGranted in
-                  Logger.d("음성인식 권한 요청 결과: \(speechGranted)")
-                  if speechGranted {
-                    Logger.d("모든 권한이 허용됨 - 완료 상태로 전환")
+        // 1. 마이크 권한이 거부된 경우
+        if microphonePermission == .denied {
+            permissionDialogType = .microphoneDenied
+            showingPermissionDialog = true
+            return
+        }
+        
+        // 2. 음성인식 권한이 거부된 경우
+        if speechPermission == .denied {
+            permissionDialogType = .speechDenied
+            showingPermissionDialog = true
+            return
+        }
+        
+        // 3. 마이크 권한이 미결정인 경우 - 권한 요청
+        if microphonePermission == .undetermined {
+            currentStep = .microphoneRequest
+            requestMicrophonePermission { granted in
+                if granted {
+                    // 마이크 허용됨 - 음성인식 권한 확인
+                    self.checkSpeechPermissionNext()
+                } else {
+                    // 마이크 거부됨 - 거부 다이얼로그
+                    self.permissionDialogType = .microphoneDenied
+                    self.showingPermissionDialog = true
+                }
+            }
+            return
+        }
+        
+        // 4. 마이크는 허용됐지만 음성인식이 미결정인 경우
+        if microphonePermission == .granted && speechPermission == .undetermined {
+            currentStep = .speechRequest
+            requestSpeechPermission { granted in
+                if granted {
                     self.currentStep = .completed
-                  } else {
-                    Logger.d("음성인식 권한 거부됨 - 거부 다이얼로그 표시")
-                    // 음성인식 거부 - 음성인식 거부 다이얼로그
+                    self.onPermissionsCompleted?()
+                } else {
                     self.permissionDialogType = .speechDenied
                     self.showingPermissionDialog = true
-                  }
                 }
-              } else if self.speechPermission == .granted {
-                Logger.d("음성인식 권한이 이미 허용됨 - 완료 상태로 전환")
-                self.currentStep = .completed
-              } else {
-                Logger.d("음성인식 권한이 이미 거부됨 - 거부 다이얼로그 표시")
-                // 음성인식이 이미 거부된 상태
-                self.permissionDialogType = .speechDenied
-                self.showingPermissionDialog = true
-              }
-            } else {
-              Logger.d("마이크 권한 거부됨 - 거부 다이얼로그 표시")
-              // 마이크 거부 - 마이크 거부 다이얼로그
-              self.permissionDialogType = .microphoneDenied
-              self.showingPermissionDialog = true
             }
-          }
-        } else if self.microphonePermission == .denied {
-          Logger.d("마이크 권한이 이미 거부됨 - 거부 다이얼로그 표시")
-          // 이미 마이크가 거부된 상태
-          self.permissionDialogType = .microphoneDenied
-          self.showingPermissionDialog = true
-        } else if self.microphonePermission == .granted {
-          Logger.d("마이크 권한이 이미 허용됨 - 음성인식 권한 확인")
-          // 마이크는 허용됨, 음성인식 확인
-          if self.speechPermission == .undetermined {
-            Logger.d("음성인식 권한이 미결정 상태 - 권한 요청 시작")
-            self.currentStep = .speechRequest
-            self.requestSpeechPermission { speechGranted in
-              Logger.d("음성인식 권한 요청 결과: \(speechGranted)")
-              if speechGranted {
-                Logger.d("음성인식 권한 허용됨 - 완료 상태로 전환")
-                self.currentStep = .completed
-              } else {
-                Logger.d("음성인식 권한 거부됨 - 거부 다이얼로그 표시")
-                self.permissionDialogType = .speechDenied
-                self.showingPermissionDialog = true
-              }
-            }
-          } else if self.speechPermission == .denied {
-            Logger.d("음성인식 권한이 이미 거부됨 - 거부 다이얼로그 표시")
-            self.permissionDialogType = .speechDenied
-            self.showingPermissionDialog = true
-          } else {
-            Logger.d("모든 권한이 이미 허용됨 - 완료 상태로 전환")
-            self.currentStep = .completed
-          }
+            return
         }
-      }
         
-    case .microphoneRequest:
-      Logger.d("마이크 거부 다이얼로그에서 취소 버튼 클릭 - 마이크 권한 재요청")
-      showingPermissionDialog = false
-      
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-        self.requestMicrophonePermission { granted in
-          Logger.d("마이크 권한 재요청 결과: \(granted)")
-          if granted {
-            // 마이크 허용되면 음성인식 권한 확인
-            if self.speechPermission == .undetermined {
-              self.currentStep = .speechRequest
-              self.requestSpeechPermission { speechGranted in
-                if speechGranted {
-                  self.currentStep = .completed
-                } else {
-                  self.permissionDialogType = .speechDenied
-                  self.showingPermissionDialog = true
-                }
-              }
-            } else if self.speechPermission == .denied {
-              self.permissionDialogType = .speechDenied
-              self.showingPermissionDialog = true
-            } else {
-              self.currentStep = .completed
-            }
-          } else {
-            // 다시 거부되면 같은 거부 다이얼로그 표시
-            Logger.d("마이크 권한 재거부 - 거부 다이얼로그 다시 표시")
-            self.permissionDialogType = .microphoneDenied
-            self.showingPermissionDialog = true
-          }
+        // 5. 모든 권한이 허용된 경우
+        if microphonePermission == .granted && speechPermission == .granted {
+            currentStep = .completed
+            onPermissionsCompleted?()
         }
-      }
-      
-    case .speechRequest:
-      Logger.d("음성인식 거부 다이얼로그에서 취소 버튼 클릭 - 음성인식 권한 재요청")
-      showingPermissionDialog = false
-      
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-        self.requestSpeechPermission { granted in
-          Logger.d("음성인식 권한 재요청 결과: \(granted)")
-          if granted {
-            self.currentStep = .completed
-          } else {
-            // 다시 거부되면 같은 거부 다이얼로그 표시
-            Logger.d("음성인식 권한 재거부 - 거부 다이얼로그 다시 표시")
-            self.permissionDialogType = .speechDenied
-            self.showingPermissionDialog = true
-          }
-        }
-      }
-      
-    case .completed:
-      showingPermissionDialog = false
-      onPermissionsCompleted?()
     }
-  }
+
+    private func checkSpeechPermissionNext() {
+        if speechPermission == .undetermined {
+            requestSpeechPermission { granted in
+                if granted {
+                    self.currentStep = .completed
+                    self.onPermissionsCompleted?()
+                } else {
+                    self.permissionDialogType = .speechDenied
+                    self.showingPermissionDialog = true
+                }
+            }
+        } else if speechPermission == .denied {
+            permissionDialogType = .speechDenied
+            showingPermissionDialog = true
+        } else {
+            currentStep = .completed
+            onPermissionsCompleted?()
+        }
+    }
+    
+    
   func checkCurrentPermissions() {
     microphonePermission = AudioManager.shared.getRecordPermissionState()
     speechPermission = VoiceRecognitionManager.shared.getSpeechPermissionState()
