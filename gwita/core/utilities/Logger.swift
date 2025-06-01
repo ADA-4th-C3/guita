@@ -16,4 +16,11 @@ enum Logger {
       print("🔴 [ERROR] \(fileName):\(line) - \(message)")
     #endif
   }
+
+  static func w(_ message: String, file: String = #file, line: Int = #line) {
+    #if DEBUG
+      let fileName = (file as NSString).lastPathComponent
+      print("🟠 [WARNING] \(fileName):\(line) - \(message)")
+    #endif
+  }
 }

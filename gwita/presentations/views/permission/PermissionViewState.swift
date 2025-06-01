@@ -10,6 +10,9 @@ struct PermissionViewState {
   let permissionStates: PermissionStates
   var showGuideDialog: Bool = false
   var showDeniedDialog: Bool = false
+  var isGranted: Bool {
+    permissionStates.values.count { $0 == .granted } == permissionStates.values.count
+  }
 
   func copy(
     permissionStates: [PermissionCategory: PermissionResult]? = nil,
