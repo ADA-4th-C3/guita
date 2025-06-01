@@ -12,7 +12,9 @@ final class VoiceRecognitionManager {
   private var resultHandler: ((String) -> Void)?
   private var isRecognitionActive = false
   
-  private init() {}
+  private init() {
+    speechRecognizer?.supportsOnDeviceRecognition = true  // 온디바이스 인식 활성화    
+  }
   
   /// 음성 인식 권한 상태 확인
   func getSpeechPermissionState() -> PermissionState {

@@ -248,52 +248,60 @@ extension BaseAudioLearningViewModel: VoiceRecognitionDelegate {
       
     case .seekBackward:
       Logger.d("뒤로 이동 명령")
+    case .speedUp:
+      handleSpeedIncrease()
+      
+    case .speedDown:
+      handleSpeedDecrease()
     }
     
-    updateRecognizedVoiceText("")
-
-    // 명령 처리 후 초기화 (음성인식은 계속 유지)
-//    DispatchQueue.main.asyncAfter(deadline: .now()) {
-//      self.restartVoiceRecognitionAfterCommand()
-//    }
-  }
+    
   
+  
+  updateRecognizedVoiceText("")
+  
+  // 명령 처리 후 초기화 (음성인식은 계속 유지)
+  //    DispatchQueue.main.asyncAfter(deadline: .now()) {
+  //      self.restartVoiceRecognitionAfterCommand()
+  //    }
+}
+
 //  /// 명령어 처리 후 음성인식 재시작
 //  private func restartVoiceRecognitionAfterCommand() {
 //    Logger.d("음성인식 재시작 시작")
-//    
+//
 //    // 음성인식 중지
 //    voiceRecognitionHandler.stopVoiceRecognition()
-//    
+//
 //    // 인식된 텍스트 초기화
 //    updateRecognizedVoiceText("")
-//    
+//
 //    // 짧은 딜레이 후 음성인식 재시작
 //    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
 //      self.voiceRecognitionHandler.startVoiceRecognition()
 //      Logger.d("음성인식 재시작 완료")
 //    }
 //  }
+
+/// 마지막 콘텐츠 TTS 다시 재생
+private func replayLastContent() {
+  let (_, lastTTS) = audioStateManager.getCurrentState()
   
-  /// 마지막 콘텐츠 TTS 다시 재생
-  private func replayLastContent() {
-    let (_, lastTTS) = audioStateManager.getCurrentState()
-    
-    guard let lastTTSText = lastTTS else {
-      Logger.d("재생할 마지막 콘텐츠가 없음")
-      return
-    }
-    
-    let replayContent = TTSContent(
-      text: lastTTSText,
-      type: .content,
-      canRepeat: true
-    )
-    
-    playTTSSequence(contents: [replayContent])
-    Logger.d("마지막 콘텐츠 재생: \(lastTTSText)")
+  guard let lastTTSText = lastTTS else {
+    Logger.d("재생할 마지막 콘텐츠가 없음")
+    return
   }
   
+  let replayContent = TTSContent(
+    text: lastTTSText,
+    type: .content,
+    canRepeat: true
+  )
+  
+  playTTSSequence(contents: [replayContent])
+  Logger.d("마지막 콘텐츠 재생: \(lastTTSText)")
+}
+
 }
 
 extension BaseAudioLearningViewModel: TTSHandlerDelegate {
@@ -362,4 +370,26 @@ extension BaseAudioLearningViewModel: SoundEffectDelegate {
   func soundEffectDidStop() {
     audioStateManager.updateAudioState(.listeningVoice)
   }
+  
+  // MARK: - 간단한 TTS 속도 조절 메서드 (2개만)
+    
+    /// TTS 속도 증가 처리
+    private func handleSpeedIncrease() {
+      let tts = TextToSpeech.shared
+      
+      tts.increaseTTSSpeed()
+      
+      
+      Logger.d("TTS 속도 증가: \(tts.currentSpeechRate)")
+    }
+    
+    /// TTS 속도 감소 처리
+    private func handleSpeedDecrease() {
+      let tts = TextToSpeech.shared
+      
+      tts.decreaseTTSSpeed()
+      
+      
+      Logger.d("TTS 속도 감소: \(tts.currentSpeechRate)")
+    }
 }

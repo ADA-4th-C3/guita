@@ -4,6 +4,7 @@ enum VoiceCommand {
   case play, pause, next, previous, replay
   case volumeUp, volumeDown
   case seekForward, seekBackward
+  case speedUp, speedDown
   
   static let commandMap: [String: VoiceCommand] = [
     // 재생 제어
@@ -20,7 +21,34 @@ enum VoiceCommand {
     "작게": .volumeDown, "볼륨다운": .volumeDown, "소리작게": .volumeDown,
     
     // 탐색
-    "앞으로": .seekForward, "빨리감기": .seekForward,
-    "뒤로": .seekBackward, "되감기": .seekBackward
+    "앞으로": .seekForward,
+    "뒤로": .seekBackward, "되감기": .seekBackward,
+    
+    "빠르게": .speedUp, "빨리": .speedUp,
+    "느리게": .speedDown, "천천히": .speedDown,
+    
+    
   ]
+  
+  // 빠른 매칭을 위한 핵심 명령어 목록
+  static let priorityCommands = ["다음", "이전", "다시", "재생", "정지", "빨리", "천천히", "느리게", "빠르게"]
+  
+  // 명령어 감지 최적화 함수
+  static func quickMatch(_ text: String) -> VoiceCommand? {
+    let cleanText = text.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+    
+    // 우선순위 명령어 먼저 확인 (더 빠름)
+    for command in priorityCommands {
+      if cleanText.contains(command) {
+        return commandMap[command]
+      }
+    }
+    
+    // 정확한 매치 확인
+    return commandMap[cleanText]
+  }
+  
+  
 }
+
+

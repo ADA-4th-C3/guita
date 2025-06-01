@@ -32,7 +32,8 @@ final class AudioManager {
       let session = AVAudioSession.sharedInstance()
       try session.setCategory(.playAndRecord, mode: .default, options: [.defaultToSpeaker, .mixWithOthers])
 //      try session.setCategory(.record, mode: .default, options: [])
-      try session.setPreferredSampleRate(sampleRate)
+//      try session.setPreferredSampleRate(sampleRate)
+      try session.setPreferredSampleRate(0.005)
       try session.setActive(true)
     } catch {
       Logger.e("AVAudioSession 설정 중 오류 발생: \(error)")

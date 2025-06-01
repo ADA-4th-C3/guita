@@ -93,7 +93,7 @@ final class TTSHandler {
     currentTTSIndex = 0
     
     // TTS 완료 후 음성인식 상태로 복원하기 위해 딜레이 추가
-    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+    DispatchQueue.main.asyncAfter(deadline: .now()) {
       self.delegate?.ttsSequenceDidComplete()
       Logger.d("TTS 시퀀스 완료 - 음성인식 복원")
     }

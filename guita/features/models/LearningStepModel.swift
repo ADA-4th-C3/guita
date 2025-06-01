@@ -34,7 +34,7 @@ struct TTSContent {
   let canRepeat: Bool                // "다시" 명령으로 반복 가능 여부
   let pauseAfter: TimeInterval       // TTS 완료 후 대기 시간 (기본 0.3초)
   
-  init(text: String, type: TTSType, canRepeat: Bool, pauseAfter: TimeInterval = 0.3) {
+  init(text: String, type: TTSType, canRepeat: Bool, pauseAfter: TimeInterval = 0.1) {
     self.text = text
     self.type = type
     self.canRepeat = canRepeat
