@@ -51,12 +51,13 @@ final class SpeechToTextManager: BaseViewModel<SpeechToTextState> {
     guard let recognitionRequest = recognitionRequest else { return }
 
     recognitionRequest.shouldReportPartialResults = true
-
     recognitionTask = speechRecognizer?.recognitionTask(with: recognitionRequest) { result, error in
       if let result = result {
-        let transcription = result.bestTranscription.formattedString
-        handler(transcription)
-        if transcription.count > resetCount {
+        let text = result.bestTranscription.formattedString
+        handler(text)
+        
+        // Restart
+        if text.count > resetCount {
           self.stop()
           DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.start(handler: handler)
@@ -79,6 +80,8 @@ final class SpeechToTextManager: BaseViewModel<SpeechToTextState> {
   }
 
   func stop() {
+    if !state.isRecognizing { return }
+    
     audioEngine.inputNode.removeTap(onBus: 0)
     audioEngine.stop()
     recognitionRequest?.endAudio()

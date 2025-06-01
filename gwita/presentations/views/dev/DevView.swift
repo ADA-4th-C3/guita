@@ -32,8 +32,8 @@ struct DevView: View {
             Tile(title: "Code Classification") {
               router.push(.codeClassification)
             }
-            Tile(title: "Voice Control") {
-              router.push(.voiceControl)
+            Tile(title: "Voice Command") {
+              router.push(.voiceCommand)
             }
           }
         }
