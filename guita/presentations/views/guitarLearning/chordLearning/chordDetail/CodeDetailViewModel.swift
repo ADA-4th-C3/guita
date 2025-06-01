@@ -33,6 +33,8 @@ final class CodeDetailViewModel: BaseAudioLearningViewModel<CodeDetailViewState>
       isListening: false,
       canProceed: false,
       audioState: .idle,
+      isCompleted: false,
+      nextChord: .B7,
       lastContentTTS: nil
     )
     
@@ -49,9 +51,11 @@ final class CodeDetailViewModel: BaseAudioLearningViewModel<CodeDetailViewState>
   
   override func onNextCommand() {
     guard currentStepIndex < learningSteps.count - 1 else {
-      Logger.d("이미 마지막 단계")
-      return
-    }
+            // 마지막 단계에서 다음 버튼 클릭 시 완료 처리
+            emit(state.copy(isCompleted: true))
+            Logger.d("A코드 학습 완료 - B7 버튼 활성화")
+            return
+        }
     
     currentStepIndex += 1
     Logger.d("다음 단계로 진행: \(currentStepIndex + 1)/\(learningSteps.count)")

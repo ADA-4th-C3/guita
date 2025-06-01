@@ -17,6 +17,8 @@ struct CodeDetailViewState: AudioLearningState {
   // MARK: - AudioLearningState 프로토콜 구현
   
   let audioState: AudioState              // 오디오 재생 상태
+  let isCompleted: Bool                   // 학습 완료 여부 추가
+  let nextChord: Chord?
   let lastContentTTS: String?             // 마지막 콘텐츠 TTS
   var recognizedInput: String { recognizedCode } // AudioLearningState 호환성
   
@@ -31,6 +33,8 @@ struct CodeDetailViewState: AudioLearningState {
     isListening: Bool? = nil,
     canProceed: Bool? = nil,
     audioState: AudioState? = nil,
+    isCompleted: Bool? = nil,
+    nextChord: Chord? = nil,
     lastContentTTS: String?? = nil
   ) -> CodeDetailViewState {
     return CodeDetailViewState(
@@ -44,6 +48,8 @@ struct CodeDetailViewState: AudioLearningState {
       isListening: isListening ?? self.isListening,
       canProceed: canProceed ?? self.canProceed,
       audioState: audioState ?? self.audioState,
+      isCompleted: isCompleted ?? self.isCompleted,
+      nextChord: nextChord ?? self.nextChord,
       lastContentTTS: lastContentTTS ?? self.lastContentTTS
     )
   }

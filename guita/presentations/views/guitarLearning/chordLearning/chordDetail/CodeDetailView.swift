@@ -274,17 +274,47 @@ struct CodeDetailView: View {
           recognizedCode: state.recognizedCode
         )
         
-        // 다음 버튼
-        navigationButton(
-          iconName: "chevron.right",
-          text: "다음",
-          isEnabled: state.canProceed,
-          action: { viewModel.nextStep() }
-        )
+        // 완료되었을 때 다음 코드 버튼, 아니면 다음 버튼
+        if state.isCompleted, let nextChord = state.nextChord {
+          nextChordButton(chord: nextChord)
+        } else {
+          navigationButton(
+            iconName: "chevron.right",
+            text: "다음",
+            isEnabled: state.canProceed,
+            action: { viewModel.nextStep() }
+          )
+        }
       }
     }
     .padding(.horizontal, 20)
     .padding(.bottom, 40)
+  }
+
+  /// 다음 코드 학습 버튼
+  private func nextChordButton(chord: Chord) -> some View {
+    Button(action: {
+      // B7 코드 학습으로 이동
+      let nextSong = SongModel(
+        id: "next_chord_\(chord.rawValue)",
+        title: "\(chord.rawValue) 코드 학습",
+        artist: "코드 학습",
+        difficulty: .intermediate,
+        requiredCodes: [chord],
+        audioFileName: "forStudyGuitar",
+        isUnlocked: true,
+        isCompleted: false
+      )
+      router.push(.codeDetail(nextSong, chord))
+    }) {
+      Text(chord.rawValue)
+        .font(.title)
+        .fontWeight(.bold)
+        .foregroundColor(.black)
+        .frame(width: 60, height: 60)
+        .background(Color.yellow)
+        .clipShape(Circle())
+    }
   }
   
   /// 음성 명령 안내

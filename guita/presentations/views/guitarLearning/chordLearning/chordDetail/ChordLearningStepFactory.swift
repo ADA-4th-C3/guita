@@ -5,8 +5,11 @@ import Foundation
 /// 코드별 학습 단계 데이터를 생성하는 팩토리 클래스
 struct ChordLearningStepFactory {
   
-  /// A코드 학습 단계 생성
+  /// A코드 학습 단계 생성 (6번줄부터 1번줄까지 순서대로)
   static func createAChordSteps() -> [LearningStep] {
+    let chord = Chord.A
+    let fingerCount = chord.coordinates.count
+    
     return [
       // 1단계: 개요 설명
       LearningStep(
@@ -14,130 +17,169 @@ struct ChordLearningStepFactory {
         stepType: .overview,
         ttsContents: [
           TTSContent(
-            text: "A코드 학습을 시작합니다.",
-            type: .function,
-            canRepeat: false,
-            pauseAfter: 0.5
-          ),
-          TTSContent(
-            text: "A코드는 2번 프렛에 검지, 중지, 약지를 나란히 배치하는 기본 코드입니다.",
+            text: "A코드는 두 번째 플랫이 사용되고, \(fingerCount)개의 손가락을 사용합니다.",
             type: .content,
             canRepeat: true,
             pauseAfter: 1.0
           ),
           TTSContent(
-            text: "총 4단계로 나누어 학습하겠습니다. 다음이라고 말하면 다음 단계로 넘어갑니다.",
+            text: "다음 학습으로 넘어가시려면 다음, 다시 들으시려면 다시라고 말씀해 주세요.",
             type: .function,
             canRepeat: false,
             pauseAfter: 0.5
           )
         ],
         soundFiles: [],
-        successSound: "success1",
+        successSound: "",
         failSound: "",
         navigationSound: "click1"
       ),
       
-      // 2단계: 4번줄 학습
+      // 2단계: 6번줄 학습 (개방현)
       LearningStep(
-        id: "a_chord_string_4",
-        stepType: .singleString(stringNumber: 4),
+        id: "a_chord_string_6",
+        stepType: .singleString(stringNumber: 6),
         ttsContents: [
           TTSContent(
-            text: "4번줄을 연습해보겠습니다.",
+            text: "한 줄씩 코드를 잡아봅시다.",
             type: .function,
             canRepeat: false,
             pauseAfter: 0.5
           ),
           TTSContent(
-            text: "검지를 2번 프렛 4번줄에 올리고 해당 줄을 한번 쳐보세요.",
+            text: "여섯 번째 줄은 손가락을 누르지 않고 개방현으로 튕겼을 때",
             type: .content,
             canRepeat: true,
             pauseAfter: 1.0
           )
         ],
-        soundFiles: ["a_chord_string_4.mp3"],
+        soundFiles: ["A-6"],
         successSound: "success1",
         failSound: "fail1",
         navigationSound: "click1"
       ),
       
-      // 3단계: 3번줄 학습
+      // 3단계: 5번줄 학습 (개방현)
+      LearningStep(
+        id: "a_chord_string_5",
+        stepType: .singleString(stringNumber: 5),
+        ttsContents: [
+          TTSContent(
+            text: "다섯 번째 줄은 손가락을 누르지 않고 개방현으로 튕겼을 때",
+            type: .content,
+            canRepeat: true,
+            pauseAfter: 1.0
+          )
+        ],
+        soundFiles: ["A-5"],
+        successSound: "success1",
+        failSound: "fail1",
+        navigationSound: "click1"
+      ),
+      
+      // 4단계: 4번줄 학습 (2프렛, 중지)
+      LearningStep(
+        id: "a_chord_string_4",
+        stepType: .singleString(stringNumber: 4),
+        ttsContents: [
+          TTSContent(
+            text: "두 번째 플랫, 아래에서 네 번째 줄을 중지손가락으로 잡으세요. 그리고 네 번째 줄을 튕겼을 때",
+            type: .content,
+            canRepeat: true,
+            pauseAfter: 1.0
+          )
+        ],
+        soundFiles: ["A-4"],
+        successSound: "success1",
+        failSound: "fail1",
+        navigationSound: "click1"
+      ),
+      
+      // 5단계: 3번줄 학습 (2프렛, 약지)
       LearningStep(
         id: "a_chord_string_3",
         stepType: .singleString(stringNumber: 3),
         ttsContents: [
           TTSContent(
-            text: "3번줄을 연습해보겠습니다.",
-            type: .function,
-            canRepeat: false,
-            pauseAfter: 0.5
-          ),
-          TTSContent(
-            text: "중지를 2번 프렛 3번줄에 올리고 해당 줄을 한번 쳐보세요.",
+            text: "두 번째 플랫, 아래에서 세 번째 줄을 약지손가락으로 잡으세요. 그리고 세 번째 줄을 튕겼을 때",
             type: .content,
             canRepeat: true,
             pauseAfter: 1.0
           )
         ],
-        soundFiles: ["a_chord_string_3.mp3"],
+        soundFiles: ["A-3"],
         successSound: "success1",
-        failSound: "textSoundColor",
+        failSound: "fail1",
         navigationSound: "click1"
       ),
       
-      // 4단계: 2번줄 학습
+      // 6단계: 2번줄 학습 (2프렛, 소지)
       LearningStep(
         id: "a_chord_string_2",
         stepType: .singleString(stringNumber: 2),
         ttsContents: [
           TTSContent(
-            text: "2번줄을 연습해보겠습니다.",
-            type: .function,
-            canRepeat: false,
-            pauseAfter: 0.5
-          ),
-          TTSContent(
-            text: "약지를 2번 프렛 2번줄에 올리고 해당 줄을 한번 쳐보세요.",
+            text: "두 번째 플랫, 아래에서 두 번째 줄을 소지손가락으로 잡으세요. 그리고 두 번째 줄을 튕겼을 때",
             type: .content,
             canRepeat: true,
             pauseAfter: 1.0
           )
         ],
-        soundFiles: ["a_chord_string_2.mp3"],
+        soundFiles: ["A-2"],
         successSound: "success1",
-        failSound: "textSoundColor",
+        failSound: "fail1",
         navigationSound: "click1"
       ),
       
-      // 5단계: 전체 코드 연주
+      // 7단계: 1번줄 학습 (개방현)
+      LearningStep(
+        id: "a_chord_string_1",
+        stepType: .singleString(stringNumber: 1),
+        ttsContents: [
+          TTSContent(
+            text: "첫 번째 줄은 손가락을 누르지 않고 개방현으로 튕겼을 때",
+            type: .content,
+            canRepeat: true,
+            pauseAfter: 1.0
+          )
+        ],
+        soundFiles: ["A-1"],
+        successSound: "success1",
+        failSound: "fail1",
+        navigationSound: "click1"
+      ),
+      
+      // 8단계: 전체 코드 연주
       LearningStep(
         id: "a_chord_full",
         stepType: .fullChord,
         ttsContents: [
           TTSContent(
-            text: "마지막 단계입니다.",
+            text: "모든 손가락으로 코드를 연주해봅시다.",
             type: .function,
             canRepeat: false,
             pauseAfter: 0.5
           ),
           TTSContent(
-            text: "이제 A코드 전체를 연주해보세요. 모든 손가락을 올바른 위치에 놓고 스트러밍해주세요.",
+            text: "두 번째 플랫, 아래에서 두 번째 줄, 세 번째 줄, 네 번째 줄을 잡고 위에서 아래로 모든 줄을 쓸어내렸을 때",
             type: .content,
             canRepeat: true,
             pauseAfter: 1.5
           )
         ],
-        soundFiles: ["a_chord_full.mp3"],
+        soundFiles: ["A_full"],
         successSound: "success2",
-        failSound: "textSoundColor",
+        failSound: "fail1",
         navigationSound: "click1"
       )
     ]
   }
   
-  /// E코드 학습 단계 생성
+  /// E코드 학습 단계 생성 (6번줄부터 1번줄까지 순서대로)
   static func createEChordSteps() -> [LearningStep] {
+    let chord = Chord.E
+    let fingerCount = chord.coordinates.count
+    
     return [
       // 1단계: 개요 설명
       LearningStep(
@@ -145,99 +187,159 @@ struct ChordLearningStepFactory {
         stepType: .overview,
         ttsContents: [
           TTSContent(
-            text: "E코드 학습을 시작합니다.",
-            type: .function,
-            canRepeat: false,
-            pauseAfter: 0.5
-          ),
-          TTSContent(
-            text: "E코드는 가장 쉬운 기본 코드 중 하나입니다. 2번 프렛에 중지와 약지를 사용합니다.",
+            text: "E코드는 두 번째 플랫이 사용되고, \(fingerCount)개의 손가락을 사용합니다.",
             type: .content,
             canRepeat: true,
             pauseAfter: 1.0
           ),
           TTSContent(
-            text: "총 3단계로 나누어 학습하겠습니다.",
+            text: "다음 학습으로 넘어가시려면 다음, 다시 들으시려면 다시라고 말씀해 주세요.",
             type: .function,
             canRepeat: false,
             pauseAfter: 0.5
           )
         ],
         soundFiles: [],
-        successSound: "success1",
+        successSound: "",
         failSound: "",
         navigationSound: "click1"
       ),
       
-      // 2단계: 5번줄 학습
+      // 2단계: 6번줄 학습 (개방현)
+      LearningStep(
+        id: "e_chord_string_6",
+        stepType: .singleString(stringNumber: 6),
+        ttsContents: [
+          TTSContent(
+            text: "한 줄씩 코드를 잡아봅시다.",
+            type: .function,
+            canRepeat: false,
+            pauseAfter: 0.5
+          ),
+          TTSContent(
+            text: "여섯 번째 줄은 손가락을 누르지 않고 개방현으로 튕겼을 때",
+            type: .content,
+            canRepeat: true,
+            pauseAfter: 1.0
+          )
+        ],
+        soundFiles: ["E-6"],
+        successSound: "success1",
+        failSound: "fail1",
+        navigationSound: "click1"
+      ),
+      
+      // 3단계: 5번줄 학습 (2프렛, 중지)
       LearningStep(
         id: "e_chord_string_5",
         stepType: .singleString(stringNumber: 5),
         ttsContents: [
           TTSContent(
-            text: "5번줄을 연습해보겠습니다.",
-            type: .function,
-            canRepeat: false,
-            pauseAfter: 0.5
-          ),
-          TTSContent(
-            text: "중지를 2번 프렛 5번줄에 올리고 해당 줄을 한번 쳐보세요.",
+            text: "두 번째 플랫, 아래에서 다섯 번째 줄을 중지손가락으로 잡으세요. 그리고 다섯 번째 줄을 튕겼을 때",
             type: .content,
             canRepeat: true,
             pauseAfter: 1.0
           )
         ],
-        soundFiles: ["e_chord_string_5.mp3"],
+        soundFiles: ["E-5"],
         successSound: "success1",
-        failSound: "textSoundColor",
+        failSound: "fail1",
         navigationSound: "click1"
       ),
       
-      // 3단계: 4번줄 학습
+      // 4단계: 4번줄 학습 (2프렛, 약지)
       LearningStep(
         id: "e_chord_string_4",
         stepType: .singleString(stringNumber: 4),
         ttsContents: [
           TTSContent(
-            text: "4번줄을 연습해보겠습니다.",
-            type: .function,
-            canRepeat: false,
-            pauseAfter: 0.5
-          ),
-          TTSContent(
-            text: "약지를 2번 프렛 4번줄에 올리고 해당 줄을 한번 쳐보세요.",
+            text: "두 번째 플랫, 아래에서 네 번째 줄을 약지손가락으로 잡으세요. 그리고 네 번째 줄을 튕겼을 때",
             type: .content,
             canRepeat: true,
             pauseAfter: 1.0
           )
         ],
-        soundFiles: ["e_chord_string_4.mp3"],
+        soundFiles: ["E-4"],
         successSound: "success1",
-        failSound: "textSoundColor",
+        failSound: "fail1",
         navigationSound: "click1"
       ),
       
-      // 4단계: 전체 코드 연주
+      // 5단계: 3번줄 학습 (1프렛, 검지)
+      LearningStep(
+        id: "e_chord_string_3",
+        stepType: .singleString(stringNumber: 3),
+        ttsContents: [
+          TTSContent(
+            text: "첫 번째 플랫, 아래에서 세 번째 줄을 검지손가락으로 잡으세요. 그리고 세 번째 줄을 튕겼을 때",
+            type: .content,
+            canRepeat: true,
+            pauseAfter: 1.0
+          )
+        ],
+        soundFiles: ["E-3"],
+        successSound: "success1",
+        failSound: "fail1",
+        navigationSound: "click1"
+      ),
+      
+      // 6단계: 2번줄 학습 (개방현)
+      LearningStep(
+        id: "e_chord_string_2",
+        stepType: .singleString(stringNumber: 2),
+        ttsContents: [
+          TTSContent(
+            text: "두 번째 줄은 손가락을 누르지 않고 개방현으로 튕겼을 때",
+            type: .content,
+            canRepeat: true,
+            pauseAfter: 1.0
+          )
+        ],
+        soundFiles: ["E-2"],
+        successSound: "success1",
+        failSound: "fail1",
+        navigationSound: "click1"
+      ),
+      
+      // 7단계: 1번줄 학습 (개방현)
+      LearningStep(
+        id: "e_chord_string_1",
+        stepType: .singleString(stringNumber: 1),
+        ttsContents: [
+          TTSContent(
+            text: "첫 번째 줄은 손가락을 누르지 않고 개방현으로 튕겼을 때",
+            type: .content,
+            canRepeat: true,
+            pauseAfter: 1.0
+          )
+        ],
+        soundFiles: ["E-1"],
+        successSound: "success1",
+        failSound: "fail1",
+        navigationSound: "click1"
+      ),
+      
+      // 8단계: 전체 코드 연주
       LearningStep(
         id: "e_chord_full",
         stepType: .fullChord,
         ttsContents: [
           TTSContent(
-            text: "마지막 단계입니다.",
+            text: "모든 손가락으로 코드를 연주해봅시다.",
             type: .function,
             canRepeat: false,
             pauseAfter: 0.5
           ),
           TTSContent(
-            text: "이제 E코드 전체를 연주해보세요. 1, 2, 3, 6번줄은 개방현으로 두고 스트러밍해주세요.",
+            text: "첫 번째 플랫, 아래에서 세 번째 줄과 두 번째 플랫, 아래에서 네 번째 줄, 다섯 번째 줄을 잡고 위에서 아래로 모든 줄을 쓸어내렸을 때",
             type: .content,
             canRepeat: true,
             pauseAfter: 1.5
           )
         ],
-        soundFiles: ["e_chord_full.mp3"],
+        soundFiles: ["E_full"],
         successSound: "success2",
-        failSound: "textSoundColor",
+        failSound: "fail1",
         navigationSound: "click1"
       )
     ]
