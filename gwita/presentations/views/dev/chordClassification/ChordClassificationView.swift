@@ -38,7 +38,6 @@ struct ChordClassificationView: View {
           } else {
             Text("")
           }
-        
         }
         Spacer()
       }

@@ -5,7 +5,6 @@ struct TechniqueViewState {
   let steps: [LearningStep]
   let currentStep: LearningStep
 
-  
   func copy(currentStepIndex: Int? = nil, steps: [LearningStep]? = nil, currentStep: LearningStep? = nil) -> TechniqueViewState {
     return TechniqueViewState(
       currentStepIndex: currentStepIndex ?? self.currentStepIndex,

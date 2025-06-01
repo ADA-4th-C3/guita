@@ -2,7 +2,7 @@
 import SwiftUI
 
 struct CurriculumItemCell: View {
-  let item: SongInfo 
+  let item: SongInfo
   @EnvironmentObject var router: Router
 
   var body: some View {
