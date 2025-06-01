@@ -44,7 +44,7 @@ struct LessonDetailView: View {
                   .foregroundColor(.white)
               }
               Button(action: {
-                router.push(.curriculum) // 임시로 라우팅 해둠
+                router.push(.technique) // 임시로 라우팅 해둠
               }) {
                 Text("주법 학습")
                   .font(.system(size: 20))

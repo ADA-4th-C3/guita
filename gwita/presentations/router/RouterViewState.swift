@@ -14,6 +14,7 @@ enum SubPage: Hashable {
   case codeClassification
   case voiceControl
   case lesson(item: SongInfo)
+  case technique
   case config
   case devPermission
 }
