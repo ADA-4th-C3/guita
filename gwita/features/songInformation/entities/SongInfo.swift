@@ -2,14 +2,14 @@
 
 import Foundation
 
-struct CurriculumViewState: Identifiable, Hashable {
+struct SongInfo: Identifiable, Hashable {
   let id = UUID()
   let level: String
   let title: String
   let chords: [String]
 
-  func copy(level: String? = nil, title: String? = nil, chords: [String]? = nil) -> CurriculumViewState {
-    return CurriculumViewState(
+  func copy(level: String? = nil, title: String? = nil, chords: [String]? = nil) -> SongInfo {
+    return SongInfo(
       level: level ?? self.level,
       title: title ?? self.title,
       chords: chords ?? self.chords
