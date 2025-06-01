@@ -5,7 +5,10 @@ final class ConfigManager: BaseViewModel<Config> {
   private let repository = ConfigRepository()
 
   private init() {
-    super.init(state: repository.load() ?? Config(fullTrackPlaySpeed: .x1_0))
+    super.init(state: repository.load() ?? Config(
+      ttsSpeed: .x0_5,
+      fullTrackPlaySpeed: .x1_0
+    ))
   }
 
   func updateConfig(_ newConfig: Config) {

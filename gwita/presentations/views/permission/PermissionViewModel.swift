@@ -4,7 +4,7 @@ import Foundation
 import UIKit
 
 final class PermissionViewModel: BaseViewModel<PermissionViewState> {
-  private let audioManager = AudioManager.shared
+  private let audioRecorderManager = AudioRecorderManager.shared
   private let speechToTextManager = SpeechToTextManager.shared
   private let permissionStatesListener: ((_ isGranted: Bool) -> Void)?
 
@@ -17,7 +17,7 @@ final class PermissionViewModel: BaseViewModel<PermissionViewState> {
 
     for category in permissionCategories {
       permissions[category] = switch category {
-      case .microphone: audioManager.getRecordPermissionState()
+      case .microphone: audioRecorderManager.getRecordPermissionState()
       case .speechRecognition: speechToTextManager.getSpeechPermissionState()
       }
     }
@@ -56,7 +56,7 @@ final class PermissionViewModel: BaseViewModel<PermissionViewState> {
 
       switch category {
       case .microphone:
-        audioManager.requestRecordPermission { handleResult($0) }
+        audioRecorderManager.requestRecordPermission { handleResult($0) }
       case .speechRecognition:
         speechToTextManager.requestSpeechPermission { handleResult($0) }
       }

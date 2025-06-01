@@ -4,6 +4,7 @@ import AVFoundation
 
 final class TextToSpeechManager: BaseViewModel<TextToSpeechState>, AVSpeechSynthesizerDelegate, @unchecked Sendable {
   static let shared = TextToSpeechManager()
+  private let configManager = ConfigManager.shared
   private let speechSynthesizer = AVSpeechSynthesizer()
   private var continuation: CheckedContinuation<Void, Never>?
 
@@ -20,25 +21,29 @@ final class TextToSpeechManager: BaseViewModel<TextToSpeechState>, AVSpeechSynth
       try session.setCategory(.playAndRecord, options: [.defaultToSpeaker, .mixWithOthers])
       try session.setActive(true)
     } catch {
-      print("❗️Failed to set audio session: \(error)")
+      Logger.e("❗️Failed to set audio session: \(error)")
     }
   }
 
   func speak(_ text: String, language: String = "ko-KR") async {
-    await withCheckedContinuation { continuation in
-      self.continuation = continuation
-      let utterance = AVSpeechUtterance(string: text)
-      utterance.voice = AVSpeechSynthesisVoice(language: language)
-      speechSynthesizer.speak(utterance)
-    }
+    stop()
+    await withTaskCancellationHandler(operation: {
+      await withCheckedContinuation { continuation in
+        self.continuation = continuation
+        let utterance = AVSpeechUtterance(string: text)
+        utterance.voice = AVSpeechSynthesisVoice(language: language)
+        utterance.rate = configManager.state.ttsSpeed.value
+        speechSynthesizer.speak(utterance)
+      }
+    }, onCancel: {
+      stop()
+    })
   }
 
   func stop() {
-    if speechSynthesizer.isSpeaking {
-      speechSynthesizer.stopSpeaking(at: .immediate)
-      continuation?.resume()
-      continuation = nil
-    }
+    speechSynthesizer.stopSpeaking(at: .immediate)
+    continuation?.resume()
+    continuation = nil
   }
 
   func speechSynthesizer(_: AVSpeechSynthesizer, didFinish _: AVSpeechUtterance) {

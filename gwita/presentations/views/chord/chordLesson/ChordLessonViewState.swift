@@ -3,24 +3,24 @@
 struct ChordLessonViewState {
   let chord: Chord
   let step: ChordLessonStep
-  let previousStep: ChordLessonStep?
+  let currentStepPlayCount: Int
   let isPlay: Bool
   
   var isReplay: Bool {
-    previousStep == step
+    currentStepPlayCount > 1
   }
 
   
   func copy(
     chord: Chord? = nil,
     step: ChordLessonStep? = nil,
-    previousStep: ChordLessonStep? = nil,
+    currentStepPlayCount: Int? = nil,
     isPlay: Bool? = nil
   ) -> ChordLessonViewState {
     return ChordLessonViewState(
       chord: chord ?? self.chord,
       step: step ?? self.step,
-      previousStep: previousStep ?? self.previousStep,
+      currentStepPlayCount: currentStepPlayCount ?? self.currentStepPlayCount,
       isPlay: isPlay ?? self.isPlay
     )
   }

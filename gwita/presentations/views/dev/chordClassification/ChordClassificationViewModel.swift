@@ -4,12 +4,12 @@ import AVFoundation
 import SwiftUI
 
 final class ChordClassificationViewModel: BaseViewModel<ChordClassificationViewState> {
-  private let audioManager: AudioManager = .shared
+  private let audioRecorderManager: AudioRecorderManager = .shared
   private let chordClassification = ChordClassification() // 기타코드 크로마 벡터 등등과 관련된 로직이 들어가있음
 
   init() {
     super.init(state: .init(
-      recordPermissionState: audioManager.getRecordPermissionState(),
+      recordPermissionState: audioRecorderManager.getRecordPermissionState(),
       chord: nil,
       confidence: 0.0,
       selectedCodes: Chord.allCases,
@@ -18,11 +18,11 @@ final class ChordClassificationViewModel: BaseViewModel<ChordClassificationViewS
   }
 
   private func startRecording() {
-    audioManager.start { [weak self] buffer, _ in
+    audioRecorderManager.start { [weak self] buffer, _ in
       guard let self = self else { return }
 
       // buffer 단위로 감지하고, 결과가 없으면 리턴
-      guard let rawResult = self.chordClassification.detectCode(buffer: buffer, windowSize: self.audioManager.windowSize) else {
+      guard let rawResult = self.chordClassification.detectCode(buffer: buffer, windowSize: self.audioRecorderManager.windowSize) else {
         return
       }
 
@@ -43,7 +43,7 @@ final class ChordClassificationViewModel: BaseViewModel<ChordClassificationViewS
   }
 
   func requestRecordPermission() {
-    audioManager.requestRecordPermission { isGranted in
+    audioRecorderManager.requestRecordPermission { isGranted in
       self.emit(self.state.copy(
         recordPermissionState: isGranted ? .granted : .denied
       ))
@@ -63,6 +63,6 @@ final class ChordClassificationViewModel: BaseViewModel<ChordClassificationViewS
   }
 
   override func dispose() {
-    audioManager.stop()
+    audioRecorderManager.stop()
   }
 }

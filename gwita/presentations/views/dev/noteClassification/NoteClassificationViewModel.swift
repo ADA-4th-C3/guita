@@ -3,18 +3,18 @@
 import SwiftUI
 
 final class NoteClassificationViewModel: BaseViewModel<NoteClassificationViewState> {
-  let audioManager: AudioManager = .shared
+  let audioRecorderManager: AudioRecorderManager = .shared
   let noteClassification: NoteClassification = .init()
 
   init() {
     super.init(state: .init(
-      recordPermissionState: audioManager.getRecordPermissionState(),
+      recordPermissionState: audioRecorderManager.getRecordPermissionState(),
       note: nil
     ))
   }
 
   func requestRecordPermission() {
-    audioManager.requestRecordPermission { isGranted in
+    audioRecorderManager.requestRecordPermission { isGranted in
       self.emit(self.state.copy(
         recordPermissionState: isGranted ? .granted : .denied
       ))
@@ -26,11 +26,11 @@ final class NoteClassificationViewModel: BaseViewModel<NoteClassificationViewSta
   }
 
   func startRecording() {
-    audioManager.start { buffer, _ in
+    audioRecorderManager.start { buffer, _ in
       guard let note = self.noteClassification.run(
         buffer: buffer,
-        sampleRate: self.audioManager.sampleRate,
-        windowSize: self.audioManager.windowSize
+        sampleRate: self.audioRecorderManager.sampleRate,
+        windowSize: self.audioRecorderManager.windowSize
       ) else {
         return
       }
@@ -47,6 +47,6 @@ final class NoteClassificationViewModel: BaseViewModel<NoteClassificationViewSta
   }
 
   override func dispose() {
-    audioManager.stop()
+    audioRecorderManager.stop()
   }
 }
