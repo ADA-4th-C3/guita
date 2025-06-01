@@ -3,13 +3,14 @@
 struct TechniqueViewState {
   let currentStepIndex: Int
   let steps: [LearningStep]
-  let currentStep: LearningStep
+  var currentStep: LearningStep {
+    steps[currentStepIndex]
+  }
 
-  func copy(currentStepIndex: Int? = nil, steps: [LearningStep]? = nil, currentStep: LearningStep? = nil) -> TechniqueViewState {
+  func copy(currentStepIndex: Int? = nil, steps: [LearningStep]? = nil) -> TechniqueViewState {
     return TechniqueViewState(
       currentStepIndex: currentStepIndex ?? self.currentStepIndex,
-      steps: steps ?? self.steps,
-      currentStep: currentStep ?? self.currentStep
+      steps: steps ?? self.steps
     )
   }
 }

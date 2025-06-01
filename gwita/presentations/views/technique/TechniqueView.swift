@@ -6,20 +6,21 @@ struct TechniqueView: View {
   @EnvironmentObject var router: Router
 
   var body: some View {
+    PermissionView{
     BaseView(
       create: { TechniqueViewModel() }
     ) { viewModel, _ in
       VStack {
         // MARK: Toolbar
         Toolbar(title: "주법 학습")
-
+        
         Spacer()
-
+        
         // MARK: Step/TotalStep
         Text("\(viewModel.state.currentStep.step)/\(viewModel.state.currentStep.totalSteps) 단계")
           .foregroundStyle(.gray)
           .font(.system(size: 22))
-
+        
         // MARK: description
         VStack {
           if let image = viewModel.currentImage() {
@@ -28,7 +29,7 @@ struct TechniqueView: View {
               .scaledToFit()
               .frame(width: 87, height: 95)
           }
-
+          
           Text(viewModel.state.currentStep.description)
             .foregroundStyle(.white)
             .fontWeight(.bold)
@@ -38,7 +39,7 @@ struct TechniqueView: View {
         }
         .frame(width: 393, height: 550)
         .background(Color.black)
-
+        
         // MARK: Button(back/play/next)
         HStack {
           Button(action: {
@@ -66,6 +67,7 @@ struct TechniqueView: View {
           .background(Color.black)
         }
       }
+    }
     }
   }
 }
