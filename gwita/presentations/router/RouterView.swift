@@ -29,11 +29,14 @@ struct RouterView: View {
           case .dev: DevView()
           case .noteClassification: NoteClassificationView()
           case .codeClassification: ChordClassificationView()
-          case .voiceControl: VoiceControlView()
+          case .voiceCommand: VoiceCommandView()
           case let .lesson(item): LessonDetailView(item: item)
+          case let .chord(songInfo): ChordView(songInfo: songInfo)
+          case let .chordLesson(chord): ChordLessonView(chord: chord)
           case .technique: TechniqueView()
           case .config: ConfigView()
           case .techniqueGuide: TechniqueUserGuideView()
+          case .devTextToSpeech: DevTextToSpeechView()
           }
         }
         .toolbarBackground(.hidden, for: .navigationBar)

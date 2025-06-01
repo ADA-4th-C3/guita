@@ -24,7 +24,7 @@ struct LessonDetailView: View {
             Text(item.title)
               .fontWeight(.bold)
               .font(.system(size: 32))
-            Text(item.chords.joined(separator: ", "))
+            Text(item.chords.map { "\($0)" }.joined(separator: ", "))
               .fontWeight(.semibold)
               .font(.system(size: 20))
               .foregroundColor(.gray)
@@ -38,7 +38,7 @@ struct LessonDetailView: View {
 
             LazyVStack(spacing: 0) {
               Button(action: {
-                router.push(.curriculum) // 임시로 라우팅 해둠
+                router.push(.chord(songInfo: item))
               }) {
                 Text("코드 학습")
                   .font(.system(size: 20))
@@ -86,7 +86,7 @@ struct LessonDetailView: View {
     LessonDetailView(item: SongInfo(
       level: "[초급1]",
       title: "여행을 떠나요",
-      chords: ["A", "B", "C"]
+      chords: [.A, .E, .B7]
     ))
   }
 }

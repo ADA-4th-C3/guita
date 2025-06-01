@@ -32,7 +32,7 @@ struct Toolbar<Leading: View, Trailing: View>: View {
       HStack {
         // MARK: Leading
         if isPopButton {
-          IconButton("chevron.left") {
+          IconButton("arrow-left", color: .light, isSystemImage: false) {
             router.pop()
           }
         } else {

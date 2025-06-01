@@ -4,15 +4,15 @@ import SwiftUI
 
 struct PermissionView<Content: View>: View {
   @EnvironmentObject var router: Router
+  var permissionListener: ((_ isGranted: Bool) -> Void)?
   var content: () -> Content
-  var onPermissionStatesChanged: ((PermissionStates) -> Void)?
 
   var body: some View {
     BaseView(
       create: {
         PermissionViewModel(
-          permissionCategories: [.microphone],
-          onPermissionStatesChanged: onPermissionStatesChanged
+          permissionCategories: PermissionCategory.allCases,
+          permissionStatesListener: permissionListener
         )
       }
     ) { viewModel, state in
@@ -33,7 +33,7 @@ struct PermissionView<Content: View>: View {
               withAnimation {
                 viewModel.hideGuideDialog()
               }
-              viewModel.requestPermission()
+              viewModel.requestPermissions()
             }
           )
         }
@@ -45,6 +45,9 @@ struct PermissionView<Content: View>: View {
             onCancel: router.pop
           )
         }
+      }
+      .onAppear {
+        permissionListener?(state.isGranted)
       }
     }
   }

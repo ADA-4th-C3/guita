@@ -12,12 +12,15 @@ enum SubPage: Hashable {
   case dev
   case noteClassification
   case codeClassification
-  case voiceControl
   case lesson(item: SongInfo)
+  case chord(songInfo: SongInfo)
+  case chordLesson(chord: Chord)
   case technique
+  case voiceCommand
   case config
   case devPermission
   case techniqueGuide
+  case devTextToSpeech
 }
 
 struct RouterViewState {

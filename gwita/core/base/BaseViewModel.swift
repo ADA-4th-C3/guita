@@ -2,7 +2,7 @@
 
 import SwiftUI
 
-class BaseViewModel<State>: ObservableObject {
+class BaseViewModel<State>: NSObject, ObservableObject {
   @Published private(set) var state: State
 
   init(state: State) {
