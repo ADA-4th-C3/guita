@@ -12,7 +12,7 @@ struct DevPermissionView: View {
       PermissionView {
         VStack {
           Toolbar(title: "Permission")
-          
+
           Form {
             ForEach(Array(state.keys), id: \.self) { category in
               if let permissionState = state[category] {

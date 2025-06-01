@@ -31,7 +31,7 @@ final class PermissionViewModel: BaseViewModel<PermissionViewState> {
     ))
     permissionStatesListener?(state.isGranted)
   }
-  
+
   func requestPermissions() {
     let permissionCategories = Array(state.permissionStates.keys)
     var updatedStates = state.permissionStates

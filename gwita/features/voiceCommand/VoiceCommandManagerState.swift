@@ -4,7 +4,7 @@ struct VoiceCommandManagerState {
   let isRecognizing: Bool
   let previousText: String
   let history: [VoiceCommandHistory]
-  
+
   func copy(
     isRecognizing: Bool? = nil,
     previousText: String? = nil,

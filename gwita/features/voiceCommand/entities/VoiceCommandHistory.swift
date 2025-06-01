@@ -7,7 +7,7 @@ struct VoiceCommandHistory: Identifiable {
   let keyword: VoiceCommandKeyword
   let rawText: String
   let phrase: String
-  
+
   init(id: UUID = UUID(), keyword: VoiceCommandKeyword, rawText: String, phrase: String) {
     self.id = id
     self.keyword = keyword
@@ -15,4 +15,3 @@ struct VoiceCommandHistory: Identifiable {
     self.phrase = phrase
   }
 }
-

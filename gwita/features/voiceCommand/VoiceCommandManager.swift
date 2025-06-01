@@ -6,18 +6,18 @@ import Foundation
 final class VoiceCommandManager: BaseViewModel<VoiceCommandManagerState> {
   static let shared = VoiceCommandManager()
   private let speechToTextManager = SpeechToTextManager.shared
-  
+
   private init() {
     super.init(state: .init(isRecognizing: false, previousText: "", history: []))
   }
-  
+
   func start(
     commands: [VoiceCommand],
     sttResult: ((String) -> Void)? = nil,
     historyListener: (([VoiceCommandHistory]) -> Void)? = nil
   ) {
     if state.isRecognizing { return }
-    
+
     // Start SpeechToText
     speechToTextManager.start { text in
       sttResult?(text)
@@ -30,10 +30,10 @@ final class VoiceCommandManager: BaseViewModel<VoiceCommandManagerState> {
     ))
     Logger.w("🎙️ Voice Command - Started")
   }
-  
+
   func stop() {
     if !state.isRecognizing { return }
-    
+
     speechToTextManager.stop()
     emit(state.copy(
       isRecognizing: false,
@@ -41,14 +41,14 @@ final class VoiceCommandManager: BaseViewModel<VoiceCommandManagerState> {
     ))
     Logger.d("🎙️ Voice Command - Stopped")
   }
-  
+
   func resetHistory() {
     emit(state.copy(history: []))
   }
-  
+
   private func matchCommand(_ text: String, _ commands: [VoiceCommand], _ historyListener: (([VoiceCommandHistory]) -> Void)? = nil) {
     let previous = state.previousText
-    
+
     let targetText: String
     if previous.isEmpty {
       targetText = text
@@ -59,7 +59,7 @@ final class VoiceCommandManager: BaseViewModel<VoiceCommandManagerState> {
       emit(state.copy(previousText: text))
       return
     }
-    
+
     for command in commands {
       for phrase in command.keyword.phrases {
         // Use regex to match whole word phrase

@@ -12,7 +12,7 @@ final class VoiceCommandViewModel: BaseViewModel<VoiceCommandViewState> {
       history: []
     ))
   }
-  
+
   func start() {
     voiceCommandManager.start(
       commands: state.commands,

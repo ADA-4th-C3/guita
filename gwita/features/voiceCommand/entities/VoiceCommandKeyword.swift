@@ -5,7 +5,7 @@ enum VoiceCommandKeyword: CaseIterable {
   case stop
   case play
   case retry
-  
+
   var phrases: [String] {
     switch self {
     case .start:

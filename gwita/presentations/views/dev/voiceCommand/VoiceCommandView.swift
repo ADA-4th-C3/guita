@@ -17,7 +17,7 @@ struct VoiceCommandView: View {
         VStack {
           // MARK: Toolbar
           Toolbar(title: "Voice Command")
-          
+
           Form {
             // MARK: Voice Command
             Section(header: Text("Commands")) {
@@ -48,7 +48,7 @@ struct VoiceCommandView: View {
                 }
               }
             }
-            
+
             // MARK: Speech To Text
             Section(header: Text("Speech To Text")) {
               Text(state.text)

@@ -55,7 +55,7 @@ final class SpeechToTextManager: BaseViewModel<SpeechToTextState> {
       if let result = result {
         let text = result.bestTranscription.formattedString
         handler(text)
-        
+
         // Restart
         if text.count > resetCount {
           self.stop()
@@ -81,7 +81,7 @@ final class SpeechToTextManager: BaseViewModel<SpeechToTextState> {
 
   func stop() {
     if !state.isRecognizing { return }
-    
+
     audioEngine.inputNode.removeTap(onBus: 0)
     audioEngine.stop()
     recognitionRequest?.endAudio()
