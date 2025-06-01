@@ -2,10 +2,26 @@
 
 struct ChordLessonViewState {
   let chord: Chord
+  let step: ChordLessonStep
+  let previousStep: ChordLessonStep?
+  let isPlay: Bool
+  
+  var isReplay: Bool {
+    previousStep == step
+  }
 
-  func copy(withChord newChord: Chord? = nil) -> ChordLessonViewState {
+  
+  func copy(
+    chord: Chord? = nil,
+    step: ChordLessonStep? = nil,
+    previousStep: ChordLessonStep? = nil,
+    isPlay: Bool? = nil
+  ) -> ChordLessonViewState {
     return ChordLessonViewState(
-      chord: newChord ?? chord
+      chord: chord ?? self.chord,
+      step: step ?? self.step,
+      previousStep: previousStep ?? self.previousStep,
+      isPlay: isPlay ?? self.isPlay
     )
   }
 }

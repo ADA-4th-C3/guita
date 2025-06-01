@@ -7,12 +7,26 @@ struct ChordLessonView: View {
   var body: some View {
     BaseView(
       create: { ChordLessonViewModel(chord) }
-    ) { _, state in
-      PermissionView {
-        VStack(spacing: 0) {
-          // MARK: Toolbar
-          Toolbar(title: "\(state.chord) 코드")
-          Spacer()
+    ) { viewModel, state in
+//      PermissionView {
+//        
+//      }
+      VStack(spacing: 0) {
+        // MARK: Toolbar
+        Toolbar(title: "\(state.chord) 코드")
+        Spacer()
+        
+        // MARK: Controllers
+        HStack {
+          IconButton("chevron-left", color: .light, size: 95, isSystemImage: false) {
+            viewModel.goPrevious()
+          }
+          IconButton("play", size: 95, isSystemImage: false) {
+            viewModel.play()
+          }
+          IconButton("chevron-right", color: .light, size: 95, isSystemImage: false) {
+            viewModel.goNext()
+          }
         }
       }
     }
