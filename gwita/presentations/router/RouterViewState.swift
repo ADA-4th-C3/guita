@@ -15,6 +15,7 @@ enum SubPage: Hashable {
   case voiceControl
   case config
   case lesson(item: CurriculumViewState)
+  case devPermission
 }
 
 struct RouterViewState {

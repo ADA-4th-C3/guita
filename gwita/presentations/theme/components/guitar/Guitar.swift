@@ -85,7 +85,7 @@ struct Guitar: View {
             Text("\(finger)")
               .font(.caption)
               .fontWeight(.bold)
-              .foregroundColor(.white)
+              .foregroundColor(.light)
               .position(x: x, y: y)
           } else {
             Circle()
@@ -95,7 +95,7 @@ struct Guitar: View {
             Text(input.label)
               .font(.caption)
               .fontWeight(.bold)
-              .foregroundColor(.white)
+              .foregroundColor(.light)
               .position(x: x, y: y)
           }
         }

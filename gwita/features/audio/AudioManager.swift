@@ -22,7 +22,7 @@ final class AudioManager: BaseViewModel<AudioManagerState> {
   }
 
   /// 마이크 접근 권한 상태 확인
-  func getRecordPermissionState() -> PermissionState {
+  func getRecordPermissionState() -> PermissionResult {
     return switch AVAudioApplication.shared.recordPermission {
     case .denied: .denied
     case .granted: .granted

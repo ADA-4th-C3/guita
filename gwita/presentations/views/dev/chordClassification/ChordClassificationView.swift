@@ -27,7 +27,7 @@ struct ChordClassificationView: View {
             }
             .buttonStyle(.borderedProminent)
           }
-        case .granted:
+        case .granted, .restricted:
           if let chord = state.chord {
             VStack {
               Text("\(chord)")

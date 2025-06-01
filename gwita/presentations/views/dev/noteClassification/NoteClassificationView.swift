@@ -27,7 +27,7 @@ struct NoteClassificationView: View {
             }
             .buttonStyle(.borderedProminent)
           }
-        case .granted:
+        case .granted, .restricted:
           if let note = state.note {
             VStack {
               Text("\(note)")
