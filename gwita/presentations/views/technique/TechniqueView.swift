@@ -15,7 +15,7 @@ struct TechniqueView: View {
         CustomToolbar(title: "주법 학습", onBack: {
           router.pop()
         }, onInfo: {
-            //도움말 만들면 여기에 넣어야함
+          router.push(.techniqueGuide)
         })
         
         Spacer()
