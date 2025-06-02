@@ -19,14 +19,18 @@ struct ChordLessonView: View {
           // MARK: Toolbar
           Toolbar(title: "\(state.chord) 코드")
 
-          Spacer()
+          // MARK: Index
           Text("\(state.index + 1)/\(state.totalStep) 단계")
             .fontKoddi(22, color: .darkGrey)
-            .padding(.bottom, 54)
+            .padding(.top, 16)
+          Spacer()
 
-          Text("\(state.step)")
+          // MARK: Step description
+          Text("\(state.step.getDescription(state.chord, index: state.index))")
             .fontKoddi(26, color: .light)
             .lineSpacing(1.45)
+            .multilineTextAlignment(.center)
+          
           Spacer()
 
           // MARK: Controllers

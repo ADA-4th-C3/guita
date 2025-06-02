@@ -15,6 +15,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
       chord: chord,
       index: 0,
       currentStepPlayCount: 0,
+      currentStepDescription: "",
       isPermissionGranted: false,
       isVoiceCommandEnabled: false
     )
@@ -26,6 +27,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
     playTask?.cancel()
   }
 
+  /// 레슨 재생
   func play() {
     cancelPlayTask()
     emit(state.copy(
@@ -45,6 +47,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
     }
   }
 
+  /// 이전 레슨으로 이동
   func goNext() {
     cancelPlayTask()
     if state.step == .finish { return }
@@ -55,6 +58,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
     play()
   }
 
+  /// 다음 레슨으로 이동
   func goPrevious() {
     cancelPlayTask()
     if state.step == .introduction { return }
@@ -65,13 +69,15 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
     play()
   }
 
+  /// 권한 승인
   func onPermissionGranted() {
     if state.isPermissionGranted { return }
     emit(state.copy(isPermissionGranted: true))
-    startVoiceCommand()
+    // startVoiceCommand()
     startClassification()
   }
 
+  /// 음성 명령 인식 시작
   private func startVoiceCommand() {
     voiceCommandManager.start(
       commands: [
@@ -86,6 +92,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
     ))
   }
 
+  /// 사운드 분류 시작
   private func startClassification() {
     audioRecorderManager.start { buffer, _ in
       // Chord classification
