@@ -2,12 +2,12 @@
 
 import SwiftUI
 
-struct TechniqueUserGuideView: View {
+struct TechniqueLessonGuideView: View {
   @EnvironmentObject var router: Router
 
   var body: some View {
     BaseView(
-      create: { TechniqueUserGuideViewModel() }
+      create: { TechniqueLessonGuideViewModel() }
     ) { _, _ in
       VStack {
         // Toolbar
@@ -88,6 +88,6 @@ struct TechniqueUserGuideView: View {
 
 #Preview {
   BasePreview {
-    TechniqueUserGuideView()
+    TechniqueLessonGuideView()
   }
 }

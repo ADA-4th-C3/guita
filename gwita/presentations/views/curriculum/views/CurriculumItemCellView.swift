@@ -2,16 +2,16 @@
 import SwiftUI
 
 struct CurriculumItemCell: View {
-  let item: SongInfo
+  let songInfo: SongInfo
   @EnvironmentObject var router: Router
 
   var body: some View {
     HStack {
       HStack {
-        Text(item.level)
+        Text(songInfo.level)
           .font(.system(size: 18))
           .fontWeight(.bold)
-        Text(item.title)
+        Text(songInfo.title)
           .font(.system(size: 18))
           .fontWeight(.bold)
       }
@@ -20,7 +20,7 @@ struct CurriculumItemCell: View {
       Spacer()
 
       HStack {
-        ForEach(item.chords, id: \.self) { chord in
+        ForEach(songInfo.chords, id: \.self) { chord in
           Text("\(chord.rawValue)")
             .font(.system(size: 17))
             .foregroundColor(.black)
@@ -35,7 +35,7 @@ struct CurriculumItemCell: View {
     }
     .contentShape(Rectangle())
     .onTapGesture {
-      router.push(.lesson(item: item))
+      router.push(.lesson(songInfo: songInfo))
     }
   }
 }

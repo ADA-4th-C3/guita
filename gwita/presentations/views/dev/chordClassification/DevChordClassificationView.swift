@@ -2,10 +2,10 @@
 
 import SwiftUI
 
-struct ChordClassificationView: View {
+struct DevChordClassificationView: View {
   var body: some View {
     BaseView(
-      create: { ChordClassificationViewModel() }
+      create: { DevChordClassificationViewModel() }
     ) { viewModel, state in
       VStack {
         // MARK: Toolbar
@@ -50,6 +50,6 @@ struct ChordClassificationView: View {
 
 #Preview {
   BasePreview {
-    ChordClassificationView()
+    DevChordClassificationView()
   }
 }

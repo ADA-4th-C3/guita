@@ -2,27 +2,27 @@
 
 import SwiftUI
 
-struct LessonDetailView: View {
-  let item: SongInfo
+struct LessonView: View {
+  let songInfo: SongInfo
   @EnvironmentObject var router: Router
 
   var body: some View {
     BaseView(
-      create: { LessonDetailViewModel(item: item) }
+      create: { LessonViewModel() }
     ) { _, _ in
       VStack {
         // MARK: Toolbar
-        Toolbar(title: item.level)
+        Toolbar(title: songInfo.level)
 
         Spacer()
 
         // MARK: SongTitle & Code
         VStack {
           VStack {
-            Text(item.title)
+            Text(songInfo.title)
               .fontWeight(.bold)
               .font(.system(size: 32))
-            Text(item.chords.map { "\($0.rawValue)" }.joined(separator: ", "))
+            Text(songInfo.chords.map { "\($0.rawValue)" }.joined(separator: ", "))
               .fontWeight(.semibold)
               .font(.system(size: 20))
               .foregroundColor(.gray)
@@ -36,7 +36,7 @@ struct LessonDetailView: View {
 
             LazyVStack(spacing: 0) {
               Button(action: {
-                router.push(.chord(songInfo: item))
+                router.push(.chord(songInfo: songInfo))
               }) {
                 Text("코드 학습")
                   .font(.system(size: 20))
@@ -45,7 +45,7 @@ struct LessonDetailView: View {
                   .foregroundColor(.white)
               }
               Button(action: {
-                router.push(.technique) // 임시로 라우팅 해둠
+                router.push(.techniqueLesson) // 임시로 라우팅 해둠
               }) {
                 Text("주법 학습")
                   .font(.system(size: 20))
@@ -81,7 +81,7 @@ struct LessonDetailView: View {
 
 #Preview {
   BasePreview {
-    LessonDetailView(item: SongInfo(
+    LessonView(songInfo: SongInfo(
       level: "[초급1]",
       title: "여행을 떠나요",
       chords: [.A, .E, .B7]

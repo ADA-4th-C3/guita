@@ -2,10 +2,10 @@
 
 import SwiftUI
 
-struct ConfigView: View {
+struct DevConfigView: View {
   var body: some View {
     BaseView(
-      create: { ConfigViewModel() }
+      create: { DevConfigViewModel() }
     ) { viewModel, state in
       VStack {
         // MARK: Toolbar
@@ -33,6 +33,6 @@ struct ConfigView: View {
 
 #Preview {
   BasePreview {
-    ConfigView()
+    DevConfigView()
   }
 }

@@ -15,7 +15,7 @@ struct CurriculumView: View {
         ScrollView {
           LazyVStack(alignment: .leading, spacing: 8) {
             ForEach(viewModel.state) { item in
-              CurriculumItemCell(item: item)
+              CurriculumItemCell(songInfo: item)
             }
           }
         }

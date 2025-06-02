@@ -1,6 +1,6 @@
 //  Copyright © 2025 ADA 4th Challenge3 Team1. All rights reserved.
 
-final class ConfigViewModel: BaseViewModel<Config> {
+final class DevConfigViewModel: BaseViewModel<Config> {
   private let configManager = ConfigManager.shared
   private let textToSpeechManager = TextToSpeechManager.shared
 

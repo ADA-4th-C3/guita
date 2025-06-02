@@ -2,10 +2,10 @@
 
 import SwiftUI
 
-struct VoiceCommandView: View {
+struct DevVoiceCommandView: View {
   var body: some View {
     BaseView(
-      create: { VoiceCommandViewModel() }
+      create: { DevVoiceCommandViewModel() }
     ) { viewModel, state in
       PermissionView(
         permissionListener: { isGranted in
@@ -62,6 +62,6 @@ struct VoiceCommandView: View {
 
 #Preview {
   BasePreview {
-    VoiceCommandView()
+    DevVoiceCommandView()
   }
 }

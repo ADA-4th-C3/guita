@@ -1,15 +1,15 @@
 //  Copyright © 2025 ADA 4th Challenge3 Team1. All rights reserved.
 
-struct TechniqueStep {
+struct TechniqueLessonStep {
   let step: Int
   let totalSteps: Int
   let description: String
   let imageName: String?
-  let subSteps: [TechniqueSubStep]
+  let subSteps: [TechniqueLessonSubStep]
   let featureDescription: String
 }
 
-struct TechniqueSubStep {
+struct TechniqueLessonSubStep {
   let ttsText: String?
   let audioFile: AudioFile?
 }

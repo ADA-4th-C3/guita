@@ -3,7 +3,7 @@
 import AVFoundation
 import SwiftUI
 
-final class ChordClassificationViewModel: BaseViewModel<ChordClassificationViewState> {
+final class DevChordClassificationViewModel: BaseViewModel<DevChordClassificationViewState> {
   private let audioRecorderManager: AudioRecorderManager = .shared
   private let chordClassification = ChordClassification() // 기타코드 크로마 벡터 등등과 관련된 로직이 들어가있음
 

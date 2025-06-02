@@ -2,10 +2,10 @@
 
 import SwiftUI
 
-struct NoteClassificationView: View {
+struct DevNoteClassificationView: View {
   var body: some View {
     BaseView(
-      create: { NoteClassificationViewModel() }
+      create: { DevNoteClassificationViewModel() }
     ) { viewModel, state in
       VStack {
         // MARK: Toolbar
@@ -51,6 +51,6 @@ struct NoteClassificationView: View {
 
 #Preview {
   BasePreview {
-    NoteClassificationView()
+    DevNoteClassificationView()
   }
 }

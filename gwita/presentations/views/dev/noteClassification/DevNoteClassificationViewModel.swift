@@ -2,7 +2,7 @@
 
 import SwiftUI
 
-final class NoteClassificationViewModel: BaseViewModel<NoteClassificationViewState> {
+final class DevNoteClassificationViewModel: BaseViewModel<DevNoteClassificationViewState> {
   private let audioRecorderManager: AudioRecorderManager = .shared
   private let noteClassification: NoteClassification = .init()
 
