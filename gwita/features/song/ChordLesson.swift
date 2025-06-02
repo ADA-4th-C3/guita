@@ -10,7 +10,7 @@ final class ChordLesson: BaseLesson {
   private let functionText = "다음 학습으로 넘어가시려면 \"다음\"을, 다시 들으시려면 \"다시\"를 말씀해 주세요."
   private var isNoteClassificationEnabled: Bool = false
   private var isChordClassificationEnabled: Bool = false
-
+  
   init(_ chord: Chord, _ totalStep: Int) {
     self.chord = chord
     self.totalStep = totalStep
@@ -20,17 +20,17 @@ final class ChordLesson: BaseLesson {
     audioPlayerManager.stop()
     textToSpeechManager.stop()
   }
-
+  
   /// 현재 단계
   private func currentStep(_: Bool, _ index: Int) -> String {
-    return "총 \(totalStep) 단계 중 \(index + 1)단계"
+    return "총 \(totalStep.koCard) 단계 중 \((index + 1).koOrd)단계"
   }
-
+  
   /// Replay에서 읽지 않는 텍스트
   private func doNotReplayText(_ isReplay: Bool, _ text: String) -> String {
     return isReplay ? "" : text
   }
-
+  
   /// 개요
   func startIntroduction(_ isReplay: Bool) async {
     isNoteClassificationEnabled = false
@@ -42,7 +42,7 @@ final class ChordLesson: BaseLesson {
         let text = self.currentStep(isReplay, 0)
         await self.textToSpeechManager.speak(text)
       },
-
+      
       // MARK: 설명
       {
         let plets = self.chord.frets.map { $0.koOrd }
@@ -50,7 +50,7 @@ final class ChordLesson: BaseLesson {
         let text = "\(self.chord)코드는 \(plets) 플랫이 사용되고, \(nFingers)개의 손가락을 사용합니다."
         await self.textToSpeechManager.speak(text)
       },
-
+      
       // MARK: 기능
       {
         let text = self.doNotReplayText(isReplay, self.functionText)
@@ -58,7 +58,7 @@ final class ChordLesson: BaseLesson {
       },
     ])
   }
-
+  
   /// 한 줄씩 설명
   func startLineByLine(_ isReplay: Bool, index: Int) async {
     isNoteClassificationEnabled = false
@@ -76,14 +76,14 @@ final class ChordLesson: BaseLesson {
         let text = self.currentStep(isReplay, index)
         await self.textToSpeechManager.speak(text)
       },
-
+      
       // MARK: 개요
       {
         if lineIndex != 0 { return }
         let text = self.doNotReplayText(isReplay, "\(self.chord) 코드를 한 줄씩 잡아봅시다.")
         await self.textToSpeechManager.speak(text)
       },
-
+      
       // MARK: 운지법 설명
       // TODO: F, B 같은 BarreChord인 경우 향후 지원 예정
       {
@@ -91,7 +91,7 @@ final class ChordLesson: BaseLesson {
         let text = "\(fret) 플랫, 아래에서 \(string) 줄을 \(finger) 손가락으로 잡으세요. 그리고 \(string) 줄을 튕겼을 때"
         await self.textToSpeechManager.speak(text)
       },
-
+      
       // MARK: 재생 - 한 줄 소리
       {
         let audioKey = "A-\(nString).m4a"
@@ -101,7 +101,7 @@ final class ChordLesson: BaseLesson {
           Logger.e("Invalid audio file name: \(audioKey)")
         }
       },
-
+      
       // MARK: 설명
       {
         let text = "이런 소리가 들려야 해요. 이제 \(string) 줄을 튕겨볼까요?"
@@ -110,7 +110,7 @@ final class ChordLesson: BaseLesson {
       }
     ])
   }
-
+  
   /// 전체 코드 소리 확인
   func startFullChord(_ isReplay: Bool) async {
     isNoteClassificationEnabled = false
@@ -122,13 +122,13 @@ final class ChordLesson: BaseLesson {
         let text = self.currentStep(isReplay, 0)
         await self.textToSpeechManager.speak(text)
       },
-
+      
       // MARK: 개요
       {
         let text = self.doNotReplayText(isReplay, "모든 손가락으로 코드 잡고 연주해봅시다.")
         await self.textToSpeechManager.speak(text)
       },
-
+      
       // MARK: 설명
       {
         var text = ""
@@ -144,7 +144,7 @@ final class ChordLesson: BaseLesson {
         text += "을 잡고 위에서 아래로 모든 줄을 피크로 천천히 쓸어내렸을 때"
         await self.textToSpeechManager.speak(text)
       },
-
+      
       // MARK: 재생 - 한 줄 소리
       {
         let audioKey = "\(self.chord)-stroke-down-slow.m4a"
@@ -164,6 +164,20 @@ final class ChordLesson: BaseLesson {
     ])
   }
   
+  /// 종료
+  func startFinish(_ isReplay: Bool) async {
+    isNoteClassificationEnabled = false
+    isChordClassificationEnabled = false
+    await startLesson([
+      // MARK: 단계
+      {
+        let text = "\(self.chord)코드 학습이 종료되었습니다."
+        await self.textToSpeechManager.speak(text)
+      }
+    ])
+  }
+  
+  /// Chord 분류
   func onChordClassified(userChord: Chord?) {
     if !isChordClassificationEnabled { return }
     guard let userChord = userChord else { return }
@@ -175,6 +189,7 @@ final class ChordLesson: BaseLesson {
     }
   }
   
+  /// Note 분류
   func onNoteClassified(userNote: Note?, index: Int) {
     if !isNoteClassificationEnabled { return }
     guard let userNote = userNote else { return }

@@ -40,7 +40,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
       case .fullChord:
         await chordLesson.startFullChord(state.isReplay)
       case .finish:
-        break
+        await chordLesson.startFinish(state.isReplay)
       }
     }
   }
