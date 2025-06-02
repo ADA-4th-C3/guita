@@ -44,10 +44,8 @@ final class AudioRecorderManager: BaseViewModel<AudioRecorderManagerState> {
 
     do {
       let session = AVAudioSession.sharedInstance()
-      try session.setCategory(.playAndRecord, mode: .default, options: [.defaultToSpeaker, .mixWithOthers, .duckOthers])
-//      try session.setCategory(.record, mode: .default, options: [])
-//      try session.setPreferredSampleRate(sampleRate)
-      try session.setPreferredSampleRate(0.005)
+      try session.setCategory(.playAndRecord, mode: .default, options: [.defaultToSpeaker])
+      try session.setPreferredSampleRate(sampleRate)
       try session.setActive(true)
     } catch {
       Logger.e("AVAudioSession 설정 중 오류 발생: \(error)")
@@ -57,12 +55,8 @@ final class AudioRecorderManager: BaseViewModel<AudioRecorderManagerState> {
     inputFormat = inputNode!.outputFormat(forBus: 0)
     inputNode?.installTap(onBus: 0, bufferSize: AVAudioFrameCount(windowSize), format: inputFormat, block: handler)
     try? audioEngine.start()
-<<<<<<<< HEAD:guita/features/audio/recorder/sound/AudioManager.swift
-}
-========
     emit(state.copy(isRecording: true))
   }
->>>>>>>> 8690b84b1301a3c2d88814b9f221dd051c749701:guita/features/audio/recorder/AudioRecorderManager.swift
 
   func stop() {
     inputNode?.removeTap(onBus: 0)

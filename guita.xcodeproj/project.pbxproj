@@ -11,20 +11,12 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-<<<<<<< HEAD
-		8D2298F42DE761FE004B3CA7 /* Exceptions for "guita" folder in "guita" target */ = {
-=======
 		24E557F42DEDCBE70073B96A /* Exceptions for "guita" folder in "guita" target */ = {
->>>>>>> 8690b84b1301a3c2d88814b9f221dd051c749701
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-<<<<<<< HEAD
-			target = 246CA9C82DE6C11B00FFEE8A /* guita */;
-=======
 			target = 24E5568F2DEDCB190073B96A /* guita */;
->>>>>>> 8690b84b1301a3c2d88814b9f221dd051c749701
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -32,11 +24,7 @@
 		24E556922DEDCB190073B96A /* guita */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-<<<<<<< HEAD
-				8D2298F42DE761FE004B3CA7 /* Exceptions for "guita" folder in "guita" target */,
-=======
 				24E557F42DEDCBE70073B96A /* Exceptions for "guita" folder in "guita" target */,
->>>>>>> 8690b84b1301a3c2d88814b9f221dd051c749701
 			);
 			path = guita;
 			sourceTree = "<group>";
@@ -103,7 +91,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1620;
-				LastUpgradeCheck = 1630;
+				LastUpgradeCheck = 1620;
 				TargetAttributes = {
 					24E5568F2DEDCB190073B96A = {
 						CreatedOnToolsVersion = 16.2;
@@ -184,9 +172,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = FVS9YDA724;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -249,9 +235,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = FVS9YDA724;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -280,35 +264,20 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FVS9YDA724;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = guita/Info.plist;
-<<<<<<< HEAD
-				INFOPLIST_KEY_CFBundleDisplayName = GuitarDev;
-				"INFOPLIST_KEY_CFBundleDisplayName[sdk=iphoneos*]" = GuitarDev;
+				INFOPLIST_KEY_CFBundleDisplayName = Guita;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "기타 연주 소리를 듣고 학습 피드백을 드리기 위해 마이크 접근 권한이 필요합니다.";
-				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "음성 명령으로 음악을 제어하기 위해 음성 인식 권한이 필요합니다.";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
-				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDefault;
-				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
-				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-=======
-				INFOPLIST_KEY_CFBundleDisplayName = Guita;
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "음성 명령으로 기능을 제어하기 위해 음성 인식 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
->>>>>>> 8690b84b1301a3c2d88814b9f221dd051c749701
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -322,12 +291,7 @@
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-<<<<<<< HEAD
-				TARGETED_DEVICE_FAMILY = 1;
-				XROS_DEPLOYMENT_TARGET = 2.2;
-=======
 				TARGETED_DEVICE_FAMILY = "1,2";
->>>>>>> 8690b84b1301a3c2d88814b9f221dd051c749701
 			};
 			name = Debug;
 		};
@@ -338,34 +302,20 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FVS9YDA724;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = guita/Info.plist;
-<<<<<<< HEAD
-				INFOPLIST_KEY_CFBundleDisplayName = GuitarDev;
+				INFOPLIST_KEY_CFBundleDisplayName = Guita;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "기타 연주 소리를 듣고 학습 피드백을 드리기 위해 마이크 접근 권한이 필요합니다.";
-				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "음성 명령으로 음악을 제어하기 위해 음성 인식 권한이 필요합니다.";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
-				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDefault;
-				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
-				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-=======
-				INFOPLIST_KEY_CFBundleDisplayName = Guita;
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "음성 명령으로 기능을 제어하기 위해 음성 인식 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
->>>>>>> 8690b84b1301a3c2d88814b9f221dd051c749701
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -379,12 +329,7 @@
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-<<<<<<< HEAD
-				TARGETED_DEVICE_FAMILY = 1;
-				XROS_DEPLOYMENT_TARGET = 2.2;
-=======
 				TARGETED_DEVICE_FAMILY = "1,2";
->>>>>>> 8690b84b1301a3c2d88814b9f221dd051c749701
 			};
 			name = Release;
 		};
