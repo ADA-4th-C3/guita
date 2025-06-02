@@ -72,7 +72,7 @@ struct TechniqueView: View {
           }
         }.onAppear {
           viewModel.startVoiceCommand()
-      }
+        }
       }
     }
   }
@@ -80,6 +80,6 @@ struct TechniqueView: View {
 
 #Preview {
   BasePreview {
-     TechniqueView()
+    TechniqueView()
   }
 }
