@@ -5,7 +5,6 @@ struct TechniqueStep {
   let totalSteps: Int
   let description: String
   let imageName: String?
-  let effectName: String?
   let subSteps: [TechniqueSubStep]
   let featureDescription: String
 }

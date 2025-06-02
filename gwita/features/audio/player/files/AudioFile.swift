@@ -18,6 +18,7 @@ enum AudioFile: String {
 
   // MARK: Effect
   case positive = "positive.mp3"
+  case nextPage = "next-page.mp3"
 
   var fileURL: URL? {
     let splitted = rawValue.split(separator: ".")
