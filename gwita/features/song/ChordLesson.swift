@@ -94,7 +94,7 @@ final class ChordLesson: BaseLesson {
 
       // MARK: 재생 - 한 줄 소리
       {
-        let audioKey = "A-\(nString).m4a"
+        let audioKey = "\(self.chord.rawValue)_\(nString).wav"
         if let audioFile = AudioFile(rawValue: audioKey) {
           await self.audioPlayerManager.start(audioFile: audioFile)
         } else {
@@ -147,7 +147,7 @@ final class ChordLesson: BaseLesson {
 
       // MARK: 재생 - 한 줄 소리
       {
-        let audioKey = "\(self.chord)-stroke-down-slow.m4a"
+        let audioKey = "\(self.chord.rawValue)_stroke_down.wav"
         if let audioFile = AudioFile(rawValue: audioKey) {
           await self.audioPlayerManager.start(audioFile: audioFile)
         } else {
