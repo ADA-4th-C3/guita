@@ -7,6 +7,7 @@ struct TechniqueStep {
   let imageName: String?
   let effectName: String?
   let subSteps: [TechniqueSubStep]
+  let featureDescription: String
 }
 
 struct TechniqueSubStep {
