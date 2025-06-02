@@ -20,7 +20,7 @@ struct ChordLessonView: View {
       ) {
         VStack(spacing: 0) {
           // MARK: Toolbar
-          Toolbar(title: "\(state.chord) 코드")
+          Toolbar(title: "\(state.chord.rawValue) 코드")
           
           // MARK: Index
           Text("\(state.index + 1)/\(state.totalStep) 단계")

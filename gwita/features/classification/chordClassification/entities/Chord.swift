@@ -1,7 +1,7 @@
-enum Chord: CaseIterable {
-  case C, D, E, F, G, A, B
-  case Dm, Em, Am
-  case B7
+enum Chord: String, CaseIterable, CustomStringConvertible {
+  case C = "C", D = "D", E = "E", F = "F", G = "G", A = "A", B = "B"
+  case Dm = "Dm", Em = "Em", Am = "Am"
+  case B7 = "B7"
 
   /// 사용하는 fret
   var frets: [Int] {
@@ -68,4 +68,12 @@ enum Chord: CaseIterable {
     case .B7: return chromaVector(for: [11, 3, 6, 9], weights: [1.0, 0.7, 0.7, 0.5])
     }
   }
+  
+  var description: String {
+    let name = self.rawValue
+      .replacingOccurrences(of: "m", with: " 마이너")
+      .replacingOccurrences(of: "7", with: " 세븐")
+    return name
+  }
 }
+  

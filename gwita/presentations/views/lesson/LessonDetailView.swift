@@ -22,7 +22,7 @@ struct LessonDetailView: View {
             Text(item.title)
               .fontWeight(.bold)
               .font(.system(size: 32))
-            Text(item.chords.map { "\($0)" }.joined(separator: ", "))
+            Text(item.chords.map { "\($0.rawValue)" }.joined(separator: ", "))
               .fontWeight(.semibold)
               .font(.system(size: 20))
               .foregroundColor(.gray)

@@ -21,7 +21,7 @@ struct CurriculumItemCell: View {
 
       HStack {
         ForEach(item.chords, id: \.self) { chord in
-          Text("\(chord)")
+          Text("\(chord.rawValue)")
             .font(.system(size: 17))
             .foregroundColor(.black)
             .padding(.horizontal, 6)
