@@ -142,11 +142,7 @@ struct CodeDetailView: View {
         // 완료 단계
         CompletionView(chord: chord)
       } else {
-        // 일반 학습 단계
-        LearningContentView(
-          instruction: state.currentInstruction,
-          chord: chord
-        )
+        stepSpecificContent(viewModel: viewModel, state: state)
       }
       
       // 코드 인식 상태 표시
@@ -157,6 +153,210 @@ struct CodeDetailView: View {
       // 음성인식 텍스트 표시 (새로 추가)
       if !state.recognizedVoiceText.isEmpty {
         voiceRecognitionDisplay(state: state)
+      }
+    }
+  }
+  
+  /// 단계 타입에 따른 특화 콘텐츠
+  private func stepSpecificContent(
+    viewModel: CodeDetailViewModel,
+    state: CodeDetailViewState
+  ) -> some View {
+    VStack(spacing: 24) {
+      // 공통 안내 문구
+      Text(state.currentInstruction)
+        .font(.title2)
+        .fontWeight(.medium)
+        .foregroundColor(.white)
+        .multilineTextAlignment(.center)
+        .lineLimit(nil)
+        .lineSpacing(4)
+        .fixedSize(horizontal: false, vertical: true)
+      
+      // 단계별 시각적 힌트
+      stepVisualHint(viewModel: viewModel, state: state)
+    }
+  }
+
+  /// 단계별 시각적 힌트
+  private func stepVisualHint(viewModel: CodeDetailViewModel, state: CodeDetailViewState) -> some View {
+  let learningSteps = viewModel.getCurrentLearningSteps()
+  let currentStep = learningSteps[state.currentStep - 1]
+  
+  return Group {
+    switch currentStep.stepType {
+    case .overview:
+      chordOverviewDisplay()
+      
+    case .singleString(let stringNumber):
+      singleStringDisplay(stringNumber: stringNumber)
+      
+    case .fullChord:
+      fullChordDisplay()
+      
+    case .technique:
+      EmptyView()
+    }
+  }
+}
+
+  /// 전체 코드 개요 표시
+  private func chordOverviewDisplay() -> some View {
+    VStack(spacing: 12) {
+      Text("학습할 코드")
+        .font(.caption)
+        .foregroundColor(.gray)
+      
+      Text(chord.rawValue)
+        .font(.system(size: 48, weight: .bold))
+        .foregroundColor(.yellow)
+        .padding(.horizontal, 24)
+        .padding(.vertical, 12)
+        .background(
+          RoundedRectangle(cornerRadius: 16)
+            .fill(Color.yellow.opacity(0.1))
+            .overlay(
+              RoundedRectangle(cornerRadius: 16)
+                .stroke(Color.yellow.opacity(0.3), lineWidth: 2)
+            )
+        )
+    }
+  }
+
+  /// 개별 줄 학습 표시 (노트 정보 포함)
+  private func singleStringDisplay(stringNumber: Int) -> some View {
+    VStack(spacing: 16) {
+      // 줄 번호 표시
+      Text("\(stringNumber)번 줄")
+        .font(.title)
+        .fontWeight(.bold)
+        .foregroundColor(.yellow)
+      
+      // 예상 노트 표시
+      if let expectedNote = ChordNoteMapper.getExpectedNote(for: chord, string: stringNumber) {
+        VStack(spacing: 8) {
+          Text("연주해야 할 노트")
+            .font(.caption)
+            .foregroundColor(.gray)
+          
+          Text(String(describing: expectedNote))
+            .font(.title2)
+            .fontWeight(.semibold)
+            .foregroundColor(.white)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 8)
+            .background(
+              RoundedRectangle(cornerRadius: 8)
+                .fill(Color.blue.opacity(0.2))
+                .overlay(
+                  RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color.blue.opacity(0.5), lineWidth: 1)
+                )
+            )
+          
+          // 주파수 정보
+          Text("\(Int(expectedNote.frequency))Hz")
+            .font(.caption2)
+            .foregroundColor(.gray)
+        }
+      }
+      
+      // 손가락 위치 힌트
+      fingerPositionHint(stringNumber: stringNumber)
+    }
+  }
+
+  /// 전체 코드 학습 표시
+  private func fullChordDisplay() -> some View {
+    VStack(spacing: 12) {
+      Text("전체 코드 연주")
+        .font(.caption)
+        .foregroundColor(.gray)
+      
+      Text("\(chord.rawValue) 코드")
+        .font(.system(size: 40, weight: .bold))
+        .foregroundColor(.yellow)
+        .padding(.horizontal, 20)
+        .padding(.vertical, 12)
+        .background(
+          RoundedRectangle(cornerRadius: 12)
+            .fill(Color.yellow.opacity(0.1))
+            .overlay(
+              RoundedRectangle(cornerRadius: 12)
+                .stroke(Color.yellow.opacity(0.3), lineWidth: 2)
+            )
+        )
+      
+      // 사용하는 줄들 요약 표시
+      usedStringsDisplay()
+    }
+  }
+
+  /// 손가락 위치 힌트
+  private func fingerPositionHint(stringNumber: Int) -> some View {
+    // ChordNoteMapper 또는 Chord.coordinates를 사용해서
+    // 해당 줄의 프렛과 손가락 정보 표시
+    let coordinates = chord.coordinates
+    
+    return Group {
+      if let positionInfo = findPositionForString(stringNumber, in: coordinates) {
+        VStack(spacing: 4) {
+          Text("손가락 위치")
+            .font(.caption2)
+            .foregroundColor(.gray)
+          
+          Text("\(positionInfo.fret)번 프렛")
+            .font(.caption)
+            .foregroundColor(.orange)
+        }
+      } else {
+        Text("개방현")
+          .font(.caption)
+          .foregroundColor(.green)
+      }
+    }
+  }
+
+  /// 특정 줄의 위치 정보를 찾는 헬퍼 함수
+  private func findPositionForString(_ stringNumber: Int, in coordinates: [([(fret: Int, string: Int)], finger: Int)]) -> (fret: Int, finger: Int)? {
+    for (positions, fingerNumber) in coordinates {
+      for position in positions {
+        if position.string == stringNumber {
+          return (fret: position.fret, finger: fingerNumber)
+        }
+      }
+    }
+    return nil
+  }
+
+  /// 사용하는 줄들 요약 표시
+  private func usedStringsDisplay() -> some View {
+    let allNotes = ChordNoteMapper.getAllNotesForChord(chord)
+    
+    return VStack(spacing: 8) {
+      Text("사용하는 줄")
+        .font(.caption)
+        .foregroundColor(.gray)
+      
+      HStack(spacing: 12) {
+        ForEach(allNotes.sorted(by: { $0.string < $1.string }), id: \.string) { noteInfo in
+          VStack(spacing: 2) {
+            Text("\(noteInfo.string)")
+              .font(.caption)
+              .fontWeight(.bold)
+              .foregroundColor(.white)
+            
+            Text(String(describing: noteInfo.note))
+              .font(.caption2)
+              .foregroundColor(.gray)
+          }
+          .padding(.horizontal, 8)
+          .padding(.vertical, 4)
+          .background(
+            RoundedRectangle(cornerRadius: 4)
+              .fill(Color.gray.opacity(0.2))
+          )
+        }
       }
     }
   }

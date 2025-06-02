@@ -14,14 +14,16 @@ final class PitchRecognitionHandler {
   private var lastPitchRecognitionTime: Date = Date()
   private var pitchRecognitionCooldown: TimeInterval = 1.0
   private var lastRecognizedNote: String = ""
-  private var targetNote: Note?
+  
+  // 타겟 노트들
+  private var targetNotes: [Note] = []
   
   // MARK: - Initialization
   init(delegate: PitchRecognitionDelegate) {
     self.delegate = delegate
   }
   
-  // MARK: - Public Methods
+  
   func processAudioBuffer(_ buffer: AVAudioPCMBuffer, audioState: AudioState) {
     // MP3, TTS 재생 중이면 피치 인식 건너뛰기
     guard audioState != .playingSound && audioState != .playingTTS else { return }
@@ -52,19 +54,21 @@ final class PitchRecognitionHandler {
     }
   }
   
-  func setTargetNote(_ note: Note) {
-    targetNote = note
-    Logger.d("타겟 노트 설정: \(note)")
+  func setTargetNotes(_ notes: [Note]) {
+    targetNotes = notes
+    Logger.d("타겟 노트들 설정: \(notes.map { String(describing: $0) })")
   }
   
+  
   func clearTargetNote() {
-    targetNote = nil
+    targetNotes = []
     Logger.d("타겟 노트 필터 해제")
   }
   
   func setCooldown(_ cooldown: TimeInterval) {
     pitchRecognitionCooldown = cooldown
   }
+  
   
   // MARK: - Private Methods
   private func handlePitchRecognition(_ recognizedNote: String, frequency: Double) {
@@ -73,10 +77,22 @@ final class PitchRecognitionHandler {
     delegate?.didRecognizeNote(recognizedNote, frequency: frequency)
     
     // 타겟 노트가 설정된 경우 검증
-    if let targetNote = targetNote {
-      let isCorrect = isMatchingNote(recognizedNote, target: targetNote)
-      delegate?.didValidateNote(recognizedNote, expected: targetNote, isCorrect: isCorrect)
+    if !targetNotes.isEmpty {
+      let (matchedNote, isCorrect) = validateAgainstTargetNotes(recognizedNote, frequency: frequency)
+      if let matched = matchedNote {
+        delegate?.didValidateNote(recognizedNote, expected: matched, isCorrect: isCorrect)
+      }
     }
+  }
+  
+  /// 여러 타겟 노트 중 하나와 매칭되는지 확인
+  private func validateAgainstTargetNotes(_ recognizedNote: String, frequency: Double) -> (matchedNote: Note?, isCorrect: Bool) {
+    for targetNote in targetNotes {
+      if isMatchingNote(recognizedNote, target: targetNote) {
+        return (targetNote, true)
+      }
+    }
+    return (nil, false)
   }
   
   /// 인식된 노트가 타겟 노트와 매칭되는지 확인

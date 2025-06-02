@@ -61,6 +61,7 @@ final class CodeDetailViewModel: BaseAudioLearningViewModel<CodeDetailViewState>
     Logger.d("다음 단계로 진행: \(currentStepIndex + 1)/\(learningSteps.count)")
     
     updateCurrentStep()
+    updateRecognitionModeForCurrentStep()
     executeCurrentStep()
   }
   
@@ -75,6 +76,7 @@ final class CodeDetailViewModel: BaseAudioLearningViewModel<CodeDetailViewState>
     Logger.d("이전 단계로 돌아가기: \(currentStepIndex + 1)/\(learningSteps.count)")
     
     updateCurrentStep()
+    updateRecognitionModeForCurrentStep()
     executeCurrentStep()
   }
   
@@ -106,6 +108,25 @@ final class CodeDetailViewModel: BaseAudioLearningViewModel<CodeDetailViewState>
       emit(state.copy(recognizedVoiceText: text))
   }
   
+  private func updateRecognitionModeForCurrentStep() {
+      guard currentStepIndex < learningSteps.count else { return }
+      
+      let currentStep = learningSteps[currentStepIndex]
+      
+      switch currentStep.stepType {
+      case .singleString(let stringNumber):
+          setRecognitionMode(.note)
+          setTargetNoteForString(chord, string: stringNumber)
+          
+      case .fullChord:
+          setRecognitionMode(.chord)
+          setTargetChordFilter(chord)
+          
+      default:
+          break
+      }
+  }
+  
   func onAudioRecoveryFailed() {
     Logger.e("오디오 복구 실패 - 사용자에게 알림")
     // TODO: 에러 상태를 ViewState에 추가하여 UI에서 에러 메시지 표시
@@ -121,10 +142,12 @@ final class CodeDetailViewModel: BaseAudioLearningViewModel<CodeDetailViewState>
     if permissionManager.microphonePermission == .granted &&
         permissionManager.speechPermission == .granted {
       setupVoiceRecognition()
+      updateRecognitionModeForCurrentStep()
       executeCurrentStep()
     } else {
       permissionManager.onPermissionsCompleted = { [weak self] in
         self?.setupVoiceRecognition()
+        self?.updateRecognitionModeForCurrentStep()
         self?.executeCurrentStep()
       }
     }

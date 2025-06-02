@@ -71,8 +71,17 @@ class BaseAudioLearningViewModel<State>: BaseViewModel<State> {
     Logger.d("인식 모드 변경: \(mode)")
   }
   
-  func setTargetNote(_ note: Note) {
-    pitchRecognitionHandler.setTargetNote(note)
+  // ChordNoteMapper 사용을 위한 메서드 추가
+  func setTargetNotesForChord(_ chord: Chord) {
+      let allNotes = ChordNoteMapper.getAllNotesForChord(chord)
+      let notes = allNotes.map { $0.note }
+      pitchRecognitionHandler.setTargetNotes(notes)
+  }
+
+  func setTargetNoteForString(_ chord: Chord, string: Int) {
+      if let note = ChordNoteMapper.getExpectedNote(for: chord, string: string) {
+          pitchRecognitionHandler.setTargetNotes([note])
+      }
   }
   
   func clearTargetNote() {
@@ -374,13 +383,18 @@ extension BaseAudioLearningViewModel: TTSHandlerDelegate {
 // MARK: - PitchRecognitionDelegate Implementation
 extension BaseAudioLearningViewModel: PitchRecognitionDelegate {
   func didRecognizeNote(_ note: String, frequency: Double) {
-    updateRecognizedNote(note, frequency: frequency)
-  }
-  
-  func didValidateNote(_ recognized: String, expected: Note, isCorrect: Bool) {
-    // 노트 검증 결과 처리
-    Logger.d("노트 검증: \(recognized) vs \(expected) = \(isCorrect)")
-  }
+          updateRecognizedNote(note, frequency: frequency)
+      }
+      
+      func didValidateNote(_ recognized: String, expected: Note, isCorrect: Bool) {
+          Logger.d("노트 검증 결과: \(recognized) vs \(expected) = \(isCorrect)")
+          
+          if isCorrect {
+              playEffectSound("success1")
+          } else {
+              playEffectSound("fail1")
+          }
+      }
 }
 
 
