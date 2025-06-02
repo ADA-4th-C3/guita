@@ -1,0 +1,31 @@
+//  Copyright © 2025 ADA 4th Challenge3 Team1. All rights reserved.
+
+import SwiftUI
+
+struct CurriculumView: View {
+  var body: some View {
+    @EnvironmentObject var router: Router
+    BaseView(
+      create: { CurriculumViewModel() }
+    ) { viewModel, _ in
+      VStack {
+        Toolbar(title: "학습 목록")
+
+        Spacer()
+        ScrollView {
+          LazyVStack(alignment: .leading, spacing: 8) {
+            ForEach(viewModel.state) { item in
+              CurriculumItemCell(songInfo: item)
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+#Preview {
+  BasePreview {
+    CurriculumView()
+  }
+}

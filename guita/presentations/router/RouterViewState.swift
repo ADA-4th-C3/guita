@@ -5,6 +5,7 @@ enum RootPage {
   case home
 }
 
+<<<<<<< HEAD
 enum SubPage: Hashable, Equatable {
 
   case dev
@@ -77,6 +78,24 @@ enum CodeType: String, CaseIterable {
     case .f, .bdim: return .advanced
     }
   }
+=======
+enum SubPage: Hashable {
+  case curriculum
+  case lesson(songInfo: SongInfo)
+  case chord(songInfo: SongInfo)
+  case chordLesson(chord: Chord, chords: [Chord])
+  case techniqueLesson
+  case techniqueLessonGuide
+
+  // MARK: Dev
+  case dev
+  case devNoteClassification
+  case devCodeClassification
+  case devVoiceCommand
+  case devConfig
+  case devPermission
+  case devTextToSpeech
+>>>>>>> 8690b84b1301a3c2d88814b9f221dd051c749701
 }
 
 struct RouterViewState {

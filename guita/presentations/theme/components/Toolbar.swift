@@ -35,7 +35,7 @@ struct Toolbar<Leading: View, Trailing: View>: View {
       HStack {
         // MARK: Leading
         if isPopButton {
-          IconButton("chevron.left") {
+          IconButton("arrow-left", color: .light, isSystemImage: false) {
             router.pop()
           }
         } else {
@@ -53,6 +53,8 @@ struct Toolbar<Leading: View, Trailing: View>: View {
         Text(title)
           .font(.koddiRegular24)
           .foregroundColor(.primary)
+          .fontKoddi(24, weight: .bold)
+          .lineSpacing(1.4)
       }
     }
     .frame(height: 56)

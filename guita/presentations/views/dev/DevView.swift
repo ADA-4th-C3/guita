@@ -14,16 +14,29 @@ struct DevView: View {
         Toolbar(title: "Development")
 
         Form {
+          // MARK: General
+          Section(header: Text("General")) {
+            Tile(title: "Config") {
+              router.push(.devConfig)
+            }
+            Tile(title: "Permission") {
+              router.push(.devPermission)
+            }
+          }
+
           // MARK: Features
           Section(header: Text("Features")) {
-            Tile(title: "Pitch Classification") {
-              router.push(.pitchClassification)
+            Tile(title: "Note Classification") {
+              router.push(.devNoteClassification)
             }
             Tile(title: "Code Classification") {
-              router.push(.codeClassification)
+              router.push(.devCodeClassification)
             }
-            Tile(title: "Voice Control") {
-              router.push(.voiceControl)
+            Tile(title: "Voice Command") {
+              router.push(.devVoiceCommand)
+            }
+            Tile(title: "Text To Speech") {
+              router.push(.devTextToSpeech)
             }
           }
         }

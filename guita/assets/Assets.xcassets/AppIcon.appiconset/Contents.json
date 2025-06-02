@@ -1,7 +1,11 @@
 {
   "images" : [
     {
+<<<<<<< HEAD
       "filename" : "Appicon_guita.png",
+=======
+      "filename" : "AppIcon1024x1024.png",
+>>>>>>> 8690b84b1301a3c2d88814b9f221dd051c749701
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
