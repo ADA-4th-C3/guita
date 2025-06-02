@@ -191,7 +191,7 @@ final class ChordLesson: BaseLesson {
     // Logger.d("Chord : \(chord), User Chord : \(userChord)")
     if chord == userChord {
       Task {
-        await self.audioPlayerManager.start(audioFile: .positive)
+        await self.audioPlayerManager.start(audioFile: .answer)
       }
     }
   }
@@ -201,11 +201,12 @@ final class ChordLesson: BaseLesson {
     if !isNoteClassificationEnabled { return }
     guard let userNote = userNote else { return }
     let lineIndex = index - 1
+    guard lineIndex >= 0 && lineIndex < chord.notes.count else { return }
     let note = chord.notes[lineIndex]
     // Logger.d("Note : \(note), User Note : \(userNote)")
     if note == userNote {
       Task {
-        await self.audioPlayerManager.start(audioFile: .positive)
+        await self.audioPlayerManager.start(audioFile: .answer)
       }
     }
   }

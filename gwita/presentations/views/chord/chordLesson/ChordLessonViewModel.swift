@@ -5,6 +5,7 @@ import Foundation
 final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
   private let voiceCommandManager = VoiceCommandManager.shared
   private let audioRecorderManager: AudioRecorderManager = .shared
+  private let audioPlayerManager: AudioPlayerManager = .shared
   private let noteClassification: NoteClassification = .init()
   private let chordClassification: ChordClassification = .init()
   private var chordLesson: ChordLesson
@@ -29,7 +30,6 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
   private func cancelPlayTask() {
     playTask?.cancel()
   }
-  
 
   /// 레슨 재생
   func play() {
@@ -60,18 +60,20 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
         router.pop()
         return
       }
-      
+
       // 다음 코드 시작
       startNextChord(nextChord)
+      playStepChangeSound()
     } else {
       // 다음 스탭
       emit(state.copy(
         index: state.index + 1,
         currentStepPlayCount: state.nextStep != state.step ? 0 : nil
       ))
-      play()
+      playStepChangeSound {
+        self.play()
+      }
     }
-    
   }
 
   /// 이전 레슨으로 이동
@@ -82,17 +84,19 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
       index: state.index - 1,
       currentStepPlayCount: state.prevStep != state.step ? 0 : nil
     ))
-    play()
+    playStepChangeSound {
+      self.play()
+    }
   }
 
   /// 권한 승인
   func onPermissionGranted() {
     if state.isPermissionGranted { return }
     emit(state.copy(isPermissionGranted: true))
-    // startVoiceCommand()
+    startVoiceCommand()
     startClassification()
   }
-  
+
   /// 다음 코드 학습으로 넘어가기
   func startNextChord(_ nextChord: Chord) {
     let nextState = state.copy(
@@ -139,6 +143,14 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
         windowSize: self.audioRecorderManager.windowSize
       )
       self.chordLesson.onNoteClassified(userNote: note, index: self.state.index)
+    }
+  }
+
+  private func playStepChangeSound(completion: (() -> Void)? = nil) {
+    Task {
+      await self.audioPlayerManager.start(audioFile: .next)
+      try? await Task.sleep(nanoseconds: 200_000_000)
+      completion?()
     }
   }
 

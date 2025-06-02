@@ -23,7 +23,7 @@ enum ChordLessonStep: CaseIterable {
     case .finish: .fullChord
     }
   }
-  
+
   func getDescription(_ chord: Chord, index: Int) -> String {
     switch self {
     case .introduction:

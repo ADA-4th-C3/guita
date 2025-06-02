@@ -3,7 +3,7 @@
 struct ChordLessonViewState {
   /// 전체 코드
   let chords: [Chord]
-  
+
   /// 학습 중인 코드
   let chord: Chord
 
@@ -12,7 +12,7 @@ struct ChordLessonViewState {
 
   /// 현재 단계 반복 횟수 ([ChordLessonStep]가 바뀌는 경우에만 초기화 됨)
   let currentStepPlayCount: Int
-  
+
   /// 현재 단계 설명
   let currentStepDescription: String
 
@@ -44,7 +44,7 @@ struct ChordLessonViewState {
       : i == totalStep - 2 ? .fullChord
       : .lineByLine
   }
-  
+
   /// 다음 배울 코드
   var nextChord: Chord? {
     guard let currentIndex = chords.firstIndex(where: { $0 == chord }) else {

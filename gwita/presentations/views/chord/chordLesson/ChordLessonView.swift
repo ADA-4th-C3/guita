@@ -6,7 +6,7 @@ struct ChordLessonView: View {
   @EnvironmentObject var router: Router
   let chord: Chord
   let chords: [Chord]
-  
+
   var body: some View {
     BaseView(
       create: { ChordLessonViewModel(router, chord, chords) }
@@ -21,21 +21,21 @@ struct ChordLessonView: View {
         VStack(spacing: 0) {
           // MARK: Toolbar
           Toolbar(title: "\(state.chord.rawValue) 코드")
-          
+
           // MARK: Index
           Text("\(state.index + 1)/\(state.totalStep) 단계")
             .fontKoddi(22, color: .darkGrey)
             .padding(.top, 16)
           Spacer()
-          
+
           // MARK: Step description
           Text("\(state.step.getDescription(state.chord, index: state.index))")
             .fontKoddi(26, color: .light)
             .lineSpacing(1.45)
             .multilineTextAlignment(.center)
-          
+
           Spacer()
-          
+
           // MARK: Controllers
           HStack {
             IconButton("chevron-left", color: .light, size: 95, isSystemImage: false) {
