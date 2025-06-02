@@ -22,8 +22,7 @@ struct TechniqueView: View {
 
           // MARK: Step/TotalStep
           Text("\(viewModel.state.currentStep.step)/\(viewModel.state.currentStep.totalSteps) 단계")
-            .foregroundStyle(.gray)
-            .font(.system(size: 22))
+            .fontKoddi(22, color: .darkGrey, weight: .regular)
 
           // MARK: description
           VStack {
@@ -35,14 +34,10 @@ struct TechniqueView: View {
             }
 
             Text(viewModel.state.currentStep.description)
-              .foregroundStyle(.white)
-              .fontWeight(.bold)
-              .foregroundStyle(.white)
-              .font(.system(size: 26))
+              .fontKoddi(26, color: .light, weight: .bold)
               .padding(.horizontal, 30)
           }
           .frame(width: 393, height: 550)
-          .background(Color.black)
 
           // MARK: Button(back/play/next)
           HStack {
@@ -52,9 +47,9 @@ struct TechniqueView: View {
               Image("chevron-left")
                 .resizable()
                 .frame(width: 75, height: 75)
-                .padding(.horizontal, 42)
+                .padding(.trailing, 42)
             }
-            Button(action: {}) {
+            Button(action: { viewModel.play() }) {
               Image("play")
                 .resizable()
                 .frame(width: 95, height: 95)
@@ -65,11 +60,17 @@ struct TechniqueView: View {
               Image("chevron-right")
                 .resizable()
                 .frame(width: 75, height: 75)
-                .padding(.horizontal, 42)
+                .padding(.leading, 42)
             }
             .padding(.vertical, 15)
             .background(Color.black)
           }
+        }
+        .onAppear {
+          viewModel.startVoiceCommand()
+        }
+        .onDisappear {
+          viewModel.dispose()
         }
       }
     }
