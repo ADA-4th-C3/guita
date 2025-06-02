@@ -83,9 +83,11 @@ final class TechniqueViewModel: BaseViewModel<TechniqueViewState> {
               await textToSpeechManager.speak(ttsText)
           }
           if let mp3Name = subStep.mp3FileName {
-              SoundManager.shared.playSound(named: mp3Name)
+            await AudioPlayerManager.shared.start(named: mp3Name)
+//              SoundManager.shared.playSound(named: mp3Name)
+            
               // mp3 재생 완료까지 대기 (필요시 sleep 시간 조정)
-              try? await Task.sleep(nanoseconds: 2_000_000_000)
+//              try? await Task.sleep(nanoseconds: 2_000_000_000)
           }
       }
     }
