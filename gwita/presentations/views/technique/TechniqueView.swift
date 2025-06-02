@@ -54,7 +54,7 @@ struct TechniqueView: View {
                 .frame(width: 75, height: 75)
                 .padding(.horizontal, 42)
             }
-            Button(action: {}) {
+            Button(action: { viewModel.play() }) {
               Image("play")
                 .resizable()
                 .frame(width: 95, height: 95)
@@ -70,7 +70,9 @@ struct TechniqueView: View {
             .padding(.vertical, 15)
             .background(Color.black)
           }
-        }
+        }.onAppear {
+          viewModel.startVoiceCommand()
+      }
       }
     }
   }

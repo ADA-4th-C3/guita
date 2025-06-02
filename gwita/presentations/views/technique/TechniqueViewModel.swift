@@ -2,6 +2,9 @@
 import SwiftUI
 
 final class TechniqueViewModel: BaseViewModel<TechniqueViewState> {
+  private let textToSpeechManager = TextToSpeechManager.shared
+  private let voiceCommandManager = VoiceCommandManager.shared
+  
   init() {
     let steps: [TechniqueStep] = [
       TechniqueStep(step: 1, totalSteps: 4, description: "주법은 기타를 치는 방법을 말합니다. 피크나 손가락으로 줄을 위아래로 튕기는 주법인 스트로크를 배워봅시다.", imageName: ""),
@@ -12,12 +15,43 @@ final class TechniqueViewModel: BaseViewModel<TechniqueViewState> {
     super.init(state: TechniqueViewState(currentStepIndex: 0, steps: steps))
   }
 
+  func startVoiceCommand() {
+    voiceCommandManager.start(
+      commands: [
+        VoiceCommand(keyword: .play, handler: play),
+        VoiceCommand(keyword: .retry, handler: play),
+        VoiceCommand(keyword: .next, handler: nextStep),
+        VoiceCommand(keyword: .previous, handler: previousStep),
+      ]
+    )
+  }
+  
+  func play() {
+    textToSpeechManager.stop()
+    Task {
+      let currentDesription = state.steps[state.currentStepIndex].description
+      await textToSpeechManager.speak(currentDesription)
+    }
+  }
+  
+
+  func stopVoiceCommand() {
+    voiceCommandManager.stop()
+    textToSpeechManager.stop()
+   
+  }
+
+  override func dispose() {
+    stopVoiceCommand()
+  }
+  
   func nextStep() {
     guard state.currentStepIndex < state.steps.count - 1 else { return }
     let newIndex = state.currentStepIndex + 1
     emit(state.copy(
       currentStepIndex: newIndex
     ))
+    play()
   }
 
   func previousStep() {
@@ -26,6 +60,7 @@ final class TechniqueViewModel: BaseViewModel<TechniqueViewState> {
     emit(state.copy(
       currentStepIndex: newIndex
     ))
+    play()
   }
 
   func currentImage() -> Image? {
