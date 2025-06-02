@@ -6,53 +6,53 @@ enum Note: CaseIterable {
   case Gb4, G4, Ab4, A4, Bb4
   case B4, C5, Db5, D5, Eb5, E5, F5, Gb5, G5, Ab5, A5, Bb5, B5, C6
 
-  var coordinates: [(string: Int, fret: Int)] {
+  var coordinates: [(fret: Int, string: Int)] {
     switch self {
-    case .E2: return [(6, 0)] // Line6
-    case .F2: return [(6, 1)]
-    case .Gb2: return [(6, 2)]
-    case .G2: return [(6, 3)]
-    case .Ab2: return [(6, 4)]
-    case .A2: return [(6, 5), (5, 0)] // Line5
-    case .Bb2: return [(6, 6), (5, 1)]
-    case .B2: return [(6, 7), (5, 2)]
-    case .C3: return [(6, 8), (5, 3)]
-    case .Db3: return [(6, 9), (5, 4)]
-    case .D3: return [(6, 10), (5, 5), (4, 0)] // Line4
-    case .Eb3: return [(6, 11), (5, 6), (4, 1)]
-    case .E3: return [(6, 12), (5, 7), (4, 2)]
-    case .F3: return [(6, 13), (5, 8), (4, 3)]
-    case .Gb3: return [(6, 14), (5, 9), (4, 4)]
-    case .G3: return [(3, 0), (6, 15), (5, 10), (4, 5)] // Line3
-    case .Ab3: return [(3, 1), (6, 16), (5, 11), (4, 6)]
-    case .A3: return [(3, 2), (6, 17), (5, 12), (4, 7)]
-    case .Bb3: return [(3, 3), (6, 18), (5, 13), (4, 8)]
-    case .B3: return [(2, 0), (3, 4), (6, 19), (5, 14), (4, 9)] // Line2
-    case .C4: return [(2, 1), (3, 5), (6, 20), (5, 15), (4, 10)]
-    case .Db4: return [(2, 2), (3, 6), (5, 16), (4, 11)]
-    case .D4: return [(2, 3), (3, 7), (5, 17), (4, 12)]
-    case .Eb4: return [(2, 4), (3, 8), (5, 18), (4, 13)]
-    case .E4: return [(2, 5), (3, 9), (5, 19), (4, 14), (1, 0)] // Line1
-    case .F4: return [(2, 6), (3, 10), (5, 20), (4, 15), (1, 1)]
-    case .Gb4: return [(2, 7), (3, 11), (4, 16), (1, 2)]
-    case .G4: return [(2, 8), (3, 12), (4, 17), (1, 3)]
-    case .Ab4: return [(2, 9), (3, 13), (4, 18), (1, 4)]
-    case .A4: return [(2, 10), (3, 14), (4, 19), (1, 5)]
-    case .Bb4: return [(2, 11), (3, 15), (4, 20), (1, 6)]
-    case .B4: return [(2, 12), (3, 16), (1, 7)]
-    case .C5: return [(2, 13), (3, 17), (1, 8)]
-    case .Db5: return [(2, 14), (3, 18), (1, 9)]
-    case .D5: return [(2, 15), (3, 19), (1, 10)]
-    case .Eb5: return [(2, 16), (3, 20), (1, 11)]
-    case .E5: return [(2, 17), (1, 12)]
-    case .F5: return [(2, 18), (1, 13)]
-    case .Gb5: return [(2, 19), (1, 14)]
-    case .G5: return [(2, 20), (1, 15)]
-    case .Ab5: return [(1, 16)]
-    case .A5: return [(1, 17)]
-    case .Bb5: return [(1, 18)]
-    case .B5: return [(1, 19)]
-    case .C6: return [(1, 20)]
+    case .E2: return [(0, 6)] // Line6
+    case .F2: return [(1, 6)]
+    case .Gb2: return [(2, 6)]
+    case .G2: return [(3, 6)]
+    case .Ab2: return [(4, 6)]
+    case .A2: return [(5, 6), (0, 5)] // Line5
+    case .Bb2: return [(6, 6), (1, 5)]
+    case .B2: return [(7, 6), (2, 5)]
+    case .C3: return [(8, 6), (3, 5)]
+    case .Db3: return [(9, 6), (4, 5)]
+    case .D3: return [(10, 6), (5, 5), (0, 4)] // Line4
+    case .Eb3: return [(11, 6), (6, 5), (1, 4)]
+    case .E3: return [(12, 6), (7, 5), (2, 4)]
+    case .F3: return [(13, 6), (8, 5), (3, 4)]
+    case .Gb3: return [(14, 6), (9, 5), (4, 4)]
+    case .G3: return [(0, 3), (15, 6), (10, 5), (5, 4)] // Line3
+    case .Ab3: return [(1, 3), (16, 6), (11, 5), (6, 4)]
+    case .A3: return [(2, 3), (17, 6), (12, 5), (7, 4)]
+    case .Bb3: return [(3, 3), (18, 6), (13, 5), (8, 4)]
+    case .B3: return [(0, 2), (4, 3), (19, 6), (14, 5), (9, 4)] // Line2
+    case .C4: return [(1, 2), (5, 3), (20, 6), (15, 5), (10, 4)]
+    case .Db4: return [(2, 2), (6, 3), (16, 5), (11, 4)]
+    case .D4: return [(3, 2), (7, 3), (17, 5), (12, 4)]
+    case .Eb4: return [(4, 2), (8, 3), (18, 5), (13, 4)]
+    case .E4: return [(5, 2), (9, 3), (19, 5), (14, 4), (0, 1)] // Line1
+    case .F4: return [(6, 2), (10, 3), (20, 5), (15, 4), (1, 1)]
+    case .Gb4: return [(7, 2), (11, 3), (16, 4), (2, 1)]
+    case .G4: return [(8, 2), (12, 3), (17, 4), (3, 1)]
+    case .Ab4: return [(9, 2), (13, 3), (18, 4), (4, 1)]
+    case .A4: return [(10, 2), (14, 3), (19, 4), (5, 1)]
+    case .Bb4: return [(11, 2), (15, 3), (20, 4), (6, 1)]
+    case .B4: return [(12, 2), (16, 3), (7, 1)]
+    case .C5: return [(13, 2), (17, 3), (8, 1)]
+    case .Db5: return [(14, 2), (18, 3), (9, 1)]
+    case .D5: return [(15, 2), (19, 3), (10, 1)]
+    case .Eb5: return [(16, 2), (20, 3), (11, 1)]
+    case .E5: return [(17, 2), (12, 1)]
+    case .F5: return [(18, 2), (13, 1)]
+    case .Gb5: return [(19, 2), (14, 1)]
+    case .G5: return [(20, 2), (15, 1)]
+    case .Ab5: return [(16, 1)]
+    case .A5: return [(17, 1)]
+    case .Bb5: return [(18, 1)]
+    case .B5: return [(19, 1)]
+    case .C6: return [(20, 1)]
     }
   }
 

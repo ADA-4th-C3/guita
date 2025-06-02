@@ -11,7 +11,7 @@ struct ChordLessonView: View {
       PermissionView(
         permissionListener: { isGranted in
           if isGranted {
-            viewModel.startVoiceCommand()
+            viewModel.onPermissionGranted()
           }
         }
       ) {

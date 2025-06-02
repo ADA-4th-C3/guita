@@ -101,7 +101,7 @@ struct NoteClassification {
     if let maxIndex = searchRange.max(by: { hps[$0] < hps[$1] }) {
       let frequency = Double(maxIndex) * sampleRate / Double(N)
       guard let note = getClosestNoteName(for: frequency) else { return nil }
-      Logger.d("Frequency: \(frequency) Hz, Note: \(note)")
+      // Logger.d("Frequency: \(frequency) Hz, Note: \(note)")
       return note
     } else {
       return nil

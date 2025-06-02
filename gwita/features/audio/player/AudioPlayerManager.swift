@@ -23,6 +23,7 @@ final class AudioPlayerManager: BaseViewModel<AudioPlayerManagerState>, AVAudioP
         do {
           self.audioPlayer = try AVAudioPlayer(contentsOf: url)
           self.audioPlayer?.delegate = self
+          self.audioPlayer?.volume = 1.0
           self.audioPlayer?.prepareToPlay()
           self.audioPlayer?.play()
           self.emit(self.state.copy(isPlaying: true))

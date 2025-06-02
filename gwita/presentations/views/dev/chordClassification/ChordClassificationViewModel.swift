@@ -12,8 +12,7 @@ final class ChordClassificationViewModel: BaseViewModel<ChordClassificationViewS
       recordPermissionState: audioRecorderManager.getRecordPermissionState(),
       chord: nil,
       confidence: 0.0,
-      selectedCodes: Chord.allCases,
-      allMatches: []
+      selectedCodes: Chord.allCases
     ))
   }
 
@@ -22,21 +21,18 @@ final class ChordClassificationViewModel: BaseViewModel<ChordClassificationViewS
       guard let self = self else { return }
 
       // buffer 단위로 감지하고, 결과가 없으면 리턴
-      guard let rawResult = self.chordClassification.detectCode(buffer: buffer, windowSize: self.audioRecorderManager.windowSize) else {
+      guard let chord = self.chordClassification.detectCode(
+        buffer: buffer,
+        windowSize: self.audioRecorderManager.windowSize,
+        activeChords: self.state.selectedCodes
+      ) else {
         return
       }
-
-      // 선택된 곡의 활성 코드만 필터링
-      let active = self.state.selectedCodes
-      if !active.contains(rawResult.chord) { return }
-      let chord = rawResult.chord
-      let matches = rawResult.allMatches.filter { active.contains($0.chord) }
 
       // UI 업데이트
       DispatchQueue.main.async {
         self.emit(self.state.copy(
-          chord: { chord },
-          allMatches: matches
+          chord: { chord }
         ))
       }
     }

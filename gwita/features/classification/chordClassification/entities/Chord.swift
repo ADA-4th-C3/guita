@@ -2,21 +2,30 @@ enum Chord: CaseIterable {
   case C, D, E, F, G, A, B
   case Dm, Em, Am
   case B7
-
+  
   /// 사용하는 fret
   var frets: [Int] {
     let uniqueFrets = Set(coordinates.flatMap { $0.0.map { $0.fret } })
     return Array(uniqueFrets).sorted()
   }
-
+  
   /// 사용하는 손가락 개수
   var nFingers: Int {
     Set(coordinates.map { $0.finger }).count
   }
-
+  
+  var notes: [Note] {
+    let positions = coordinates.flatMap { $0.0 }
+    return positions.compactMap { position in
+      Note.allCases.first(where: { note in
+        note.coordinates.contains(where: { $0.fret == position.fret && $0.string == position.string })
+      })
+    }
+  }
+  
   var coordinates: [([(fret: Int, string: Int)], finger: Int)] {
     switch self {
-    // MARK: Major
+      // MARK: Major
     case .C: return [([(1, 2)], 2), ([(2, 4)], 3), ([(3, 5)], 4)]
     case .D: return [([(2, 1)], 3), ([(2, 3)], 2), ([(3, 2)], 4)]
     case .E: return [([(1, 3)], 2), ([(2, 4)], 4), ([(2, 5)], 3)]
@@ -24,15 +33,15 @@ enum Chord: CaseIterable {
     case .G: return [([(2, 5)], 2), ([(3, 1)], 5), ([(3, 6)], 3)]
     case .A: return [([(2, 2)], 5), ([(2, 3)], 4), ([(2, 4)], 3)]
     case .B: return [([(2, 1), (2, 5), (2, 6)], 2), ([(4, 2)], 5), ([(4, 3)], 4), ([(4, 4)], 3)]
-    // MARK: Minor
+      // MARK: Minor
     case .Dm: return [([(1, 1)], 2), ([(2, 3)], 3), ([(3, 2)], 4)]
     case .Em: return [([(2, 4)], 4), ([(2, 5)], 3)]
     case .Am: return [([(1, 2)], 2), ([(2, 3)], 4), ([(2, 4)], 3)]
-    // MARK: 7
+      // MARK: 7
     case .B7: return [([(1, 4)], 2), ([(2, 1)], 5), ([(2, 3)], 4), ([(2, 5)], 3)]
     }
   }
-
+  
   /// 기본 12음 배열
   /// ["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"]
   var chroma: [Float] {
@@ -44,7 +53,7 @@ enum Chord: CaseIterable {
       }
       return vector
     }
-
+    
     switch self {
     case .C: return chromaVector(for: [0, 4, 7], weights: [1.0, 0.7, 0.7])
     case .D: return chromaVector(for: [2, 6, 9, 0], weights: [1.0, 0.7, 0.7, 0.5])

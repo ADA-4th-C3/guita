@@ -9,6 +9,10 @@ struct ChordLessonViewState {
 
   /// 현재 단계 반복 횟수 ([ChordLessonStep]가 바뀌는 경우에만 초기화 됨)
   let currentStepPlayCount: Int
+  
+  /// 기능 사용 여부
+  let isPermissionGranted: Bool
+  let isVoiceCommandEnabled: Bool
 
   /// 반복 실행 여부
   var isReplay: Bool { currentStepPlayCount > 1 }
@@ -37,12 +41,16 @@ struct ChordLessonViewState {
   func copy(
     chord: Chord? = nil,
     index: Int? = nil,
-    currentStepPlayCount: Int? = nil
+    currentStepPlayCount: Int? = nil,
+    isPermissionGranted: Bool? = nil,
+    isVoiceCommandEnabled: Bool? = nil
   ) -> ChordLessonViewState {
     return ChordLessonViewState(
       chord: chord ?? self.chord,
       index: index ?? self.index,
-      currentStepPlayCount: currentStepPlayCount ?? self.currentStepPlayCount
+      currentStepPlayCount: currentStepPlayCount ?? self.currentStepPlayCount,
+      isPermissionGranted: isPermissionGranted ?? self.isPermissionGranted,
+      isVoiceCommandEnabled: isVoiceCommandEnabled ?? self.isVoiceCommandEnabled
     )
   }
 }

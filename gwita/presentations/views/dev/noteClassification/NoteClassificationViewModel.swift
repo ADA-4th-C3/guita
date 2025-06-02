@@ -3,8 +3,8 @@
 import SwiftUI
 
 final class NoteClassificationViewModel: BaseViewModel<NoteClassificationViewState> {
-  let audioRecorderManager: AudioRecorderManager = .shared
-  let noteClassification: NoteClassification = .init()
+  private let audioRecorderManager: AudioRecorderManager = .shared
+  private let noteClassification: NoteClassification = .init()
 
   init() {
     super.init(state: .init(

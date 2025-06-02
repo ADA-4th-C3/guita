@@ -3,18 +3,26 @@
 import Foundation
 
 enum AudioFile: String {
-  case strokeDown = "stroke-down"
-  case strokeUp = "stroke-up"
-  case A_1 = "A-1"
-  case A_2 = "A-2"
-  case A_3 = "A-3"
-  case A_4 = "A-4"
-  case A_5 = "A-5"
-  case A_6 = "A-6"
-  case A_strokeDown = "A-stroke-down"
-  case A_strokeDownSlow = "A-stroke-down-slow"
-
+  // MARK: Guitar
+  case strokeDown = "stroke-down.m4a"
+  case strokeUp = "stroke-up.m4a"
+  case A_1 = "A-1.m4a"
+  case A_2 = "A-2.m4a"
+  case A_3 = "A-3.m4a"
+  case A_4 = "A-4.m4a"
+  case A_5 = "A-5.m4a"
+  case A_6 = "A-6.m4a"
+  case A_strokeDown = "A-stroke-down.m4a"
+  case A_strokeDownSlow = "A-stroke-down-slow.m4a"
+  
+  // MARK: Effect
+  case positive = "positive.mp3"
+  
   var fileURL: URL? {
-    Bundle.main.url(forResource: rawValue, withExtension: "m4a")
+    let splitted = rawValue.split(separator: ".")
+    guard splitted.count == 2 else { return nil }
+    let name = String(splitted[0])
+    let ext = String(splitted[1])
+    return Bundle.main.url(forResource: name, withExtension: ext)
   }
 }

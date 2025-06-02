@@ -8,10 +8,17 @@ final class ChordLesson: BaseLesson {
   private let chord: Chord
   private let totalStep: Int
   private let functionText = "다음 학습으로 넘어가시려면 \"다음\"을, 다시 들으시려면 \"다시\"를 말씀해 주세요."
+  private var isNoteClassificationEnabled: Bool = false
+  private var isChordClassificationEnabled: Bool = false
 
   init(_ chord: Chord, _ totalStep: Int) {
     self.chord = chord
     self.totalStep = totalStep
+  }
+  
+  override func onLessonCancel(_ error: any Error) {
+    audioPlayerManager.stop()
+    textToSpeechManager.stop()
   }
 
   /// 현재 단계
@@ -26,6 +33,9 @@ final class ChordLesson: BaseLesson {
 
   /// 개요
   func startIntroduction(_ isReplay: Bool) async {
+    isNoteClassificationEnabled = false
+    isChordClassificationEnabled = false
+    
     await startLesson([
       // MARK: 단계
       {
@@ -51,9 +61,10 @@ final class ChordLesson: BaseLesson {
 
   /// 한 줄씩 설명
   func startLineByLine(_ isReplay: Bool, index: Int) async {
+    isNoteClassificationEnabled = false
+    isChordClassificationEnabled = false
+    
     let lineIndex = index - 1
-
-    // ([(fret: Int, string: Int)], finger: Int)
     let coordinate = chord.coordinates[lineIndex]
     let nFret = coordinate.0.first!.fret
     let nString = coordinate.0.first!.string
@@ -83,7 +94,7 @@ final class ChordLesson: BaseLesson {
 
       // MARK: 재생 - 한 줄 소리
       {
-        let audioKey = "A-\(nString)"
+        let audioKey = "A-\(nString).m4a"
         if let audioFile = AudioFile(rawValue: audioKey) {
           await self.audioPlayerManager.start(audioFile: audioFile)
         } else {
@@ -95,17 +106,16 @@ final class ChordLesson: BaseLesson {
       {
         let text = "이런 소리가 들려야 해요. 이제 \(string) 줄을 튕겨볼까요?"
         await self.textToSpeechManager.speak(text)
-      },
-
-      // MARK: 기능
-      {
-        let text = self.doNotReplayText(isReplay, self.functionText)
-        await self.textToSpeechManager.speak(text)
-      },
+        self.isNoteClassificationEnabled = true
+      }
     ])
   }
 
+  /// 전체 코드 소리 확인
   func startFullChord(_ isReplay: Bool) async {
+    isNoteClassificationEnabled = false
+    isChordClassificationEnabled = false
+    
     await startLesson([
       // MARK: 단계
       {
@@ -137,7 +147,7 @@ final class ChordLesson: BaseLesson {
 
       // MARK: 재생 - 한 줄 소리
       {
-        let audioKey = "\(self.chord)-stroke-down-slow"
+        let audioKey = "\(self.chord)-stroke-down-slow.m4a"
         if let audioFile = AudioFile(rawValue: audioKey) {
           await self.audioPlayerManager.start(audioFile: audioFile)
         } else {
@@ -149,13 +159,32 @@ final class ChordLesson: BaseLesson {
       {
         let text = "\(self.chord) 코드는 이런 소리가 들려야 해요. 이제 피크로 쓸어내려보세요."
         await self.textToSpeechManager.speak(text)
-      },
-
-      // MARK: 기능
-      {
-        let text = self.doNotReplayText(isReplay, self.functionText)
-        await self.textToSpeechManager.speak(text)
-      },
+        self.isChordClassificationEnabled = true
+      }
     ])
+  }
+  
+  func onChordClassified(userChord: Chord?) {
+    if !isChordClassificationEnabled { return }
+    guard let userChord = userChord else { return }
+    // Logger.d("Chord : \(chord), User Chord : \(userChord)")
+    if chord == userChord {
+      Task {
+        await self.audioPlayerManager.start(audioFile: .positive)
+      }
+    }
+  }
+  
+  func onNoteClassified(userNote: Note?, index: Int) {
+    if !isNoteClassificationEnabled { return }
+    guard let userNote = userNote else { return }
+    let lineIndex = index - 1
+    let note = chord.notes[lineIndex]
+    // Logger.d("Note : \(note), User Note : \(userNote)")
+    if note == userNote {
+      Task {
+        await self.audioPlayerManager.start(audioFile: .positive)
+      }
+    }
   }
 }
