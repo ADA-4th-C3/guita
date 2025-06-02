@@ -6,6 +6,7 @@ enum AudioFile: String {
   // MARK: Guitar
   case strokeDown = "stroke-down.m4a"
   case strokeUp = "stroke-up.m4a"
+  case strokeCalypso = "stroke-calypso.m4a"
   case A_1 = "A-1.m4a"
   case A_2 = "A-2.m4a"
   case A_3 = "A-3.m4a"

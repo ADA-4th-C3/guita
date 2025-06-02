@@ -11,5 +11,5 @@ struct TechniqueStep {
 
 struct TechniqueSubStep {
   let ttsText: String?
-  let mp3FileName: String?
+  let audioFile: AudioFile?
 }
