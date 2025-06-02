@@ -350,16 +350,17 @@ extension BaseAudioLearningViewModel: VoiceRecognitionDelegate {
 }
 
 extension BaseAudioLearningViewModel: TTSHandlerDelegate {
-  func ttsDidStart(_ text: String) {
+func ttsDidStart(_ text: String) {
     // TTS 시작 시 음성인식 일시중단
     voiceRecognitionHandler.stopVoiceRecognition()
+
     audioStateManager.updateAudioState(.playingTTS)
   }
   
   func ttsDidStop() {
     audioStateManager.updateAudioState(.listeningVoice)
     // 음성인식 즉시 재시작
-    voiceRecognitionHandler.startVoiceRecognition()
+  voiceRecognitionHandler.startVoiceRecognition()
   }
   
   func ttsContentDidPlay(_ text: String) {
