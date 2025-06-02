@@ -9,7 +9,7 @@ struct ChordLessonViewState {
 
   /// 현재 단계 반복 횟수 ([ChordLessonStep]가 바뀌는 경우에만 초기화 됨)
   let currentStepPlayCount: Int
-  
+
   /// 기능 사용 여부
   let isPermissionGranted: Bool
   let isVoiceCommandEnabled: Bool

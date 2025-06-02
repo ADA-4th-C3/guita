@@ -9,7 +9,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
   private let chordClassification: ChordClassification = .init()
   private var chordLesson: ChordLesson
   private var playTask: Task<Void, Never>? = nil
-  
+
   init(_ chord: Chord) {
     let state = ChordLessonViewState(
       chord: chord,
@@ -21,11 +21,11 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
     chordLesson = ChordLesson(chord, state.totalStep)
     super.init(state: state)
   }
-  
+
   private func cancelPlayTask() {
     playTask?.cancel()
   }
-  
+
   func play() {
     cancelPlayTask()
     emit(state.copy(
@@ -44,7 +44,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
       }
     }
   }
-  
+
   func goNext() {
     cancelPlayTask()
     if state.step == .finish { return }
@@ -54,7 +54,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
     ))
     play()
   }
-  
+
   func goPrevious() {
     cancelPlayTask()
     if state.step == .introduction { return }
@@ -64,14 +64,14 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
     ))
     play()
   }
-  
+
   func onPermissionGranted() {
     if state.isPermissionGranted { return }
     emit(state.copy(isPermissionGranted: true))
     startVoiceCommand()
     startClassification()
   }
-  
+
   private func startVoiceCommand() {
     voiceCommandManager.start(
       commands: [
@@ -85,7 +85,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
       isVoiceCommandEnabled: true
     ))
   }
-  
+
   private func startClassification() {
     audioRecorderManager.start { buffer, _ in
       // Chord classification
@@ -95,7 +95,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
         activeChords: [self.state.chord]
       )
       self.chordLesson.onChordClassified(userChord: chord)
-      
+
       // Note classification
       let note = self.noteClassification.run(
         buffer: buffer,
@@ -105,7 +105,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
       self.chordLesson.onNoteClassified(userNote: note, index: self.state.index)
     }
   }
-  
+
   override func dispose() {
     cancelPlayTask()
     voiceCommandManager.stop()

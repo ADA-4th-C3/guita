@@ -14,10 +14,10 @@ enum AudioFile: String {
   case A_6 = "A-6.m4a"
   case A_strokeDown = "A-stroke-down.m4a"
   case A_strokeDownSlow = "A-stroke-down-slow.m4a"
-  
+
   // MARK: Effect
   case positive = "positive.mp3"
-  
+
   var fileURL: URL? {
     let splitted = rawValue.split(separator: ".")
     guard splitted.count == 2 else { return nil }

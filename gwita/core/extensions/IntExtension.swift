@@ -27,7 +27,7 @@ extension Int {
       return "\(self)번째"
     }
   }
-  
+
   var koCard: String {
     switch self {
     case 1:
@@ -54,5 +54,4 @@ extension Int {
       return "\(self)"
     }
   }
-  
 }
