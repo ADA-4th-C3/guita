@@ -4,46 +4,42 @@ import AVFoundation
 import SwiftUI
 
 final class ChordClassificationViewModel: BaseViewModel<ChordClassificationViewState> {
-  private let audioManager: AudioManager = .shared
+  private let audioRecorderManager: AudioRecorderManager = .shared
   private let chordClassification = ChordClassification() // 기타코드 크로마 벡터 등등과 관련된 로직이 들어가있음
 
   init() {
     super.init(state: .init(
-      recordPermissionState: audioManager.getRecordPermissionState(),
+      recordPermissionState: audioRecorderManager.getRecordPermissionState(),
       chord: nil,
       confidence: 0.0,
-      selectedCodes: Chord.allCases,
-      allMatches: []
+      selectedCodes: Chord.allCases
     ))
   }
 
   private func startRecording() {
-    audioManager.start { [weak self] buffer, _ in
+    audioRecorderManager.start { [weak self] buffer, _ in
       guard let self = self else { return }
 
       // buffer 단위로 감지하고, 결과가 없으면 리턴
-      guard let rawResult = self.chordClassification.detectCode(buffer: buffer, windowSize: self.audioManager.windowSize) else {
+      guard let chord = self.chordClassification.detectCode(
+        buffer: buffer,
+        windowSize: self.audioRecorderManager.windowSize,
+        activeChords: self.state.selectedCodes
+      ) else {
         return
       }
-
-      // 선택된 곡의 활성 코드만 필터링
-      let active = self.state.selectedCodes
-      if !active.contains(rawResult.chord) { return }
-      let chord = rawResult.chord
-      let matches = rawResult.allMatches.filter { active.contains($0.chord) }
 
       // UI 업데이트
       DispatchQueue.main.async {
         self.emit(self.state.copy(
-          chord: { chord },
-          allMatches: matches
+          chord: { chord }
         ))
       }
     }
   }
 
   func requestRecordPermission() {
-    audioManager.requestRecordPermission { isGranted in
+    audioRecorderManager.requestRecordPermission { isGranted in
       self.emit(self.state.copy(
         recordPermissionState: isGranted ? .granted : .denied
       ))
@@ -63,6 +59,6 @@ final class ChordClassificationViewModel: BaseViewModel<ChordClassificationViewS
   }
 
   override func dispose() {
-    audioManager.stop()
+    audioRecorderManager.stop()
   }
 }

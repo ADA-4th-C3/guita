@@ -2,8 +2,8 @@
 
 import AVFoundation
 
-final class AudioManager: BaseViewModel<AudioManagerState> {
-  static let shared = AudioManager()
+final class AudioRecorderManager: BaseViewModel<AudioRecorderManagerState> {
+  static let shared = AudioRecorderManager()
   private var audioEngine = AVAudioEngine()
   private var inputNode: AVAudioInputNode?
   private var inputFormat: AVAudioFormat?
@@ -11,7 +11,7 @@ final class AudioManager: BaseViewModel<AudioManagerState> {
   let windowSize: Int = 8192
 
   private init() {
-    super.init(state: AudioManagerState(
+    super.init(state: AudioRecorderManagerState(
       permission: .undetermined,
       isRecording: false
     ))

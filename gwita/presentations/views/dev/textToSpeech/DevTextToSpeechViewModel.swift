@@ -3,6 +3,7 @@
 final class DevTextToSpeechViewModel: BaseViewModel<DevTextToSpeechViewState> {
   private let textToSpeechManager = TextToSpeechManager.shared
   private let voiceCommandManager = VoiceCommandManager.shared
+  private var playTask: Task<Void, Never>?
 
   init() {
     super.init(state: .init(
@@ -36,8 +37,8 @@ final class DevTextToSpeechViewModel: BaseViewModel<DevTextToSpeechViewState> {
   }
 
   func play() {
-    textToSpeechManager.stop()
-    Task {
+    playTask?.cancel()
+    playTask = Task {
       let sample = self.state.samples[self.state.index]
       await textToSpeechManager.speak(sample)
     }
@@ -55,6 +56,6 @@ final class DevTextToSpeechViewModel: BaseViewModel<DevTextToSpeechViewState> {
 
   override func dispose() {
     stopVoiceCommand()
-    textToSpeechManager.stop()
+    playTask?.cancel()
   }
 }

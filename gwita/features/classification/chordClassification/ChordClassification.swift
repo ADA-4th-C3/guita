@@ -8,7 +8,12 @@ final class ChordClassification {
   private let chromaExtractor = ChromaExtractor()
 
   // MARK: - 버퍼 입력 감지
-  func detectCode(buffer: AVAudioPCMBuffer, windowSize: Int) -> ChordResult? {
+  func detectCode(
+    buffer: AVAudioPCMBuffer,
+    windowSize: Int,
+    activeChords: [Chord] = Chord.allCases,
+    confidence: Float = 0.5
+  ) -> Chord? {
     guard let data = buffer.floatChannelData?[0] else { return nil }
     let frameLength = Int(buffer.frameLength)
     let audioArray = Array(UnsafeBufferPointer(start: data, count: frameLength))
@@ -18,7 +23,11 @@ final class ChordClassification {
       windowSize: windowSize,
       hopSize: Int(windowSize / 2)
     )
-    return matchCode(chromaFeatures: chroma)
+    let chordResult = matchChord(chromaFeatures: chroma)
+    let (chord, chordConfidence) = (chordResult.chord, chordResult.confidence)
+    if !activeChords.contains(chord) { return nil }
+    if chordConfidence < confidence { return nil }
+    return chord
   }
 
   // MARK: - 정규화
@@ -36,7 +45,7 @@ final class ChordClassification {
   }
 
   // MARK: - 매칭
-  private func matchCode(chromaFeatures: [Float]) -> ChordResult {
+  private func matchChord(chromaFeatures: [Float]) -> ChordResult {
     var matches: [(Chord, Float)] = []
     for chord in Chord.allCases {
       let tpl = chord.chroma

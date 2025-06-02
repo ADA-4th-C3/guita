@@ -23,6 +23,7 @@ struct ChordView: View {
                 .fontKoddi(26, color: .darkGrey, weight: .bold)
                 .padding(.vertical, 36)
             }
+            .frame(maxWidth: .infinity)
           }
           dividerView()
         }

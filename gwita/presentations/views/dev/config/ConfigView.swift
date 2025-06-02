@@ -13,10 +13,17 @@ struct ConfigView: View {
 
         Form {
           // MARK: FullTrackPlaySpeed
+          Section(header: Text("TTS Speed")) {
+            Text("곡 재생 속도 : \(state.ttsSpeed.value.formatted(2))")
+            Tile(title: "느리게", subtitle: "🐢", action: { viewModel.updateTtsSpeed(isSpeedUp: false) })
+            Tile(title: "빠르게", subtitle: "🐇", action: { viewModel.updateTtsSpeed(isSpeedUp: true) })
+          }
+
+          // MARK: FullTrackPlaySpeed
           Section(header: Text("FullTrackPlaySpeed")) {
             Text("곡 재생 속도 : \(state.fullTrackPlaySpeed.value.formatted(2))")
-            Tile(title: "느리게", subtitle: "🐢", action: viewModel.speedDown)
-            Tile(title: "빠르게", subtitle: "🐇", action: viewModel.speedUp)
+            Tile(title: "느리게", subtitle: "🐢", action: { viewModel.updateFullTrackPlaySpeed(isSpeedUp: false) })
+            Tile(title: "빠르게", subtitle: "🐇", action: { viewModel.updateFullTrackPlaySpeed(isSpeedUp: true) })
           }
         }
       }
