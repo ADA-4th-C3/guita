@@ -33,7 +33,6 @@ enum ChordLessonStep: CaseIterable {
       let coordinate = chord.coordinates[lineIndex]
       let nFret = coordinate.0.first!.fret
       let nString = coordinate.0.first!.string
-      let nFinger = coordinate.1
       let (fret, string) = (nFret.koOrd, nString.koOrd)
       return "\(chord) 코드 \(fret) 프랫\n아래서 \(string) 줄 운지 연습"
     case .fullChord:

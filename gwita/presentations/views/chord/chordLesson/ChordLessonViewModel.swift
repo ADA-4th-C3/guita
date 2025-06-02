@@ -9,9 +9,12 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
   private let chordClassification: ChordClassification = .init()
   private var chordLesson: ChordLesson
   private var playTask: Task<Void, Never>? = nil
+  private let router: Router
 
-  init(_ chord: Chord) {
+  init(_ router: Router, _ chord: Chord, _ chords: [Chord]) {
+    self.router = router
     let state = ChordLessonViewState(
+      chords: chords,
       chord: chord,
       index: 0,
       currentStepPlayCount: 0,
@@ -26,6 +29,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
   private func cancelPlayTask() {
     playTask?.cancel()
   }
+  
 
   /// 레슨 재생
   func play() {
@@ -40,25 +44,37 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
       case .lineByLine:
         await chordLesson.startLineByLine(state.isReplay, index: state.index)
       case .fullChord:
-        await chordLesson.startFullChord(state.isReplay)
+        await chordLesson.startFullChord(state.isReplay, index: state.index)
       case .finish:
-        await chordLesson.startFinish(state.isReplay)
+        await chordLesson.startFinish(state.isReplay, nextChord: state.nextChord)
       }
     }
   }
 
-  /// 이전 레슨으로 이동
+  /// 다음 레슨으로 이동
   func goNext() {
     cancelPlayTask()
-    if state.step == .finish { return }
-    emit(state.copy(
-      index: state.index + 1,
-      currentStepPlayCount: state.nextStep != state.step ? 0 : nil
-    ))
-    play()
+    if state.step == .finish {
+      guard let nextChord = state.nextChord else {
+        // 코드 학습 종료
+        router.pop()
+        return
+      }
+      
+      // 다음 코드 시작
+      startNextChord(nextChord)
+    } else {
+      // 다음 스탭
+      emit(state.copy(
+        index: state.index + 1,
+        currentStepPlayCount: state.nextStep != state.step ? 0 : nil
+      ))
+      play()
+    }
+    
   }
 
-  /// 다음 레슨으로 이동
+  /// 이전 레슨으로 이동
   func goPrevious() {
     cancelPlayTask()
     if state.step == .introduction { return }
@@ -75,6 +91,19 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
     emit(state.copy(isPermissionGranted: true))
     // startVoiceCommand()
     startClassification()
+  }
+  
+  /// 다음 코드 학습으로 넘어가기
+  func startNextChord(_ nextChord: Chord) {
+    let nextState = state.copy(
+      chord: nextChord,
+      index: 0,
+      currentStepPlayCount: 0,
+      currentStepDescription: ""
+    )
+    chordLesson = ChordLesson(nextChord, nextState.totalStep)
+    emit(nextState)
+    play()
   }
 
   /// 음성 명령 인식 시작

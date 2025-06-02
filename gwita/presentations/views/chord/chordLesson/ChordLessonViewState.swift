@@ -1,6 +1,9 @@
 //  Copyright © 2025 ADA 4th Challenge3 Team1. All rights reserved.
 
 struct ChordLessonViewState {
+  /// 전체 코드
+  let chords: [Chord]
+  
   /// 학습 중인 코드
   let chord: Chord
 
@@ -34,14 +37,25 @@ struct ChordLessonViewState {
     return intro + lineByLine + fullChord + finish
   }
 
+  /// 전달 받은 index에 따른 스탭
   private func getStep(_ i: Int) -> ChordLessonStep {
     i == 0 ? .introduction
       : i == totalStep - 1 ? .finish
       : i == totalStep - 2 ? .fullChord
       : .lineByLine
   }
+  
+  /// 다음 배울 코드
+  var nextChord: Chord? {
+    guard let currentIndex = chords.firstIndex(where: { $0 == chord }) else {
+      return nil
+    }
+    let nextIndex = currentIndex + 1
+    return nextIndex < chords.count ? chords[nextIndex] : nil
+  }
 
   func copy(
+    chords: [Chord]? = nil,
     chord: Chord? = nil,
     index: Int? = nil,
     currentStepPlayCount: Int? = nil,
@@ -50,6 +64,7 @@ struct ChordLessonViewState {
     isVoiceCommandEnabled: Bool? = nil
   ) -> ChordLessonViewState {
     return ChordLessonViewState(
+      chords: chords ?? self.chords,
       chord: chord ?? self.chord,
       index: index ?? self.index,
       currentStepPlayCount: currentStepPlayCount ?? self.currentStepPlayCount,

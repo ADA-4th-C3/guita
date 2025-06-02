@@ -112,20 +112,20 @@ final class ChordLesson: BaseLesson {
   }
 
   /// 전체 코드 소리 확인
-  func startFullChord(_ isReplay: Bool) async {
+  func startFullChord(_ isReplay: Bool, index: Int) async {
     isNoteClassificationEnabled = false
     isChordClassificationEnabled = false
 
     await startLesson([
       // MARK: 단계
       {
-        let text = self.currentStep(isReplay, 0)
+        let text = self.currentStep(isReplay, index)
         await self.textToSpeechManager.speak(text)
       },
 
       // MARK: 개요
       {
-        let text = self.doNotReplayText(isReplay, "모든 손가락으로 코드 잡고 연주해봅시다.")
+        let text = self.doNotReplayText(isReplay, "\(self.chord) 코드를 잡고 소리를 확인해 봅시다..")
         await self.textToSpeechManager.speak(text)
       },
 
@@ -165,13 +165,20 @@ final class ChordLesson: BaseLesson {
   }
 
   /// 종료
-  func startFinish(_: Bool) async {
+  func startFinish(_: Bool, nextChord: Chord?) async {
     isNoteClassificationEnabled = false
     isChordClassificationEnabled = false
     await startLesson([
       // MARK: 단계
       {
-        let text = "\(self.chord)코드 학습이 종료되었습니다."
+        var text = "\(self.chord)코드 학습이 종료되었습니다."
+        if nextChord != nil {
+          // 다음 chord 학습
+          text += " 다음으로 \(nextChord!) 코드를 학습하고 싶으시면 \"다음\"이라고 말씀해 주세요."
+        } else {
+          // 화면 종료
+          text += " \"다음\"이라고 말씀하시면 이전 \"코드 선택\"화면으로 이동됩니다."
+        }
         await self.textToSpeechManager.speak(text)
       },
     ])

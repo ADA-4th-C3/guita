@@ -17,7 +17,7 @@ struct ChordView: View {
         // MARK: Chord Button
         dividerView()
         ForEach(state.songInfo.chords, id: \.self) { chord in
-          Button(action: { router.push(.chordLesson(chord: chord)) }) {
+          Button(action: { router.push(.chordLesson(chord: chord, chords: state.songInfo.chords)) }) {
             VStack {
               Text("\(chord) 코드")
                 .fontKoddi(26, color: .darkGrey, weight: .bold)

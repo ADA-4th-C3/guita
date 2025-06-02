@@ -3,10 +3,13 @@
 import SwiftUI
 
 struct ChordLessonView: View {
+  @EnvironmentObject var router: Router
   let chord: Chord
+  let chords: [Chord]
+  
   var body: some View {
     BaseView(
-      create: { ChordLessonViewModel(chord) }
+      create: { ChordLessonViewModel(router, chord, chords) }
     ) { viewModel, state in
       PermissionView(
         permissionListener: { isGranted in
@@ -18,13 +21,13 @@ struct ChordLessonView: View {
         VStack(spacing: 0) {
           // MARK: Toolbar
           Toolbar(title: "\(state.chord) 코드")
-
+          
           // MARK: Index
           Text("\(state.index + 1)/\(state.totalStep) 단계")
             .fontKoddi(22, color: .darkGrey)
             .padding(.top, 16)
           Spacer()
-
+          
           // MARK: Step description
           Text("\(state.step.getDescription(state.chord, index: state.index))")
             .fontKoddi(26, color: .light)
@@ -32,7 +35,7 @@ struct ChordLessonView: View {
             .multilineTextAlignment(.center)
           
           Spacer()
-
+          
           // MARK: Controllers
           HStack {
             IconButton("chevron-left", color: .light, size: 95, isSystemImage: false) {
@@ -53,6 +56,6 @@ struct ChordLessonView: View {
 
 #Preview {
   BasePreview {
-    ChordLessonView(chord: .A)
+    ChordLessonView(chord: .A, chords: [.A, .E, .B7])
   }
 }
