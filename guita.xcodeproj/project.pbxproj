@@ -7,32 +7,32 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		24B0C4592DE9E91C00923537 /* gwita.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gwita.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		24E556902DEDCB190073B96A /* guita.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = guita.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		24B0C63B2DE9FAC600923537 /* Exceptions for "gwita" folder in "gwita" target */ = {
+		24E557F42DEDCBE70073B96A /* Exceptions for "guita" folder in "guita" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = 24B0C4582DE9E91C00923537 /* gwita */;
+			target = 24E5568F2DEDCB190073B96A /* guita */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		24B0C45B2DE9E91C00923537 /* gwita */ = {
+		24E556922DEDCB190073B96A /* guita */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				24B0C63B2DE9FAC600923537 /* Exceptions for "gwita" folder in "gwita" target */,
+				24E557F42DEDCBE70073B96A /* Exceptions for "guita" folder in "guita" target */,
 			);
-			path = gwita;
+			path = guita;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		24B0C4562DE9E91C00923537 /* Frameworks */ = {
+		24E5568D2DEDCB190073B96A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -42,18 +42,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		24B0C4502DE9E91C00923537 = {
+		24E556872DEDCB190073B96A = {
 			isa = PBXGroup;
 			children = (
-				24B0C45B2DE9E91C00923537 /* gwita */,
-				24B0C45A2DE9E91C00923537 /* Products */,
+				24E556922DEDCB190073B96A /* guita */,
+				24E556912DEDCB190073B96A /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		24B0C45A2DE9E91C00923537 /* Products */ = {
+		24E556912DEDCB190073B96A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				24B0C4592DE9E91C00923537 /* gwita.app */,
+				24E556902DEDCB190073B96A /* guita.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -61,64 +61,64 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		24B0C4582DE9E91C00923537 /* gwita */ = {
+		24E5568F2DEDCB190073B96A /* guita */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 24B0C4672DE9E91E00923537 /* Build configuration list for PBXNativeTarget "gwita" */;
+			buildConfigurationList = 24E5569E2DEDCB1A0073B96A /* Build configuration list for PBXNativeTarget "guita" */;
 			buildPhases = (
-				24B0C4552DE9E91C00923537 /* Sources */,
-				24B0C4562DE9E91C00923537 /* Frameworks */,
-				24B0C4572DE9E91C00923537 /* Resources */,
+				24E5568C2DEDCB190073B96A /* Sources */,
+				24E5568D2DEDCB190073B96A /* Frameworks */,
+				24E5568E2DEDCB190073B96A /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				24B0C45B2DE9E91C00923537 /* gwita */,
+				24E556922DEDCB190073B96A /* guita */,
 			);
-			name = gwita;
+			name = guita;
 			packageProductDependencies = (
 			);
-			productName = gwita;
-			productReference = 24B0C4592DE9E91C00923537 /* gwita.app */;
+			productName = guita;
+			productReference = 24E556902DEDCB190073B96A /* guita.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		24B0C4512DE9E91C00923537 /* Project object */ = {
+		24E556882DEDCB190073B96A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1620;
 				TargetAttributes = {
-					24B0C4582DE9E91C00923537 = {
+					24E5568F2DEDCB190073B96A = {
 						CreatedOnToolsVersion = 16.2;
 					};
 				};
 			};
-			buildConfigurationList = 24B0C4542DE9E91C00923537 /* Build configuration list for PBXProject "gwita" */;
+			buildConfigurationList = 24E5568B2DEDCB190073B96A /* Build configuration list for PBXProject "guita" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = 24B0C4502DE9E91C00923537;
+			mainGroup = 24E556872DEDCB190073B96A;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 24B0C45A2DE9E91C00923537 /* Products */;
+			productRefGroup = 24E556912DEDCB190073B96A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				24B0C4582DE9E91C00923537 /* gwita */,
+				24E5568F2DEDCB190073B96A /* guita */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		24B0C4572DE9E91C00923537 /* Resources */ = {
+		24E5568E2DEDCB190073B96A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -128,7 +128,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		24B0C4552DE9E91C00923537 /* Sources */ = {
+		24E5568C2DEDCB190073B96A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -138,7 +138,7 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		24B0C4652DE9E91E00923537 /* Debug */ = {
+		24E5569C2DEDCB1A0073B96A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -201,7 +201,7 @@
 			};
 			name = Debug;
 		};
-		24B0C4662DE9E91E00923537 /* Release */ = {
+		24E5569D2DEDCB1A0073B96A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -257,18 +257,17 @@
 			};
 			name = Release;
 		};
-		24B0C4682DE9E91E00923537 /* Debug */ = {
+		24E5569F2DEDCB1A0073B96A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = gwita/Info.plist;
-				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_FILE = guita/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Guita;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -279,26 +278,29 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "ada-4th-c3.gwita";
+				PRODUCT_BUNDLE_IDENTIFIER = "ada-4th-c3.guita";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		24B0C4692DE9E91E00923537 /* Release */ = {
+		24E556A02DEDCB1A0073B96A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = gwita/Info.plist;
-				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_FILE = guita/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Guita;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -309,8 +311,12 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "ada-4th-c3.gwita";
+				PRODUCT_BUNDLE_IDENTIFIER = "ada-4th-c3.guita";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -320,25 +326,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		24B0C4542DE9E91C00923537 /* Build configuration list for PBXProject "gwita" */ = {
+		24E5568B2DEDCB190073B96A /* Build configuration list for PBXProject "guita" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				24B0C4652DE9E91E00923537 /* Debug */,
-				24B0C4662DE9E91E00923537 /* Release */,
+				24E5569C2DEDCB1A0073B96A /* Debug */,
+				24E5569D2DEDCB1A0073B96A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		24B0C4672DE9E91E00923537 /* Build configuration list for PBXNativeTarget "gwita" */ = {
+		24E5569E2DEDCB1A0073B96A /* Build configuration list for PBXNativeTarget "guita" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				24B0C4682DE9E91E00923537 /* Debug */,
-				24B0C4692DE9E91E00923537 /* Release */,
+				24E5569F2DEDCB1A0073B96A /* Debug */,
+				24E556A02DEDCB1A0073B96A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 24B0C4512DE9E91C00923537 /* Project object */;
+	rootObject = 24E556882DEDCB190073B96A /* Project object */;
 }
