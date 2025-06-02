@@ -1,4 +1,4 @@
-enum Chord: CaseIterable {
+enum Chord: String, CaseIterable, CustomStringConvertible {
   case C, D, E, F, G, A, B
   case Dm, Em, Am
   case B7
@@ -38,7 +38,7 @@ enum Chord: CaseIterable {
     case .Em: return [([(2, 4)], 4), ([(2, 5)], 3)]
     case .Am: return [([(1, 2)], 2), ([(2, 3)], 4), ([(2, 4)], 3)]
     // MARK: 7
-    case .B7: return [([(1, 4)], 2), ([(2, 1)], 5), ([(2, 3)], 4), ([(2, 5)], 3)]
+    case .B7: return [([(1, 4)], 2), /* ([(2, 1)], 5), */ ([(2, 3)], 4), ([(2, 5)], 3)] // 약식으로 잡음
     }
   }
 
@@ -67,5 +67,12 @@ enum Chord: CaseIterable {
     case .Am: return chromaVector(for: [9, 0, 4], weights: [1.0, 0.7, 0.7])
     case .B7: return chromaVector(for: [11, 3, 6, 9], weights: [1.0, 0.7, 0.7, 0.5])
     }
+  }
+
+  var description: String {
+    let name = rawValue
+      .replacingOccurrences(of: "m", with: " 마이너")
+      .replacingOccurrences(of: "7", with: " 세븐")
+    return name
   }
 }

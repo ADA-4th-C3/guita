@@ -24,19 +24,21 @@ struct RouterView: View {
         // MARK: Sub page
         .navigationDestination(for: SubPage.self) { subPage in
           switch subPage {
+          // MARK: User
           case .curriculum: CurriculumView()
-          case .devPermission: DevPermissionView()
-          case .dev: DevView()
-          case .noteClassification: NoteClassificationView()
-          case .codeClassification: ChordClassificationView()
-          case .voiceCommand: VoiceCommandView()
-          case let .lesson(item): LessonDetailView(item: item)
+          case let .lesson(songInfo): LessonView(songInfo: songInfo)
           case let .chord(songInfo): ChordView(songInfo: songInfo)
-          case let .chordLesson(chord): ChordLessonView(chord: chord)
-          case .technique: TechniqueView()
-          case .config: ConfigView()
-          case .techniqueGuide: TechniqueUserGuideView()
+          case let .chordLesson(chord, chords): ChordLessonView(chord: chord, chords: chords)
+          case .techniqueLesson: TechniqueLessonView()
+          case .techniqueLessonGuide: TechniqueLessonGuideView()
+          // MARK: Dev
+          case .dev: DevView()
+          case .devConfig: DevConfigView()
+          case .devPermission: DevPermissionView()
+          case .devVoiceCommand: DevVoiceCommandView()
           case .devTextToSpeech: DevTextToSpeechView()
+          case .devNoteClassification: DevNoteClassificationView()
+          case .devCodeClassification: DevChordClassificationView()
           }
         }
         .toolbarBackground(.hidden, for: .navigationBar)

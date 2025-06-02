@@ -17,7 +17,7 @@ struct DevView: View {
           // MARK: General
           Section(header: Text("General")) {
             Tile(title: "Config") {
-              router.push(.config)
+              router.push(.devConfig)
             }
             Tile(title: "Permission") {
               router.push(.devPermission)
@@ -27,13 +27,13 @@ struct DevView: View {
           // MARK: Features
           Section(header: Text("Features")) {
             Tile(title: "Note Classification") {
-              router.push(.noteClassification)
+              router.push(.devNoteClassification)
             }
             Tile(title: "Code Classification") {
-              router.push(.codeClassification)
+              router.push(.devCodeClassification)
             }
             Tile(title: "Voice Command") {
-              router.push(.voiceCommand)
+              router.push(.devVoiceCommand)
             }
             Tile(title: "Text To Speech") {
               router.push(.devTextToSpeech)

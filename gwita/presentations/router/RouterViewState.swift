@@ -7,19 +7,19 @@ enum RootPage {
 
 enum SubPage: Hashable {
   case curriculum
+  case lesson(songInfo: SongInfo)
+  case chord(songInfo: SongInfo)
+  case chordLesson(chord: Chord, chords: [Chord])
+  case techniqueLesson
+  case techniqueLessonGuide
 
   // MARK: Dev
   case dev
-  case noteClassification
-  case codeClassification
-  case lesson(item: SongInfo)
-  case chord(songInfo: SongInfo)
-  case chordLesson(chord: Chord)
-  case technique
-  case voiceCommand
-  case config
+  case devNoteClassification
+  case devCodeClassification
+  case devVoiceCommand
+  case devConfig
   case devPermission
-  case techniqueGuide
   case devTextToSpeech
 }
 
