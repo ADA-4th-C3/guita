@@ -1,14 +1,7 @@
 {
   "images" : [
     {
-<<<<<<< HEAD:guita/assets/Assets.xcassets/AccentColor.colorset/Contents.json
-      "color" : {
-        "platform" : "watchos",
-        "reference" : "systemYellowColor"
-      },
-=======
       "filename" : "info.png",
->>>>>>> 8690b84b1301a3c2d88814b9f221dd051c749701:guita/assets/Assets.xcassets/images/info.imageset/Contents.json
       "idiom" : "universal"
     }
   ],

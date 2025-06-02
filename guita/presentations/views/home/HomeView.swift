@@ -4,7 +4,7 @@ import SwiftUI
 
 struct HomeView: View {
   @EnvironmentObject var router: Router
-  
+
   var body: some View {
     BaseView(
       create: { HomeViewModel() }
@@ -17,13 +17,6 @@ struct HomeView: View {
           }
         })
         Spacer()
-<<<<<<< HEAD
-        
-        // 기타학습 버튼 제거하거나 숨김 처리
-        // 필요시 다른 UI 요소들 추가
-        
-        Spacer()
-=======
         Button {
           router.push(.curriculum)
         } label: {
@@ -39,7 +32,6 @@ struct HomeView: View {
           }.offset(y: -40)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
->>>>>>> 8690b84b1301a3c2d88814b9f221dd051c749701
       }
     }
   }
