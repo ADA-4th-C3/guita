@@ -73,15 +73,15 @@ class BaseAudioLearningViewModel<State>: BaseViewModel<State> {
   
   // ChordNoteMapper 사용을 위한 메서드 추가
   func setTargetNotesForChord(_ chord: Chord) {
-      let allNotes = ChordNoteMapper.getAllNotesForChord(chord)
-      let notes = allNotes.map { $0.note }
-      pitchRecognitionHandler.setTargetNotes(notes)
+    let allNotes = ChordNoteMapper.getAllNotesForChord(chord)
+    let notes = allNotes.map { $0.note }
+    pitchRecognitionHandler.setTargetNotes(notes)
   }
-
+  
   func setTargetNoteForString(_ chord: Chord, string: Int) {
-      if let note = ChordNoteMapper.getExpectedNote(for: chord, string: string) {
-          pitchRecognitionHandler.setTargetNotes([note])
-      }
+    if let note = ChordNoteMapper.getExpectedNote(for: chord, string: string) {
+      pitchRecognitionHandler.setTargetNotes([note])
+    }
   }
   
   func clearTargetNote() {
@@ -142,7 +142,12 @@ class BaseAudioLearningViewModel<State>: BaseViewModel<State> {
     if !step.soundFiles.isEmpty {
       // TTS 완료 후 2초 후에 기타 소리 재생 (더 긴 딜레이)
       DispatchQueue.main.asyncAfter(deadline: .now() + calculateTTSDuration(step.ttsContents) + 2.0) {
-        self.playSoundFiles(step.soundFiles)
+        // 현재 단계가 바뀌지 않았을 때만 재생
+        if self.currentStepIndex < steps.count && steps[self.currentStepIndex].id == step.id {
+          self.playSoundFiles(step.soundFiles)
+        } else {
+          Logger.d("단계가 변경되어 기타 소리 재생 취소")
+        }
       }
     }
   }
@@ -171,11 +176,11 @@ class BaseAudioLearningViewModel<State>: BaseViewModel<State> {
     let extensionsToTry = ["m4a", "mp3"]
     
     for ext in extensionsToTry {
-        if Bundle.main.url(forResource: baseName, withExtension: ext) != nil {
-            Logger.d("사운드 파일 발견: \(baseName).\(ext)")
-            playEffectSound(baseName, fileExtension: ext)
-            return
-        }
+      if Bundle.main.url(forResource: baseName, withExtension: ext) != nil {
+        Logger.d("사운드 파일 발견: \(baseName).\(ext)")
+        playEffectSound(baseName, fileExtension: ext)
+        return
+      }
     }
     
     // 파일을 찾지 못한 경우
@@ -188,6 +193,7 @@ class BaseAudioLearningViewModel<State>: BaseViewModel<State> {
   // MARK: - Cleanup
   override func dispose() {
     soundEffectHandler?.dispose()
+    ttsHandler?.dispose()
     super.dispose()
   }
 }
@@ -330,21 +336,21 @@ extension BaseAudioLearningViewModel: VoiceRecognitionDelegate {
     )
     
     // TTS 먼저 재생
-      playTTSSequence(contents: [replayContent])
-      
-      // 현재 단계의 기타 소리도 함께 재생
-      let steps = getCurrentLearningSteps()
-      guard currentStepIndex < steps.count else { return }
-      let currentStep = steps[currentStepIndex]
-      
-      if !currentStep.soundFiles.isEmpty {
-        let ttsEstimatedDuration = Double(lastTTSText.count) * 0.1
-        DispatchQueue.main.asyncAfter(deadline: .now() + ttsEstimatedDuration + 2.0) {
-          self.playSoundFiles(currentStep.soundFiles)
-        }
+    playTTSSequence(contents: [replayContent])
+    
+    // 현재 단계의 기타 소리도 함께 재생
+    let steps = getCurrentLearningSteps()
+    guard currentStepIndex < steps.count else { return }
+    let currentStep = steps[currentStepIndex]
+    
+    if !currentStep.soundFiles.isEmpty {
+      let ttsEstimatedDuration = Double(lastTTSText.count) * 0.1
+      DispatchQueue.main.asyncAfter(deadline: .now() + ttsEstimatedDuration + 2.0) {
+        self.playSoundFiles(currentStep.soundFiles)
       }
-      
-      Logger.d("마지막 콘텐츠와 기타 소리 재생: \(lastTTSText)")
+    }
+    
+    Logger.d("마지막 콘텐츠와 기타 소리 재생: \(lastTTSText)")
   }
   
 }
@@ -373,28 +379,36 @@ extension BaseAudioLearningViewModel: TTSHandlerDelegate {
   }
   
   func ttsSequenceDidComplete() {
-    // TTS 시퀀스 완료 후 음성인식 즉시 재시작
     audioStateManager.updateAudioState(.listeningVoice)
-    voiceRecognitionHandler.startVoiceRecognition()
-    Logger.d("TTS 완료 - 음성인식 즉시 재시작")
+    // 음성인식 재시작을 한 번만 호출
+    if !voiceRecognitionHandler.isRecognitionActive {
+      voiceRecognitionHandler.startVoiceRecognition()
+      Logger.d("TTS 완료 - 음성인식 재시작")
+    } else {
+      Logger.d("TTS 완료 - 음성인식 이미 활성화됨")
+    }
   }
 }
 
 // MARK: - PitchRecognitionDelegate Implementation
 extension BaseAudioLearningViewModel: PitchRecognitionDelegate {
   func didRecognizeNote(_ note: String, frequency: Double) {
-          updateRecognizedNote(note, frequency: frequency)
+    updateRecognizedNote(note, frequency: frequency)
+  }
+  
+  func didValidateNote(_ recognized: String, expected: Note, isCorrect: Bool) {
+    Logger.d("노트 검증 결과: \(recognized) vs \(expected) = \(isCorrect)")
+    
+    if isCorrect {
+      playEffectSound("success1")
+      // 사운드 재생 완료 후 다음 단계로 진행 (3초 딜레이)
+      DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+        self.onNextCommand()
       }
-      
-      func didValidateNote(_ recognized: String, expected: Note, isCorrect: Bool) {
-          Logger.d("노트 검증 결과: \(recognized) vs \(expected) = \(isCorrect)")
-          
-          if isCorrect {
-              playEffectSound("success1")
-          } else {
-              playEffectSound("fail1")
-          }
-      }
+    } else {
+      playEffectSound("fail1")
+    }
+  }
 }
 
 

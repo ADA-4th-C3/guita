@@ -12,8 +12,11 @@ final class PitchRecognitionHandler {
   
   // 디바운싱 관련
   private var lastPitchRecognitionTime: Date = Date()
-  private var pitchRecognitionCooldown: TimeInterval = 1.0
+  private var pitchRecognitionCooldown: TimeInterval = 0.5
   private var lastRecognizedNote: String = ""
+  private var noteChangeThreshold = 3  // 같은 노트 3번까지는 허용
+  private var sameNoteCount = 0
+
   
   // 타겟 노트들
   private var targetNotes: [Note] = []
@@ -43,13 +46,21 @@ final class PitchRecognitionHandler {
       return
     }
     
-    // 같은 음정 반복 인식 방지
-    guard result.note != lastRecognizedNote else { return }
+    // 같은 노트 반복 인식 방지 로직 개선
+    if result.note == lastRecognizedNote {
+      sameNoteCount += 1
+      if sameNoteCount < noteChangeThreshold {
+        return  // 아직 임계값에 도달하지 않음
+      }
+    } else {
+      sameNoteCount = 0  // 다른 노트면 카운트 리셋
+    }
     
     // 메인 스레드에서 처리
     DispatchQueue.main.async { [weak self] in
       self?.lastPitchRecognitionTime = now
       self?.lastRecognizedNote = result.note
+      self?.sameNoteCount = 0  // 처리 후 카운트 리셋
       self?.handlePitchRecognition(result.note, frequency: result.frequency)
     }
   }

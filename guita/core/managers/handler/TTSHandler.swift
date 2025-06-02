@@ -8,6 +8,8 @@ final class TTSHandler {
   // MARK: - Properties
   private let tts = TextToSpeech.shared
   private weak var delegate: TTSHandlerDelegate?
+  private var micSoundPlayer: AudioPlayer?
+  private var hasPlayedMicOn = false  // 중복 방지 플래그 추가
   
   private var ttsQueue: [TTSContent] = []
   private var currentTTSIndex = 0
@@ -39,15 +41,31 @@ final class TTSHandler {
   
   // MARK: - Public Methods
   func playTTSSequence(contents: [TTSContent]) {
-    guard !contents.isEmpty else { return }
-    
-    ttsQueue = contents
-    currentTTSIndex = 0
-    isTTSSequencePlaying = true
-    
-    delegate?.ttsSequenceDidStart()
-    playNextTTS()
-  }
+          guard !contents.isEmpty else { return }
+          
+          // 새로운 시퀀스 시작 시 플래그 리셋
+          hasPlayedMicOn = false
+          
+          ttsQueue = contents
+          currentTTSIndex = 0
+          isTTSSequencePlaying = true
+          
+          delegate?.ttsSequenceDidStart()
+          playNextTTS()
+      }
+      
+      private func playMicOnSound() {
+          micSoundPlayer?.dispose()
+          micSoundPlayer = AudioPlayer()
+          
+          if micSoundPlayer?.setupAudio(fileName: "micOn", fileExtension: "mp3") == true {
+              micSoundPlayer?.volume = 0.7
+              micSoundPlayer?.play()
+              Logger.d("TTS 완료 후 micOn.mp3 재생")
+          } else {
+              Logger.e("micOn.mp3 파일을 찾을 수 없음")
+          }
+      }
   
   func stop() {
     tts.stop()
@@ -92,12 +110,49 @@ final class TTSHandler {
     ttsQueue.removeAll()
     currentTTSIndex = 0
     
-    // TTS 완료 후 음성인식 상태로 복원하기 위해 딜레이 추가
-    DispatchQueue.main.asyncAfter(deadline: .now()) {
-      self.delegate?.ttsSequenceDidComplete()
-      Logger.d("TTS 시퀀스 완료 - 음성인식 복원")
+    // micOn 소리가 이미 재생되었으면 재생하지 않음
+    if !hasPlayedMicOn {
+      hasPlayedMicOn = true
+      
+      DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+        self.playMicOnSound()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+          self.delegate?.ttsSequenceDidComplete()
+          Logger.d("TTS 시퀀스 완료 - 음성인식 복원")
+          
+          // 플래그 리셋
+          self.hasPlayedMicOn = false
+        }
+      }
+    } else {
+      // 이미 재생했으면 바로 완료 처리
+      delegate?.ttsSequenceDidComplete()
+      Logger.d("TTS 시퀀스 완료 - micOn 이미 재생됨")
     }
   }
+  
+  /// TTS 시작 시 마이크 꺼짐 사운드 재생
+  private func playTTSStartSound() {
+    micSoundPlayer?.dispose()
+    micSoundPlayer = AudioPlayer()
+    
+    if micSoundPlayer?.setupAudio(fileName: "micOff", fileExtension: "mp3") == true {
+      micSoundPlayer?.volume = 0.7
+      micSoundPlayer?.play()
+      Logger.d("TTS 시작 전 micOff.mp3 재생")
+    } else {
+      Logger.e("micOff.mp3 파일을 찾을 수 없음")
+    }
+  }
+  
+  
+  func dispose() {
+    micSoundPlayer?.dispose()
+    hasPlayedMicOn = false
+  }
+  
+  
 }
 
 /// TTSHandler의 델리게이트 프로토콜

@@ -57,8 +57,9 @@ final class CodeDetailViewModel: BaseAudioLearningViewModel<CodeDetailViewState>
             return
         }
     
+    let oldStepIndex = currentStepIndex
     currentStepIndex += 1
-    Logger.d("다음 단계로 진행: \(currentStepIndex + 1)/\(learningSteps.count)")
+    Logger.d("다음 단계로 진행: \(oldStepIndex)/ \(currentStepIndex + 1)/\(learningSteps.count)")
     
     updateCurrentStep()
     updateRecognitionModeForCurrentStep()
