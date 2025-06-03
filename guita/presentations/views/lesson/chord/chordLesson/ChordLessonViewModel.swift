@@ -8,7 +8,8 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
   private let audioPlayerManager: AudioPlayerManager = .shared
   private let noteClassification: NoteClassification = .init()
   private let chordClassification: ChordClassification = .init()
-  private let noteThrottle = ThrottleAggregator<Note>(interval: 1.0)
+  private let noteThrottle = ThrottleAggregator<Note>(interval: 2.0)
+  private let chordThrottle = ThrottleAggregator<Chord>(interval: 2.0)
   private var chordLesson: ChordLesson
   private var playTask: Task<Void, Never>? = nil
   private let router: Router
@@ -132,23 +133,26 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
   private func startClassification() {
     audioRecorderManager.start { buffer, _ in
       // Chord classification
-      let chord = self.chordClassification.detectCode(
+      if let (chord, chordConfidence) = self.chordClassification.run(
         buffer: buffer,
         windowSize: self.audioRecorderManager.windowSize,
         activeChords: [self.state.chord]
-      )
-      self.chordLesson.onChordClassified(userChord: chord)
+      ) {
+        if let throttledChord = self.chordThrottle.add(value: chord, confidence: chordConfidence) {
+          self.chordLesson.onChordClassified(userChord: throttledChord.value)
+        }
+        
+      }
       
       // Note classification
-      guard let (note, confidence) = self.noteClassification.run(
+      if let (note, noteConfidence) = self.noteClassification.run(
         buffer: buffer,
         sampleRate: self.audioRecorderManager.sampleRate,
         windowSize: self.audioRecorderManager.windowSize
-      ) else { return }
-      
-      // Note throttle
-      if let throttledNote = self.noteThrottle.add(value: note, confidence: confidence) {
-        self.chordLesson.onNoteClassified(userNote: throttledNote.value, index: self.state.index)
+      ) {
+        if let throttledNote = self.noteThrottle.add(value: note, confidence: noteConfidence) {
+          self.chordLesson.onNoteClassified(userNote: throttledNote.value, index: self.state.index)
+        }
       }
     }
   }

@@ -5,8 +5,9 @@ import SwiftUI
 
 final class DevChordClassificationViewModel: BaseViewModel<DevChordClassificationViewState> {
   private let audioRecorderManager: AudioRecorderManager = .shared
-  private let chordClassification = ChordClassification() // 기타코드 크로마 벡터 등등과 관련된 로직이 들어가있음
-
+  private let chordClassification = ChordClassification()
+  private let throttleAggregator = ThrottleAggregator<Chord>(interval: 2.0)
+  
   init() {
     super.init(state: .init(
       recordPermissionState: audioRecorderManager.getRecordPermissionState(),
@@ -15,41 +16,40 @@ final class DevChordClassificationViewModel: BaseViewModel<DevChordClassificatio
       selectedCodes: Chord.allCases
     ))
   }
-
+  
   private func startRecording() {
     audioRecorderManager.start { [weak self] buffer, _ in
       guard let self = self else { return }
-
+      
       // buffer 단위로 감지하고, 결과가 없으면 리턴
-      guard let chord = self.chordClassification.detectCode(
+      if let (chord, confidence) = self.chordClassification.run(
         buffer: buffer,
         windowSize: self.audioRecorderManager.windowSize,
         activeChords: self.state.selectedCodes
-      ) else {
-        return
-      }
-
-      // UI 업데이트
-      DispatchQueue.main.async {
-        self.emit(self.state.copy(
-          chord: { chord }
-        ))
+      ) {
+        if let throttled = self.throttleAggregator.add(value: chord, confidence: confidence) {
+          // UI 업데이트
+          self.emit(self.state.copy(
+            chord: { throttled.value },
+            confidence: throttled.confidence
+          ))
+        }
       }
     }
   }
-
+  
   func requestRecordPermission() {
     audioRecorderManager.requestRecordPermission { isGranted in
       self.emit(self.state.copy(
         recordPermissionState: isGranted ? .granted : .denied
       ))
-
+      
       if isGranted {
         self.startRecording()
       }
     }
   }
-
+  
   func openSettings() {
     if let url = URL(string: UIApplication.openSettingsURLString),
        UIApplication.shared.canOpenURL(url)
@@ -57,7 +57,7 @@ final class DevChordClassificationViewModel: BaseViewModel<DevChordClassificatio
       UIApplication.shared.open(url)
     }
   }
-
+  
   override func dispose() {
     audioRecorderManager.stop()
   }

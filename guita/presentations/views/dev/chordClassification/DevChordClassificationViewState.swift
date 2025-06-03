@@ -1,8 +1,8 @@
 //  Copyright © 2025 ADA 4th Challenge3 Team1. All rights reserved.
 
 struct DevChordClassificationViewState {
-  let recordPermissionState: PermissionResult // 녹음 권한
-  let chord: Chord? // 화면상에 나올 코드 !
+  let recordPermissionState: PermissionResult
+  let chord: Chord?
   let confidence: Float
   let selectedCodes: [Chord]
 

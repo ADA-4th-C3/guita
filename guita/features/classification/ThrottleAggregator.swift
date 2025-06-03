@@ -5,14 +5,14 @@ import Foundation
 final class ThrottleAggregator<T: Hashable> {
   private let interval: TimeInterval
   private var lastEmitTime: TimeInterval = 0
-  private var collected: [(value: T, confidence: Double)] = []
+  private var collected: [(value: T, confidence: Float)] = []
   private var timerStart: TimeInterval?
 
   init(interval: TimeInterval = 1.0) {
     self.interval = interval
   }
 
-  func add(value: T, confidence: Double) -> (value: T, confidence: Double)? {
+  func add(value: T, confidence: Float) -> (value: T, confidence: Float)? {
     let currentTime = Date().timeIntervalSince1970
 
     
@@ -26,9 +26,9 @@ final class ThrottleAggregator<T: Hashable> {
       let grouped = Dictionary(grouping: collected, by: { $0.value })
       let mostFrequent = grouped.max(by: { $0.value.count < $1.value.count })?.key
 
-      let avgConfidence: Double
+      let avgConfidence: Float
       if let key = mostFrequent, let items = grouped[key] {
-        avgConfidence = items.map { $0.confidence }.reduce(0, +) / Double(items.count)
+        avgConfidence = items.map { $0.confidence }.reduce(0, +) / Float(items.count)
       } else {
         avgConfidence = 0
       }

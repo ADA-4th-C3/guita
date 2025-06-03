@@ -24,7 +24,7 @@ struct NoteClassification {
     windowSize: Int,
     minVolumeThreshold: Double = 0.01,
     minConfidenceThreshold: Double = 0.5
-  ) -> (note: Note, confidence: Double)? {
+  ) -> (note: Note, confidence: Float)? {
     // Audio data in buffer
     guard let channelData = buffer.floatChannelData?[0] else { return nil }
     let frameLength = Int(buffer.frameLength)
@@ -111,16 +111,13 @@ struct NoteClassification {
       let ratio = peak / neighborAverage
       
       // sigmoid로 정규화
-      let confidenceRaw = 1 / (1 + exp(-(ratio - 1)))
-      let confidence = (confidenceRaw * 100).rounded() / 100
-      
-      
+      let confidence = 1 / (1 + exp(-(ratio - 1)))
       if confidence < minConfidenceThreshold {
         return nil
       }
       
       // Logger.d("Frequency: \(frequency) Hz, Note: \(note)")
-      return (note, confidence)
+      return (note, Float(confidence))
     } else {
       return nil
     }

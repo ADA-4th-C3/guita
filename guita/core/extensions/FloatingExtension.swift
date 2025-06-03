@@ -5,4 +5,9 @@ extension Float {
   func formatted(_ decimals: Int) -> String {
     String(format: "%.\(decimals)f", self)
   }
+  
+  /// Returns the string truncated to the specified number of decimal places
+  func truncated(_ decimals: Int) -> String {
+    return String(format: "%.\(decimals)f", self)
+  }
 }

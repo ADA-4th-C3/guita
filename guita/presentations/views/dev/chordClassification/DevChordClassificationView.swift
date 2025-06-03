@@ -30,7 +30,7 @@ struct DevChordClassificationView: View {
         case .granted, .restricted:
           if let chord = state.chord {
             VStack {
-              Text("\(chord)")
+              Text("\(chord.rawValue) (\(state.confidence.truncated(2)))")
                 .font(.headline)
                 .foregroundStyle(.blue)
               Guitar(input: NoteOrChord.chord(chord))

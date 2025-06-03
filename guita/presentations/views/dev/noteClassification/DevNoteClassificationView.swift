@@ -30,7 +30,7 @@ struct DevNoteClassificationView: View {
         case .granted, .restricted:
           if let note = state.note {
             VStack {
-              Text("\(note) (\(state.confidence!))")
+              Text("\(note) (\(state.confidence.truncated(2)))")
                 .font(.headline)
                 .foregroundStyle(.blue)
               Guitar(input: NoteOrChord.note(note))
