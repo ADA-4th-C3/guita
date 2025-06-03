@@ -11,7 +11,7 @@ struct DevChordClassificationView: View {
         // MARK: Toolbar
         Toolbar(title: "Code Classification")
         Spacer()
-
+        
         switch state.recordPermissionState {
         case .undetermined:
           Loading()
@@ -21,22 +21,18 @@ struct DevChordClassificationView: View {
               .font(.headline)
               .multilineTextAlignment(.center)
               .padding()
-
+            
             Button("설정으로 이동") {
               viewModel.openSettings()
             }
             .buttonStyle(.borderedProminent)
           }
         case .granted, .restricted:
-          if let chord = state.chord {
-            VStack {
-              Text("\(chord.rawValue) (\(state.confidence.truncated(2)))")
-                .font(.headline)
-                .foregroundStyle(.blue)
-              Guitar(input: NoteOrChord.chord(chord))
-            }
-          } else {
-            Text("")
+          VStack {
+            Text(state.chord == nil ? " " : "\(state.chord!.rawValue) (\(state.confidence.truncated(2)))")
+              .font(.headline)
+              .foregroundStyle(.blue)
+            Guitar(input: state.chord == nil ? nil : NoteOrChord.chord(state.chord!))
           }
         }
         Spacer()

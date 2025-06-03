@@ -11,7 +11,7 @@ struct DevNoteClassificationView: View {
         // MARK: Toolbar
         Toolbar(title: "Note Classification")
         Spacer()
-
+        
         switch state.recordPermissionState {
         case .undetermined:
           Loading()
@@ -21,25 +21,21 @@ struct DevNoteClassificationView: View {
               .font(.headline)
               .multilineTextAlignment(.center)
               .padding()
-
+            
             Button("설정으로 이동") {
               viewModel.openSettings()
             }
             .buttonStyle(.borderedProminent)
           }
         case .granted, .restricted:
-          if let note = state.note {
-            VStack {
-              Text("\(note) (\(state.confidence.truncated(2)))")
-                .font(.headline)
-                .foregroundStyle(.blue)
-              Guitar(input: NoteOrChord.note(note))
-            }
-          } else {
-            Text("")
+          VStack {
+            Text(state.note == nil ? " " : "\(state.note!) (\(state.confidence.truncated(2)))")
+              .font(.headline)
+              .foregroundStyle(.blue)
+            Guitar(input: state.note == nil ? nil : NoteOrChord.note(state.note!))
           }
         }
-
+        
         Spacer()
       }
       .onAppear {

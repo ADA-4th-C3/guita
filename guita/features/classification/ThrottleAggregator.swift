@@ -7,6 +7,7 @@ final class ThrottleAggregator<T: Hashable> {
   private var lastEmitTime: TimeInterval = 0
   private var collected: [(value: T, confidence: Float)] = []
   private var timerStart: TimeInterval?
+  private var hasEmittedFirst = false
 
   init(interval: TimeInterval = 1.0) {
     self.interval = interval
@@ -15,7 +16,12 @@ final class ThrottleAggregator<T: Hashable> {
   func add(value: T, confidence: Float) -> (value: T, confidence: Float)? {
     let currentTime = Date().timeIntervalSince1970
 
-    
+    if !hasEmittedFirst {
+      hasEmittedFirst = true
+      timerStart = currentTime
+      return (value, confidence)
+    }
+
     if timerStart == nil {
       timerStart = currentTime
     }

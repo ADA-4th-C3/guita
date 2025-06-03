@@ -6,7 +6,7 @@ import SwiftUI
 final class DevChordClassificationViewModel: BaseViewModel<DevChordClassificationViewState> {
   private let audioRecorderManager: AudioRecorderManager = .shared
   private let chordClassification = ChordClassification()
-  private let throttleAggregator = ThrottleAggregator<Chord>(interval: 2.0)
+  private let throttleAggregator = ThrottleAggregator<Chord>(interval: 1.0)
   
   init() {
     super.init(state: .init(
