@@ -68,7 +68,7 @@ struct LessonView: View {
               }
               Divider()
               Button(action: {
-                router.push(.curriculum) // 임시로 라우팅 해둠
+                router.push(.fullLesson)
               }) {
                 Text("곡 전체 학습")
                   .fontKoddi(26, color: .light, weight: .regular)
