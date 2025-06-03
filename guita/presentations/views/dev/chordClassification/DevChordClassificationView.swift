@@ -11,7 +11,7 @@ struct DevChordClassificationView: View {
         // MARK: Toolbar
         Toolbar(title: "Code Classification")
         Spacer()
-        
+
         switch state.recordPermissionState {
         case .undetermined:
           Loading()
@@ -21,7 +21,7 @@ struct DevChordClassificationView: View {
               .font(.headline)
               .multilineTextAlignment(.center)
               .padding()
-            
+
             Button("설정으로 이동") {
               viewModel.openSettings()
             }

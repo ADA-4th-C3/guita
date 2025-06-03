@@ -17,7 +17,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
   private var chordLesson: ChordLesson
   private var playTask: Task<Void, Never>? = nil
   private let router: Router
-  
+
   init(_ router: Router, _ chord: Chord, _ chords: [Chord]) {
     self.router = router
     let state = ChordLessonViewState(
@@ -32,11 +32,11 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
     chordLesson = ChordLesson(chord, state.totalStep)
     super.init(state: state)
   }
-  
+
   private func cancelPlayTask() {
     playTask?.cancel()
   }
-  
+
   /// 레슨 재생
   func play() {
     cancelPlayTask()
@@ -56,7 +56,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
       }
     }
   }
-  
+
   /// 다음 레슨으로 이동
   func goNext() {
     cancelPlayTask()
@@ -66,7 +66,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
         router.pop()
         return
       }
-      
+
       // 다음 코드 시작
       startNextChord(nextChord)
       playStepChangeSound()
@@ -81,7 +81,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
       }
     }
   }
-  
+
   /// 이전 레슨으로 이동
   func goPrevious() {
     cancelPlayTask()
@@ -94,7 +94,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
       self.play()
     }
   }
-  
+
   /// 권한 승인
   func onPermissionGranted() {
     if state.isPermissionGranted { return }
@@ -104,7 +104,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
       self.startClassification()
     }
   }
-  
+
   /// 다음 코드 학습으로 넘어가기
   func startNextChord(_ nextChord: Chord) {
     let nextState = state.copy(
@@ -117,7 +117,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
     emit(nextState)
     play()
   }
-  
+
   /// 음성 명령 인식 시작
   private func startVoiceCommand() {
     voiceCommandManager.start(
@@ -132,7 +132,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
       isVoiceCommandEnabled: true
     ))
   }
-  
+
   /// 사운드 분류 시작
   private func startClassification() {
     audioRecorderManager.start { buffer, _ in
@@ -145,9 +145,8 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
         if let throttledChord = self.chordThrottle.add(value: chord, confidence: chordConfidence) {
           self.chordLesson.onChordClassified(userChord: throttledChord.value)
         }
-        
       }
-      
+
       // Note classification
       if let (note, noteConfidence) = self.noteClassification.run(
         buffer: buffer,
@@ -160,7 +159,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
       }
     }
   }
-  
+
   private func playStepChangeSound(completion: (() -> Void)? = nil) {
     Task {
       await self.audioPlayerManager.start(audioFile: .next)
@@ -168,7 +167,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
       completion?()
     }
   }
-  
+
   override func dispose() {
     cancelPlayTask()
     voiceCommandManager.stop()

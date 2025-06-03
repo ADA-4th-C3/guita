@@ -25,14 +25,14 @@ struct DevConfigView: View {
             Tile(title: "느리게", subtitle: "🐢", action: { viewModel.updateFullTrackPlaySpeed(isSpeedUp: false) })
             Tile(title: "빠르게", subtitle: "🐇", action: { viewModel.updateFullTrackPlaySpeed(isSpeedUp: true) })
           }
-          
+
           // MARK: Chord Throttle
           Section(header: Text("Chord Throttle Interval")) {
             Text("Chord 인식 간격 : \(state.chordThrottleInterval.formatted(2))s")
             Tile(title: "느리게", subtitle: "🐢", action: { viewModel.updateChordThrottleInterval(isSpeedUp: false) })
             Tile(title: "빠르게", subtitle: "🐇", action: { viewModel.updateChordThrottleInterval(isSpeedUp: true) })
           }
-          
+
           // MARK: Note Throttle
           Section(header: Text("Note Throttle Interval")) {
             Text("Note 인식 간격 : \(state.noteThrottleInterval.formatted(2))s")

@@ -8,7 +8,7 @@ final class DevNoteClassificationViewModel: BaseViewModel<DevNoteClassificationV
   private let throttleAggregator = ThrottleAggregator<Note>(
     interval: ConfigManager.shared.state.noteThrottleInterval
   )
-  
+
   init() {
     super.init(state: .init(
       recordPermissionState: audioRecorderManager.getRecordPermissionState(),
@@ -16,19 +16,19 @@ final class DevNoteClassificationViewModel: BaseViewModel<DevNoteClassificationV
       confidence: 0.0
     ))
   }
-  
+
   func requestRecordPermission() {
     audioRecorderManager.requestRecordPermission { isGranted in
       self.emit(self.state.copy(
         recordPermissionState: isGranted ? .granted : .denied
       ))
-      
+
       if isGranted {
         self.startRecording()
       }
     }
   }
-  
+
   func startRecording() {
     audioRecorderManager.start { buffer, _ in
       if let (note, confidence) = self.noteClassification.run(
@@ -45,7 +45,7 @@ final class DevNoteClassificationViewModel: BaseViewModel<DevNoteClassificationV
       }
     }
   }
-  
+
   func openSettings() {
     if let url = URL(string: UIApplication.openSettingsURLString),
        UIApplication.shared.canOpenURL(url)
@@ -53,7 +53,7 @@ final class DevNoteClassificationViewModel: BaseViewModel<DevNoteClassificationV
       UIApplication.shared.open(url)
     }
   }
-  
+
   override func dispose() {
     audioRecorderManager.stop()
   }

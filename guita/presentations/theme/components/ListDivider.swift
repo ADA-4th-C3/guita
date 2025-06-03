@@ -3,14 +3,14 @@
 import SwiftUI
 
 struct ListDivider: View {
-    var body: some View {
-      Rectangle()
-        .frame(height: 1)
-        .background(.darkGrey)
-        .opacity(0.3)
-    }
+  var body: some View {
+    Rectangle()
+      .frame(height: 1)
+      .background(.darkGrey)
+      .opacity(0.3)
+  }
 }
 
 #Preview {
-    ListDivider()
+  ListDivider()
 }

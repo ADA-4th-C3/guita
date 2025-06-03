@@ -9,7 +9,7 @@ final class DevChordClassificationViewModel: BaseViewModel<DevChordClassificatio
   private let throttleAggregator = ThrottleAggregator<Chord>(
     interval: ConfigManager.shared.state.chordThrottleInterval
   )
-  
+
   init() {
     super.init(state: .init(
       recordPermissionState: audioRecorderManager.getRecordPermissionState(),
@@ -18,11 +18,11 @@ final class DevChordClassificationViewModel: BaseViewModel<DevChordClassificatio
       selectedCodes: Chord.allCases
     ))
   }
-  
+
   private func startRecording() {
     audioRecorderManager.start { [weak self] buffer, _ in
       guard let self = self else { return }
-      
+
       // buffer 단위로 감지하고, 결과가 없으면 리턴
       if let (chord, confidence) = self.chordClassification.run(
         buffer: buffer,
@@ -39,19 +39,19 @@ final class DevChordClassificationViewModel: BaseViewModel<DevChordClassificatio
       }
     }
   }
-  
+
   func requestRecordPermission() {
     audioRecorderManager.requestRecordPermission { isGranted in
       self.emit(self.state.copy(
         recordPermissionState: isGranted ? .granted : .denied
       ))
-      
+
       if isGranted {
         self.startRecording()
       }
     }
   }
-  
+
   func openSettings() {
     if let url = URL(string: UIApplication.openSettingsURLString),
        UIApplication.shared.canOpenURL(url)
@@ -59,7 +59,7 @@ final class DevChordClassificationViewModel: BaseViewModel<DevChordClassificatio
       UIApplication.shared.open(url)
     }
   }
-  
+
   override func dispose() {
     audioRecorderManager.stop()
   }

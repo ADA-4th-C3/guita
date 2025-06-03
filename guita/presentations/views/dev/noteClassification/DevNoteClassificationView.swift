@@ -11,7 +11,7 @@ struct DevNoteClassificationView: View {
         // MARK: Toolbar
         Toolbar(title: "Note Classification")
         Spacer()
-        
+
         switch state.recordPermissionState {
         case .undetermined:
           Loading()
@@ -21,7 +21,7 @@ struct DevNoteClassificationView: View {
               .font(.headline)
               .multilineTextAlignment(.center)
               .padding()
-            
+
             Button("설정으로 이동") {
               viewModel.openSettings()
             }
@@ -35,7 +35,7 @@ struct DevNoteClassificationView: View {
             Guitar(input: state.note == nil ? nil : NoteOrChord.note(state.note!))
           }
         }
-        
+
         Spacer()
       }
       .onAppear {
