@@ -45,17 +45,17 @@ struct ChordLessonView: View {
 
           // MARK: Controllers
           HStack {
-            IconButton("chevron-left", color: .light, size: 95, isSystemImage: false) {
+            IconButton("chevron-left", size: 95) {
               viewModel.goPrevious()
             }.accessibilityAddTraits(.isButton)
               .accessibilityLabel("이전")
 
-            IconButton("play", size: 95, isSystemImage: false) {
+            IconButton("play", color: .accent, size: 95) {
               viewModel.play()
             }.accessibilityAddTraits(.isButton)
               .accessibilityLabel("재생")
 
-            IconButton("chevron-right", color: .light, size: 95, isSystemImage: false) {
+            IconButton("chevron-right", size: 95) {
               viewModel.goNext()
             }.accessibilityAddTraits(.isButton)
               .accessibilityLabel(viewModel.nextChordAccessibilityLabel)
