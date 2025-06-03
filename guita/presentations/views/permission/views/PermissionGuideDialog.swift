@@ -14,6 +14,7 @@ struct PermissionGuideDialog: View {
         Text("Guita 앱의 편리한 이용을 위해\n아래 접근권한의 허용이 필요합니다")
           .multilineTextAlignment(.center)
           .fontKoddi(17, color: .dark, weight: .bold)
+        
 
         dividerView()
 

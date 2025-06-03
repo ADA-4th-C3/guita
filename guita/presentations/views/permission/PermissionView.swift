@@ -18,7 +18,10 @@ struct PermissionView<Content: View>: View {
     ) { viewModel, state in
       ZStack {
         // MARK: Content
-        content()
+        
+        if state.isGranted {
+          content()
+        }
 
         // MARK: Background
         if state.showGuideDialog || state.showDeniedDialog {
