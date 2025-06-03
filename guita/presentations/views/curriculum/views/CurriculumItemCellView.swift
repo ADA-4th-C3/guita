@@ -6,33 +6,27 @@ struct CurriculumItemCell: View {
   @EnvironmentObject var router: Router
 
   var body: some View {
-    HStack {
-      HStack {
-        Text(songInfo.level)
-          .font(.system(size: 18))
-          .fontWeight(.bold)
-        Text(songInfo.title)
-          .font(.system(size: 18))
-          .fontWeight(.bold)
-      }
-      .padding(.horizontal, 30)
+    HStack(alignment: .center) {
+      Text("\(songInfo.level) \(songInfo.truncatedTitle)")
+        .fontKoddi(18, color: .light, weight: .bold)
+        .frame(width: UIScreen.main.bounds.width * 0.6, alignment: .leading)
+        .padding(.leading, 25)
 
       Spacer()
 
       HStack {
         ForEach(songInfo.chords, id: \.self) { chord in
           Text("\(chord.rawValue)")
-            .font(.system(size: 17))
-            .foregroundColor(.black)
-            .padding(.horizontal, 6)
+            .fontKoddi(17, color: .black, weight: .bold)
+            .padding(.horizontal, 5.5)
+            .padding(.vertical, 1)
             .background(Color.white)
             .cornerRadius(5)
         }
-      }
-      .padding(.horizontal)
-      .frame(height: 110)
-      // padding 영역 조절하기
+      }.padding(.trailing, 25)
     }
+
+    .frame(height: 110)
     .contentShape(Rectangle())
     .onTapGesture {
       router.push(.lesson(songInfo: songInfo))

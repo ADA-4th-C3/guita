@@ -17,7 +17,7 @@ struct HomeView: View {
             .opacity(0.01)
             .onLongPressGesture {
               router.push(.dev)
-            }
+            }.accessibilityHidden(true)
         })
         Spacer()
         Button {
@@ -26,13 +26,11 @@ struct HomeView: View {
           VStack {
             Image("pick")
               .resizable()
-              .frame(width: 46.95, height: 54.17)
-              .padding(.vertical, 9.17)
+              .frame(width: 47, height: 54)
+              .padding(.bottom, 43)
             Text("기타 학습")
-              .fontWeight(.bold)
-              .font(.system(size: 32))
-              .foregroundStyle(.light)
-          }.offset(y: -40)
+              .fontKoddi(32, color: .light, weight: .bold)
+          }.offset(y: -80)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
       }
