@@ -51,7 +51,7 @@ struct Guitar: View {
             path.addLine(to: CGPoint(x: x, y: height))
           }
           .stroke(lineWidth: CGFloat(7 - string))
-          .foregroundStyle(.gray)
+          .foregroundStyle(.darkGrey)
         }
 
         // Draw frets
@@ -68,7 +68,7 @@ struct Guitar: View {
         ForEach(markerFrets.sorted(), id: \.self) { fret in
           let y = (CGFloat(fret) + openFretOffset + 0.5) * fretSpacing
           Circle()
-            .fill(Color.gray.opacity(0.5))
+            .fill(.darkGrey.opacity(0.75))
             .frame(width: 10, height: 10)
             .position(x: width / 2, y: y)
         }

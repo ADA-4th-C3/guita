@@ -13,7 +13,7 @@ struct TechniqueLessonView: View {
         VStack {
           // MARK: Toolbar
           Toolbar(title: "주법 학습", trailing: {
-            IconButton("info", color: .light, isSystemImage: false) {
+            IconButton("info") {
               router.push(.techniqueLessonGuide)
             }
           })
