@@ -2,7 +2,7 @@
 
 import SwiftUI
 
-struct HelpSection: View {
+struct GuideSection: View {
   let title: String
   let titleSize: CGFloat
   let contents: [String]
