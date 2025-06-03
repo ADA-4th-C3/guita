@@ -12,10 +12,12 @@ struct TechniqueLessonView: View {
       ) { viewModel, state in
         VStack {
           // MARK: Toolbar
-          Toolbar(title: "주법 학습", trailing: {
+          Toolbar(title: "주법 학습", accessibilityText: "", trailing: {
             IconButton("info", color: .light, isSystemImage: false) {
               router.push(.techniqueLessonGuide)
-            }
+            }.accessibilityAddTraits(.isButton)
+              .accessibilityLabel("사용법 도움말")
+
           })
 
           Spacer()
@@ -23,6 +25,7 @@ struct TechniqueLessonView: View {
           // MARK: Step/TotalStep
           Text("\(state.currentStep.step)/\(state.currentStep.totalSteps) 단계")
             .fontKoddi(22, color: .darkGrey, weight: .regular)
+            .accessibilityHidden(true)
 
           // MARK: description
           VStack {
@@ -39,6 +42,7 @@ struct TechniqueLessonView: View {
               .multilineTextAlignment(.center)
           }
           .frame(width: 393, height: 550)
+          .accessibilityHidden(true)
 
           // MARK: Button(back/play/next)
           HStack {
@@ -50,11 +54,16 @@ struct TechniqueLessonView: View {
                 .frame(width: 75, height: 75)
                 .padding(.trailing, 42)
             }
+            .accessibilityAddTraits(.isButton)
+            .accessibilityLabel("이전")
+
             Button(action: { viewModel.play() }) {
               Image("play")
                 .resizable()
                 .frame(width: 95, height: 95)
-            }
+            }.accessibilityAddTraits(.isButton)
+              .accessibilityLabel("재생")
+
             Button(action: {
               viewModel.nextStep()
             }) {
@@ -65,6 +74,8 @@ struct TechniqueLessonView: View {
             }
             .padding(.vertical, 15)
             .background(Color.black)
+            .accessibilityAddTraits(.isButton)
+            .accessibilityLabel("다음")
           }
         }
         .onAppear {

@@ -12,8 +12,8 @@ struct IconButton: View {
   let action: () -> Void
 
   var _color: Color {
-    if disabled { return .gray }
-    return color ?? .accentColor
+    if disabled { return .darkGrey }
+    return color ?? .light
   }
 
   init(
@@ -22,7 +22,7 @@ struct IconButton: View {
     size: CGFloat? = nil,
     padding: CGFloat? = nil,
     disabled: Bool = false,
-    isSystemImage: Bool = true,
+    isSystemImage: Bool = false,
     action: @escaping () -> Void
   ) {
     self.icon = icon
@@ -54,8 +54,8 @@ struct IconButton: View {
 #Preview {
   BasePreview {
     ZStack {
-      Color(.gray)
-      IconButton("chevron.right") {}
+      Color(.black)
+      IconButton("chevron.right", isSystemImage: true) {}
     }
   }
 }

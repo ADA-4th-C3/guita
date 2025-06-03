@@ -10,6 +10,7 @@ enum SubPage: Hashable {
   case lesson(songInfo: SongInfo)
   case chord(songInfo: SongInfo)
   case chordLesson(chord: Chord, chords: [Chord])
+  case chordLessonGuide
   case techniqueLesson
   case techniqueLessonGuide
   case sectionLesson

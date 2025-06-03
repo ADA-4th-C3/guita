@@ -8,6 +8,7 @@ struct Toolbar<Leading: View, Trailing: View>: View {
   @EnvironmentObject var router: Router
 
   let title: String
+  let accessibilityText: String
   let titleColor: Color?
   let leading: () -> Leading
   let trailing: () -> Trailing
@@ -15,12 +16,14 @@ struct Toolbar<Leading: View, Trailing: View>: View {
 
   init(
     title: String = "",
+    accessibilityText: String? = nil,
     titleColor: Color? = nil,
     isPopButton: Bool = true,
     @ViewBuilder leading: @escaping () -> Leading = { EmptyView() },
     @ViewBuilder trailing: @escaping () -> Trailing = { EmptyView() }
   ) {
     self.title = title
+    self.accessibilityText = accessibilityText ?? title
     self.titleColor = titleColor
     self.leading = leading
     self.trailing = trailing
@@ -35,6 +38,7 @@ struct Toolbar<Leading: View, Trailing: View>: View {
           IconButton("arrow-left", color: .light, isSystemImage: false) {
             router.pop()
           }
+          .accessibilityLabel("나가기")
         } else {
           leading()
         }
@@ -51,6 +55,7 @@ struct Toolbar<Leading: View, Trailing: View>: View {
           .foregroundColor(.primary)
           .fontKoddi(24, weight: .bold)
           .lineSpacing(1.4)
+          .accessibilityLabel("\(title) 머릿말, \(accessibilityText)")
       }
     }
     .frame(height: 56)
@@ -63,7 +68,7 @@ struct Toolbar<Leading: View, Trailing: View>: View {
       title: "Preview",
       isPopButton: true,
       trailing: {
-        IconButton("pencil") {}
+        IconButton("pencil", isSystemImage: true) {}
       }
     )
   }

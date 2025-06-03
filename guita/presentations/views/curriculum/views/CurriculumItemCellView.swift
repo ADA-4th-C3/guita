@@ -37,5 +37,7 @@ struct CurriculumItemCell: View {
     .onTapGesture {
       router.push(.lesson(songInfo: songInfo))
     }
+    .accessibilityElement(children: .ignore)
+    .accessibilityLabel("\(songInfo.level) \(songInfo.title) 학습하기 버튼")
   }
 }

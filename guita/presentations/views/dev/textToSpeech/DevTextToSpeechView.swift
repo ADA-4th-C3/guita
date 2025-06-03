@@ -33,13 +33,13 @@ struct DevTextToSpeechView: View {
           }
           Spacer()
           HStack {
-            IconButton("chevron-left", color: .light, size: 95, isSystemImage: false) {
+            IconButton("chevron-left", size: 95) {
               viewModel.goPrevious()
             }
-            IconButton("play", size: 95, isSystemImage: false) {
+            IconButton("play", size: 95) {
               viewModel.play()
             }
-            IconButton("chevron-right", color: .light, size: 95, isSystemImage: false) {
+            IconButton("chevron-right", size: 95) {
               viewModel.goNext()
             }
           }
