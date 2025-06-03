@@ -29,6 +29,7 @@ struct RouterView: View {
           case let .lesson(songInfo): LessonView(songInfo: songInfo)
           case let .chord(songInfo): ChordView(songInfo: songInfo)
           case let .chordLesson(chord, chords): ChordLessonView(chord: chord, chords: chords)
+          case .chordLessonGuide: ChordLessonGuideView()
           case .techniqueLesson: TechniqueLessonView()
           case .techniqueLessonGuide: TechniqueLessonGuideView()
           // MARK: Dev

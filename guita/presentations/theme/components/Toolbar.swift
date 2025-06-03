@@ -63,7 +63,7 @@ struct Toolbar<Leading: View, Trailing: View>: View {
       title: "Preview",
       isPopButton: true,
       trailing: {
-        IconButton("pencil") {}
+        IconButton("pencil", isSystemImage: true) {}
       }
     )
   }
