@@ -138,7 +138,7 @@ final class ChordLesson: BaseLesson {
           let nFret = coordinate.0.first!.fret
           let nString = coordinate.0.first!.string
           let (fret, string) = (nFret.koOrd, nString.koOrd)
-          text += "\(fret) 프랫, 아래서 \(string) 줄"
+          text += "\(fret) 프렛, 아래서 \(string) 줄"
           if !isLast { text += ", " }
         }
         text += "을 잡고 위에서 아래로 모든 줄을 피크로 천천히 쓸어내렸을 때"

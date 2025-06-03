@@ -6,9 +6,9 @@ final class ChordLessonGuideViewModel: BaseViewModel<ChordLessonGuideViewState> 
     super.init(state: .init())
   }
 
-  func playAnswerSound() {
+  func playSound(_ audioFile: AudioFile) {
     Task {
-      await audioPlayerManager.start(audioFile: .answer)
+      await audioPlayerManager.start(audioFile: audioFile)
     }
   }
 }

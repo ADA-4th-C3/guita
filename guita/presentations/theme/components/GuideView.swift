@@ -16,22 +16,25 @@ struct GuideSection: Identifiable {
 
 struct GuideView: View {
   let title: String
-  let description: String
   let sections: [GuideSection]
   
   var body: some View {
     VStack(spacing: 0) {
-      Toolbar(title: "도움말")
+      Toolbar(title: "\(title) 도움말")
       ScrollView {
         VStack(alignment: .leading, spacing: 32) {
-          VStack(alignment: .leading, spacing: 5) {
-            Text(title)
-              .fontKoddi(32, weight: .bold)
-            divider()
-            Text(description)
-              .fontKoddi(18, color: .lightGrey)
+          // MARK: Table of contents
+          VStack(alignment: .leading, spacing: 4) {
+            Text("목차")
+              .fontKoddi(18, color: .light, weight: .bold)
+            
+            ForEach(Array(sections.enumerated()), id: \.element.id) { index, section in
+              Text("\(index + 1). \(section.title)")
+                .fontKoddi(15, color: .lightGrey)
+            }
           }
           
+          // MARK: Section
           ForEach(sections, id: \.id) { section in
             VStack(alignment: .leading, spacing: 5) {
               Text(section.title)
@@ -59,7 +62,6 @@ struct GuideView: View {
 #Preview {
   GuideView(
     title: "코드 학습",
-    description: "코드 학습은 제공하는 음성 안내를 통해 원하는 코드를 학습할 수 있습니다.\n\n이 화면은 사용자가 음성을 통해 조작할 수 있습니다.",
     sections: [
       GuideSection(
         title: "음성 학습 안내",
