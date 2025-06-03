@@ -28,13 +28,13 @@ enum NoteOrChord {
 }
 
 struct Guitar: View {
-  var input: NoteOrChord
+  var input: NoteOrChord?
   var body: some View {
     GeometryReader { geometry in
       let stringCount = 6
       let fretCount = 20
       let openFretOffset: CGFloat = 1.0
-      let notePositions = input.coordinates
+      let notePositions = input?.coordinates ?? []
       let markerFrets: Set<Int> = [3, 5, 7, 9, 12, 15, 17]
 
       let width = geometry.size.width
@@ -92,7 +92,7 @@ struct Guitar: View {
               .fill(Color.red)
               .frame(width: 24, height: 24)
               .position(x: x, y: y)
-            Text(input.label)
+            Text(input?.label ?? "")
               .font(.caption)
               .fontWeight(.bold)
               .foregroundColor(.light)

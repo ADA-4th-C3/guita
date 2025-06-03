@@ -25,6 +25,18 @@ final class DevConfigViewModel: BaseViewModel<Config> {
     }
   }
 
+  func updateChordThrottleInterval(isSpeedUp: Bool) {
+    let rawValue = state.chordThrottleInterval + (isSpeedUp ? 0.1 : -0.1)
+    let value = max(0.0, min(5.0, rawValue))
+    emit(state.copy(chordThrottleInterval: value))
+  }
+
+  func updateNoteThrottleInterval(isSpeedUp: Bool) {
+    let rawValue = state.noteThrottleInterval + (isSpeedUp ? 0.1 : -0.1)
+    let value = max(0.0, min(5.0, rawValue))
+    emit(state.copy(noteThrottleInterval: value))
+  }
+
   override func dispose() {
     textToSpeechManager.stop()
   }
