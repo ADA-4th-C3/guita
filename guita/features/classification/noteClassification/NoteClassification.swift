@@ -22,7 +22,8 @@ struct NoteClassification {
     buffer: AVAudioPCMBuffer,
     sampleRate: Double,
     windowSize: Int,
-    minVolumeThreshold: Double = 0.01
+    minVolumeThreshold: Double = 0.01,
+    minConfidenceThreshold: Double = 0.5
   ) -> (note: Note, confidence: Double)? {
     // Audio data in buffer
     guard let channelData = buffer.floatChannelData?[0] else { return nil }
@@ -112,6 +113,12 @@ struct NoteClassification {
       // sigmoid로 정규화
       let confidenceRaw = 1 / (1 + exp(-(ratio - 1)))
       let confidence = (confidenceRaw * 100).rounded() / 100
+      
+      
+      if confidence < minConfidenceThreshold {
+        return nil
+      }
+      
       // Logger.d("Frequency: \(frequency) Hz, Note: \(note)")
       return (note, confidence)
     } else {
