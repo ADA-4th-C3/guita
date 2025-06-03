@@ -160,3 +160,18 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
     audioRecorderManager.stop()
   }
 }
+
+extension ChordLessonViewModel {
+  var nextChordAccessibilityLabel: String {
+    let isLastStep = state.index + 1 == state.totalStep
+    if isLastStep {
+      if let nextChord = state.nextChord {
+        return "\(nextChord.rawValue) 다음"
+      } else {
+        return "다음"
+      }
+    } else {
+      return "다음"
+    }
+  }
+}
