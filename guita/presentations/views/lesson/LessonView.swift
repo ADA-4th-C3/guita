@@ -72,7 +72,7 @@ struct LessonView: View {
                   .accessibilityLabel("곡 구간 학습하기")
               }
               Button(action: {
-                router.push(.curriculum) // 임시로 라우팅 해둠
+                router.push(.fullLesson)
               }) {
                 Text("곡 전체 학습")
                   .font(.system(size: 20))

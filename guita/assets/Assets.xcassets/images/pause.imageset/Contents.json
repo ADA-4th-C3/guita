@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "Property 1 정지=Component 1, Property 2=정지.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

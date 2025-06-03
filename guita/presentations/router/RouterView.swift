@@ -34,6 +34,9 @@ struct RouterView: View {
           case .techniqueLessonGuide: TechniqueLessonGuideView()
           case .sectionLesson: SectionLessonView()
           case .sectionLessonGuide: SectionLessonGuideView()
+          case .fullLesson: FullLessonView()
+          case .fullLessonGuide: FullLessonGuideView()
+            
           // MARK: Dev
           case .dev: DevView()
           case .devConfig: DevConfigView()

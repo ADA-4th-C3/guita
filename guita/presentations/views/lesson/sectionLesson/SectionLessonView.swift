@@ -4,7 +4,7 @@ import SwiftUI
 
 struct SectionLessonView: View {
   @EnvironmentObject var router: Router
-
+  
   var body: some View {
     BaseView(
       create: { SectionLessonViewModel(router) }
@@ -18,39 +18,51 @@ struct SectionLessonView: View {
       ) {
         VStack(spacing: 0) {
           // MARK: Toolbar
-          Toolbar(title: "Song", trailing: {
+          Toolbar(title: "곡 구간 학습", trailing: {
             IconButton("info", color: .light, isSystemImage: false) {
-              // TODO: IconButton 키우기
               router.push(.sectionLessonGuide)
             }
           })
-
+          .accessibilityAddTraits(.isButton)
+            .accessibilityLabel("사용법 도움말")
+          
           Spacer()
             .aspectRatio(2.5, contentMode: .fit)
-
+          
           // MARK: Index
           Text("\(state.currentStepIndex + 1)/\(state.steps.count) 단계")
             .fontKoddi(22, color: .darkGrey)
             .padding(.top, 16)
-
+            .accessibilityHidden(true)
+          
           // MARK: Step description
           if let firstInfo = state.currentStep.sectionLessonInfo.first {
             ChordProgressionBar(chords: firstInfo.chords)
+              .accessibilityHidden(true)
           }
+          
           Spacer()
             .aspectRatio(1, contentMode: .fit)
-
+          
           // MARK: Controllers
           HStack {
-            IconButton("chevron-left", color: .light, size: 95, isSystemImage: false) {
+            IconButton("chevron-left", color: .light, size: 95, disabled: state.currentStepIndex == 0, isSystemImage: false) {
               viewModel.previousStep()
             }
+            .accessibilityAddTraits(.isButton)
+            .accessibilityLabel("이전")
+            
             IconButton("play", size: 95, isSystemImage: false) {
               viewModel.play()
             }
-            IconButton("chevron-right", color: .light, size: 95, isSystemImage: false) {
+            .accessibilityAddTraits(.isButton)
+            .accessibilityLabel("재생")
+            
+            IconButton("chevron-right", color: .light, size: 95, disabled: state.currentStepIndex == state.steps.count - 1, isSystemImage: false) {
               viewModel.nextStep()
             }
+            .accessibilityAddTraits(.isButton)
+            .accessibilityLabel("다음")
           }
         }
       }
