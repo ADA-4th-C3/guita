@@ -5,18 +5,17 @@
 //  Created by 박정욱 on 6/3/25.
 //
 
-
 struct SectionLessonViewState {
-  
   let currentStepIndex: Int
   let steps: [SectionLessonStep]
   var currentStep: SectionLessonStep {
     steps[currentStepIndex]
   }
+
   /// 기능 사용 여부
   let isPermissionGranted: Bool
   let isVoiceCommandEnabled: Bool
-  
+
   func copy(
     currentStepIndex: Int? = nil,
     steps: [SectionLessonStep]? = nil,
@@ -30,5 +29,4 @@ struct SectionLessonViewState {
       isVoiceCommandEnabled: isVoiceCommandEnabled ?? self.isVoiceCommandEnabled
     )
   }
-  
 }

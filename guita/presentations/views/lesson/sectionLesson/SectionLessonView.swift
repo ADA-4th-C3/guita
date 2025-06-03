@@ -1,11 +1,10 @@
 //  Copyright © 2025 ADA 4th Challenge3 Team1. All rights reserved.
 
-
 import SwiftUI
 
 struct SectionLessonView: View {
   @EnvironmentObject var router: Router
-  
+
   var body: some View {
     BaseView(
       create: { SectionLessonViewModel(router) }
@@ -17,8 +16,6 @@ struct SectionLessonView: View {
           }
         }
       ) {
-        
-        
         VStack(spacing: 0) {
           // MARK: Toolbar
           Toolbar(title: "Song", trailing: {
@@ -30,16 +27,15 @@ struct SectionLessonView: View {
 
           Spacer()
             .aspectRatio(2.5, contentMode: .fit)
-          
+
           // MARK: Index
           Text("\(state.currentStepIndex + 1)/\(state.steps.count) 단계")
             .fontKoddi(22, color: .darkGrey)
             .padding(.top, 16)
 
-
           // MARK: Step description
           if let firstInfo = state.currentStep.sectionLessonInfo.first {
-              ChordProgressionBar(chords: firstInfo.chords)
+            ChordProgressionBar(chords: firstInfo.chords)
           }
           Spacer()
             .aspectRatio(1, contentMode: .fit)

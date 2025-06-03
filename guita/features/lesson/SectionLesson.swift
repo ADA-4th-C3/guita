@@ -121,7 +121,7 @@ enum SectionLesson {
         sectionLessonInfo: [SectionLessonInfo(ttsText: nil, chords: [.A, .E, .B7, .E])],
         audioFile: .section_repeat_13,
         featureDescription: "이전 학습으로 넘어가시려면 \"이전\", 다시 들으시려면 \"다시\"를 말씀해 주세요."
-      )
+      ),
     ]
     return steps
   }
