@@ -13,6 +13,7 @@ enum SubPage: Hashable {
   case techniqueLesson
   case techniqueLessonGuide
   case sectionLesson
+  case sectionLessonGuide
 
   // MARK: Dev
   case dev

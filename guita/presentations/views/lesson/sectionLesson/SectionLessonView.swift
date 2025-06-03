@@ -1,10 +1,5 @@
+//  Copyright © 2025 ADA 4th Challenge3 Team1. All rights reserved.
 
-//
-//  SectionLesson.swift
-//  guita
-//
-//  Created by 박정욱 on 6/3/25.
-//
 
 import SwiftUI
 
@@ -22,34 +17,43 @@ struct SectionLessonView: View {
           }
         }
       ) {
+        
+        
         VStack(spacing: 0) {
           // MARK: Toolbar
-          Toolbar(title: "Song")
+          Toolbar(title: "Song", trailing: {
+            IconButton("questionmark.circle", color: .primary) {
+              // TODO: IconButton 키우기
+              router.push(.sectionLessonGuide)
+            }
+          })
 
+          Spacer()
+            .aspectRatio(2.5, contentMode: .fit)
+          
           // MARK: Index
-          Text("\(state.index + 1)/\(state.totalStep) 단계")
+          Text("\(state.currentStepIndex + 1)/\(state.steps.count) 단계")
             .fontKoddi(22, color: .darkGrey)
             .padding(.top, 16)
-          Spacer()
+
 
           // MARK: Step description
-          Text("\(state.step.getDescription(state.chord, index: state.index))")
-            .fontKoddi(26, color: .light)
-            .lineSpacing(1.45)
-            .multilineTextAlignment(.center)
-
+          if let firstInfo = state.currentStep.sectionLessonInfo.first {
+              ChordProgressionBar(chords: firstInfo.chords)
+          }
           Spacer()
+            .aspectRatio(1, contentMode: .fit)
 
           // MARK: Controllers
           HStack {
             IconButton("chevron-left", color: .light, size: 95, isSystemImage: false) {
-              viewModel.goPrevious()
+              viewModel.previousStep()
             }
             IconButton("play", size: 95, isSystemImage: false) {
               viewModel.play()
             }
             IconButton("chevron-right", color: .light, size: 95, isSystemImage: false) {
-              viewModel.goNext()
+              viewModel.nextStep()
             }
           }
         }
