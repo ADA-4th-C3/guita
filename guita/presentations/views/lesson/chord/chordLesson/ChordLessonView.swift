@@ -49,16 +49,16 @@ struct ChordLessonView: View {
               viewModel.goPrevious()
             }.accessibilityAddTraits(.isButton)
               .accessibilityLabel("이전")
-            
+
             IconButton("play", size: 95, isSystemImage: false) {
               viewModel.play()
             }.accessibilityAddTraits(.isButton)
               .accessibilityLabel("재생")
-            
+
             IconButton("chevron-right", color: .light, size: 95, isSystemImage: false) {
               viewModel.goNext()
             }.accessibilityAddTraits(.isButton)
-            .accessibilityLabel(viewModel.nextChordAccessibilityLabel)
+              .accessibilityLabel(viewModel.nextChordAccessibilityLabel)
           }
         }
       }
