@@ -7,7 +7,9 @@ final class ConfigManager: BaseViewModel<Config> {
   private init() {
     super.init(state: repository.load() ?? Config(
       ttsSpeed: .x0_5,
-      fullTrackPlaySpeed: .x1_0
+      fullTrackPlaySpeed: .x1_0,
+      noteThrottleInterval: 1.0,
+      chordThrottleInterval: 1.0
     ))
   }
 

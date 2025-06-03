@@ -17,7 +17,6 @@ struct CurriculumView: View {
             ForEach(viewModel.state) { item in
               CurriculumItemCell(songInfo: item)
               Divider()
-              
             }
           }
         }

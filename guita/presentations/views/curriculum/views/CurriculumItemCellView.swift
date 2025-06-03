@@ -6,15 +6,15 @@ struct CurriculumItemCell: View {
   @EnvironmentObject var router: Router
 
   var body: some View {
-    HStack (alignment: .center){
+    HStack(alignment: .center) {
       Text("\(songInfo.level) \(songInfo.truncatedTitle)")
-              .fontKoddi(18, color: .light, weight: .bold)
-              .frame(width: UIScreen.main.bounds.width * 0.6, alignment: .leading)
-              .padding(.leading, 25)
-              
+        .fontKoddi(18, color: .light, weight: .bold)
+        .frame(width: UIScreen.main.bounds.width * 0.6, alignment: .leading)
+        .padding(.leading, 25)
+
       Spacer()
 
-      HStack() {
+      HStack {
         ForEach(songInfo.chords, id: \.self) { chord in
           Text("\(chord.rawValue)")
             .fontKoddi(17, color: .black, weight: .bold)
@@ -24,9 +24,8 @@ struct CurriculumItemCell: View {
             .cornerRadius(5)
         }
       }.padding(.trailing, 25)
-     
     }
-    
+
     .frame(height: 110)
     .contentShape(Rectangle())
     .onTapGesture {

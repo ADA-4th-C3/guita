@@ -3,11 +3,17 @@
 struct DevNoteClassificationViewState {
   let recordPermissionState: PermissionResult
   let note: Note?
+  let confidence: Float
 
-  func copy(recordPermissionState: PermissionResult? = nil, note: (() -> Note?)? = nil) -> DevNoteClassificationViewState {
+  func copy(
+    recordPermissionState: PermissionResult? = nil,
+    note: (() -> Note?)? = nil,
+    confidence: Float? = nil
+  ) -> DevNoteClassificationViewState {
     return DevNoteClassificationViewState(
       recordPermissionState: recordPermissionState ?? self.recordPermissionState,
-      note: note == nil ? self.note : note!()
+      note: note == nil ? self.note : note!(),
+      confidence: confidence ?? self.confidence
     )
   }
 }

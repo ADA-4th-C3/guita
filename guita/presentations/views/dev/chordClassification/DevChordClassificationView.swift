@@ -28,15 +28,11 @@ struct DevChordClassificationView: View {
             .buttonStyle(.borderedProminent)
           }
         case .granted, .restricted:
-          if let chord = state.chord {
-            VStack {
-              Text("\(chord)")
-                .font(.headline)
-                .foregroundStyle(.blue)
-              Guitar(input: NoteOrChord.chord(chord))
-            }
-          } else {
-            Text("")
+          VStack {
+            Text(state.chord == nil ? " " : "\(state.chord!.rawValue) (\(state.confidence.formatted(2)))")
+              .font(.headline)
+              .foregroundStyle(.blue)
+            Guitar(input: state.chord == nil ? nil : NoteOrChord.chord(state.chord!))
           }
         }
         Spacer()

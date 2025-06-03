@@ -12,18 +12,32 @@ struct DevConfigView: View {
         Toolbar(title: "Config")
 
         Form {
-          // MARK: FullTrackPlaySpeed
+          // MARK: TTS Speed
           Section(header: Text("TTS Speed")) {
             Text("곡 재생 속도 : \(state.ttsSpeed.value.formatted(2))")
             Tile(title: "느리게", subtitle: "🐢", action: { viewModel.updateTtsSpeed(isSpeedUp: false) })
             Tile(title: "빠르게", subtitle: "🐇", action: { viewModel.updateTtsSpeed(isSpeedUp: true) })
           }
 
-          // MARK: FullTrackPlaySpeed
-          Section(header: Text("FullTrackPlaySpeed")) {
-            Text("곡 재생 속도 : \(state.fullTrackPlaySpeed.value.formatted(2))")
+          // MARK: Full Track Play Speed
+          Section(header: Text("Full Track Play Speed")) {
+            Text("곡 재생 속도 : x\(state.fullTrackPlaySpeed.value.formatted(2))")
             Tile(title: "느리게", subtitle: "🐢", action: { viewModel.updateFullTrackPlaySpeed(isSpeedUp: false) })
             Tile(title: "빠르게", subtitle: "🐇", action: { viewModel.updateFullTrackPlaySpeed(isSpeedUp: true) })
+          }
+
+          // MARK: Chord Throttle
+          Section(header: Text("Chord Throttle Interval")) {
+            Text("Chord 인식 간격 : \(state.chordThrottleInterval.formatted(2))s")
+            Tile(title: "느리게", subtitle: "🐢", action: { viewModel.updateChordThrottleInterval(isSpeedUp: false) })
+            Tile(title: "빠르게", subtitle: "🐇", action: { viewModel.updateChordThrottleInterval(isSpeedUp: true) })
+          }
+
+          // MARK: Note Throttle
+          Section(header: Text("Note Throttle Interval")) {
+            Text("Note 인식 간격 : \(state.noteThrottleInterval.formatted(2))s")
+            Tile(title: "느리게", subtitle: "🐢", action: { viewModel.updateNoteThrottleInterval(isSpeedUp: false) })
+            Tile(title: "빠르게", subtitle: "🐇", action: { viewModel.updateNoteThrottleInterval(isSpeedUp: true) })
           }
         }
       }

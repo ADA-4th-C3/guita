@@ -28,15 +28,11 @@ struct DevNoteClassificationView: View {
             .buttonStyle(.borderedProminent)
           }
         case .granted, .restricted:
-          if let note = state.note {
-            VStack {
-              Text("\(note)")
-                .font(.headline)
-                .foregroundStyle(.blue)
-              Guitar(input: NoteOrChord.note(note))
-            }
-          } else {
-            Text("")
+          VStack {
+            Text(state.note == nil ? " " : "\(state.note!) (\(state.confidence.formatted(2)))")
+              .font(.headline)
+              .foregroundStyle(.blue)
+            Guitar(input: state.note == nil ? nil : NoteOrChord.note(state.note!))
           }
         }
 

@@ -41,7 +41,7 @@ struct TechniqueLessonView: View {
               .padding(.horizontal, 30)
               .multilineTextAlignment(.center)
           }
-          .frame(maxWidth:.infinity , maxHeight: .infinity)
+          .frame(maxWidth: .infinity, maxHeight: .infinity)
           .accessibilityHidden(true)
 
           // MARK: Button(back/play/next)
@@ -75,13 +75,13 @@ struct TechniqueLessonView: View {
             .accessibilityAddTraits(.isButton)
             .accessibilityLabel("다음")
           }
-        }.padding(.bottom,5)
-        .onAppear {
-          viewModel.startVoiceCommand()
-        }
-        .onDisappear {
-          viewModel.dispose()
-        }
+        }.padding(.bottom, 5)
+          .onAppear {
+            viewModel.startVoiceCommand()
+          }
+          .onDisappear {
+            viewModel.dispose()
+          }
       }
     }
   }

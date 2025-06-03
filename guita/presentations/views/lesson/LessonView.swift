@@ -22,7 +22,7 @@ struct LessonView: View {
             Text(songInfo.title)
               .fontKoddi(26, color: .light, weight: .bold)
               .accessibilityHidden(true)
-              .padding(.bottom,6)
+              .padding(.bottom, 6)
 
             Text(songInfo.chords.map { "\($0.rawValue)" }.joined(separator: ", "))
               .fontKoddi(18, color: .darkGrey, weight: .regular)
