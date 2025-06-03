@@ -12,7 +12,7 @@ struct LessonView: View {
     ) { _, _ in
       VStack {
         // MARK: Toolbar
-        Toolbar(title: songInfo.level, accessibilityText : "곡 제목은 \(songInfo.title) 입니다.,\(songInfo.chords)  코드를 사용하는 곡입니다. 코드 학습하기 , 주법 학습하기, 곡 구간별 학습하기, 곡 전체 학습하기 를 할 수 있습니다. 화면을 좌우로 쓸어넘기며 희망하는 학습을 선택해주십시오.")
+        Toolbar(title: songInfo.level, accessibilityText: "곡 제목은 \(songInfo.title) 입니다.,\(songInfo.chords)  코드를 사용하는 곡입니다. 코드 학습하기 , 주법 학습하기, 곡 구간별 학습하기, 곡 전체 학습하기 를 할 수 있습니다. 화면을 좌우로 쓸어넘기며 희망하는 학습을 선택해주십시오.")
 
         Spacer()
 
@@ -23,8 +23,7 @@ struct LessonView: View {
               .fontWeight(.bold)
               .font(.system(size: 32))
               .accessibilityHidden(true)
-            
-            
+
             Text(songInfo.chords.map { "\($0.rawValue)" }.joined(separator: ", "))
               .fontWeight(.semibold)
               .font(.system(size: 20))

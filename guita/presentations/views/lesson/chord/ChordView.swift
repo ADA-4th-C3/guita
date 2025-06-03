@@ -27,7 +27,7 @@ struct ChordView: View {
           }
           .accessibilityLabel("\(chord.rawValue) 코드 학습하기")
           .accessibilityAddTraits(.isButton)
-          
+
           dividerView()
         }
         Spacer()

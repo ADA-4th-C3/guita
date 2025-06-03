@@ -18,7 +18,7 @@ struct PermissionView<Content: View>: View {
     ) { viewModel, state in
       ZStack {
         // MARK: Content
-        
+
         if state.isGranted {
           content()
         }
