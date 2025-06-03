@@ -16,3 +16,14 @@ struct SongInfo: Identifiable, Hashable {
     )
   }
 }
+
+extension SongInfo {
+    var truncatedTitle: String {
+        let maxCount = 20
+        if title.count > maxCount {
+            return title.prefix(maxCount) + "…"
+        } else {
+            return title
+        }
+    }
+}
