@@ -23,7 +23,7 @@ struct NoteClassification {
     sampleRate: Double,
     windowSize: Int,
     minVolumeThreshold: Double = 0.01
-  ) -> Note? {
+  ) -> (note: Note, confidence: Double)? {
     // Audio data in buffer
     guard let channelData = buffer.floatChannelData?[0] else { return nil }
     let frameLength = Int(buffer.frameLength)
@@ -101,8 +101,19 @@ struct NoteClassification {
     if let maxIndex = searchRange.max(by: { hps[$0] < hps[$1] }) {
       let frequency = Double(maxIndex) * sampleRate / Double(N)
       guard let note = getClosestNoteName(for: frequency) else { return nil }
+      
+      // HPS peak 대비 주변 평균값으로 confidence 계산
+      let peak = hps[maxIndex]
+      let left = max(maxIndex - 1, searchRange.lowerBound)
+      let right = min(maxIndex + 1, searchRange.upperBound - 1)
+      let neighborAverage = (hps[left] + hps[right]) / 2
+      let ratio = peak / neighborAverage
+      
+      // sigmoid로 정규화
+      let confidenceRaw = 1 / (1 + exp(-(ratio - 1)))
+      let confidence = (confidenceRaw * 100).rounded() / 100
       // Logger.d("Frequency: \(frequency) Hz, Note: \(note)")
-      return note
+      return (note, confidence)
     } else {
       return nil
     }

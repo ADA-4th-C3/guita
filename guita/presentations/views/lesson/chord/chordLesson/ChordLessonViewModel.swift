@@ -139,11 +139,12 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
       self.chordLesson.onChordClassified(userChord: chord)
       
       // Note classification
-      let note = self.noteClassification.run(
+      guard let (note, confidence) = self.noteClassification.run(
         buffer: buffer,
         sampleRate: self.audioRecorderManager.sampleRate,
         windowSize: self.audioRecorderManager.windowSize
-      )
+      ) else { return }
+      print(confidence)
       self.chordLesson.onNoteClassified(userNote: note, index: self.state.index)
     }
   }

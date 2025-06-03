@@ -9,7 +9,8 @@ final class DevNoteClassificationViewModel: BaseViewModel<DevNoteClassificationV
   init() {
     super.init(state: .init(
       recordPermissionState: audioRecorderManager.getRecordPermissionState(),
-      note: nil
+      note: nil,
+      confidence: nil
     ))
   }
 
@@ -27,14 +28,14 @@ final class DevNoteClassificationViewModel: BaseViewModel<DevNoteClassificationV
 
   func startRecording() {
     audioRecorderManager.start { buffer, _ in
-      guard let note = self.noteClassification.run(
+      guard let (note, confidence) = self.noteClassification.run(
         buffer: buffer,
         sampleRate: self.audioRecorderManager.sampleRate,
         windowSize: self.audioRecorderManager.windowSize
       ) else {
         return
       }
-      self.emit(self.state.copy(note: { note }))
+      self.emit(self.state.copy(note: { note }, confidence: { confidence }))
     }
   }
 
