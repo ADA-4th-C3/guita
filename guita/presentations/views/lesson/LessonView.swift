@@ -25,7 +25,7 @@ struct LessonView: View {
               .padding(.bottom,6)
 
             Text(songInfo.chords.map { "\($0.rawValue)" }.joined(separator: ", "))
-              .fontKoddi(18, color: .gray, weight: .regular)
+              .fontKoddi(18, color: .darkGrey, weight: .regular)
               .accessibilityHidden(true)
           }
           .frame(maxWidth: .infinity, maxHeight: 220)
