@@ -22,7 +22,7 @@ struct SectionLessonView: View {
         VStack(spacing: 0) {
           // MARK: Toolbar
           Toolbar(title: "Song", trailing: {
-            IconButton("questionmark.circle", color: .primary) {
+            IconButton("info", color: .light, isSystemImage: false) {
               // TODO: IconButton 키우기
               router.push(.sectionLessonGuide)
             }
