@@ -59,7 +59,7 @@ struct Toolbar<Leading: View, Trailing: View>: View {
           .accessibilityLabel("\(title) 머릿말, \(accessibilityText)")
       }
     }
-    .frame(height: 56)
+    .frame(height: 44)
   }
 }
 
