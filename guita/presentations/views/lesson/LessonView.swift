@@ -20,12 +20,12 @@ struct LessonView: View {
         VStack {
           VStack {
             Text(songInfo.title)
-              .fontWeight(.bold)
-              .font(.system(size: 32))
+              .fontKoddi(26, color: .light, weight: .bold)
               .accessibilityHidden(true)
+              .padding(.bottom,6)
 
             Text(songInfo.chords.map { "\($0.rawValue)" }.joined(separator: ", "))
-              .fontWeight(.semibold)
+              .fontKoddi(18, color: .light, weight: .regular)
               .font(.system(size: 20))
               .foregroundColor(.gray)
               .accessibilityHidden(true)
@@ -42,10 +42,8 @@ struct LessonView: View {
                 router.push(.chord(songInfo: songInfo))
               }) {
                 Text("코드 학습")
-                  .font(.system(size: 20))
+                  .fontKoddi(26, color: .light, weight: .regular)
                   .frame(width: boxWidth, height: boxHeight)
-                  .background(Color.black)
-                  .foregroundColor(.white)
                   .accessibilityAddTraits(.isButton)
                   .accessibilityLabel("코드 학습하기")
               }
@@ -53,10 +51,8 @@ struct LessonView: View {
                 router.push(.techniqueLesson) // 임시로 라우팅 해둠
               }) {
                 Text("주법 학습")
-                  .font(.system(size: 20))
+                  .fontKoddi(26, color: .light, weight: .regular)
                   .frame(width: boxWidth, height: boxHeight)
-                  .background(Color.black)
-                  .foregroundColor(.white)
                   .accessibilityAddTraits(.isButton)
                   .accessibilityLabel("주법 학습하기")
               }
@@ -64,10 +60,8 @@ struct LessonView: View {
                 router.push(.sectionLesson)
               }) {
                 Text("곡 구간 학습")
-                  .font(.system(size: 20))
+                  .fontKoddi(26, color: .light, weight: .regular)
                   .frame(width: boxWidth, height: boxHeight)
-                  .background(Color.black)
-                  .foregroundColor(.white)
                   .accessibilityAddTraits(.isButton)
                   .accessibilityLabel("곡 구간 학습하기")
               }
@@ -75,10 +69,8 @@ struct LessonView: View {
                 router.push(.curriculum) // 임시로 라우팅 해둠
               }) {
                 Text("곡 전체 학습")
-                  .font(.system(size: 20))
+                  .fontKoddi(26, color: .light, weight: .regular)
                   .frame(width: boxWidth, height: boxHeight)
-                  .background(Color.black)
-                  .foregroundColor(.white)
                   .accessibilityAddTraits(.isButton)
                   .accessibilityLabel("곡 전체 학습하기")
               }
