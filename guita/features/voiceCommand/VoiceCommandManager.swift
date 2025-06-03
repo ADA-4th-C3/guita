@@ -20,6 +20,7 @@ final class VoiceCommandManager: BaseViewModel<VoiceCommandManagerState> {
 
     // Start SpeechToText
     speechToTextManager.start { text in
+      if !self.state.isRecognizing { return }
       sttResult?(text)
       self.matchCommand(text, commands, historyListener)
     }

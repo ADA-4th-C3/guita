@@ -55,10 +55,11 @@ struct Toolbar<Leading: View, Trailing: View>: View {
           .foregroundColor(.primary)
           .fontKoddi(24, weight: .bold)
           .lineSpacing(1.4)
+          .accessibilityElement(children: .ignore)
           .accessibilityLabel("\(title) 머릿말, \(accessibilityText)")
       }
     }
-    .frame(height: 56)
+    .frame(height: 44)
   }
 }
 

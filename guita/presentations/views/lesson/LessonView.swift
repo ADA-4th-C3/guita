@@ -20,14 +20,12 @@ struct LessonView: View {
         VStack {
           VStack {
             Text(songInfo.title)
-              .fontWeight(.bold)
-              .font(.system(size: 32))
+              .fontKoddi(26, color: .light, weight: .bold)
               .accessibilityHidden(true)
+              .padding(.bottom, 6)
 
             Text(songInfo.chords.map { "\($0.rawValue)" }.joined(separator: ", "))
-              .fontWeight(.semibold)
-              .font(.system(size: 20))
-              .foregroundColor(.gray)
+              .fontKoddi(18, color: .darkGrey, weight: .regular)
               .accessibilityHidden(true)
           }
           .frame(maxWidth: .infinity, maxHeight: 220)
@@ -38,50 +36,47 @@ struct LessonView: View {
             let boxHeight = geometry.size.height / 4
 
             LazyVStack(spacing: 0) {
+              Divider()
               Button(action: {
                 router.push(.chord(songInfo: songInfo))
               }) {
                 Text("코드 학습")
-                  .font(.system(size: 20))
+                  .fontKoddi(26, color: .light, weight: .regular)
                   .frame(width: boxWidth, height: boxHeight)
-                  .background(Color.black)
-                  .foregroundColor(.white)
                   .accessibilityAddTraits(.isButton)
                   .accessibilityLabel("코드 학습하기")
               }
+              Divider()
               Button(action: {
                 router.push(.techniqueLesson) // 임시로 라우팅 해둠
               }) {
                 Text("주법 학습")
-                  .font(.system(size: 20))
+                  .fontKoddi(26, color: .light, weight: .regular)
                   .frame(width: boxWidth, height: boxHeight)
-                  .background(Color.black)
-                  .foregroundColor(.white)
                   .accessibilityAddTraits(.isButton)
                   .accessibilityLabel("주법 학습하기")
               }
+              Divider()
               Button(action: {
                 router.push(.sectionLesson)
               }) {
                 Text("곡 구간 학습")
-                  .font(.system(size: 20))
+                  .fontKoddi(26, color: .light, weight: .regular)
                   .frame(width: boxWidth, height: boxHeight)
-                  .background(Color.black)
-                  .foregroundColor(.white)
                   .accessibilityAddTraits(.isButton)
                   .accessibilityLabel("곡 구간 학습하기")
               }
+              Divider()
               Button(action: {
                 router.push(.fullLesson)
               }) {
                 Text("곡 전체 학습")
-                  .font(.system(size: 20))
+                  .fontKoddi(26, color: .light, weight: .regular)
                   .frame(width: boxWidth, height: boxHeight)
-                  .background(Color.black)
-                  .foregroundColor(.white)
                   .accessibilityAddTraits(.isButton)
                   .accessibilityLabel("곡 전체 학습하기")
               }
+              Divider()
             }
           }
         }

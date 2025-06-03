@@ -5,11 +5,15 @@ import SwiftUI
 final class DevNoteClassificationViewModel: BaseViewModel<DevNoteClassificationViewState> {
   private let audioRecorderManager: AudioRecorderManager = .shared
   private let noteClassification: NoteClassification = .init()
+  private let throttleAggregator = ThrottleAggregator<Note>(
+    interval: ConfigManager.shared.state.noteThrottleInterval
+  )
 
   init() {
     super.init(state: .init(
       recordPermissionState: audioRecorderManager.getRecordPermissionState(),
-      note: nil
+      note: nil,
+      confidence: 0.0
     ))
   }
 
@@ -27,14 +31,18 @@ final class DevNoteClassificationViewModel: BaseViewModel<DevNoteClassificationV
 
   func startRecording() {
     audioRecorderManager.start { buffer, _ in
-      guard let note = self.noteClassification.run(
+      if let (note, confidence) = self.noteClassification.run(
         buffer: buffer,
         sampleRate: self.audioRecorderManager.sampleRate,
         windowSize: self.audioRecorderManager.windowSize
-      ) else {
-        return
+      ) {
+        if let throttled = self.throttleAggregator.add(value: note, confidence: confidence) {
+          self.emit(self.state.copy(
+            note: { throttled.value },
+            confidence: throttled.confidence
+          ))
+        }
       }
-      self.emit(self.state.copy(note: { note }))
     }
   }
 

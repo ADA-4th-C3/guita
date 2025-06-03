@@ -18,10 +18,11 @@ struct SectionLessonView: View {
       ) {
         VStack(spacing: 0) {
           // MARK: Toolbar
-          Toolbar(title: "곡 구간 학습", trailing: {
+          Toolbar(title: "곡 구간 학습", accessibilityText: "곡 구간 학습을 할 수 있습니다.", trailing: {
             IconButton("info", color: .light, isSystemImage: false) {
               router.push(.sectionLessonGuide)
-            }
+            }.accessibilityAddTraits(.isButton)
+              .accessibilityLabel("사용법 도움말")
           })
           .accessibilityAddTraits(.isButton)
             .accessibilityLabel("사용법 도움말")
@@ -34,7 +35,7 @@ struct SectionLessonView: View {
             .fontKoddi(22, color: .darkGrey)
             .padding(.top, 16)
             .accessibilityHidden(true)
-          
+
           // MARK: Step description
           if let firstInfo = state.currentStep.sectionLessonInfo.first {
             ChordProgressionBar(chords: firstInfo.chords)
@@ -46,21 +47,22 @@ struct SectionLessonView: View {
           
           // MARK: Controllers
           HStack {
-            IconButton("chevron-left", color: .light, size: 95, disabled: state.currentStepIndex == 0, isSystemImage: false) {
+            IconButton("chevron-left", size: 95, disabled: state.currentStepIndex == 0) {
               viewModel.previousStep()
-            }
-            .accessibilityAddTraits(.isButton)
-            .accessibilityLabel("이전")
-            
+            }.accessibilityAddTraits(.isButton)
+              .accessibilityLabel("이전")
+
             IconButton("play", size: 95, isSystemImage: false) {
               viewModel.play()
             }
             .accessibilityAddTraits(.isButton)
             .accessibilityLabel("재생")
             
-            IconButton("chevron-right", color: .light, size: 95, disabled: state.currentStepIndex == state.steps.count - 1, isSystemImage: false) {
+            IconButton("chevron-right", size: 95, disabled: state.currentStepIndex == state.steps.count - 1) {
               viewModel.nextStep()
             }
+            .accessibilityAddTraits(.isButton)
+            .accessibilityLabel("다음")
             .accessibilityAddTraits(.isButton)
             .accessibilityLabel("다음")
           }

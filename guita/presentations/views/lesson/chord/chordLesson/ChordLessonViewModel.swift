@@ -8,6 +8,12 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
   private let audioPlayerManager: AudioPlayerManager = .shared
   private let noteClassification: NoteClassification = .init()
   private let chordClassification: ChordClassification = .init()
+  private let noteThrottle = ThrottleAggregator<Note>(
+    interval: ConfigManager.shared.state.noteThrottleInterval
+  )
+  private let chordThrottle = ThrottleAggregator<Chord>(
+    interval: ConfigManager.shared.state.chordThrottleInterval
+  )
   private var chordLesson: ChordLesson
   private var playTask: Task<Void, Never>? = nil
   private let router: Router
@@ -92,9 +98,11 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
   /// 권한 승인
   func onPermissionGranted() {
     if state.isPermissionGranted { return }
-    emit(state.copy(isPermissionGranted: true))
-    startVoiceCommand()
-    startClassification()
+    DispatchQueue.main.async {
+      self.emit(self.state.copy(isPermissionGranted: true))
+      self.startVoiceCommand()
+      self.startClassification()
+    }
   }
 
   /// 다음 코드 학습으로 넘어가기
@@ -129,20 +137,26 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
   private func startClassification() {
     audioRecorderManager.start { buffer, _ in
       // Chord classification
-      let chord = self.chordClassification.detectCode(
+      if let (chord, chordConfidence) = self.chordClassification.run(
         buffer: buffer,
         windowSize: self.audioRecorderManager.windowSize,
         activeChords: [self.state.chord]
-      )
-      self.chordLesson.onChordClassified(userChord: chord)
+      ) {
+        if let throttledChord = self.chordThrottle.add(value: chord, confidence: chordConfidence) {
+          self.chordLesson.onChordClassified(userChord: throttledChord.value)
+        }
+      }
 
       // Note classification
-      let note = self.noteClassification.run(
+      if let (note, noteConfidence) = self.noteClassification.run(
         buffer: buffer,
         sampleRate: self.audioRecorderManager.sampleRate,
         windowSize: self.audioRecorderManager.windowSize
-      )
-      self.chordLesson.onNoteClassified(userNote: note, index: self.state.index)
+      ) {
+        if let throttledNote = self.noteThrottle.add(value: note, confidence: noteConfidence) {
+          self.chordLesson.onNoteClassified(userNote: throttledNote.value, index: self.state.index)
+        }
+      }
     }
   }
 
@@ -158,5 +172,20 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
     cancelPlayTask()
     voiceCommandManager.stop()
     audioRecorderManager.stop()
+  }
+}
+
+extension ChordLessonViewModel {
+  var nextChordAccessibilityLabel: String {
+    let isLastStep = state.index + 1 == state.totalStep
+    if isLastStep {
+      if let nextChord = state.nextChord {
+        return "\(nextChord.rawValue) 다음"
+      } else {
+        return "다음"
+      }
+    } else {
+      return "다음"
+    }
   }
 }
