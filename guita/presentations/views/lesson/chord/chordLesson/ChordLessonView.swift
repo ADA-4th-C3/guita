@@ -45,7 +45,7 @@ struct ChordLessonView: View {
 
           // MARK: Controllers
           HStack {
-            IconButton("chevron-left", size: 95) {
+            IconButton("chevron-left", color: .light, size: 95, disabled: state.step == .introduction) {
               viewModel.goPrevious()
             }.accessibilityAddTraits(.isButton)
               .accessibilityLabel("이전")
