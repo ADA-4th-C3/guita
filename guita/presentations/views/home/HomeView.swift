@@ -17,7 +17,7 @@ struct HomeView: View {
             .opacity(0.01)
             .onLongPressGesture {
               router.push(.dev)
-            }
+            }.accessibilityHidden(true)
         })
         Spacer()
         Button {
