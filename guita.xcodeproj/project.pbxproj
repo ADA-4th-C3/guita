@@ -91,7 +91,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1620;
-				LastUpgradeCheck = 1620;
+				LastUpgradeCheck = 1640;
 				TargetAttributes = {
 					24E5568F2DEDCB190073B96A = {
 						CreatedOnToolsVersion = 16.2;
@@ -173,6 +173,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = FVS9YDA724;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -236,6 +237,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = FVS9YDA724;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -269,6 +271,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = guita/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Guita;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "기타 연주 소리를 듣고 학습 피드백을 드리기 위해 마이크 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "음성 명령으로 기능을 제어하기 위해 음성 인식 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -306,6 +309,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = guita/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Guita;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "기타 연주 소리를 듣고 학습 피드백을 드리기 위해 마이크 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "음성 명령으로 기능을 제어하기 위해 음성 인식 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

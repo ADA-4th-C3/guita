@@ -32,6 +32,20 @@ enum AudioFile: String {
   case stroke_calipso = "stroke_calipso.wav"
   case stroke_down = "stroke_down.wav"
   case stroke_up = "stroke_up.wav"
+  // section_repeat
+  case section_repeat_1 = "section_repeat_1.m4a"
+  case section_repeat_2 = "section_repeat_2.m4a"
+  case section_repeat_3 = "section_repeat_3.m4a"
+  case section_repeat_4 = "section_repeat_4.m4a"
+  case section_repeat_5 = "section_repeat_5.m4a"
+  case section_repeat_6 = "section_repeat_6.m4a"
+  case section_repeat_7 = "section_repeat_7.m4a"
+  case section_repeat_8 = "section_repeat_8.m4a"
+  case section_repeat_9 = "section_repeat_9.m4a"
+  case section_repeat_10 = "section_repeat_10.m4a"
+  case section_repeat_11 = "section_repeat_11.m4a"
+  case section_repeat_12 = "section_repeat_12.m4a"
+  case section_repeat_13 = "section_repeat_13.m4a"
 
   // MARK: Effect
   case answer = "answer.wav"
