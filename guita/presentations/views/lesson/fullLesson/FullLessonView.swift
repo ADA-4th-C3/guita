@@ -9,13 +9,13 @@ struct FullLessonView: View {
     BaseView(
       create: { FullLessonViewModel(router) }
     ) { viewModel, state in
-      PermissionView(
-        permissionListener: { isGranted in
-          if isGranted {
-            viewModel.onPermissionGranted()
-          }
-        }
-      ) {
+//      PermissionView(
+//        permissionListener: { isGranted in
+//          if isGranted {
+//            viewModel.onPermissionGranted()
+//          }
+//        }
+//      ) {
         VStack(spacing: 0) {
           // MARK: Toolbar
           Toolbar(title: "곡 전체 학습", trailing: {
@@ -26,13 +26,15 @@ struct FullLessonView: View {
           .accessibilityAddTraits(.isButton)
           .accessibilityLabel("사용법 도움말")
           
-          Spacer()
-            .aspectRatio(2.5, contentMode: .fit)
+          
           
           // MARK: Full Song description
           Image("audio-file")
+            .resizable()
             .scaledToFit()
+            .frame(height: 100)
             .accessibilityHidden(true)
+            .padding(87)
           
           // MARK: Full Song ProgressBar
           SongProgressBar(
@@ -42,7 +44,7 @@ struct FullLessonView: View {
           .accessibilityHidden(true)
           
           Spacer()
-            .aspectRatio(1, contentMode: .fit)
+            .padding(.top, 218)
           
           Button(action: {
             viewModel.play()
@@ -54,49 +56,57 @@ struct FullLessonView: View {
           .accessibilityLabel("다시 듣기")
           
           Spacer()
-            .aspectRatio(0.5, contentMode: .fit)
+            .padding(.bottom, 71)
           
           // MARK: Controllers
           HStack {
-            IconButton(viewModel.isMinPlaybackRate() ? "slow-inactive" : "slow-active",
-                       color: .light,
-                       size: 95,
-                       disabled: viewModel.isMinPlaybackRate() == true,
-                       isSystemImage: false) {
-              viewModel.decreasePlaybackRate()
+            Button(action: {
+             viewModel.decreasePlaybackRate()
+            }) {
+             Image(viewModel.isMinPlaybackRate() ? "slow-inactive" : "slow-active")
+               .renderingMode(.template)
+               .resizable()
+               .frame(width: 95, height: 95)
+               .foregroundColor(.light)
             }
-                       .accessibilityAddTraits(.isButton)
-                       .accessibilityLabel("느리게")
+            .disabled(viewModel.isMinPlaybackRate())
+            .accessibilityAddTraits(.isButton)
+            .accessibilityLabel("느리게")
             
-            IconButton(
-              state.isPlaying ? "pause" : "play",
-              size: 95,
-              isSystemImage: false
-            ) {
-              if state.isPlaying {
-                viewModel.pause()
-              } else {
-                viewModel.play()
-              }
+            Button(action: {
+             if state.isPlaying {
+               viewModel.pause()
+             } else {
+               viewModel.play()
+             }
+            }) {
+             Image(state.isPlaying ? "pause" : "play")
+               .resizable()
+               .frame(width: 95, height: 95)
             }
             .accessibilityAddTraits(.isButton)
             .accessibilityLabel(state.isPlaying ? "일시정지" : "재생")
             
-            IconButton(viewModel.isMaxPlaybackRate() ? "fast-inactive" : "fast-active",
-                       color: .light,
-                       size: 95,
-                       disabled: viewModel.isMaxPlaybackRate() == true,
-                       isSystemImage: false) {
-              viewModel.increasePlaybackRate()
+            Button(action: {
+             viewModel.increasePlaybackRate()
+            }) {
+             Image(viewModel.isMaxPlaybackRate() ? "fast-inactive" : "fast-active")
+               .renderingMode(.template)
+               .resizable()
+               .frame(width: 95, height: 95)
+               .foregroundColor(.light)
             }
-                       .accessibilityAddTraits(.isButton)
-                       .accessibilityLabel("빠르게")
+            .disabled(viewModel.isMaxPlaybackRate())
+            .accessibilityAddTraits(.isButton)
+            .accessibilityLabel("빠르게")
+
           }
+          .padding(.bottom, 39)
         }
       }
     }
   }
-}
+//}
 
 #Preview {
   BasePreview {

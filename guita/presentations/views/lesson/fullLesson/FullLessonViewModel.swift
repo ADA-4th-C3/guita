@@ -3,10 +3,10 @@
 import Foundation
 
 final class FullLessonViewModel: BaseViewModel<FullLessonViewState> {
-  private let voiceCommandManager = VoiceCommandManager.shared
+  private let voiceCommandManager: VoiceCommandManager = .shared
   private let audioRecorderManager: AudioRecorderManager = .shared
   private let audioPlayerManager: AudioPlayerManager = .shared
-  private let textToSpeechManager = TextToSpeechManager.shared
+  private let textToSpeechManager: TextToSpeechManager = .shared
   
   private var playTask: Task<Void, Never>? = nil
   private let router: Router
@@ -41,39 +41,21 @@ final class FullLessonViewModel: BaseViewModel<FullLessonViewState> {
   /// 노래 재생 시작
   func play(isRetry: Bool = false) {
     cancelPlayTask()
+    emit(state.copy(isPlaying: true))
     playTask = Task {
-      do {
-        try await Task.sleep(nanoseconds: 100_000_000)
-        
-        let currentStep = state.steps[state.currentStepIndex]
-        // 추후 다른 곡 추가할 때 사용
-        //        let stepNumber = currentStep.step
-        //        let totalSteps = state.steps.count
-        
-        for lessonInfo in currentStep.fullLessonInfo {
-          try Task.checkCancellation()
-          if let ttsText = lessonInfo.ttsText {
-            await textToSpeechManager.speak(ttsText)
-          }
-          try Task.checkCancellation()
-          if let audioFile = currentStep.audioFile {
-            await AudioPlayerManager.shared.start(audioFile: audioFile)
-          }
-        }
-        if !isRetry {
-          await textToSpeechManager.speak(currentStep.featureDescription)
-        }
-      } catch {
-        textToSpeechManager.stop()
-        AudioPlayerManager.shared.stop()
+      await audioPlayerManager.start(audioFile: .full_song)
+      await MainActor.run {
+        self.startProgressTracking()
       }
+      // 오디오 재생이 끝난 후 TTS 재생
+//      await textToSpeechManager.speak("다시 듣고 싶으시면 \"재생\"이라고 말씀해주십시오. 중간에 멈추고 싶으시면 \"정지\"라고 말씀해주십시오.")
     }
     startProgressTracking()
   }
   
   /// 정지
   func pause() {
-//    cancelPlayTask()
+    emit(state.copy(isPlaying: false))
     AudioPlayerManager.shared.pause()
   }
   
@@ -116,10 +98,12 @@ final class FullLessonViewModel: BaseViewModel<FullLessonViewState> {
     progressTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
       let currentTime = self.audioPlayerManager.getCurrentTime()
       let duration = self.audioPlayerManager.getDuration()
+      let isPlaying = self.audioPlayerManager.state.isPlaying
       
       self.emit(self.state.copy(
         currentTime: currentTime,
-        totalDuration: duration
+        totalDuration: duration,
+        isPlaying: isPlaying
       ))
     }
   }
@@ -147,14 +131,11 @@ final class FullLessonViewModel: BaseViewModel<FullLessonViewState> {
   
   /// 최대 속도 확인
   func isMaxPlaybackRate() -> Bool {
-    Logger.d("최대 속도 확인: \(audioPlayerManager.getCurrentRate())")
-    Logger.d("최대 속도 확인: \(audioPlayerManager.isAtMaxRate())")
     return audioPlayerManager.isAtMaxRate()
   }
   
   /// 최소 속도 확인
   func isMinPlaybackRate() -> Bool {
-    Logger.d("최소 속도 확인: \(audioPlayerManager.getCurrentRate())")
     return audioPlayerManager.isAtMinRate()
   }
   
