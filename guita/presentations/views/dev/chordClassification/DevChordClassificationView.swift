@@ -29,7 +29,7 @@ struct DevChordClassificationView: View {
           }
         case .granted, .restricted:
           VStack {
-            Text(state.chord == nil ? " " : "\(state.chord!.rawValue) (\(state.confidence.truncated(2)))")
+            Text(state.chord == nil ? " " : "\(state.chord!.rawValue) (\(state.confidence.formatted(2)))")
               .font(.headline)
               .foregroundStyle(.blue)
             Guitar(input: state.chord == nil ? nil : NoteOrChord.chord(state.chord!))

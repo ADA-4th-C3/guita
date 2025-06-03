@@ -12,7 +12,11 @@ struct HomeView: View {
       VStack {
         // MARK: Toolbar
         Toolbar(title: "Guita", accessibilityText: "귀로 치는 기타, 귀타가 시작되었습니다. 기타 학습을 시작하기 위해서는 기타 학습 버튼을 눌러주십시오.", isPopButton: false, trailing: {
-          Button("Dev") {
+          
+          // MARK: Dev Button
+          Text("Dev")
+          .opacity(0.01)
+          .onLongPressGesture {
             router.push(.dev)
           }
         })

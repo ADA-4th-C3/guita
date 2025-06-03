@@ -29,7 +29,7 @@ struct DevNoteClassificationView: View {
           }
         case .granted, .restricted:
           VStack {
-            Text(state.note == nil ? " " : "\(state.note!) (\(state.confidence.truncated(2)))")
+            Text(state.note == nil ? " " : "\(state.note!) (\(state.confidence.formatted(2)))")
               .font(.headline)
               .foregroundStyle(.blue)
             Guitar(input: state.note == nil ? nil : NoteOrChord.note(state.note!))

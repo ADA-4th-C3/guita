@@ -8,8 +8,12 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
   private let audioPlayerManager: AudioPlayerManager = .shared
   private let noteClassification: NoteClassification = .init()
   private let chordClassification: ChordClassification = .init()
-  private let noteThrottle = ThrottleAggregator<Note>(interval: 2.0)
-  private let chordThrottle = ThrottleAggregator<Chord>(interval: 2.0)
+  private let noteThrottle = ThrottleAggregator<Note>(
+    interval: ConfigManager.shared.state.noteThrottleInterval
+  )
+  private let chordThrottle = ThrottleAggregator<Chord>(
+    interval: ConfigManager.shared.state.chordThrottleInterval
+  )
   private var chordLesson: ChordLesson
   private var playTask: Task<Void, Never>? = nil
   private let router: Router

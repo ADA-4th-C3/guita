@@ -5,7 +5,9 @@ import SwiftUI
 final class DevNoteClassificationViewModel: BaseViewModel<DevNoteClassificationViewState> {
   private let audioRecorderManager: AudioRecorderManager = .shared
   private let noteClassification: NoteClassification = .init()
-  private let throttleAggregator = ThrottleAggregator<Note>(interval: 2.0)
+  private let throttleAggregator = ThrottleAggregator<Note>(
+    interval: ConfigManager.shared.state.noteThrottleInterval
+  )
   
   init() {
     super.init(state: .init(
