@@ -34,7 +34,7 @@ enum ChordLessonStep: CaseIterable {
       let nFret = coordinate.0.first!.fret
       let nString = coordinate.0.first!.string
       let (fret, string) = (nFret.koOrd, nString.koOrd)
-      return "\(chord.rawValue) 코드 \(fret) 프랫\n아래서 \(string) 줄 운지 연습"
+      return "\(chord.rawValue) 코드 \(fret) 프렛\n아래서 \(string) 줄 운지 연습"
     case .fullChord:
       return "\(chord.rawValue) 코드 소리 확인"
     case .finish:
