@@ -25,9 +25,7 @@ struct LessonView: View {
               .padding(.bottom,6)
 
             Text(songInfo.chords.map { "\($0.rawValue)" }.joined(separator: ", "))
-              .fontKoddi(18, color: .light, weight: .regular)
-              .font(.system(size: 20))
-              .foregroundColor(.gray)
+              .fontKoddi(18, color: .gray, weight: .regular)
               .accessibilityHidden(true)
           }
           .frame(maxWidth: .infinity, maxHeight: 220)
@@ -38,6 +36,7 @@ struct LessonView: View {
             let boxHeight = geometry.size.height / 4
 
             LazyVStack(spacing: 0) {
+              Divider()
               Button(action: {
                 router.push(.chord(songInfo: songInfo))
               }) {
@@ -47,6 +46,7 @@ struct LessonView: View {
                   .accessibilityAddTraits(.isButton)
                   .accessibilityLabel("코드 학습하기")
               }
+              Divider()
               Button(action: {
                 router.push(.techniqueLesson) // 임시로 라우팅 해둠
               }) {
@@ -56,6 +56,7 @@ struct LessonView: View {
                   .accessibilityAddTraits(.isButton)
                   .accessibilityLabel("주법 학습하기")
               }
+              Divider()
               Button(action: {
                 router.push(.sectionLesson)
               }) {
@@ -65,6 +66,7 @@ struct LessonView: View {
                   .accessibilityAddTraits(.isButton)
                   .accessibilityLabel("곡 구간 학습하기")
               }
+              Divider()
               Button(action: {
                 router.push(.curriculum) // 임시로 라우팅 해둠
               }) {
@@ -74,6 +76,7 @@ struct LessonView: View {
                   .accessibilityAddTraits(.isButton)
                   .accessibilityLabel("곡 전체 학습하기")
               }
+              Divider()
             }
           }
         }
