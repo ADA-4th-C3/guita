@@ -28,7 +28,7 @@ struct PermissionGuideDialog: View {
         VStack(alignment: .leading, spacing: 18) {
           VStack(alignment: .leading, spacing: 7) {
             Text("음성 인식(필수)")
-              .accessibilityLabel("음성 권한 인식이 필요합니다.")
+              .accessibilityLabel("음성 인식 권한이 필요합니다.")
               .fontKoddi(15, color: .dark, weight: .bold)
             Text("음성 명령으로 기능 제어시 사용")
               .fontKoddi(13, color: .dark)
