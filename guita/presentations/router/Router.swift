@@ -3,10 +3,9 @@
 import SwiftUI
 
 final class Router: BaseViewModel<RouterViewState> {
-  
   private var lastNavigationTime: Date = .distantPast
   private let navigationThreshold: TimeInterval = 1.0
-  
+
   init() {
     super.init(state: RouterViewState(
       rootPage: .splash,
@@ -38,7 +37,9 @@ final class Router: BaseViewModel<RouterViewState> {
       return
     }
     lastNavigationTime = now
-    emit(state.copy(subPages: state.subPages + [subPage]))
+    emit(
+      state.copy(subPages: state.subPages + [subPage])
+    )
   }
 
   /// Pop from sub page list
@@ -47,5 +48,4 @@ final class Router: BaseViewModel<RouterViewState> {
       subPages: state.subPages.dropLast()
     ))
   }
-
 }

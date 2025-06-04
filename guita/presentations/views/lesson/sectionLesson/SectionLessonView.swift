@@ -47,14 +47,12 @@ struct SectionLessonView: View {
 
           // MARK: Controllers
           HStack {
-            IconButton("chevron-left", size: 95 ,disabled: state.currentStepIndex == 0) {
+            IconButton("chevron-left", size: 95, disabled: state.currentStepIndex == 0) {
               viewModel.previousStep()
             }.accessibilityAddTraits(.isButton)
               .accessibilityLabel(state.currentStepIndex == 0 ? "이전 (비활성화)" : "이전")
               .accessibilityAddTraits([.isButton, .startsMediaSession])
-             
 
-            
             IconButton("play", size: 95, isSystemImage: false) {
               viewModel.play()
             }
@@ -68,7 +66,6 @@ struct SectionLessonView: View {
             .accessibilityAddTraits(.isButton)
             .accessibilityLabel("다음")
             .accessibilityAddTraits([.isButton, .startsMediaSession])
-
           }
         }
       }

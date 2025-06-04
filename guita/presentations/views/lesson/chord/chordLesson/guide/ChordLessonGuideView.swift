@@ -115,7 +115,6 @@ struct ChordLessonGuideView: View {
                 }
                 .accessibilityLabel("페이지 전환 효과음 재생")
                 .accessibilityAddTraits([.isButton, .startsMediaSession])
-                
 
                 Button(action: {
                   viewModel.playSound(.answer)

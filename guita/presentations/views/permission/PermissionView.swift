@@ -19,9 +19,8 @@ struct PermissionView<Content: View>: View {
       ZStack {
         // MARK: Content
 
-        if state.isGranted {
-          content()
-        }
+        content()
+          .accessibilityHidden(state.showGuideDialog || state.showDeniedDialog)
 
         // MARK: Background
         if state.showGuideDialog || state.showDeniedDialog {

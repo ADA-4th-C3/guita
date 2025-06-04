@@ -12,7 +12,6 @@ struct PermissionDeniedDialog: View {
           .resizable()
           .frame(width: 54, height: 54)
           .accessibilityHidden(true)
-          
 
         Text("음성 명령 기능을 사용할 수 없습니다.")
           .multilineTextAlignment(.center)
