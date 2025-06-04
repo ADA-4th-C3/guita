@@ -2,7 +2,7 @@
 
 import AVFoundation
 
-final class AudioPlayerManager: BaseViewModel<AudioPlayerManagerState>, AVAudioPlayerDelegate {
+final class AudioPlayerManager: BaseViewModel<AudioPlayerManagerState> {
   static let shared = AudioPlayerManager()
   private let engine = AVAudioEngine()
   private let playerNode = AVAudioPlayerNode()
@@ -60,6 +60,7 @@ final class AudioPlayerManager: BaseViewModel<AudioPlayerManagerState>, AVAudioP
           self.continuation = continuation
           if let file = self.audioFile {
             self.playerNode.scheduleFile(file, at: nil) {
+              // 재생 완료 콜백
               self.continuation?.resume()
               self.continuation = nil
               self.emit(self.state.copy(isPlaying: false))
@@ -92,12 +93,6 @@ final class AudioPlayerManager: BaseViewModel<AudioPlayerManagerState>, AVAudioP
     emit(state.copy(isPlaying: false))
     continuation?.resume()
     continuation = nil
-  }
-  
-  func audioPlayerDidFinishPlaying(_: AVAudioPlayer, successfully _: Bool) {
-    continuation?.resume()
-    continuation = nil
-    emit(state.copy(isPlaying: false))
   }
   
   /// 현재 재생 시간 반환
