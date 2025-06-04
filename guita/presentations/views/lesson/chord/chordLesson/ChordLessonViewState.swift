@@ -31,7 +31,7 @@ struct ChordLessonViewState {
   /// 전체 스탭 개수
   var totalStep: Int {
     let intro = 1
-    let lineByLine = chord.coordinates.count
+    let lineByLine = chord.coordinates.count * 2
     let fullChord = 1
     let finish = 1
     return intro + lineByLine + fullChord + finish
