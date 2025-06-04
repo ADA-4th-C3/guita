@@ -48,7 +48,7 @@ struct ChordLessonView: View {
             IconButton("chevron-left", color: .light, size: 95, disabled: state.step == .introduction) {
               viewModel.goPrevious()
             }.accessibilityAddTraits(.isButton)
-              .accessibilityLabel("이전")
+              .accessibilityLabel(state.step == .introduction ? "이전 (비활성화)" : "이전")
 
             IconButton("play", color: .accent, size: 95) {
               viewModel.play()
