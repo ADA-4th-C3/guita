@@ -180,7 +180,7 @@ extension ChordLessonViewModel {
     let isLastStep = state.index + 1 == state.totalStep
     if isLastStep {
       if let nextChord = state.nextChord {
-        return "\(nextChord.rawValue) 다음"
+        return "\(nextChord.rawValue) 코드로 다음"
       } else {
         return "다음"
       }
