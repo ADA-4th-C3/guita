@@ -35,7 +35,7 @@ final class AudioPlayerManager: BaseViewModel<AudioPlayerManagerState> {
 
   // 속도 측정을 위한 상수
   private let minRate: Float = 0.5
-  private let maxRate: Float = 2.0
+  private let maxRate: Float = 1.25
   private let rateStep: Float = 0.25
 
   private init() {

@@ -30,7 +30,6 @@ enum ChordLessonStep: CaseIterable {
       return "\(chord.rawValue) 코드 개요"
     case .lineByLine:
       let lineIndex = (index - 1) / 2
-      guard index > 0, lineIndex < chord.coordinates.count else { return "" }
       let coordinate = chord.coordinates[lineIndex]
       let nFret = coordinate.0.first!.fret
       let nString = coordinate.0.first!.string
