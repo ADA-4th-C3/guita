@@ -7,16 +7,16 @@ final class FullLessonViewModel: BaseViewModel<FullLessonViewState> {
   private let audioRecorderManager: AudioRecorderManager = .shared
   private let audioPlayerManager: AudioPlayerManager = .shared
   private let textToSpeechManager: TextToSpeechManager = .shared
-  
+
   private var playTask: Task<Void, Never>? = nil
   private let router: Router
-  
+
   private var progressTimer: Timer?
-  
+
   init(_ router: Router) {
     self.router = router
     let steps = FullLesson.makeSteps()
-    
+
     super.init(state: FullLessonViewState(
       currentStepIndex: 0,
       steps: steps,
@@ -24,22 +24,21 @@ final class FullLessonViewModel: BaseViewModel<FullLessonViewState> {
       isVoiceCommandEnabled: false
     ))
   }
-  
+
   /// 권한 승인
   func onPermissionGranted() {
     if state.isPermissionGranted { return }
     emit(state.copy(isPermissionGranted: true))
     startVoiceCommand()
   }
-  
-  
+
   /// 실행 중인 비동기 작업 정지
   private func cancelPlayTask() {
     playTask?.cancel()
   }
-  
+
   /// 노래 재생 시작
-  func play(isRetry: Bool = false) {
+  func play(isRetry _: Bool = false) {
     cancelPlayTask()
     emit(state.copy(isPlaying: true))
     playTask = Task {
@@ -52,25 +51,25 @@ final class FullLessonViewModel: BaseViewModel<FullLessonViewState> {
     }
     startProgressTracking()
   }
-  
+
   /// 정지
   func pause() {
     emit(state.copy(isPlaying: false))
     AudioPlayerManager.shared.pause()
   }
-  
+
   /// 다음 step
   func nextStep() {
     cancelPlayTask()
     guard state.currentStepIndex < state.steps.count - 1 else { return }
-    
+
     let newIndex = state.currentStepIndex + 1
     emit(state.copy(currentStepIndex: newIndex))
     playStepChangeSound {
       self.play()
     }
   }
-  
+
   /// 이전 step
   func previousStep() {
     cancelPlayTask()
@@ -83,7 +82,7 @@ final class FullLessonViewModel: BaseViewModel<FullLessonViewState> {
       self.play()
     }
   }
-  
+
   /// 다음 스텝 사운드 재생
   func playStepChangeSound(completion: (() -> Void)? = nil) {
     Task {
@@ -92,14 +91,14 @@ final class FullLessonViewModel: BaseViewModel<FullLessonViewState> {
       completion?()
     }
   }
-  
+
   /// SongProgressBar Tracking Start
   func startProgressTracking() {
     progressTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
       let currentTime = self.audioPlayerManager.getCurrentTime()
       let duration = self.audioPlayerManager.getDuration()
       let isPlaying = self.audioPlayerManager.state.isPlaying
-      
+
       self.emit(self.state.copy(
         currentTime: currentTime,
         totalDuration: duration,
@@ -107,38 +106,38 @@ final class FullLessonViewModel: BaseViewModel<FullLessonViewState> {
       ))
     }
   }
-  
+
   /// SongProgressBar Tracking Stop
   func stopProgressTracking() {
     progressTimer?.invalidate()
     progressTimer = nil
   }
-  
+
   /// 현재 속도 반환
   func getPlaybackRate() -> Float {
     return audioPlayerManager.getCurrentRate()
   }
-  
+
   /// 속도 빠르게
   func increasePlaybackRate() {
     audioPlayerManager.increasePlaybackRate()
   }
-  
+
   /// 속도 느리게
   func decreasePlaybackRate() {
     audioPlayerManager.decreasePlaybackRate()
   }
-  
+
   /// 최대 속도 확인
   func isMaxPlaybackRate() -> Bool {
     return audioPlayerManager.isAtMaxRate()
   }
-  
+
   /// 최소 속도 확인
   func isMinPlaybackRate() -> Bool {
     return audioPlayerManager.isAtMinRate()
   }
-  
+
   /// 음성 명령 인식 시작
   func startVoiceCommand() {
     voiceCommandManager.start(
@@ -151,18 +150,17 @@ final class FullLessonViewModel: BaseViewModel<FullLessonViewState> {
       ]
     )
   }
-  
+
   /// 음성 명령 인식 정지
   func stopVoiceCommand() {
     voiceCommandManager.stop()
     textToSpeechManager.stop()
     stopProgressTracking()
   }
-  
+
   override func dispose() {
     cancelPlayTask()
     voiceCommandManager.stop()
     audioRecorderManager.stop()
   }
 }
-

@@ -4,7 +4,7 @@ import SwiftUI
 
 struct SectionLessonView: View {
   @EnvironmentObject var router: Router
-  
+
   var body: some View {
     BaseView(
       create: { SectionLessonViewModel(router) }
@@ -25,11 +25,11 @@ struct SectionLessonView: View {
               .accessibilityLabel("사용법 도움말")
           })
           .accessibilityAddTraits(.isButton)
-            .accessibilityLabel("사용법 도움말")
-          
+          .accessibilityLabel("사용법 도움말")
+
           Spacer()
             .aspectRatio(2.5, contentMode: .fit)
-          
+
           // MARK: Index
           Text("\(state.currentStepIndex + 1)/\(state.steps.count) 단계")
             .fontKoddi(22, color: .darkGrey)
@@ -41,10 +41,10 @@ struct SectionLessonView: View {
             ChordProgressionBar(chords: firstInfo.chords)
               .accessibilityHidden(true)
           }
-          
+
           Spacer()
             .aspectRatio(1, contentMode: .fit)
-          
+
           // MARK: Controllers
           HStack {
             IconButton("chevron-left", size: 95, disabled: state.currentStepIndex == 0) {
@@ -57,7 +57,7 @@ struct SectionLessonView: View {
             }
             .accessibilityAddTraits(.isButton)
             .accessibilityLabel("재생")
-            
+
             IconButton("chevron-right", size: 95, disabled: state.currentStepIndex == state.steps.count - 1) {
               viewModel.nextStep()
             }

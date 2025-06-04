@@ -6,7 +6,6 @@ struct AudioPlayerManagerState {
   var currentTime: TimeInterval
   var totalDuration: TimeInterval
 
-
   func copy(
     isPlaying: Bool? = nil,
     currentTime: TimeInterval? = nil,

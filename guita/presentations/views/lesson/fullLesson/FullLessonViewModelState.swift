@@ -1,23 +1,22 @@
 //  Copyright © 2025 ADA 4th Challenge3 Team1. All rights reserved.
 
-
 struct FullLessonViewState {
   let currentStepIndex: Int
   let steps: [FullLessonStep]
   var currentStep: FullLessonStep {
     steps[currentStepIndex]
   }
-  
+
   // SongProgressBar를 위한 시간
   var currentTime: Double = 0.0
   var totalDuration: Double = 0.0
 
   var isPlaying: Bool = false
-  
+
   /// 기능 사용 여부
   let isPermissionGranted: Bool
   let isVoiceCommandEnabled: Bool
-  
+
   func copy(
     currentStepIndex: Int? = nil,
     steps: [FullLessonStep]? = nil,
