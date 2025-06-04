@@ -48,7 +48,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
       case .introduction:
         await chordLesson.startIntroduction(state.isReplay)
       case .lineByLine:
-        await chordLesson.startLineByLine(state.isReplay, index: state.index)
+        await chordLesson.startLineByLine(state.isReplay, index: state.index * 2)
       case .fullChord:
         await chordLesson.startFullChord(state.isReplay, index: state.index)
       case .finish:

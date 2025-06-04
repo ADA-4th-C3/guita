@@ -55,6 +55,8 @@ final class SectionLessonViewModel: BaseViewModel<SectionLessonViewState> {
           }
           try Task.checkCancellation()
           if let audioFile = currentStep.audioFile {
+            // 구간 반복 오디오 속도 설정
+            AudioPlayerManager.shared.setPlaybackRate(0.8)
             await AudioPlayerManager.shared.start(audioFile: audioFile)
           }
         }
@@ -71,6 +73,8 @@ final class SectionLessonViewModel: BaseViewModel<SectionLessonViewState> {
   /// 다음 step
   func nextStep() {
     cancelPlayTask()
+    // 다시 속도 조정
+    AudioPlayerManager.shared.setPlaybackRate(1.0)
     guard state.currentStepIndex < state.steps.count - 1 else { return }
 
     let newIndex = state.currentStepIndex + 1
@@ -83,6 +87,8 @@ final class SectionLessonViewModel: BaseViewModel<SectionLessonViewState> {
   /// 이전 step
   func previousStep() {
     cancelPlayTask()
+    // 다시 속도 조정
+    AudioPlayerManager.shared.setPlaybackRate(1.0)
     guard state.currentStepIndex > 0 else { return }
     let newIndex = state.currentStepIndex - 1
     emit(state.copy(
