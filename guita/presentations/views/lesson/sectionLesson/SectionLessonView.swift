@@ -18,7 +18,7 @@ struct SectionLessonView: View {
       ) {
         VStack(spacing: 0) {
           // MARK: Toolbar
-          Toolbar(title: "곡 구간 학습", accessibilityText: "곡 구간 학습을 할 수 있습니다.", trailing: {
+          Toolbar(title: "곡 구간 학습", accessibilityText: "칼립소 주법을 이용해 곡 구간을 학습할 수 있습니다.", trailing: {
             IconButton("info", color: .light, isSystemImage: false) {
               router.push(.sectionLessonGuide)
             }.accessibilityAddTraits(.isButton)
