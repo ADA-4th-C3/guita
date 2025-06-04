@@ -53,7 +53,7 @@ struct FullLessonGuideView: View {
                 """)
 
                 Button(action: {
-                  viewModelplaySound(.next)
+                  viewModel.playSound(.next)
                 }) {
                   Text("페이지 전환 효과음 재생 ▶")
                 }

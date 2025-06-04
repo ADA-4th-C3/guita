@@ -28,7 +28,7 @@ struct ChordLessonView: View {
           })
 
           // MARK: Index
-          Text("\(state.index + 1)/\(state.totalStep) 단계")
+          Text("\(state.step)/\(state.totalStep) 단계")
             .fontKoddi(22, color: .darkGrey)
             .padding(.top, 16)
             .accessibilityHidden(true)
