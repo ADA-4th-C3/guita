@@ -46,6 +46,8 @@ final class FullLessonViewModel: BaseViewModel<FullLessonViewState> {
   /// 노래 재생 시작
   func play() {
     Task {
+      // 시작 전 속도 설정
+      audioPlayerManager.setPlaybackRate(0.75)
       await audioPlayerManager.start(audioFile: state.songInfo.fullSong)
     }
   }
