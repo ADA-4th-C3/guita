@@ -55,7 +55,7 @@ final class AudioPlayerManager: BaseViewModel<AudioPlayerManagerState> {
   private func startPlaybackTimer() {
     stopPlaybackTimer()
     DispatchQueue.main.async { [weak self] in
-      self?.playbackTimer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { _ in
+      self?.playbackTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
         guard let self = self else { return }
         let currentTime = min(self.state.initTime + self.getPlayDuration(), self.state.totalDuration)
         if currentTime == self.state.totalDuration {

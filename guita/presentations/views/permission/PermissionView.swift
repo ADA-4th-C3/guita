@@ -18,9 +18,11 @@ struct PermissionView<Content: View>: View {
     ) { viewModel, state in
       ZStack {
         // MARK: Content
-
-        content()
-          .accessibilityHidden(state.showGuideDialog || state.showDeniedDialog)
+        Group {
+          content()
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityHidden(state.showGuideDialog || state.showDeniedDialog)
 
         // MARK: Background
         if state.showGuideDialog || state.showDeniedDialog {

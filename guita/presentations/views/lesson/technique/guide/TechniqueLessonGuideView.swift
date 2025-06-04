@@ -49,7 +49,6 @@ struct TechniqueLessonGuideView: View {
                 }
                 .accessibilityLabel("페이지 전환 효과음 재생")
                 .accessibilityAddTraits([.isButton, .startsMediaSession])
-                
               }
             }
           ),
