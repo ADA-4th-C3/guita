@@ -10,6 +10,7 @@ struct PermissionGuideDialog: View {
         Image("pick-check")
           .resizable()
           .frame(width: 54, height: 54)
+          .accessibilityHidden(true)
 
         Text("Guita 앱의 편리한 이용을 위해\n아래 접근권한의 허용이 필요합니다")
           .multilineTextAlignment(.center)
@@ -36,6 +37,7 @@ struct PermissionGuideDialog: View {
 
         Text("* 설정 > Guita 앱에서 권한 변경이 가능합니다.")
           .fontKoddi(13, color: .darkGrey)
+          .accessibilityLabel("설정 안,  귀타 앱에서 권한 변경이 가능합니다.")
       }
       .padding(.vertical, 22)
       .padding(.horizontal, 12.5)
