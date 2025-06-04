@@ -30,6 +30,9 @@ struct ChordLessonViewState {
 
   /// 전체 스탭 개수
   var totalStep: Int { steps.count }
+  
+  /// 설명
+  var description: String { step.getDescription(chord, index: index) }
 
   /// 다음 배울 코드
   var nextChord: Chord? {
