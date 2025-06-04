@@ -38,7 +38,7 @@ struct Toolbar<Leading: View, Trailing: View>: View {
           IconButton("arrow-left", color: .light, isSystemImage: false) {
             router.pop()
           }
-          .accessibilityLabel("나가기")
+          .accessibilityLabel(" 첫 버튼, \(router.previousTitle ?? "") 화면으로 돌아 가기")
         } else {
           leading()
         }
