@@ -57,7 +57,7 @@ final class AudioPlayerManager: BaseViewModel<AudioPlayerManagerState> {
     DispatchQueue.main.async { [weak self] in
       self?.playbackTimer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { _ in
         guard let self = self else { return }
-        let currentTime = self.state.initTime + self.getPlayDuration()
+        let currentTime = min(self.state.initTime + self.getPlayDuration(), self.state.totalDuration)
         self.emit(self.state.copy(currentTime: currentTime))
       }
     }
@@ -67,38 +67,43 @@ final class AudioPlayerManager: BaseViewModel<AudioPlayerManagerState> {
     playbackTimer?.invalidate()
     playbackTimer = nil
   }
+  
+  func initialize(_ audioFile: AudioFile) {
+    do {
+      guard let url = audioFile.fileURL else {
+        Logger.e("음원 파일을 찾을 수 없습니다: \(audioFile)")
+        return
+      }
+      
+      self.audioFile = try AVAudioFile(forReading: url)
+      self.emit(self.state.copy(
+        totalDuration: self.getDuration()
+      ))
+    } catch {
+      Logger.e("AVAudioFile 생성 오류: \(error)")
+    }
+  }
 
   func start(audioFile: AudioFile) async {
     stop()
 
     await withTaskCancellationHandler {
-      guard let url = audioFile.fileURL else {
-        Logger.e("음원 파일을 찾을 수 없습니다: \(audioFile)")
-        return
-      }
-
-      do {
-        self.audioFile = try AVAudioFile(forReading: url)
-        await withCheckedContinuation { continuation in
-          self.continuation = continuation
-          if let file = self.audioFile {
-            self.playerNode.scheduleFile(file, at: nil) {
-              // 재생 완료 콜백
-              self.continuation?.resume()
-              self.continuation = nil
-              Logger.d("완전 정지인지 일시정지인지 모르겠음!")
-              self.emit(self.state.copy(playerState: .stopped))
-            }
-            self.playerNode.play()
-            self.startPlaybackTimer()
-            self.emit(self.state.copy(
-              playerState: .playing,
-              totalDuration: self.getDuration()
-            ))
+      initialize(audioFile)
+      await withCheckedContinuation { continuation in
+        self.continuation = continuation
+        if let file = self.audioFile {
+          self.playerNode.scheduleFile(file, at: nil) {
+            // 재생 완료 콜백
+            self.continuation?.resume()
+            self.continuation = nil
+            self.emit(self.state.copy(playerState: .stopped))
           }
+          self.playerNode.play()
+          self.startPlaybackTimer()
+          self.emit(self.state.copy(
+            playerState: .playing
+          ))
         }
-      } catch {
-        Logger.e("AVAudioFile 생성 오류: \(error)")
       }
     } onCancel: {
       stop()

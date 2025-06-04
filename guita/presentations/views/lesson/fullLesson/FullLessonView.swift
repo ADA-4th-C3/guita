@@ -4,10 +4,11 @@ import SwiftUI
 
 struct FullLessonView: View {
   @EnvironmentObject var router: Router
+  let songInfo: SongInfo
 
   var body: some View {
     BaseView(
-      create: { FullLessonViewModel(router) }
+      create: { FullLessonViewModel(router, songInfo) }
     ) { viewModel, state in
 //      PermissionView(
 //        permissionListener: { isGranted in
@@ -111,6 +112,6 @@ struct FullLessonView: View {
 
 #Preview {
   BasePreview {
-    FullLessonView()
+    FullLessonView(songInfo: SongInfo.curriculum.first!)
   }
 }

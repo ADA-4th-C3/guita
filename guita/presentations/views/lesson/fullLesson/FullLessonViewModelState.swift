@@ -1,6 +1,7 @@
 //  Copyright © 2025 ADA 4th Challenge3 Team1. All rights reserved.
 
 struct FullLessonViewState {
+  let songInfo: SongInfo
   let currentStepIndex: Int
   let steps: [FullLessonStep]
   var currentStep: FullLessonStep {
@@ -19,6 +20,7 @@ struct FullLessonViewState {
   let isVoiceCommandEnabled: Bool
 
   func copy(
+    songInfo: SongInfo? = nil,
     currentStepIndex: Int? = nil,
     steps: [FullLessonStep]? = nil,
     playerState: AudioPlayerState? = nil,
@@ -28,6 +30,7 @@ struct FullLessonViewState {
     isVoiceCommandEnabled: Bool? = nil
   ) -> FullLessonViewState {
     return FullLessonViewState(
+      songInfo: songInfo ?? self.songInfo,
       currentStepIndex: currentStepIndex ?? self.currentStepIndex,
       steps: steps ?? self.steps,
       playerState: playerState ?? self.playerState,

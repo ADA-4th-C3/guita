@@ -7,14 +7,7 @@ struct SongInfo: Identifiable, Hashable {
   let level: String
   let title: String
   let chords: [Chord]
-
-  func copy(level: String? = nil, title: String? = nil, chords: [Chord]? = nil) -> SongInfo {
-    return SongInfo(
-      level: level ?? self.level,
-      title: title ?? self.title,
-      chords: chords ?? self.chords
-    )
-  }
+  let fullSong: AudioFile
 }
 
 extension SongInfo {
@@ -26,4 +19,8 @@ extension SongInfo {
       return title
     }
   }
+  
+  static var curriculum: [SongInfo] = [
+    SongInfo(level: "[초급1]", title: "여행을 떠나요", chords: [.A, .E, .B7], fullSong: .basic_1)
+  ]
 }

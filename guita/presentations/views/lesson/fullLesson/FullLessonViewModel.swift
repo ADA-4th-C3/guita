@@ -14,11 +14,12 @@ final class FullLessonViewModel: BaseViewModel<FullLessonViewState> {
 
   private var cancellables = Set<AnyCancellable>()
 
-  init(_ router: Router) {
+  init(_ router: Router, _ songInfo : SongInfo) {
     self.router = router
     let steps = FullLesson.makeSteps()
 
     super.init(state: FullLessonViewState(
+      songInfo: songInfo,
       currentStepIndex: 0,
       steps: steps,
       playerState: .stopped,
@@ -37,6 +38,8 @@ final class FullLessonViewModel: BaseViewModel<FullLessonViewState> {
         ))
       }
       .store(in: &cancellables)
+    
+    audioPlayerManager.initialize(state.songInfo.fullSong)
   }
 
   /// 권한 승인
@@ -55,7 +58,7 @@ final class FullLessonViewModel: BaseViewModel<FullLessonViewState> {
   func play(isRetry _: Bool = false) {
     cancelPlayTask()
     playTask = Task {
-      await audioPlayerManager.start(audioFile: .full_song)
+      await audioPlayerManager.start(audioFile: state.songInfo.fullSong)
       // 오디오 재생이 끝난 후 TTS 재생
 //      await textToSpeechManager.speak("다시 듣고 싶으시면 \"재생\"이라고 말씀해주십시오. 중간에 멈추고 싶으시면 \"정지\"라고 말씀해주십시오.")
     }
