@@ -108,17 +108,21 @@ struct ChordLessonGuideView: View {
                 첫 번째로 다음 학습 단계로 넘어갈 때 페이지가 넘어가는 효과음이 실행됩니다.
                 """)
 
-                Button(action: { viewModel.playSound(.next) }) {
+                Button(action: {
+                  viewModel.playSound(.next)
+                }) {
                   Text("페이지 전환 효과음 재생 ▶")
                 }
+                .accessibilityLabel("페이지 전환 효과음 재생")
+                .accessibilityAddTraits([.isButton, .startsMediaSession])
 
-                Text("""
-                두 번째로 일부 학습 단계에서 사용자가 기타를 쳤을 때 올바른 소리가 나는 경우 올바른 소리라는 것을 확인해 주는 효과음이 실행됩니다.
-                """)
-
-                Button(action: { viewModel.playSound(.answer) }) {
-                  Text("올바른 소리 인식 효과음 재생 ▶")
+                Button(action: {
+                  viewModel.playSound(.answer)
+                }) {
+                  Text("올바른 소리 효과음 재생 ▶")
                 }
+                .accessibilityLabel("올바른 소리 효과음 재생")
+                .accessibilityAddTraits([.isButton, .startsMediaSession])
               }
             }
           ),

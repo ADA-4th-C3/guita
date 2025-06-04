@@ -50,21 +50,22 @@ struct SectionLessonView: View {
             IconButton("chevron-left", size: 95, disabled: state.currentStepIndex == 0) {
               viewModel.previousStep()
             }.accessibilityAddTraits(.isButton)
-              .accessibilityLabel("이전")
+              .accessibilityLabel(state.currentStepIndex == 0 ? "이전 (비활성화)" : "이전")
+              .accessibilityAddTraits([.isButton, .startsMediaSession])
 
             IconButton("play", size: 95, isSystemImage: false) {
               viewModel.play()
             }
             .accessibilityAddTraits(.isButton)
             .accessibilityLabel("재생")
+            .accessibilityAddTraits([.isButton, .startsMediaSession])
 
             IconButton("chevron-right", size: 95, disabled: state.currentStepIndex == state.steps.count - 1) {
               viewModel.nextStep()
             }
             .accessibilityAddTraits(.isButton)
             .accessibilityLabel("다음")
-            .accessibilityAddTraits(.isButton)
-            .accessibilityLabel("다음")
+            .accessibilityAddTraits([.isButton, .startsMediaSession])
           }
         }
       }

@@ -12,7 +12,7 @@ struct TechniqueLessonView: View {
       ) { viewModel, state in
         VStack {
           // MARK: Toolbar
-          Toolbar(title: "주법 학습", accessibilityText: "", trailing: {
+          Toolbar(title: "주법 학습", accessibilityText: "주법을 학습하는 화면입니다. 학습을 시작하고자 하시는 재생버튼을 눌러주세요.", trailing: {
             IconButton("info", color: .light, isSystemImage: false) {
               router.push(.techniqueLessonGuide)
             }.accessibilityAddTraits(.isButton)
@@ -45,9 +45,13 @@ struct TechniqueLessonView: View {
           .accessibilityHidden(true)
 
           // MARK: Button(back/play/next)
+
           HStack {
+            let isFirstStep = (state.currentStepIndex == 0)
             Button(action: {
-              viewModel.previousStep()
+              if !isFirstStep {
+                viewModel.previousStep()
+              }
             }) {
               Image("chevron-left")
                 .resizable()
@@ -55,7 +59,9 @@ struct TechniqueLessonView: View {
                 .padding(.trailing, 42)
             }
             .accessibilityAddTraits(.isButton)
-            .accessibilityLabel("이전")
+            .accessibilityLabel(isFirstStep ? "이전(비활성화)" : "이전")
+            .opacity(isFirstStep ? 0.5 : 1.0)
+            .accessibilityAddTraits([.isButton, .startsMediaSession])
 
             Button(action: { viewModel.play() }) {
               Image("play")
@@ -63,6 +69,7 @@ struct TechniqueLessonView: View {
                 .frame(width: 95, height: 95)
             }.accessibilityAddTraits(.isButton)
               .accessibilityLabel("재생")
+              .accessibilityAddTraits([.isButton, .startsMediaSession])
 
             Button(action: {
               viewModel.nextStep()
@@ -74,6 +81,7 @@ struct TechniqueLessonView: View {
             }
             .accessibilityAddTraits(.isButton)
             .accessibilityLabel("다음")
+            .accessibilityAddTraits([.isButton, .startsMediaSession])
           }
         }.padding(.bottom, 5)
           .onAppear {
