@@ -13,12 +13,8 @@ final class FullLessonViewModel: BaseViewModel<FullLessonViewState> {
 
   init(_ router: Router, _ songInfo: SongInfo) {
     self.router = router
-    let steps = FullLesson.makeSteps()
-
     super.init(state: FullLessonViewState(
       songInfo: songInfo,
-      currentStepIndex: 0,
-      steps: steps,
       playerState: .stopped,
       isPermissionGranted: false,
       isVoiceCommandEnabled: false
@@ -69,23 +65,6 @@ final class FullLessonViewModel: BaseViewModel<FullLessonViewState> {
     audioPlayerManager.setCurrentTime(currentTime)
   }
 
-  /// 다음 step
-  func nextStep() {
-    guard state.currentStepIndex < state.steps.count - 1 else { return }
-
-    let newIndex = state.currentStepIndex + 1
-    emit(state.copy(currentStepIndex: newIndex))
-  }
-
-  /// 이전 step
-  func previousStep() {
-    guard state.currentStepIndex > 0 else { return }
-    let newIndex = state.currentStepIndex - 1
-    emit(state.copy(
-      currentStepIndex: newIndex
-    ))
-  }
-
   /// 속도 빠르게
   func increasePlaybackRate() {
     audioPlayerManager.increasePlaybackRate()
@@ -114,8 +93,6 @@ final class FullLessonViewModel: BaseViewModel<FullLessonViewState> {
           self.state.playerState == .stopped ? self.play() : self.resume()
         }),
         VoiceCommand(keyword: .retry, handler: { self.play() }),
-        VoiceCommand(keyword: .next, handler: nextStep),
-        VoiceCommand(keyword: .previous, handler: previousStep),
         VoiceCommand(keyword: .stop, handler: pause),
       ]
     )

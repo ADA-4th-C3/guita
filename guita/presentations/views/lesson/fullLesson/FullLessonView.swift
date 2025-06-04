@@ -31,8 +31,8 @@ struct FullLessonView: View {
           Image("audio-file")
             .resizable()
             .scaledToFit()
-            .frame(height: 95)
             .accessibilityHidden(true)
+            .frame(height: 95)
             .padding(87)
 
           // MARK: Full Song ProgressBar
@@ -41,9 +41,16 @@ struct FullLessonView: View {
               get: { state.currentTime },
               set: viewModel.setCurrentTime
             ),
-            totalDuration: state.totalDuration
+            totalDuration: state.totalDuration,
+            onSliderIncrease: {
+              let newCurrentTime = min(state.totalDuration, state.currentTime + state.totalDuration / 10)
+              viewModel.setCurrentTime(newCurrentTime)
+            },
+            onSliderDecrease: {
+              let newCurrentTime = max(0, state.currentTime - state.totalDuration / 10)
+              viewModel.setCurrentTime(newCurrentTime)
+            }
           )
-          .accessibilityHidden(true)
 
           Spacer()
 

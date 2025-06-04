@@ -5,6 +5,19 @@ import SwiftUI
 struct SongProgressBar: View {
   @Binding var currentTime: Double
   let totalDuration: Double
+  let onSliderIncrease: () -> Void
+  let onSliderDecrease: () -> Void
+
+  private func voiceOverFormatTime(_ time: Double) -> String {
+    let minutes = Int(time) / 60
+    let seconds = Int(time) % 60
+
+    if minutes == 0 {
+      return "\(seconds)초"
+    } else {
+      return "\(minutes)분 \(seconds)초"
+    }
+  }
 
   private func formatTime(_ time: Double) -> String {
     let minutes = Int(time) / 60
@@ -17,6 +30,14 @@ struct SongProgressBar: View {
       // Interactive Slider
       Slider(value: $currentTime, in: 0 ... totalDuration)
         .accentColor(.primary)
+        .accessibilityValue("총 재생 시간 \(voiceOverFormatTime(totalDuration)) 중 \(voiceOverFormatTime(currentTime))")
+        .accessibilityAdjustableAction { direction in
+          if direction == .increment {
+            onSliderIncrease()
+          } else {
+            onSliderDecrease()
+          }
+        }
 
       // Time labels
       HStack {
@@ -25,7 +46,7 @@ struct SongProgressBar: View {
         Spacer()
         Text(formatTime(totalDuration))
           .fontKoddi(14, color: .gray, weight: .regular)
-      }
+      }.accessibilityHidden(true)
     }
     .padding(.horizontal, 20)
   }
@@ -39,9 +60,7 @@ struct SongProgressBar: View {
 
     var body: some View {
       VStack(spacing: 20) {
-        SongProgressBar(currentTime: $time1, totalDuration: 180)
-        SongProgressBar(currentTime: $time2, totalDuration: 180)
-        SongProgressBar(currentTime: $time3, totalDuration: 180)
+        SongProgressBar(currentTime: $time1, totalDuration: 180, onSliderIncrease: {}, onSliderDecrease: {})
       }
       .padding()
     }
