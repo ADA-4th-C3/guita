@@ -5,7 +5,7 @@ import SwiftUI
 final class Router: BaseViewModel<RouterViewState> {
   
   private var lastNavigationTime: Date = .distantPast
-  private let navigationThreshold: TimeInterval = 0.3
+  private let navigationThreshold: TimeInterval = 1.0
   
   init() {
     super.init(state: RouterViewState(
