@@ -4,6 +4,8 @@ import SwiftUI
 
 struct ChordView: View {
   @EnvironmentObject var router: Router
+//  @AccessibilityFocusState private var focusedChord: Chord?
+  
   let songInfo: SongInfo
 
   var body: some View {
@@ -25,7 +27,10 @@ struct ChordView: View {
                 .padding(.vertical, 36)
             }
             .frame(maxWidth: .infinity)
+            
           }
+//          .accessibilityFocused($focusedChord, equals: chord)
+//          .background(focusedChord == chord ? Color.yellow.opacity(0.9) : Color.clear)
           .accessibilityLabel("\(chord.rawValue) 코드 학습하기")
           .accessibilityAddTraits(.isButton)
 
