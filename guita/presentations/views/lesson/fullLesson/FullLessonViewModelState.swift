@@ -2,11 +2,6 @@
 
 struct FullLessonViewState {
   let songInfo: SongInfo
-  let currentStepIndex: Int
-  let steps: [FullLessonStep]
-  var currentStep: FullLessonStep {
-    steps[currentStepIndex]
-  }
 
   /// 재생 상태
   var playerState: AudioPlayerState
@@ -21,8 +16,6 @@ struct FullLessonViewState {
 
   func copy(
     songInfo: SongInfo? = nil,
-    currentStepIndex: Int? = nil,
-    steps: [FullLessonStep]? = nil,
     playerState: AudioPlayerState? = nil,
     currentTime: Double? = nil,
     totalDuration: Double? = nil,
@@ -31,8 +24,6 @@ struct FullLessonViewState {
   ) -> FullLessonViewState {
     return FullLessonViewState(
       songInfo: songInfo ?? self.songInfo,
-      currentStepIndex: currentStepIndex ?? self.currentStepIndex,
-      steps: steps ?? self.steps,
       playerState: playerState ?? self.playerState,
       currentTime: currentTime ?? self.currentTime,
       totalDuration: totalDuration ?? self.totalDuration,
