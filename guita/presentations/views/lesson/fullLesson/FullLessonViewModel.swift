@@ -1,7 +1,7 @@
 //  Copyright © 2025 ADA 4th Challenge3 Team1. All rights reserved.
 
-import Foundation
 import Combine
+import Foundation
 
 final class FullLessonViewModel: BaseViewModel<FullLessonViewState> {
   private let voiceCommandManager: VoiceCommandManager = .shared
@@ -25,7 +25,7 @@ final class FullLessonViewModel: BaseViewModel<FullLessonViewState> {
       isPermissionGranted: false,
       isVoiceCommandEnabled: false
     ))
-    
+
     audioPlayerManager.$state
       .receive(on: DispatchQueue.main)
       .sink { [weak self] audioPlayerManagerState in
@@ -60,7 +60,7 @@ final class FullLessonViewModel: BaseViewModel<FullLessonViewState> {
 //      await textToSpeechManager.speak("다시 듣고 싶으시면 \"재생\"이라고 말씀해주십시오. 중간에 멈추고 싶으시면 \"정지\"라고 말씀해주십시오.")
     }
   }
-  
+
   /// 재시작
   func resume() {
     audioPlayerManager.resume()
@@ -69,6 +69,11 @@ final class FullLessonViewModel: BaseViewModel<FullLessonViewState> {
   /// 정지
   func pause() {
     audioPlayerManager.pause()
+  }
+
+  func setCurrentTime(_ currentTime: Double) {
+//    Logger.d("set current time : \(currentTime)")
+    audioPlayerManager.setCurrentTime(currentTime)
   }
 
   /// 다음 step

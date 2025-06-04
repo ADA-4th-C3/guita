@@ -6,7 +6,6 @@ struct FullLessonViewState {
   var currentStep: FullLessonStep {
     steps[currentStepIndex]
   }
-  
 
   /// 재생 상태
   var playerState: AudioPlayerState

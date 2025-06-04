@@ -36,7 +36,10 @@ struct FullLessonView: View {
 
         // MARK: Full Song ProgressBar
         SongProgressBar(
-          currentTime: state.currentTime,
+          currentTime: Binding(
+            get: { state.currentTime },
+            set: viewModel.setCurrentTime
+          ),
           totalDuration: state.totalDuration
         )
         .accessibilityHidden(true)

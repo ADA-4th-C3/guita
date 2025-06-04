@@ -4,6 +4,6 @@ enum AudioPlayerState {
   case paused
   case playing
   case stopped
-  
+
   var isPlaying: Bool { self == .playing }
 }
