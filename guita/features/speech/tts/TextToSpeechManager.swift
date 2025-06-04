@@ -10,13 +10,14 @@ final class TextToSpeechManager: BaseViewModel<TextToSpeechState>, AVSpeechSynth
 
   private init() {
     super.init(state: .init(isSpeaking: false))
-    configureAudioSession()
     speechSynthesizer.delegate = self
   }
 
+  /// init()에 있는 경우 화면 진입시 느려지는 원인으로 확인되어 SplashView에서 호출하여 해결
   /// TTS와 Mic 함께 사용시 TTS 소리가 작아지는 문제 해결
-  private func configureAudioSession() {
+  func configureAudioSession() {
     let session = AVAudioSession.sharedInstance()
+    guard session.category != .playAndRecord else { return }
     do {
       try session.setCategory(.playAndRecord, options: [.defaultToSpeaker, .mixWithOthers])
       try session.setActive(true)

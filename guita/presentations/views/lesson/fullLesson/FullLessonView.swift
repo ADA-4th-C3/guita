@@ -11,10 +11,10 @@ struct FullLessonView: View {
       create: { FullLessonViewModel(router, songInfo) }
     ) { viewModel, state in
       PermissionView(
-        permissionListener: { isGranted in
-          if isGranted {
-            viewModel.onPermissionGranted()
-          }
+        permissionListener: { _ in
+//          if isGranted {
+//            viewModel.onPermissionGranted()
+//          }
         }
       ) {
         VStack(spacing: 0) {
