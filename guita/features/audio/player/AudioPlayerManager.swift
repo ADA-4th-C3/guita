@@ -41,6 +41,7 @@ final class AudioPlayerManager: BaseViewModel<AudioPlayerManagerState> {
   private init() {
     super.init(state: .init(
       playerState: .stopped,
+      initTime: 0.0,
       currentTime: 0.0,
       totalDuration: 0.0
     ))
@@ -56,8 +57,7 @@ final class AudioPlayerManager: BaseViewModel<AudioPlayerManagerState> {
     DispatchQueue.main.async { [weak self] in
       self?.playbackTimer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { _ in
         guard let self = self else { return }
-        let currentTime = self.getCurrentTime()
-        Logger.d("currentTime : \(currentTime)")
+        let currentTime = self.state.initTime + self.getPlayDuration()
         self.emit(self.state.copy(currentTime: currentTime))
       }
     }
@@ -124,21 +124,16 @@ final class AudioPlayerManager: BaseViewModel<AudioPlayerManagerState> {
       guard let self = self, let audioFile = self.audioFile else { return }
 
       self.playerNode.stop()
-
+      self.playerNode.reset()
       let sampleRate = audioFile.processingFormat.sampleRate
       let frameCount = AVAudioFramePosition(time * sampleRate)
       let length = audioFile.length
       let startFrame = max(0, min(frameCount, length))
 
-      Task {
-        await self.playerNode.scheduleSegment(audioFile, startingFrame: startFrame, frameCount: AVAudioFrameCount(length - startFrame), at: nil) {
-          //        self.emit(self.state.copy(playerState: .stopped))
-        }
-        self.playerNode.play()
-        self.emit(self.state.copy(playerState: .playing, currentTime: time))
-        try? await Task.sleep(nanoseconds: 1_000_000_000)
-        self.startPlaybackTimer()
-      }
+      self.playerNode.scheduleSegment(audioFile, startingFrame: startFrame, frameCount: AVAudioFrameCount(length - startFrame), at: nil) {}
+      self.playerNode.play()
+      self.emit(self.state.copy(playerState: .playing, initTime: time))
+      self.startPlaybackTimer()
     }
   }
 
@@ -150,8 +145,8 @@ final class AudioPlayerManager: BaseViewModel<AudioPlayerManagerState> {
     continuation = nil
   }
 
-  /// 현재 재생 시간 반환
-  func getCurrentTime() -> TimeInterval {
+  /// 현재 음원 타임라인의 위치가 아니라 지금까지 재생된 시간 반환
+  func getPlayDuration() -> TimeInterval {
     return playerNode.lastRenderTime.flatMap { playerNode.playerTime(forNodeTime: $0)?.sampleTime }.map {
       Double($0) / (audioFile?.processingFormat.sampleRate ?? 1.0)
     } ?? 0
