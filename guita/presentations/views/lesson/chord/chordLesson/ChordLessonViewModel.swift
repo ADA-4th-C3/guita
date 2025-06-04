@@ -20,17 +20,17 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
 
   init(_ router: Router, _ chord: Chord, _ chords: [Chord]) {
     self.router = router
-    let state = ChordLessonViewState(
+    self.chordLesson = ChordLesson(chord)
+    super.init(state: ChordLessonViewState(
       chords: chords,
       chord: chord,
       index: 0,
       currentStepDescription: "",
       isPermissionGranted: false,
       isVoiceCommandEnabled: false,
-      isReplay: false
-    )
-    chordLesson = ChordLesson(chord, state.totalStep)
-    super.init(state: state)
+      isReplay: false,
+      steps: chordLesson.steps
+    ))
   }
 
   private func cancelPlayTask() {
@@ -40,20 +40,40 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
   /// 레슨 재생
   func play() {
     cancelPlayTask()
+    
+    Task {
+      try? await Task.sleep(nanoseconds: 300_000_000)
+      emit(state.copy(
+        isReplay: true
+      ))
+    }
     playTask = Task {
       switch state.step {
       case .introduction:
         await chordLesson.startIntroduction(state.isReplay)
-      case .lineByLine:
-        await chordLesson.startLineByLine(state.isReplay, index: state.index * 2)
-      case .fullChord:
-        await chordLesson.startFullChord(state.isReplay, index: state.index)
+      case let .lineFingering(nString, nFret, nFinger):
+        await chordLesson.startLineFingering(
+          state.isReplay,
+          index: state.index,
+          nString: nString,
+          nFret: nFret,
+          nFinger: nFinger
+        )
+      case let .lineSoundCheck(nString, nFret, nFinger):
+        await chordLesson.startLineSoundCheck(
+          state.isReplay,
+          index: state.index,
+          nString: nString,
+          nFret: nFret,
+          nFinger: nFinger
+        )
+      case .chordFingering:
+        await chordLesson.startChordFingering(state.isReplay, index: state.index)
+      case .chordSoundCheck:
+        await chordLesson.startChordSoundCheck(state.isReplay, index: state.index)
       case .finish:
         await chordLesson.startFinish(state.isReplay, nextChord: state.nextChord)
       }
-      emit(state.copy(
-        isReplay: true
-      ))
     }
   }
 
@@ -112,7 +132,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
       index: 0,
       currentStepDescription: ""
     )
-    chordLesson = ChordLesson(nextChord, nextState.totalStep)
+    chordLesson = ChordLesson(nextChord)
     emit(nextState)
     play()
   }

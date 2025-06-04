@@ -19,28 +19,17 @@ struct ChordLessonViewState {
 
   /// 반복 실행 여부
   let isReplay: Bool
+  
+  /// 전체 레슨
+  let steps: [ChordLessonStep]
 
-  /// 레슨 스탭
-  var step: ChordLessonStep { getStep(index) }
-  var nextStep: ChordLessonStep { getStep(index + 1) }
-  var prevStep: ChordLessonStep { getStep(index - 1) }
+  /// 현재 레슨
+  var step: ChordLessonStep { steps[index] }
+  var nextStep: ChordLessonStep { index+1 > totalStep ? .finish : steps[index + 1] }
+  var prevStep: ChordLessonStep { index-1 < 0 ? .introduction : steps[index - 1] }
 
   /// 전체 스탭 개수
-  var totalStep: Int {
-    let intro = 1
-    let lineByLine = chord.coordinates.count
-    let fullChord = 1
-    let finish = 1
-    return intro + lineByLine + fullChord + finish
-  }
-
-  /// 전달 받은 index에 따른 스탭
-  private func getStep(_ i: Int) -> ChordLessonStep {
-    i == 0 ? .introduction
-      : i == totalStep - 1 ? .finish
-      : i == totalStep - 2 ? .fullChord
-      : .lineByLine
-  }
+  var totalStep: Int { steps.count }
 
   /// 다음 배울 코드
   var nextChord: Chord? {
@@ -58,7 +47,8 @@ struct ChordLessonViewState {
     currentStepDescription: String? = nil,
     isPermissionGranted: Bool? = nil,
     isVoiceCommandEnabled: Bool? = nil,
-    isReplay: Bool? = nil
+    isReplay: Bool? = nil,
+    steps: [ChordLessonStep]? = nil
   ) -> ChordLessonViewState {
     return ChordLessonViewState(
       chords: chords ?? self.chords,
@@ -67,7 +57,8 @@ struct ChordLessonViewState {
       currentStepDescription: currentStepDescription ?? self.currentStepDescription,
       isPermissionGranted: isPermissionGranted ?? self.isPermissionGranted,
       isVoiceCommandEnabled: isVoiceCommandEnabled ?? self.isVoiceCommandEnabled,
-      isReplay: isReplay ?? self.isReplay
+      isReplay: isReplay ?? self.isReplay,
+      steps: steps ?? self.steps
     )
   }
 }

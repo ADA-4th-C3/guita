@@ -21,7 +21,7 @@ final class DevConfigViewModel: BaseViewModel<Config> {
     emit(state.copy(ttsSpeed: isSpeedUp ? state.ttsSpeed.next : state.ttsSpeed.previous))
     Task {
       textToSpeechManager.stop()
-      await textToSpeechManager.speak("코로나로 식욕이 사라졌던 줄리앤 블랙홀 처럼 모든 걸 빨아들이게 된 사연은? Feat. 아 배고프다 편의점 갈 사람?")
+      await textToSpeechManager.speak("텍스트를 읽어주는 속도를 조절합니다")
     }
   }
 
