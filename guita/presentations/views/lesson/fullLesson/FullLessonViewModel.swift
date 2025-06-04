@@ -1,6 +1,7 @@
 //  Copyright © 2025 ADA 4th Challenge3 Team1. All rights reserved.
 
 import Foundation
+import Combine
 
 final class FullLessonViewModel: BaseViewModel<FullLessonViewState> {
   private let voiceCommandManager: VoiceCommandManager = .shared
@@ -12,6 +13,7 @@ final class FullLessonViewModel: BaseViewModel<FullLessonViewState> {
   private let router: Router
 
   private var progressTimer: Timer?
+  private var cancellables = Set<AnyCancellable>()
 
   init(_ router: Router) {
     self.router = router
@@ -23,6 +25,18 @@ final class FullLessonViewModel: BaseViewModel<FullLessonViewState> {
       isPermissionGranted: false,
       isVoiceCommandEnabled: false
     ))
+    
+    audioPlayerManager.$state
+      .receive(on: DispatchQueue.main)
+      .sink { [weak self] playerState in
+        guard let self = self else { return }
+        self.emit(self.state.copy(
+          currentTime: playerState.currentTime,
+          totalDuration: playerState.totalDuration,
+          isPlaying: playerState.isPlaying
+        ))
+      }
+      .store(in: &cancellables)
   }
 
   /// 권한 승인
@@ -43,13 +57,13 @@ final class FullLessonViewModel: BaseViewModel<FullLessonViewState> {
     emit(state.copy(isPlaying: true))
     playTask = Task {
       await audioPlayerManager.start(audioFile: .full_song)
-      await MainActor.run {
-        self.startProgressTracking()
-      }
+//      await MainActor.run {
+//        self.startProgressTracking()
+//      }
       // 오디오 재생이 끝난 후 TTS 재생
 //      await textToSpeechManager.speak("다시 듣고 싶으시면 \"재생\"이라고 말씀해주십시오. 중간에 멈추고 싶으시면 \"정지\"라고 말씀해주십시오.")
     }
-    startProgressTracking()
+//    startProgressTracking()
   }
 
   /// 정지
