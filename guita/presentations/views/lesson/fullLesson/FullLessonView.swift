@@ -37,7 +37,7 @@ struct FullLessonView: View {
         // MARK: Full Song ProgressBar
         SongProgressBar(
           currentTime: state.currentTime,
-          totalDuration: state.totalDuration, isPlaying: state.isPlaying
+          totalDuration: state.totalDuration
         )
         .accessibilityHidden(true)
 
@@ -72,18 +72,18 @@ struct FullLessonView: View {
           .accessibilityLabel("느리게")
 
           Button(action: {
-            if state.isPlaying {
-              viewModel.pause()
-            } else {
-              viewModel.play()
+            switch state.playerState {
+            case .paused: viewModel.resume()
+            case .stopped: viewModel.play()
+            case .playing: viewModel.pause()
             }
           }) {
-            Image(state.isPlaying ? "pause" : "play")
+            Image(state.playerState.isPlaying ? "pause" : "play")
               .resizable()
               .frame(width: 95, height: 95)
           }
           .accessibilityAddTraits(.isButton)
-          .accessibilityLabel(state.isPlaying ? "일시정지" : "재생")
+          .accessibilityLabel(state.playerState.isPlaying ? "일시정지" : "재생")
 
           Button(action: {
             viewModel.increasePlaybackRate()

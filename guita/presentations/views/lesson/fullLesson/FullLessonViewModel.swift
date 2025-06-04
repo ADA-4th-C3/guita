@@ -12,7 +12,6 @@ final class FullLessonViewModel: BaseViewModel<FullLessonViewState> {
   private var playTask: Task<Void, Never>? = nil
   private let router: Router
 
-  private var progressTimer: Timer?
   private var cancellables = Set<AnyCancellable>()
 
   init(_ router: Router) {
@@ -22,18 +21,19 @@ final class FullLessonViewModel: BaseViewModel<FullLessonViewState> {
     super.init(state: FullLessonViewState(
       currentStepIndex: 0,
       steps: steps,
+      playerState: .stopped,
       isPermissionGranted: false,
       isVoiceCommandEnabled: false
     ))
     
     audioPlayerManager.$state
       .receive(on: DispatchQueue.main)
-      .sink { [weak self] playerState in
+      .sink { [weak self] audioPlayerManagerState in
         guard let self = self else { return }
         self.emit(self.state.copy(
-          currentTime: playerState.currentTime,
-          totalDuration: playerState.totalDuration,
-          isPlaying: playerState.isPlaying
+          playerState: audioPlayerManagerState.playerState,
+          currentTime: audioPlayerManagerState.currentTime,
+          totalDuration: audioPlayerManagerState.totalDuration
         ))
       }
       .store(in: &cancellables)
@@ -54,22 +54,21 @@ final class FullLessonViewModel: BaseViewModel<FullLessonViewState> {
   /// 노래 재생 시작
   func play(isRetry _: Bool = false) {
     cancelPlayTask()
-    emit(state.copy(isPlaying: true))
     playTask = Task {
       await audioPlayerManager.start(audioFile: .full_song)
-//      await MainActor.run {
-//        self.startProgressTracking()
-//      }
       // 오디오 재생이 끝난 후 TTS 재생
 //      await textToSpeechManager.speak("다시 듣고 싶으시면 \"재생\"이라고 말씀해주십시오. 중간에 멈추고 싶으시면 \"정지\"라고 말씀해주십시오.")
     }
-//    startProgressTracking()
+  }
+  
+  /// 재시작
+  func resume() {
+    audioPlayerManager.resume()
   }
 
   /// 정지
   func pause() {
-    emit(state.copy(isPlaying: false))
-    AudioPlayerManager.shared.pause()
+    audioPlayerManager.pause()
   }
 
   /// 다음 step
@@ -104,27 +103,6 @@ final class FullLessonViewModel: BaseViewModel<FullLessonViewState> {
       try? await Task.sleep(nanoseconds: 200_000_000)
       completion?()
     }
-  }
-
-  /// SongProgressBar Tracking Start
-  func startProgressTracking() {
-    progressTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
-      let currentTime = self.audioPlayerManager.getCurrentTime()
-      let duration = self.audioPlayerManager.getDuration()
-      let isPlaying = self.audioPlayerManager.state.isPlaying
-
-      self.emit(self.state.copy(
-        currentTime: currentTime,
-        totalDuration: duration,
-        isPlaying: isPlaying
-      ))
-    }
-  }
-
-  /// SongProgressBar Tracking Stop
-  func stopProgressTracking() {
-    progressTimer?.invalidate()
-    progressTimer = nil
   }
 
   /// 현재 속도 반환
@@ -169,7 +147,6 @@ final class FullLessonViewModel: BaseViewModel<FullLessonViewState> {
   func stopVoiceCommand() {
     voiceCommandManager.stop()
     textToSpeechManager.stop()
-    stopProgressTracking()
   }
 
   override func dispose() {

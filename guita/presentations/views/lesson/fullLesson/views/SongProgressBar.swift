@@ -5,7 +5,6 @@ import SwiftUI
 struct SongProgressBar: View {
   let currentTime: Double
   let totalDuration: Double
-  let isPlaying: Bool
 
   private var progress: Double {
     guard totalDuration > 0 else { return 0 }
@@ -56,9 +55,9 @@ struct SongProgressBar: View {
 
 #Preview {
   VStack(spacing: 20) {
-    SongProgressBar(currentTime: 45, totalDuration: 180, isPlaying: true)
-    SongProgressBar(currentTime: 120, totalDuration: 180, isPlaying: false)
-    SongProgressBar(currentTime: 0, totalDuration: 180, isPlaying: false)
+    SongProgressBar(currentTime: 45, totalDuration: 180)
+    SongProgressBar(currentTime: 120, totalDuration: 180)
+    SongProgressBar(currentTime: 0, totalDuration: 180)
   }
   .padding()
 }

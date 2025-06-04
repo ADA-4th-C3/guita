@@ -18,7 +18,7 @@ final class AudioPlayerManager: BaseViewModel<AudioPlayerManagerState> {
   
   private init() {
     super.init(state: .init(
-      isPlaying: false,
+      playerState: .stopped,
       currentTime: 0.0,
       totalDuration: 0.0
     ))
@@ -63,12 +63,13 @@ final class AudioPlayerManager: BaseViewModel<AudioPlayerManagerState> {
               // 재생 완료 콜백
               self.continuation?.resume()
               self.continuation = nil
-              self.emit(self.state.copy(isPlaying: false))
+              Logger.d("완전 정지인지 일시정지인지 모르겠음!")
+              self.emit(self.state.copy(playerState: .stopped))
             }
             self.playerNode.play()
             self.startPlaybackTimer()
             self.emit(self.state.copy(
-              isPlaying: true,
+              playerState: .playing,
               totalDuration: self.getDuration()
             ))
           }
@@ -84,13 +85,19 @@ final class AudioPlayerManager: BaseViewModel<AudioPlayerManagerState> {
   func pause() {
     playerNode.pause()
     stopPlaybackTimer()
-    emit(state.copy(isPlaying: false))
+    emit(state.copy(playerState: .paused))
+  }
+  
+  func resume() {
+    startPlaybackTimer()
+    playerNode.play()
+    emit(state.copy(playerState: .playing))
   }
   
   func stop() {
     playerNode.stop()
     stopPlaybackTimer()
-    emit(state.copy(isPlaying: false))
+    emit(state.copy(playerState: .stopped))
     continuation?.resume()
     continuation = nil
   }
