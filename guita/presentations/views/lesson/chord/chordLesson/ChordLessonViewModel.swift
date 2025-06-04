@@ -6,6 +6,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
   private let voiceCommandManager = VoiceCommandManager.shared
   private let audioRecorderManager: AudioRecorderManager = .shared
   private let audioPlayerManager: AudioPlayerManager = .shared
+  private let textToSpeechManager: TextToSpeechManager = .shared
   private let noteClassification: NoteClassification = .init()
   private let chordClassification: ChordClassification = .init()
   private let noteThrottle = ThrottleAggregator<Note>(
@@ -20,17 +21,17 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
 
   init(_ router: Router, _ chord: Chord, _ chords: [Chord]) {
     self.router = router
-    let state = ChordLessonViewState(
+    chordLesson = ChordLesson(chord)
+    super.init(state: ChordLessonViewState(
       chords: chords,
       chord: chord,
       index: 0,
-      currentStepPlayCount: 0,
       currentStepDescription: "",
       isPermissionGranted: false,
-      isVoiceCommandEnabled: false
-    )
-    chordLesson = ChordLesson(chord, state.totalStep)
-    super.init(state: state)
+      isVoiceCommandEnabled: false,
+      isReplay: false,
+      steps: chordLesson.steps
+    ))
   }
 
   private func cancelPlayTask() {
@@ -40,17 +41,37 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
   /// 레슨 재생
   func play() {
     cancelPlayTask()
-    emit(state.copy(
-      currentStepPlayCount: state.currentStepPlayCount + 1
-    ))
+
+    Task {
+      try? await Task.sleep(nanoseconds: 300_000_000)
+      emit(state.copy(
+        isReplay: true
+      ))
+    }
     playTask = Task {
       switch state.step {
       case .introduction:
         await chordLesson.startIntroduction(state.isReplay)
-      case .lineByLine:
-        await chordLesson.startLineByLine(state.isReplay, index: state.index * 2)
-      case .fullChord:
-        await chordLesson.startFullChord(state.isReplay, index: state.index)
+      case let .lineFingering(nString, nFret, nFinger):
+        await chordLesson.startLineFingering(
+          state.isReplay,
+          index: state.index,
+          nString: nString,
+          nFret: nFret,
+          nFinger: nFinger
+        )
+      case let .lineSoundCheck(nString, nFret, nFinger):
+        await chordLesson.startLineSoundCheck(
+          state.isReplay,
+          index: state.index,
+          nString: nString,
+          nFret: nFret,
+          nFinger: nFinger
+        )
+      case .chordFingering:
+        await chordLesson.startChordFingering(state.isReplay, index: state.index)
+      case .chordSoundCheck:
+        await chordLesson.startChordSoundCheck(state.isReplay, index: state.index)
       case .finish:
         await chordLesson.startFinish(state.isReplay, nextChord: state.nextChord)
       }
@@ -74,11 +95,15 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
       // 다음 스탭
       emit(state.copy(
         index: state.index + 1,
-        currentStepPlayCount: state.nextStep != state.step ? 0 : nil
+        isReplay: false
       ))
-      playStepChangeSound {
-        self.play()
-      }
+      playStepChangeSound()
+    }
+  }
+
+  func readDescription() {
+    Task {
+      await textToSpeechManager.speak(state.description)
     }
   }
 
@@ -88,11 +113,9 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
     if state.step == .introduction { return }
     emit(state.copy(
       index: state.index - 1,
-      currentStepPlayCount: state.prevStep != state.step ? 0 : nil
+      isReplay: false
     ))
-    playStepChangeSound {
-      self.play()
-    }
+    playStepChangeSound()
   }
 
   /// 권한 승인
@@ -110,10 +133,9 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
     let nextState = state.copy(
       chord: nextChord,
       index: 0,
-      currentStepPlayCount: 0,
       currentStepDescription: ""
     )
-    chordLesson = ChordLesson(nextChord, nextState.totalStep)
+    chordLesson = ChordLesson(nextChord)
     emit(nextState)
     play()
   }
@@ -124,8 +146,14 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
       commands: [
         VoiceCommand(keyword: .play, handler: play),
         VoiceCommand(keyword: .retry, handler: play),
-        VoiceCommand(keyword: .next, handler: goNext),
-        VoiceCommand(keyword: .previous, handler: goPrevious),
+        VoiceCommand(keyword: .next, handler: {
+          self.goNext()
+          self.play()
+        }),
+        VoiceCommand(keyword: .previous, handler: {
+          self.goPrevious()
+          self.play()
+        }),
       ]
     )
     emit(state.copy(

@@ -20,7 +20,7 @@ struct ChordLessonView: View {
       ) {
         VStack(spacing: 0) {
           // MARK: Toolbar
-          Toolbar(title: "\(state.chord.rawValue) 코드", accessibilityText: "\(state.chord.rawValue) 코드를 학습하는 화면입니다. 학습을 시작하고자 하시면 재생버튼을 눌러주세요.", trailing: {
+          Toolbar(title: "\(state.chord.rawValue) 코드", accessibilityText: "\(state.chord.rawValue) 코드를 학습하는 화면입니다. 학습을 시작하고자 하시면 재생이라고 말해주세요.", trailing: {
             IconButton("info") {
               router.push(.chordLessonGuide)
             }.accessibilityAddTraits(.isButton)
@@ -35,7 +35,7 @@ struct ChordLessonView: View {
           Spacer()
 
           // MARK: Step description
-          Text("\(state.step.getDescription(state.chord, index: state.index))")
+          Text(state.description)
             .fontKoddi(26, color: .light)
             .lineSpacing(1.45)
             .multilineTextAlignment(.center)
@@ -54,7 +54,7 @@ struct ChordLessonView: View {
             IconButton("play", color: .accent, size: 95) {
               viewModel.play()
             }.accessibilityAddTraits(.isButton)
-              .accessibilityLabel("재생")
+              .accessibilityLabel("\(state.description) 재생")
               .accessibilityAddTraits([.isButton, .startsMediaSession])
 
             IconButton("chevron-right", size: 95) {

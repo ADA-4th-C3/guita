@@ -10,9 +10,6 @@ struct ChordLessonViewState {
   /// 현재 단계
   let index: Int
 
-  /// 현재 단계 반복 횟수 ([ChordLessonStep]가 바뀌는 경우에만 초기화 됨)
-  let currentStepPlayCount: Int
-
   /// 현재 단계 설명
   let currentStepDescription: String
 
@@ -21,29 +18,21 @@ struct ChordLessonViewState {
   let isVoiceCommandEnabled: Bool
 
   /// 반복 실행 여부
-  var isReplay: Bool { currentStepPlayCount > 1 }
+  let isReplay: Bool
 
-  /// 레슨 스탭
-  var step: ChordLessonStep { getStep(index) }
-  var nextStep: ChordLessonStep { getStep(index + 1) }
-  var prevStep: ChordLessonStep { getStep(index - 1) }
+  /// 전체 레슨
+  let steps: [ChordLessonStep]
+
+  /// 현재 레슨
+  var step: ChordLessonStep { steps[index] }
+  var nextStep: ChordLessonStep { index + 1 > totalStep ? .finish : steps[index + 1] }
+  var prevStep: ChordLessonStep { index - 1 < 0 ? .introduction : steps[index - 1] }
 
   /// 전체 스탭 개수
-  var totalStep: Int {
-    let intro = 1
-    let lineByLine = chord.coordinates.count * 2
-    let fullChord = 1
-    let finish = 1
-    return intro + lineByLine + fullChord + finish
-  }
+  var totalStep: Int { steps.count }
 
-  /// 전달 받은 index에 따른 스탭
-  private func getStep(_ i: Int) -> ChordLessonStep {
-    i == 0 ? .introduction
-      : i == totalStep - 1 ? .finish
-      : i == totalStep - 2 ? .fullChord
-      : .lineByLine
-  }
+  /// 설명
+  var description: String { step.getDescription(chord, index: index) }
 
   /// 다음 배울 코드
   var nextChord: Chord? {
@@ -58,19 +47,21 @@ struct ChordLessonViewState {
     chords: [Chord]? = nil,
     chord: Chord? = nil,
     index: Int? = nil,
-    currentStepPlayCount: Int? = nil,
     currentStepDescription: String? = nil,
     isPermissionGranted: Bool? = nil,
-    isVoiceCommandEnabled: Bool? = nil
+    isVoiceCommandEnabled: Bool? = nil,
+    isReplay: Bool? = nil,
+    steps: [ChordLessonStep]? = nil
   ) -> ChordLessonViewState {
     return ChordLessonViewState(
       chords: chords ?? self.chords,
       chord: chord ?? self.chord,
       index: index ?? self.index,
-      currentStepPlayCount: currentStepPlayCount ?? self.currentStepPlayCount,
       currentStepDescription: currentStepDescription ?? self.currentStepDescription,
       isPermissionGranted: isPermissionGranted ?? self.isPermissionGranted,
-      isVoiceCommandEnabled: isVoiceCommandEnabled ?? self.isVoiceCommandEnabled
+      isVoiceCommandEnabled: isVoiceCommandEnabled ?? self.isVoiceCommandEnabled,
+      isReplay: isReplay ?? self.isReplay,
+      steps: steps ?? self.steps
     )
   }
 }

@@ -11,6 +11,7 @@ struct SplashView: View {
     ) { viewModel, _ in
       VStack {
         Loading()
+          .accessibilityLabel("앱 로딩 중...")
       }
       .onAppear {
         TextToSpeechManager.shared.configureAudioSession()
