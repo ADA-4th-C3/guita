@@ -25,7 +25,7 @@ final class TextToSpeechManager: BaseViewModel<TextToSpeechState>, AVSpeechSynth
     }
   }
 
-  func speak(_ text: String, language: String = "ko-KR") async {
+  func speak(_ text: String, language: String = "ko-KR", rate: Float? = nil) async {
     stop()
     if text.isEmpty { return }
     await withTaskCancellationHandler(operation: {
@@ -33,7 +33,7 @@ final class TextToSpeechManager: BaseViewModel<TextToSpeechState>, AVSpeechSynth
         self.continuation = continuation
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = AVSpeechSynthesisVoice(language: language)
-        utterance.rate = configManager.state.ttsSpeed.value
+        utterance.rate = rate ?? configManager.state.ttsSpeed.value
         speechSynthesizer.speak(utterance)
       }
     }, onCancel: {
