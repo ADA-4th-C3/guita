@@ -13,6 +13,7 @@ struct SplashView: View {
         Loading()
       }
       .onAppear {
+        TextToSpeechManager.shared.configureAudioSession()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
           viewModel.onLoaded()
           router.setRoot(.home)
