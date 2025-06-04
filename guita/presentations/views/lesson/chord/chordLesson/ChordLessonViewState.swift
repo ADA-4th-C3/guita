@@ -10,9 +10,6 @@ struct ChordLessonViewState {
   /// 현재 단계
   let index: Int
 
-  /// 현재 단계 반복 횟수 ([ChordLessonStep]가 바뀌는 경우에만 초기화 됨)
-  let currentStepPlayCount: Int
-
   /// 현재 단계 설명
   let currentStepDescription: String
 
@@ -21,7 +18,7 @@ struct ChordLessonViewState {
   let isVoiceCommandEnabled: Bool
 
   /// 반복 실행 여부
-  var isReplay: Bool { currentStepPlayCount > 1 }
+  let isReplay: Bool
 
   /// 레슨 스탭
   var step: ChordLessonStep { getStep(index) }
@@ -31,7 +28,7 @@ struct ChordLessonViewState {
   /// 전체 스탭 개수
   var totalStep: Int {
     let intro = 1
-    let lineByLine = chord.coordinates.count * 2
+    let lineByLine = chord.coordinates.count
     let fullChord = 1
     let finish = 1
     return intro + lineByLine + fullChord + finish
@@ -58,19 +55,19 @@ struct ChordLessonViewState {
     chords: [Chord]? = nil,
     chord: Chord? = nil,
     index: Int? = nil,
-    currentStepPlayCount: Int? = nil,
     currentStepDescription: String? = nil,
     isPermissionGranted: Bool? = nil,
-    isVoiceCommandEnabled: Bool? = nil
+    isVoiceCommandEnabled: Bool? = nil,
+    isReplay: Bool? = nil
   ) -> ChordLessonViewState {
     return ChordLessonViewState(
       chords: chords ?? self.chords,
       chord: chord ?? self.chord,
       index: index ?? self.index,
-      currentStepPlayCount: currentStepPlayCount ?? self.currentStepPlayCount,
       currentStepDescription: currentStepDescription ?? self.currentStepDescription,
       isPermissionGranted: isPermissionGranted ?? self.isPermissionGranted,
-      isVoiceCommandEnabled: isVoiceCommandEnabled ?? self.isVoiceCommandEnabled
+      isVoiceCommandEnabled: isVoiceCommandEnabled ?? self.isVoiceCommandEnabled,
+      isReplay: isReplay ?? self.isReplay
     )
   }
 }

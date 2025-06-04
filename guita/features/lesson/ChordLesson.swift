@@ -23,12 +23,12 @@ final class ChordLesson: BaseLesson {
 
   /// 현재 단계
   private func currentStep(_: Bool, _ index: Int) -> String {
-    return "총 \(totalStep) 단계 중 \(index + 1)단계"
+    return "총 \(totalStep.koCard) 단계 중 \((index + 1).koOrd)단계"
   }
 
   /// Replay에서 읽지 않는 텍스트
-  private func doNotReplayText(_ isReplay: Bool, _: String) -> String {
-    return isReplay ? "" : functionText
+  private func doNotReplayText(_ isReplay: Bool, _ text: String) -> String {
+    return isReplay ? "" : text
   }
 
   /// 개요
@@ -77,35 +77,42 @@ final class ChordLesson: BaseLesson {
         await self.textToSpeechManager.speak(text)
       },
 
-      // MARK: 홀수일 때만 실행
+      // MARK: 개요
       {
-        if index % 2 == 1 {
-          // 개요
-          if lineIndex != 0 {
-            let text = self.doNotReplayText(isReplay, "\(self.chord) 코드를 한 줄씩 잡아봅시다.")
-            await self.textToSpeechManager.speak(text)
-          }
-          // 운지법 설명
-          let text = "\(fret) 플랫, 아래에서 \(string) 줄을 \(finger) 손가락으로 잡으세요."
-          await self.textToSpeechManager.speak(text)
+        if lineIndex != 0 { return }
+        let text = self.doNotReplayText(isReplay, "\(self.chord) 코드를 한 줄씩 잡아봅시다.")
+        await self.textToSpeechManager.speak(text)
+      },
+
+      // MARK: 운지법 설명
+      // TODO: F, B 같은 BarreChord인 경우 향후 지원 예정
+      {
+        // let isBarreChord = coordinate.0.count > 1
+        let text = "\(fret) 플랫, 아래에서 \(string) 줄을 \(finger) 손가락으로 잡으세요. 그리고 \(string) 줄을 튕겼을 때"
+        await self.textToSpeechManager.speak(text)
+      },
+
+      // MARK: 재생 - 한 줄 소리
+      {
+        let audioKey = "\(self.chord.rawValue)_\(nString).wav"
+        if let audioFile = AudioFile(rawValue: audioKey) {
+          await self.audioPlayerManager.start(audioFile: audioFile)
+        } else {
+          Logger.e("Invalid audio file name: \(audioKey)")
         }
       },
 
-      // MARK: 짝수일 때만 실행
+      // MARK: 설명
       {
-        if index % 2 == 0 {
-          // 재생 - 한 줄 소리
-          let audioKey = "\(self.chord.rawValue)_\(nString).wav"
-          if let audioFile = AudioFile(rawValue: audioKey) {
-            await self.audioPlayerManager.start(audioFile: audioFile)
-          } else {
-            Logger.e("Invalid audio file name: \(audioKey)")
-          }
-          // 설명
-          let text = " 그리고 \(string) 줄을 튕겼을 때, 이런 소리가 들려야 해요. 이제 \(string) 줄을 튕겨볼까요?"
-          await self.textToSpeechManager.speak(text)
-          self.isNoteClassificationEnabled = true
-        }
+        let text = "이런 소리가 들려야 해요. 이제 \(string) 줄을 튕겨볼까요?"
+        await self.textToSpeechManager.speak(text)
+        self.isNoteClassificationEnabled = true
+      },
+      
+      // MARK: 기능
+      {
+        let text = self.doNotReplayText(isReplay, self.functionText)
+        await self.textToSpeechManager.speak(text)
       },
     ])
   }
@@ -159,6 +166,12 @@ final class ChordLesson: BaseLesson {
         let text = "\(self.chord) 코드는 이런 소리가 들려야 해요. 이제 피크로 쓸어내려보세요."
         await self.textToSpeechManager.speak(text)
         self.isChordClassificationEnabled = true
+      },
+      
+      // MARK: 기능
+      {
+        let text = self.doNotReplayText(isReplay, self.functionText)
+        await self.textToSpeechManager.speak(text)
       },
     ])
   }

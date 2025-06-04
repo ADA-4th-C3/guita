@@ -24,10 +24,10 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
       chords: chords,
       chord: chord,
       index: 0,
-      currentStepPlayCount: 0,
       currentStepDescription: "",
       isPermissionGranted: false,
-      isVoiceCommandEnabled: false
+      isVoiceCommandEnabled: false,
+      isReplay: false
     )
     chordLesson = ChordLesson(chord, state.totalStep)
     super.init(state: state)
@@ -40,9 +40,6 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
   /// 레슨 재생
   func play() {
     cancelPlayTask()
-    emit(state.copy(
-      currentStepPlayCount: state.currentStepPlayCount + 1
-    ))
     playTask = Task {
       switch state.step {
       case .introduction:
@@ -54,6 +51,9 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
       case .finish:
         await chordLesson.startFinish(state.isReplay, nextChord: state.nextChord)
       }
+      emit(state.copy(
+        isReplay: true
+      ))
     }
   }
 
@@ -74,7 +74,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
       // 다음 스탭
       emit(state.copy(
         index: state.index + 1,
-        currentStepPlayCount: state.nextStep != state.step ? 0 : nil
+        isReplay: false
       ))
       playStepChangeSound {
         self.play()
@@ -88,7 +88,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
     if state.step == .introduction { return }
     emit(state.copy(
       index: state.index - 1,
-      currentStepPlayCount: state.prevStep != state.step ? 0 : nil
+      isReplay: false
     ))
     playStepChangeSound {
       self.play()
@@ -110,7 +110,6 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
     let nextState = state.copy(
       chord: nextChord,
       index: 0,
-      currentStepPlayCount: 0,
       currentStepDescription: ""
     )
     chordLesson = ChordLesson(nextChord, nextState.totalStep)
