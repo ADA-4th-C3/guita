@@ -4,13 +4,13 @@ enum RootPage {
   case splash
   case home
   var title: String {
-      switch self {
-      case .home:
-        return "귀타 시작"
-      case .splash:
-              return "스플래쉬"
-      }
+    switch self {
+    case .home:
+      return "귀타 시작"
+    case .splash:
+      return "스플래쉬"
     }
+  }
 }
 
 enum SubPage: Hashable {
@@ -56,11 +56,11 @@ extension SubPage {
     switch self {
     case .curriculum:
       return "학습 목록"
-    case .lesson(let songInfo):
+    case let .lesson(songInfo):
       return "\(songInfo.level)"
     case .chord:
       return "코드 학습"
-    case .chordLesson(let songInfo):
+    case let .chordLesson(songInfo):
       return "\(songInfo.chord)코드"
     case .chordLessonGuide:
       return "코드 학습 도움말"
@@ -72,7 +72,7 @@ extension SubPage {
       return "곡 구간 학습 "
     case .sectionLessonGuide:
       return "곡 구간 학습 도움말"
-    case .fullLesson(let songInfo):
+    case let .fullLesson(songInfo):
       return "\(songInfo.title) 곡 전체 학습"
     case .fullLessonGuide:
       return "곡 전체 학습 도움말"

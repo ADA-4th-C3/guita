@@ -22,10 +22,10 @@ struct FullLessonView: View {
           Toolbar(title: "곡 전체 학습", trailing: {
             IconButton("info", color: .light, isSystemImage: false) {
               router.push(.fullLessonGuide)
-            }
+
+            }.accessibilityAddTraits(.isButton)
+              .accessibilityLabel("사용법 도움말")
           })
-          .accessibilityAddTraits(.isButton)
-          .accessibilityLabel("사용법 도움말")
 
           // MARK: Full Song description
           Image("audio-file")

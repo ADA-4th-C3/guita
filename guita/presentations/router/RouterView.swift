@@ -52,8 +52,6 @@ struct RouterView: View {
   }
 }
 
-
-
 #Preview {
   BasePreview {
     RouterView()
