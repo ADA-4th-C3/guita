@@ -8,6 +8,13 @@ struct PermissionDeniedDialog: View {
   var body: some View {
     VStack(spacing: 0) {
       VStack(spacing: 14) {
+        Text("알림창입니다.")
+          .font(.caption)
+          .foregroundColor(.clear)
+          .accessibilityHidden(false)
+          .accessibilityLabel("알림창입니다.")
+          .accessibilityAddTraits(.isHeader)
+
         Image("pick-check")
           .resizable()
           .frame(width: 54, height: 54)
@@ -43,6 +50,7 @@ struct PermissionDeniedDialog: View {
 
         Button(action: onConfirm) {
           Text("설정")
+            .accessibilityLabel("설정 바로가기 버튼")
             .fontKoddi(20, color: .dark, weight: .bold)
             .frame(maxWidth: .infinity)
             .padding()
