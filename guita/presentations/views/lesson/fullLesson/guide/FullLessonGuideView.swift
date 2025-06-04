@@ -8,7 +8,7 @@ struct FullLessonGuideView: View {
   var body: some View {
     BaseView(
       create: { FullLessonGuideViewModel() }
-    ) { _, _ in
+    ) { viewModel, _ in
       GuideView(
         title: "곡 전체 학습",
         sections: [
@@ -54,6 +54,24 @@ struct FullLessonGuideView: View {
 
               속도 조절은 느리게, 빠르게로 조절 가능합니다.
               """)
+            }
+          ),
+          GuideSection(
+            title: "주법 학습 화면 효과음 안내",
+            content: {
+              VStack(alignment: .leading, spacing: 25.2) {
+                Text("""
+                주법 학습 화면에선 다음 학습 단계로 넘어갈 때 페이지가 넘어가는 효과음이 실행됩니다.
+                """)
+
+                Button(action: {
+                  viewModel.playSound(.next)
+                }) {
+                  Text("페이지 전환 효과음 재생 ▶")
+                }
+                .accessibilityLabel("페이지 전환 효과음 재생")
+                .accessibilityAddTraits([.isButton, .startsMediaSession])
+              }
             }
           ),
         ]

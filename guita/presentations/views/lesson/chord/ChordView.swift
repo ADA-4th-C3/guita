@@ -14,7 +14,7 @@ struct ChordView: View {
     ) { _, state in
       VStack(spacing: 0) {
         // MARK: Toolbar
-        Toolbar(title: "코드 학습", accessibilityText: "\(state.songInfo.chords) 를 배우는 화면입니다. 배우고 싶은 코드를 선택해 주세요.")
+        Toolbar(title: "코드 학습", accessibilityText: "\(state.songInfo.chords) 를 배우는 화면입니다. 기타를 들고 배우고 싶은 코드를 선택해 주세요.")
 
         // MARK: Chord Button
         ListDivider()

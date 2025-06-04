@@ -42,9 +42,13 @@ struct TechniqueLessonGuideView: View {
                 주법 학습 화면에선 다음 학습 단계로 넘어갈 때 페이지가 넘어가는 효과음이 실행됩니다.
                 """)
 
-                Button(action: { viewModel.playSound(.next) }) {
+                Button(action: {
+                  viewModel.playSound(.next)
+                }) {
                   Text("페이지 전환 효과음 재생 ▶")
                 }
+                .accessibilityLabel("페이지 전환 효과음 재생")
+                .accessibilityAddTraits([.isButton, .startsMediaSession])
               }
             }
           ),
