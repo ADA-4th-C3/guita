@@ -53,7 +53,7 @@ struct SectionLessonView: View {
               .accessibilityLabel(state.currentStepIndex == 0 ? "이전 (비활성화)" : "이전")
               .accessibilityAddTraits([.isButton, .startsMediaSession])
 
-            IconButton("play", size: 95, isSystemImage: false) {
+            IconButton("play", color: .accent, size: 95) {
               viewModel.play()
             }
             .accessibilityAddTraits(.isButton)

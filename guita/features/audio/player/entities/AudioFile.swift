@@ -49,7 +49,7 @@ enum AudioFile: String {
   case section_repeat_13 = "section_repeat_13.m4a"
 
   // full_song
-  case full_song = "full_song.mp3"
+  case basic_1 = "basic_1.mp3"
 
   // MARK: Effect
   case answer = "answer.wav"

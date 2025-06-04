@@ -68,7 +68,7 @@ struct LessonView: View {
               }
               Divider()
               Button(action: {
-                router.push(.fullLesson)
+                router.push(.fullLesson(songInfo: songInfo))
               }) {
                 Text("곡 전체 학습")
                   .fontKoddi(26, color: .light, weight: .regular)
@@ -87,10 +87,6 @@ struct LessonView: View {
 
 #Preview {
   BasePreview {
-    LessonView(songInfo: SongInfo(
-      level: "[초급1]",
-      title: "여행을 떠나요",
-      chords: [.A, .E, .B7]
-    ))
+    LessonView(songInfo: SongInfo.curriculum.first!)
   }
 }

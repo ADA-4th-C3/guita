@@ -34,7 +34,7 @@ struct RouterView: View {
           case .techniqueLessonGuide: TechniqueLessonGuideView()
           case .sectionLesson: SectionLessonView()
           case .sectionLessonGuide: SectionLessonGuideView()
-          case .fullLesson: FullLessonView()
+          case let .fullLesson(songInfo): FullLessonView(songInfo: songInfo)
           case .fullLessonGuide: FullLessonGuideView()
           // MARK: Dev
           case .dev: DevView()

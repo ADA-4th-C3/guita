@@ -43,6 +43,6 @@ struct ChordView: View {
 
 #Preview {
   BasePreview {
-    ChordView(songInfo: SongInfo(level: "초급1", title: "여행을 떠나요", chords: [.A, .E, .B7]))
+    ChordView(songInfo: SongInfo.curriculum.first!)
   }
 }

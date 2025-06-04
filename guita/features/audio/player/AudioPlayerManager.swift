@@ -57,8 +57,14 @@ final class AudioPlayerManager: BaseViewModel<AudioPlayerManagerState> {
     DispatchQueue.main.async { [weak self] in
       self?.playbackTimer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { _ in
         guard let self = self else { return }
-        let currentTime = self.state.initTime + self.getPlayDuration()
-        self.emit(self.state.copy(currentTime: currentTime))
+        let currentTime = min(self.state.initTime + self.getPlayDuration(), self.state.totalDuration)
+        if currentTime == self.state.totalDuration {
+          self.stopPlaybackTimer()
+          self.stop()
+          self.emit(self.state.copy(currentTime: 0))
+        } else {
+          self.emit(self.state.copy(currentTime: currentTime))
+        }
       }
     }
   }
@@ -68,37 +74,45 @@ final class AudioPlayerManager: BaseViewModel<AudioPlayerManagerState> {
     playbackTimer = nil
   }
 
-  func start(audioFile: AudioFile) async {
-    stop()
-
-    await withTaskCancellationHandler {
+  func initialize(_ audioFile: AudioFile) {
+    do {
       guard let url = audioFile.fileURL else {
         Logger.e("음원 파일을 찾을 수 없습니다: \(audioFile)")
         return
       }
 
-      do {
-        self.audioFile = try AVAudioFile(forReading: url)
-        await withCheckedContinuation { continuation in
-          self.continuation = continuation
-          if let file = self.audioFile {
-            self.playerNode.scheduleFile(file, at: nil) {
-              // 재생 완료 콜백
-              self.continuation?.resume()
-              self.continuation = nil
-              Logger.d("완전 정지인지 일시정지인지 모르겠음!")
-              self.emit(self.state.copy(playerState: .stopped))
-            }
-            self.playerNode.play()
-            self.startPlaybackTimer()
-            self.emit(self.state.copy(
-              playerState: .playing,
-              totalDuration: self.getDuration()
-            ))
+      self.audioFile = try AVAudioFile(forReading: url)
+      emit(state.copy(
+        playerState: .stopped,
+        initTime: 0,
+        currentTime: 0,
+        totalDuration: getDuration()
+      ))
+    } catch {
+      Logger.e("AVAudioFile 생성 오류: \(error)")
+    }
+  }
+
+  func start(audioFile: AudioFile) async {
+    stop()
+
+    await withTaskCancellationHandler {
+      initialize(audioFile)
+      await withCheckedContinuation { continuation in
+        self.continuation = continuation
+        if let file = self.audioFile {
+          self.playerNode.scheduleFile(file, at: nil) {
+            // 재생 완료 콜백
+            self.continuation?.resume()
+            self.continuation = nil
+            self.emit(self.state.copy(playerState: .stopped))
           }
+          self.playerNode.play()
+          self.startPlaybackTimer()
+          self.emit(self.state.copy(
+            playerState: .playing
+          ))
         }
-      } catch {
-        Logger.e("AVAudioFile 생성 오류: \(error)")
       }
     } onCancel: {
       stop()
@@ -122,16 +136,20 @@ final class AudioPlayerManager: BaseViewModel<AudioPlayerManagerState> {
     emit(state.copy(playerState: .playing, currentTime: time))
     seekDebouncer.call { [weak self] in
       guard let self = self, let audioFile = self.audioFile else { return }
-
-      self.playerNode.stop()
+      let isPlaying = self.state.playerState.isPlaying
+      if isPlaying {
+        self.playerNode.stop()
+      }
       self.playerNode.reset()
       let sampleRate = audioFile.processingFormat.sampleRate
       let frameCount = AVAudioFramePosition(time * sampleRate)
       let length = audioFile.length
-      let startFrame = max(0, min(frameCount, length))
+      let startFrame = max(0, min(frameCount, length - 1))
 
       self.playerNode.scheduleSegment(audioFile, startingFrame: startFrame, frameCount: AVAudioFrameCount(length - startFrame), at: nil) {}
-      self.playerNode.play()
+      if isPlaying {
+        self.playerNode.play()
+      }
       self.emit(self.state.copy(playerState: .playing, initTime: time))
       self.startPlaybackTimer()
     }

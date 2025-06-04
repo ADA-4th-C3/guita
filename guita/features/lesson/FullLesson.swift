@@ -11,7 +11,7 @@ enum FullLesson {
         description: "곡 전체 학습",
         imageName: nil,
         fullLessonInfo: [FullLessonInfo(ttsText: nil)],
-        audioFile: .full_song,
+        audioFile: .basic_1,
         featureDescription: "다시 듣고 싶으시면 \"재생\"이라고 말씀해주십시오. 중간에 멈추고 싶으시면 \"정지\"라고 말씀해주십시오."
       ),
     ]

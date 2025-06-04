@@ -4,113 +4,100 @@ import SwiftUI
 
 struct FullLessonView: View {
   @EnvironmentObject var router: Router
+  let songInfo: SongInfo
 
   var body: some View {
     BaseView(
-      create: { FullLessonViewModel(router) }
+      create: { FullLessonViewModel(router, songInfo) }
     ) { viewModel, state in
-//      PermissionView(
-//        permissionListener: { isGranted in
-//          if isGranted {
-//            viewModel.onPermissionGranted()
-//          }
-//        }
-//      ) {
-      VStack(spacing: 0) {
-        // MARK: Toolbar
-        Toolbar(title: "곡 전체 학습", trailing: {
-          IconButton("info", color: .light, isSystemImage: false) {
-            router.push(.fullLessonGuide)
+      PermissionView(
+        permissionListener: { isGranted in
+          if isGranted {
+            viewModel.onPermissionGranted()
           }
-        })
-        .accessibilityAddTraits(.isButton)
-        .accessibilityLabel("사용법 도움말")
-
-        // MARK: Full Song description
-        Image("audio-file")
-          .resizable()
-          .scaledToFit()
-          .frame(height: 100)
-          .accessibilityHidden(true)
-          .padding(87)
-
-        // MARK: Full Song ProgressBar
-        SongProgressBar(
-          currentTime: Binding(
-            get: { state.currentTime },
-            set: viewModel.setCurrentTime
-          ),
-          totalDuration: state.totalDuration
-        )
-        .accessibilityHidden(true)
-
-        Spacer()
-          .padding(.top, 218)
-
-        Button(action: {
-          viewModel.play()
-        }) {
-          Text("다시 듣기")
-            .fontKoddi(26, color: .darkGrey, weight: .bold)
         }
-        .accessibilityAddTraits(.isButton)
-        .accessibilityLabel("다시 듣기")
-
-        Spacer()
-          .padding(.bottom, 71)
-
-        // MARK: Controllers
-        HStack {
-          Button(action: {
-            viewModel.decreasePlaybackRate()
-          }) {
-            Image(viewModel.isMinPlaybackRate() ? "slow-inactive" : "slow-active")
-              .renderingMode(.template)
-              .resizable()
-              .frame(width: 95, height: 95)
-              .foregroundColor(.light)
-          }
-          .disabled(viewModel.isMinPlaybackRate())
-          .accessibilityAddTraits(.isButton)
-          .accessibilityLabel("느리게")
-
-          Button(action: {
-            switch state.playerState {
-            case .paused: viewModel.resume()
-            case .stopped: viewModel.play()
-            case .playing: viewModel.pause()
+      ) {
+        VStack(spacing: 0) {
+          // MARK: Toolbar
+          Toolbar(title: "곡 전체 학습", trailing: {
+            IconButton("info", color: .light, isSystemImage: false) {
+              router.push(.fullLessonGuide)
             }
-          }) {
-            Image(state.playerState.isPlaying ? "pause" : "play")
-              .resizable()
-              .frame(width: 95, height: 95)
-          }
+          })
           .accessibilityAddTraits(.isButton)
-          .accessibilityLabel(state.playerState.isPlaying ? "일시정지" : "재생")
+          .accessibilityLabel("사용법 도움말")
+
+          // MARK: Full Song description
+          Image("audio-file")
+            .resizable()
+            .scaledToFit()
+            .frame(height: 95)
+            .accessibilityHidden(true)
+            .padding(87)
+
+          // MARK: Full Song ProgressBar
+          SongProgressBar(
+            currentTime: Binding(
+              get: { state.currentTime },
+              set: viewModel.setCurrentTime
+            ),
+            totalDuration: state.totalDuration
+          )
+          .accessibilityHidden(true)
+
+          Spacer()
 
           Button(action: {
-            viewModel.increasePlaybackRate()
+            viewModel.setCurrentTime(0)
           }) {
-            Image(viewModel.isMaxPlaybackRate() ? "fast-inactive" : "fast-active")
-              .renderingMode(.template)
-              .resizable()
-              .frame(width: 95, height: 95)
-              .foregroundColor(.light)
+            Text("다시 듣기")
+              .fontKoddi(26, color: .darkGrey, weight: .bold)
           }
-          .disabled(viewModel.isMaxPlaybackRate())
           .accessibilityAddTraits(.isButton)
-          .accessibilityLabel("빠르게")
+          .accessibilityLabel("다시 듣기")
+
+          Spacer()
+
+          // MARK: Controllers
+          HStack {
+            // MARK: Slow
+            IconButton("slow", color: .accent, size: 75, disabled: viewModel.isMinPlaybackRate()) {
+              viewModel.decreasePlaybackRate()
+            }
+            .accessibilityAddTraits(.isButton)
+            .accessibilityLabel("느리게")
+
+            Spacer()
+
+            // MARK: Play or Pause or Resume
+            IconButton(state.playerState.isPlaying ? "pause" : "play", color: .accent, size: 95) {
+              switch state.playerState {
+              case .paused: viewModel.resume()
+              case .stopped: viewModel.play()
+              case .playing: viewModel.pause()
+              }
+            }
+            .accessibilityAddTraits(.isButton)
+            .accessibilityLabel(state.playerState.isPlaying ? "일시정지" : "재생")
+
+            Spacer()
+
+            // MARK: Fast
+            IconButton("fast", color: .accent, size: 75, disabled: viewModel.isMaxPlaybackRate()) {
+              viewModel.increasePlaybackRate()
+            }
+            .accessibilityAddTraits(.isButton)
+            .accessibilityLabel("빠르게")
+          }
+          .padding(.horizontal, 32)
         }
-        .padding(.bottom, 39)
       }
     }
   }
 }
 
-// }
-
 #Preview {
   BasePreview {
-    FullLessonView()
+    FullLessonView(songInfo: SongInfo.curriculum.first!)
   }
 }
