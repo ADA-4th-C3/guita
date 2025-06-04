@@ -58,11 +58,15 @@ final class AudioPlayerManager: BaseViewModel<AudioPlayerManagerState> {
       self?.playbackTimer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { _ in
         guard let self = self else { return }
         let currentTime = min(self.state.initTime + self.getPlayDuration(), self.state.totalDuration)
-        self.emit(self.state.copy(currentTime: currentTime))
+        if currentTime == self.state.totalDuration {
+          self.setCurrentTime(0)
+        } else {
+          self.emit(self.state.copy(currentTime: currentTime))
+        }
       }
     }
   }
-
+  
   private func stopPlaybackTimer() {
     playbackTimer?.invalidate()
     playbackTimer = nil
@@ -127,16 +131,20 @@ final class AudioPlayerManager: BaseViewModel<AudioPlayerManagerState> {
     emit(state.copy(playerState: .playing, currentTime: time))
     seekDebouncer.call { [weak self] in
       guard let self = self, let audioFile = self.audioFile else { return }
-
-      self.playerNode.stop()
+      let isPlaying = self.state.playerState.isPlaying
+      if isPlaying {
+        self.playerNode.stop()
+      }
       self.playerNode.reset()
       let sampleRate = audioFile.processingFormat.sampleRate
       let frameCount = AVAudioFramePosition(time * sampleRate)
       let length = audioFile.length
-      let startFrame = max(0, min(frameCount, length))
+      let startFrame = max(0, min(frameCount, length - 1))
 
       self.playerNode.scheduleSegment(audioFile, startingFrame: startFrame, frameCount: AVAudioFrameCount(length - startFrame), at: nil) {}
-      self.playerNode.play()
+      if isPlaying {
+        self.playerNode.play()
+      }
       self.emit(self.state.copy(playerState: .playing, initTime: time))
       self.startPlaybackTimer()
     }
