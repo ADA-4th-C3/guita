@@ -5,7 +5,7 @@ import SwiftUI
 struct FullLessonView: View {
   @EnvironmentObject var router: Router
   let songInfo: SongInfo
-  
+
   var body: some View {
     BaseView(
       create: { FullLessonViewModel(router, songInfo) }
@@ -26,7 +26,7 @@ struct FullLessonView: View {
           })
           .accessibilityAddTraits(.isButton)
           .accessibilityLabel("사용법 도움말")
-          
+
           // MARK: Full Song description
           Image("audio-file")
             .resizable()
@@ -34,7 +34,7 @@ struct FullLessonView: View {
             .frame(height: 95)
             .accessibilityHidden(true)
             .padding(87)
-          
+
           // MARK: Full Song ProgressBar
           SongProgressBar(
             currentTime: Binding(
@@ -44,9 +44,9 @@ struct FullLessonView: View {
             totalDuration: state.totalDuration
           )
           .accessibilityHidden(true)
-          
+
           Spacer()
-          
+
           Button(action: {
             viewModel.setCurrentTime(0)
           }) {
@@ -55,9 +55,9 @@ struct FullLessonView: View {
           }
           .accessibilityAddTraits(.isButton)
           .accessibilityLabel("다시 듣기")
-          
+
           Spacer()
-          
+
           // MARK: Controllers
           HStack {
             // MARK: Slow
@@ -66,9 +66,9 @@ struct FullLessonView: View {
             }
             .accessibilityAddTraits(.isButton)
             .accessibilityLabel("느리게")
-            
+
             Spacer()
-            
+
             // MARK: Play or Pause or Resume
             IconButton(state.playerState.isPlaying ? "pause" : "play", color: .accent, size: 95) {
               switch state.playerState {
@@ -79,9 +79,9 @@ struct FullLessonView: View {
             }
             .accessibilityAddTraits(.isButton)
             .accessibilityLabel(state.playerState.isPlaying ? "일시정지" : "재생")
-            
+
             Spacer()
-            
+
             // MARK: Fast
             IconButton("fast", color: .accent, size: 75, disabled: viewModel.isMaxPlaybackRate()) {
               viewModel.increasePlaybackRate()

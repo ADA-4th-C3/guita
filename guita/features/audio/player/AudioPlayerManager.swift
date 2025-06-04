@@ -59,32 +59,34 @@ final class AudioPlayerManager: BaseViewModel<AudioPlayerManagerState> {
         guard let self = self else { return }
         let currentTime = min(self.state.initTime + self.getPlayDuration(), self.state.totalDuration)
         if currentTime == self.state.totalDuration {
-          self.setCurrentTime(0)
+          self.stopPlaybackTimer()
+          self.stop()
+          self.emit(self.state.copy(currentTime: 0))
         } else {
           self.emit(self.state.copy(currentTime: currentTime))
         }
       }
     }
   }
-  
+
   private func stopPlaybackTimer() {
     playbackTimer?.invalidate()
     playbackTimer = nil
   }
-  
+
   func initialize(_ audioFile: AudioFile) {
     do {
       guard let url = audioFile.fileURL else {
         Logger.e("음원 파일을 찾을 수 없습니다: \(audioFile)")
         return
       }
-      
+
       self.audioFile = try AVAudioFile(forReading: url)
-      self.emit(self.state.copy(
+      emit(state.copy(
         playerState: .stopped,
         initTime: 0,
         currentTime: 0,
-        totalDuration: self.getDuration()
+        totalDuration: getDuration()
       ))
     } catch {
       Logger.e("AVAudioFile 생성 오류: \(error)")
