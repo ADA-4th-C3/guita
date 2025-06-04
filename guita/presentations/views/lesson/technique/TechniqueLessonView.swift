@@ -63,6 +63,7 @@ struct TechniqueLessonView: View {
                 .accessibilityAddTraits(.isButton)
                 .accessibilityLabel(isFirstStep ? "이전(비활성화)" : "이전")
                 .opacity(isFirstStep ? 0.5 : 1.0)
+                .accessibilityAddTraits([.isButton, .startsMediaSession])
  
 
             Button(action: { viewModel.play() }) {
@@ -71,6 +72,7 @@ struct TechniqueLessonView: View {
                 .frame(width: 95, height: 95)
             }.accessibilityAddTraits(.isButton)
               .accessibilityLabel("재생")
+              .accessibilityAddTraits([.isButton, .startsMediaSession])
 
             Button(action: {
               viewModel.nextStep()
@@ -82,6 +84,8 @@ struct TechniqueLessonView: View {
             }
             .accessibilityAddTraits(.isButton)
             .accessibilityLabel("다음")
+            .accessibilityAddTraits([.isButton, .startsMediaSession])
+            
           }
         }.padding(.bottom, 5)
           .onAppear {
