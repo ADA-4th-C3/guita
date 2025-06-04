@@ -27,8 +27,8 @@ final class ChordLesson: BaseLesson {
   }
 
   /// Replay에서 읽지 않는 텍스트
-  private func doNotReplayText(_ isReplay: Bool, _ text: String) -> String {
-    return isReplay ? "" : text
+  private func doNotReplayText(_ isReplay: Bool, _: String) -> String {
+    return isReplay ? "" : functionText
   }
 
   /// 개요
