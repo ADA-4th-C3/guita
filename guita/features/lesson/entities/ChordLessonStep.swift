@@ -8,7 +8,7 @@ enum ChordLessonStep: Equatable {
   case chordSoundCheck
   case finish
 
-  static func ==(lhs: ChordLessonStep, rhs: ChordLessonStep) -> Bool {
+  static func == (lhs: ChordLessonStep, rhs: ChordLessonStep) -> Bool {
     switch (lhs, rhs) {
     case (.introduction, .introduction),
          (.lineFingering, .lineFingering),
@@ -22,7 +22,7 @@ enum ChordLessonStep: Equatable {
     }
   }
 
-  func getDescription(_ chord: Chord, index: Int) -> String {
+  func getDescription(_ chord: Chord, index _: Int) -> String {
     switch self {
     case .introduction:
       return "\(chord.rawValue) 코드 개요"

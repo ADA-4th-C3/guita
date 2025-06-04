@@ -6,6 +6,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
   private let voiceCommandManager = VoiceCommandManager.shared
   private let audioRecorderManager: AudioRecorderManager = .shared
   private let audioPlayerManager: AudioPlayerManager = .shared
+  private let textToSpeechManager: TextToSpeechManager = .shared
   private let noteClassification: NoteClassification = .init()
   private let chordClassification: ChordClassification = .init()
   private let noteThrottle = ThrottleAggregator<Note>(
@@ -20,7 +21,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
 
   init(_ router: Router, _ chord: Chord, _ chords: [Chord]) {
     self.router = router
-    self.chordLesson = ChordLesson(chord)
+    chordLesson = ChordLesson(chord)
     super.init(state: ChordLessonViewState(
       chords: chords,
       chord: chord,
@@ -40,7 +41,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
   /// 레슨 재생
   func play() {
     cancelPlayTask()
-    
+
     Task {
       try? await Task.sleep(nanoseconds: 300_000_000)
       emit(state.copy(
@@ -96,9 +97,13 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
         index: state.index + 1,
         isReplay: false
       ))
-      playStepChangeSound {
-        self.play()
-      }
+      playStepChangeSound()
+    }
+  }
+
+  func readDescription() {
+    Task {
+      await textToSpeechManager.speak(state.description)
     }
   }
 
@@ -110,9 +115,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
       index: state.index - 1,
       isReplay: false
     ))
-    playStepChangeSound {
-      self.play()
-    }
+    playStepChangeSound()
   }
 
   /// 권한 승인
@@ -143,8 +146,14 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
       commands: [
         VoiceCommand(keyword: .play, handler: play),
         VoiceCommand(keyword: .retry, handler: play),
-        VoiceCommand(keyword: .next, handler: goNext),
-        VoiceCommand(keyword: .previous, handler: goPrevious),
+        VoiceCommand(keyword: .next, handler: {
+          self.goNext()
+          self.play()
+        }),
+        VoiceCommand(keyword: .previous, handler: {
+          self.goPrevious()
+          self.play()
+        }),
       ]
     )
     emit(state.copy(

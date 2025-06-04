@@ -14,12 +14,12 @@ final class ChordLesson: BaseLesson {
 
   init(_ chord: Chord) {
     self.chord = chord
-    
+
     var result: [ChordLessonStep] = []
-    
+
     // Add intro
     result.append(.introduction)
-    
+
     // Add lineFingering & lineSoundCheck
     for lineIndex in chord.coordinates.indices {
       let coordinate = chord.coordinates[lineIndex]
@@ -29,18 +29,18 @@ final class ChordLesson: BaseLesson {
       result.append(.lineFingering(nString: nString, nFret: nFret, nFinger: nFinger))
       result.append(.lineSoundCheck(nString: nString, nFret: nFret, nFinger: nFinger))
     }
-    
+
     // Add chord fingering
     result.append(.chordFingering)
-    
+
     // Add chord sound check
     result.append(.chordSoundCheck)
-    
+
     // Add finish
     result.append(.finish)
-    self.steps = result
+    steps = result
   }
-  
+
   override func onLessonCancel(_: any Error) {
     audioPlayerManager.stop()
     textToSpeechManager.stop()
@@ -107,7 +107,7 @@ final class ChordLesson: BaseLesson {
         let text = "\(fret) 플랫, 아래에서 \(string) 줄을 \(finger) 손가락으로 잡으세요."
         await self.textToSpeechManager.speak(text)
       },
-      
+
       // MARK: 기능
       {
         let text = self.doNotReplayText(isReplay, self.functionText)
@@ -115,7 +115,7 @@ final class ChordLesson: BaseLesson {
       },
     ])
   }
-  
+
   /// 한 줄씩 사운드 체크
   func startLineSoundCheck(_ isReplay: Bool, index: Int, nString: Int, nFret: Int, nFinger: Int) async {
     isNoteClassificationEnabled = false
@@ -156,7 +156,7 @@ final class ChordLesson: BaseLesson {
         await self.textToSpeechManager.speak(text)
         self.isNoteClassificationEnabled = true
       },
-      
+
       // MARK: 기능
       {
         let text = self.doNotReplayText(isReplay, self.functionText)
@@ -164,7 +164,7 @@ final class ChordLesson: BaseLesson {
       },
     ])
   }
-  
+
   /// 코드 운지법 확인
   func startChordFingering(_ isReplay: Bool, index: Int) async {
     isNoteClassificationEnabled = false
@@ -199,7 +199,7 @@ final class ChordLesson: BaseLesson {
         text += "잡아주세요."
         await self.textToSpeechManager.speak(text)
       },
-      
+
       // MARK: 기능
       {
         let text = self.doNotReplayText(isReplay, self.functionText)
@@ -259,7 +259,7 @@ final class ChordLesson: BaseLesson {
         await self.textToSpeechManager.speak(text)
         self.isChordClassificationEnabled = true
       },
-      
+
       // MARK: 기능
       {
         let text = self.doNotReplayText(isReplay, self.functionText)

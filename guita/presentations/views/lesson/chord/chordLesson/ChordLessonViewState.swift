@@ -19,18 +19,18 @@ struct ChordLessonViewState {
 
   /// 반복 실행 여부
   let isReplay: Bool
-  
+
   /// 전체 레슨
   let steps: [ChordLessonStep]
 
   /// 현재 레슨
   var step: ChordLessonStep { steps[index] }
-  var nextStep: ChordLessonStep { index+1 > totalStep ? .finish : steps[index + 1] }
-  var prevStep: ChordLessonStep { index-1 < 0 ? .introduction : steps[index - 1] }
+  var nextStep: ChordLessonStep { index + 1 > totalStep ? .finish : steps[index + 1] }
+  var prevStep: ChordLessonStep { index - 1 < 0 ? .introduction : steps[index - 1] }
 
   /// 전체 스탭 개수
   var totalStep: Int { steps.count }
-  
+
   /// 설명
   var description: String { step.getDescription(chord, index: index) }
 
