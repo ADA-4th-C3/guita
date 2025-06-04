@@ -129,5 +129,6 @@ final class FullLessonViewModel: BaseViewModel<FullLessonViewState> {
   override func dispose() {
     voiceCommandManager.stop()
     audioRecorderManager.stop()
+    audioPlayerManager.stop()
   }
 }

@@ -81,6 +81,9 @@ final class AudioPlayerManager: BaseViewModel<AudioPlayerManagerState> {
       
       self.audioFile = try AVAudioFile(forReading: url)
       self.emit(self.state.copy(
+        playerState: .stopped,
+        initTime: 0,
+        currentTime: 0,
         totalDuration: self.getDuration()
       ))
     } catch {
