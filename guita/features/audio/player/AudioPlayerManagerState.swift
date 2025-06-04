@@ -2,18 +2,17 @@
 import Foundation
 
 struct AudioPlayerManagerState {
-  var isPlaying: Bool = false
+  var playerState: AudioPlayerState
   var currentTime: TimeInterval
   var totalDuration: TimeInterval
 
-
   func copy(
-    isPlaying: Bool? = nil,
+    playerState: AudioPlayerState? = nil,
     currentTime: TimeInterval? = nil,
     totalDuration: TimeInterval? = nil
   ) -> AudioPlayerManagerState {
     return AudioPlayerManagerState(
-      isPlaying: isPlaying ?? self.isPlaying,
+      playerState: playerState ?? self.playerState,
       currentTime: currentTime ?? self.currentTime,
       totalDuration: totalDuration ?? self.totalDuration
     )

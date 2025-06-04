@@ -5,7 +5,7 @@ struct FullLessonStep {
   let step: Int
   let description: String
   let imageName: String?
-  let fullLessonInfo : [FullLessonInfo]
+  let fullLessonInfo: [FullLessonInfo]
   let audioFile: AudioFile?
   let featureDescription: String
 }
@@ -13,4 +13,3 @@ struct FullLessonStep {
 struct FullLessonInfo {
   let ttsText: String?
 }
-
