@@ -134,7 +134,7 @@ final class TechniqueLessonViewModel: BaseViewModel<TechniqueLessonViewState> {
         let stepNumber = currentStep.step
         let totalSteps = currentStep.totalSteps
 
-        await textToSpeechManager.speak("총 \(totalSteps) 단게 중 \(stepNumber) 단계")
+        await textToSpeechManager.speak("총 \(totalSteps) 단계 중 \(stepNumber) 단계")
 
 //        for subStep in currentStep.subSteps {
 //          try Task.checkCancellation()

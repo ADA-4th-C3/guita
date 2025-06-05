@@ -52,21 +52,23 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
       switch state.step {
       case .introduction:
         await chordLesson.startIntroduction(state.isReplay)
-      case let .lineFingering(nString, nFret, nFinger):
+      case let .lineFingering(nString, nFret, nFinger, coordIdx):
         await chordLesson.startLineFingering(
           state.isReplay,
           index: state.index,
           nString: nString,
           nFret: nFret,
-          nFinger: nFinger
+          nFinger: nFinger,
+          coordIdx: coordIdx
         )
-      case let .lineSoundCheck(nString, nFret, nFinger):
+      case let .lineSoundCheck(nString, nFret, nFinger, coordIdx):
         await chordLesson.startLineSoundCheck(
           state.isReplay,
           index: state.index,
           nString: nString,
           nFret: nFret,
-          nFinger: nFinger
+          nFinger: nFinger,
+          coordIdx: coordIdx
         )
       case .chordFingering:
         await chordLesson.startChordFingering(state.isReplay, index: state.index)
@@ -182,7 +184,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
         windowSize: self.audioRecorderManager.windowSize
       ) {
         if let throttledNote = self.noteThrottle.add(value: note, confidence: noteConfidence) {
-          self.chordLesson.onNoteClassified(userNote: throttledNote.value, index: self.state.index)
+          self.chordLesson.onNoteClassified(userNote: throttledNote.value)
         }
       }
     }
@@ -208,7 +210,7 @@ extension ChordLessonViewModel {
     let isLastStep = state.index + 1 == state.totalStep
     if isLastStep {
       if let nextChord = state.nextChord {
-        return "다음으로 학습할 코드는 \(nextChord.rawValue) 코드 입니다. \(nextChord.rawValue) 코드로 넘어가기   "
+        return "다음으로 학습할 코드는 \(nextChord.rawValue) 코드 입니다. \(nextChord.rawValue) 코드로 넘어가기"
       } else {
         return "다음"
       }

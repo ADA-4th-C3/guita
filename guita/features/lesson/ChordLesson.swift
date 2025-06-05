@@ -11,6 +11,7 @@ final class ChordLesson: BaseLesson {
   let chord: Chord
   let steps: [ChordLessonStep]
   var totalStep: Int { steps.count }
+  private var coordIdx: Int = 0
 
   init(_ chord: Chord) {
     self.chord = chord
@@ -21,13 +22,13 @@ final class ChordLesson: BaseLesson {
     result.append(.introduction)
 
     // Add lineFingering & lineSoundCheck
-    for lineIndex in chord.coordinates.indices {
-      let coordinate = chord.coordinates[lineIndex]
+    for coordIdx in chord.coordinates.indices {
+      let coordinate = chord.coordinates[coordIdx]
       let nFret = coordinate.0.first!.fret
       let nString = coordinate.0.first!.string
       let nFinger = coordinate.1
-      result.append(.lineFingering(nString: nString, nFret: nFret, nFinger: nFinger))
-      result.append(.lineSoundCheck(nString: nString, nFret: nFret, nFinger: nFinger))
+      result.append(.lineFingering(nString: nString, nFret: nFret, nFinger: nFinger, coordIdx: coordIdx))
+      result.append(.lineSoundCheck(nString: nString, nFret: nFret, nFinger: nFinger, coordIdx: coordIdx))
     }
 
     // Add chord fingering
@@ -85,7 +86,7 @@ final class ChordLesson: BaseLesson {
   }
 
   /// 한 줄씩 운지법 설명
-  func startLineFingering(_ isReplay: Bool, index: Int, nString: Int, nFret: Int, nFinger: Int) async {
+  func startLineFingering(_ isReplay: Bool, index: Int, nString: Int, nFret: Int, nFinger: Int, coordIdx: Int) async {
     isNoteClassificationEnabled = false
     isChordClassificationEnabled = false
     let (fret, string, finger) = (nFret.koOrd, nString.koOrd, nFinger.koOrd)
@@ -117,7 +118,7 @@ final class ChordLesson: BaseLesson {
   }
 
   /// 한 줄씩 사운드 체크
-  func startLineSoundCheck(_ isReplay: Bool, index: Int, nString: Int, nFret: Int, nFinger: Int) async {
+  func startLineSoundCheck(_ isReplay: Bool, index: Int, nString: Int, nFret: Int, nFinger: Int, coordIdx: Int) async {
     isNoteClassificationEnabled = false
     isChordClassificationEnabled = false
     let (fret, string, finger) = (nFret.koOrd, nString.koOrd, nFinger.koOrd)
@@ -142,6 +143,7 @@ final class ChordLesson: BaseLesson {
 
       // MARK: 재생 - 한 줄 소리
       {
+        self.coordIdx = coordIdx
         let audioKey = "\(self.chord.rawValue)_\(nString).wav"
         if let audioFile = AudioFile(rawValue: audioKey) {
           await self.audioPlayerManager.start(audioFile: audioFile)
@@ -301,12 +303,11 @@ final class ChordLesson: BaseLesson {
   }
 
   /// Note 분류
-  func onNoteClassified(userNote: Note?, index: Int) {
+  func onNoteClassified(userNote: Note?) {
     if !isNoteClassificationEnabled { return }
     guard let userNote = userNote else { return }
-    let lineIndex = index - 1
-    guard lineIndex >= 0 && lineIndex < chord.notes.count else { return }
-    let note = chord.notes[lineIndex]
+    guard coordIdx >= 0 && coordIdx < chord.notes.count else { return }
+    let note = chord.notes[coordIdx]
     // Logger.d("Note : \(note), User Note : \(userNote)")
     if note == userNote {
       Task {
