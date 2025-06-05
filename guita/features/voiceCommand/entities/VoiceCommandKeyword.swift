@@ -7,6 +7,8 @@ enum VoiceCommandKeyword: CaseIterable {
   case retry
   case next
   case previous
+  case slow
+  case fast
 
   var phrases: [String] {
     switch self {
@@ -16,6 +18,8 @@ enum VoiceCommandKeyword: CaseIterable {
     case .retry: ["다시", "처음부터"]
     case .next: ["다음"]
     case .previous: ["이전"]
+    case .slow: ["느리게"]
+    case .fast: ["빠르게"]
     }
   }
 }
