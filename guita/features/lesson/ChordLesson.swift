@@ -86,7 +86,7 @@ final class ChordLesson: BaseLesson {
   }
 
   /// 한 줄씩 운지법 설명
-  func startLineFingering(_ isReplay: Bool, index: Int, nString: Int, nFret: Int, nFinger: Int, coordIdx: Int) async {
+  func startLineFingering(_ isReplay: Bool, index: Int, nString: Int, nFret: Int, nFinger: Int, coordIdx _: Int) async {
     isNoteClassificationEnabled = false
     isChordClassificationEnabled = false
     let (fret, string, finger) = (nFret.koOrd, nString.koOrd, nFinger.koOrd)
