@@ -13,7 +13,7 @@ struct FullLessonGuideView: View {
         title: "곡 전체 학습",
         sections: [
           GuideSection(
-            title: "곡 전체 학습",
+            title: "곡 전체 학습 개요",
             content: {
               Text("""
               곡 전체 학습은 제공하는 음성 안내를 통해 곡을 구간별로 학습할 수 있습니다.
