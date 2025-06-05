@@ -137,7 +137,7 @@ final class ChordLesson: BaseLesson {
 
       // MARK: 운지법 설명
       {
-        let text = "\(fret) 플랫, 아래에서 \(string) 줄을 \(finger) 손가락으로 잡고 \(string) 줄을 튕겼을 때"
+        let text = "\(fret) 플랫, 아래에서 \(string) 줄을 \(finger) 손가락으로 잡고 \(string) 줄을 튕겼을 때 이런 소리가 들려야 해요."
         await self.textToSpeechManager.speak(text)
       },
 
@@ -154,7 +154,7 @@ final class ChordLesson: BaseLesson {
 
       // MARK: 설명
       {
-        let text = "이런 소리가 들려야 해요. 이제 \(string) 줄을 튕겨볼까요?"
+        let text = "이제 \(string) 줄을 튕겨볼까요?"
         await self.textToSpeechManager.speak(text)
         self.isNoteClassificationEnabled = true
       },
@@ -241,7 +241,7 @@ final class ChordLesson: BaseLesson {
           text += "\(fret) 프렛, 아래서 \(string) 줄을 \(finger) 손가락으로"
           if !isLast { text += ", " }
         }
-        text += "잡고 위에서 아래로 모든 줄을 피크로 천천히 쓸어내렸을 때"
+        text += "잡고 위에서 아래로 모든 줄을 피크로 천천히 쓸어내렸을 때 \(self.chord) 코드는 이런 소리가 들려야 해요. "
         await self.textToSpeechManager.speak(text)
       },
 
@@ -257,7 +257,7 @@ final class ChordLesson: BaseLesson {
 
       // MARK: 설명
       {
-        let text = "\(self.chord) 코드는 이런 소리가 들려야 해요. 이제 피크로 쓸어내려보세요."
+        let text = "이제 피크로 쓸어내려보세요."
         await self.textToSpeechManager.speak(text)
         self.isChordClassificationEnabled = true
       },
