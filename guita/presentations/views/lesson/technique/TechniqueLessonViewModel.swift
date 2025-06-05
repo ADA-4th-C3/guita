@@ -29,7 +29,7 @@ final class TechniqueLessonViewModel: BaseViewModel<TechniqueLessonViewState> {
         totalSteps: 7,
         description: "주법의 업에 대한 설명",
         imageName: "",
-        subSteps: [TechniqueLessonSubStep(ttsText: "사운드 홀에 오른쪽 손을 두고, 위에서 아래로 줄을 쓸어내려 보세요.", audioFile: .stroke_up, delayAfter: nil, speechRate: nil),
+        subSteps: [TechniqueLessonSubStep(ttsText: "사운드 홀에 오른쪽 손을 두고, 아래에서 위로 줄을 쓸어내려 보세요.", audioFile: .stroke_up, delayAfter: nil, speechRate: nil),
                    TechniqueLessonSubStep(ttsText: "이것을 업 스트로크라고 해요. 자유롭게 업 스트로크를 연주해보세요.", audioFile: nil, delayAfter: nil, speechRate: nil)],
         featureDescription: "이전 학습으로 넘어가시려면 \"이전\", 다음 학습으로 넘어가시려면 \"다음\"을, 다시 들으시려면 \"다시\"를 말씀해 주세요."
       ),
@@ -38,7 +38,7 @@ final class TechniqueLessonViewModel: BaseViewModel<TechniqueLessonViewState> {
         totalSteps: 7,
         description: "주법의 다운에 대한 설명",
         imageName: "",
-        subSteps: [TechniqueLessonSubStep(ttsText: "사운드 홀에 오른쪽 손을 두고, 아래에서 위로 줄을 쓸어내려 보세요.", audioFile: .stroke_down, delayAfter: nil, speechRate: nil),
+        subSteps: [TechniqueLessonSubStep(ttsText: "사운드 홀에 오른쪽 손을 두고, 위에서 아래로 줄을 쓸어내려 보세요.", audioFile: .stroke_down, delayAfter: nil, speechRate: nil),
                    TechniqueLessonSubStep(ttsText: "이것을 다운 스트로크라고 해요. 자유롭게 다운 스트로크를 연주해보세요.", audioFile: nil, delayAfter: nil, speechRate: nil)],
         featureDescription: "이전 학습으로 넘어가시려면 \"이전\", 다음 학습으로 넘어가시려면 \"다음\"을, 다시 들으시려면 \"다시\"를 말씀해 주세요."
       ),

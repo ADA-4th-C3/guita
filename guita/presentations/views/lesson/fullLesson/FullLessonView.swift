@@ -5,28 +5,27 @@ import SwiftUI
 struct FullLessonView: View {
   @EnvironmentObject var router: Router
   let songInfo: SongInfo
-
+  
   var body: some View {
     BaseView(
       create: { FullLessonViewModel(router, songInfo) }
     ) { viewModel, state in
       PermissionView(
-        permissionListener: { _ in
-//          if isGranted {
-//            viewModel.onPermissionGranted()
-//          }
+        permissionListener: { isGranted in
+          if isGranted {
+            viewModel.onPermissionGranted()
+          }
         }
       ) {
         VStack(spacing: 0) {
           // MARK: Toolbar
-          Toolbar(title: "곡 전체 학습", trailing: {
+          Toolbar(title: "곡 전체 학습", accessibilityText: "곡을 연주해 봅시다. 재생이라고 말씀하시면 곡의 코드를 불러줄게요.", trailing: {
             IconButton("info", color: .light, isSystemImage: false) {
               router.push(.fullLessonGuide)
-
             }.accessibilityAddTraits(.isButton)
               .accessibilityLabel("사용법 도움말")
           })
-
+          
           // MARK: Full Song description
           Image("audio-file")
             .resizable()
@@ -34,7 +33,7 @@ struct FullLessonView: View {
             .accessibilityHidden(true)
             .frame(height: 95)
             .padding(87)
-
+          
           // MARK: Full Song ProgressBar
           SongProgressBar(
             currentTime: Binding(
@@ -51,9 +50,9 @@ struct FullLessonView: View {
               viewModel.setCurrentTime(newCurrentTime)
             }
           )
-
+          
           Spacer()
-
+          
           Button(action: {
             viewModel.setCurrentTime(0)
           }) {
@@ -62,9 +61,9 @@ struct FullLessonView: View {
           }
           .accessibilityAddTraits(.isButton)
           .accessibilityLabel("다시 듣기")
-
+          
           Spacer()
-
+          
           // MARK: Controllers
           HStack {
             // MARK: Slow
@@ -73,9 +72,9 @@ struct FullLessonView: View {
             }
             .accessibilityAddTraits(.isButton)
             .accessibilityLabel("느리게")
-
+            
             Spacer()
-
+            
             // MARK: Play or Pause or Resume
             IconButton(state.playerState.isPlaying ? "pause" : "play", color: .accent, size: 95) {
               switch state.playerState {
@@ -86,9 +85,9 @@ struct FullLessonView: View {
             }
             .accessibilityAddTraits(.isButton)
             .accessibilityLabel(state.playerState.isPlaying ? "일시정지" : "재생")
-
+            
             Spacer()
-
+            
             // MARK: Fast
             IconButton("fast", color: .accent, size: 75, disabled: viewModel.isMaxPlaybackRate()) {
               viewModel.increasePlaybackRate()
