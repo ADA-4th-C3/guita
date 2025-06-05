@@ -3,16 +3,14 @@
 import SwiftUI
 
 final class Router: BaseViewModel<RouterViewState> {
-  private var lastNavigationTime: Date = .distantPast
-  private let navigationThreshold: TimeInterval = 1.0
-
+  
   init() {
     super.init(state: RouterViewState(
       rootPage: .splash,
       subPages: []
     ))
   }
-
+  
   /// Change root page
   func setRoot(_ rootPage: RootPage) {
     withAnimation(.easeInOut(duration: 0.5)) {
@@ -22,26 +20,24 @@ final class Router: BaseViewModel<RouterViewState> {
       ))
     }
   }
-
+  
   /// Change all sub pages
   func setSubPages(_ subPages: [SubPage]) {
     emit(state.copy(
       subPages: subPages
     ))
   }
-
+  
   /// Push to sub page list
   func push(_ subPage: SubPage) {
-    let now = Date()
-    guard now.timeIntervalSince(lastNavigationTime) > navigationThreshold else {
+    if !state.subPages.isEmpty && state.subPages.last == subPage {
       return
     }
-    lastNavigationTime = now
     emit(
       state.copy(subPages: state.subPages + [subPage])
     )
   }
-
+  
   /// Pop from sub page list
   func pop() {
     emit(state.copy(
