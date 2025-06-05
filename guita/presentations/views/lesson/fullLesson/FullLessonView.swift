@@ -11,18 +11,17 @@ struct FullLessonView: View {
       create: { FullLessonViewModel(router, songInfo) }
     ) { viewModel, state in
       PermissionView(
-        permissionListener: { _ in
-//          if isGranted {
-//            viewModel.onPermissionGranted()
-//          }
+        permissionListener: { isGranted in
+          if isGranted {
+            viewModel.onPermissionGranted()
+          }
         }
       ) {
         VStack(spacing: 0) {
           // MARK: Toolbar
-          Toolbar(title: "곡 전체 학습", trailing: {
+          Toolbar(title: "곡 전체 학습", accessibilityText: "곡을 연주해 봅시다. 재생이라고 말씀하시면 곡의 코드를 불러줄게요.", trailing: {
             IconButton("info", color: .light, isSystemImage: false) {
               router.push(.fullLessonGuide)
-
             }.accessibilityAddTraits(.isButton)
               .accessibilityLabel("사용법 도움말")
           })

@@ -46,7 +46,7 @@ final class SectionLessonViewModel: BaseViewModel<SectionLessonViewState> {
         let stepNumber = currentStep.step
         let totalSteps = state.steps.count
 
-        await textToSpeechManager.speak("총 \(totalSteps) 단게 중 \(stepNumber) 단계")
+        await textToSpeechManager.speak("총 \(totalSteps) 단계 중 \(stepNumber) 단계")
 
         for lessonInfo in currentStep.sectionLessonInfo {
           try Task.checkCancellation()
