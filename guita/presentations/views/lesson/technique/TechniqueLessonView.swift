@@ -12,7 +12,7 @@ struct TechniqueLessonView: View {
       ) { viewModel, state in
         VStack {
           // MARK: Toolbar
-          Toolbar(title: "주법 학습", accessibilityText: "주법을 학습하는 화면입니다. 학습을 시작하고자 하시는 재생버튼을 눌러주세요.", trailing: {
+          Toolbar(title: NSLocalizedString("주법 학습", comment: ""), accessibilityText:NSLocalizedString("주법을 학습하는 화면입니다. 학습을 시작하고자 하시는 재생버튼을 눌러주세요.", comment: ""), trailing: {
             IconButton("info", color: .light, isSystemImage: false) {
               router.push(.techniqueLessonGuide)
             }.accessibilityAddTraits(.isButton)

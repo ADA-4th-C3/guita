@@ -15,7 +15,7 @@ import Foundation
  "remaining_time".localized("%d분 %d초 남음", 3, 27)
 
  // VoiceOver 접근성에서 사용
- .accessibilityLabel("play_button_voice".localized())
+ .accessibilityLabel("play_button_voice".localizedhoe())
  .accessibilityHint("voice_control_hint".localized())
 
  // SwiftUI Text에서 사용
