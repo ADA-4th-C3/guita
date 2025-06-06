@@ -29,7 +29,7 @@ struct HomeView: View {
               .frame(width: 47, height: 54)
               .padding(.bottom, 43)
             Text("기타 학습")
-            
+
               .fontKoddi(32, color: .light, weight: .bold)
           }.offset(y: -80)
             .frame(maxWidth: .infinity, maxHeight: .infinity)

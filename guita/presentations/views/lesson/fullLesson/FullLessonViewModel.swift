@@ -96,6 +96,8 @@ final class FullLessonViewModel: BaseViewModel<FullLessonViewState> {
         }),
         VoiceCommand(keyword: .retry, handler: { self.play() }),
         VoiceCommand(keyword: .stop, handler: pause),
+        VoiceCommand(keyword: .slow, handler: decreasePlaybackRate),
+        VoiceCommand(keyword: .fast, handler: increasePlaybackRate),
       ]
     )
   }
