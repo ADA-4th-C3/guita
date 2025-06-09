@@ -8,6 +8,7 @@
 
     },
     "* 설정 > Guita 앱에서 권한 변경이 가능합니다." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -16,6 +17,9 @@
           }
         }
       }
+    },
+    "* 설정 > 귀타 앱에서 권한 변경이 가능합니다." : {
+
     },
     "%@" : {
       "localizations" : {

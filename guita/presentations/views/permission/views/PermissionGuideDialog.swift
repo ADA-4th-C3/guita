@@ -46,7 +46,7 @@ struct PermissionGuideDialog: View {
         }
         dividerView()
 
-        Text("* 설정 > Guita 앱에서 권한 변경이 가능합니다.")
+        Text("* 설정 > 귀타 앱에서 권한 변경이 가능합니다.")
           .fontKoddi(13, color: .darkGrey)
           .accessibilityLabel("설정 내부의 귀타 앱에서 권한 변경이 가능합니다.")
       }
