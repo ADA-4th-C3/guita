@@ -23,7 +23,7 @@ struct ChordView: View {
           Button(action: { router.push(.chordLesson(chord: chord, chords: state.songInfo.chords)) }) {
             VStack {
               Text("\(chord.rawValue) 코드")
-                .fontKoddi(26, color: .darkGrey, weight: .bold)
+                .fontKoddi(26, color: .light, weight: .regular)
                 .padding(.vertical, 36)
             }
             .frame(maxWidth: .infinity)
