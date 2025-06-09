@@ -296,6 +296,9 @@
         }
       }
     },
+    "가장 많이 사용하는 칼립소 주법을 알려줄게요." : {
+
+    },
     "곡 구간 학습" : {
       "localizations" : {
         "en" : {
@@ -376,6 +379,12 @@
         }
       }
     },
+    "귀로 치는 기타, 귀타가 시작되었습니다. 기타 학습을 시작하기 위해서는 기타 학습 버튼을 눌러주십시오." : {
+
+    },
+    "기타 몸통에 있는 구멍을 찾아보세요. 이 구멍을 사운드 홀이라고 부릅니다." : {
+
+    },
     "기타 연주 소리를 듣고 학습 피드백을 드리기 위해 마이크 접근 권한이 필요" : {
       "localizations" : {
         "en" : {
@@ -396,6 +405,16 @@
         }
       }
     },
+    "기타 주법과 스트로크에 대한 소개" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“Introduction to Guitar Techniques and Strumming”\n"
+          }
+        }
+      }
+    },
     "기타 학습" : {
       "localizations" : {
         "en" : {
@@ -412,6 +431,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "The guitar consists of a total of six strings, and when learning chords, the guitar string numbers used are numbered from the bottom string as string 1, the next thinnest string as string 2, sequentially going up to the thickest string at the top as string 6.\n\nWhen using a pick, it is recommended to play the 6th, 5th, and 4th strings with the thumb, the 3rd string with the middle finger, the 2nd string with the ring finger, and the 1st string with the pinky finger."
+          }
+        }
+      }
+    },
+    "기타의 사운드 홀에 대한 설명" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Description of the Guitar Sound Hole"
           }
         }
       }
@@ -465,6 +494,12 @@
           }
         }
       }
+    },
+    "다음 학습으로 넘어가시려면 \"다음\"을, 다시 들으시려면 \"다시\"를 말씀해 주세요." : {
+
+    },
+    "따라서 말해보며 리듬을 익혀보세요." : {
+
     },
     "마이크 권한 인식이 필요합니다." : {
       "localizations" : {
@@ -703,6 +738,9 @@
         }
       }
     },
+    "이렇게 들립니다. 반복해서 칼립소 주법을 연주해 보세요." : {
+
+    },
     "이전" : {
       "localizations" : {
         "en" : {
@@ -722,6 +760,12 @@
           }
         }
       }
+    },
+    "이전 학습으로 넘어가시려면 \"이전\", 다시 들으시려면 \"다시\"를 말씀해 주세요." : {
+
+    },
+    "이전 학습으로 넘어가시려면 \"이전\", 다음 학습으로 넘어가시려면 \"다음\"을, 다시 들으시려면 \"다시\"를 말씀해 주세요." : {
+
     },
     "이전(비활성화)" : {
       "localizations" : {
@@ -803,12 +847,44 @@
         }
       }
     },
+    "주법 학습이 완료되었습니다." : {
+
+    },
+    "주법 학습이 완료되었습니다. " : {
+
+    },
     "주법 학습하기" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Start Technique Learning"
+          }
+        }
+      }
+    },
+    "주법은 기타를 치는 방법을 말합니다. 피크나 손가락으로 줄을 위아래로 튕기는 주법인 스트로크를 배워봅시다." : {
+
+    },
+    "주법을 학습하는 화면입니다. 학습을 시작하고자 하시는 재생버튼을 눌러주세요." : {
+
+    },
+    "주법의 다운에 대한 설명" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Explanation of the Downstroke"
+          }
+        }
+      }
+    },
+    "주법의 업에 대한 설명" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Explanation of the Upstroke"
           }
         }
       }
@@ -828,6 +904,29 @@
           }
         }
       }
+    },
+    "칼립소 주법에 대한 설명" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Explanation of the Calypso Technique"
+          }
+        }
+      }
+    },
+    "칼립소 주법에 리듬에 대한 설명" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Explanation of the Calypso Rhythm Technique"
+          }
+        }
+      }
+    },
+    "칼립소 주법을 기타로 연주하면 " : {
+
     },
     "코드 학습" : {
       "localizations" : {
