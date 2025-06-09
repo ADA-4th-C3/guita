@@ -52,32 +52,32 @@ final class TechniqueLessonViewModel: BaseViewModel<TechniqueLessonViewState> {
                    TechniqueLessonSubStep(
                      ttsText: "다운",
                      audioFile: nil,
-                     delayAfter: TechniqueLessonViewModel.calcDelay(for: "다운", speechRate: 0.45),
-                     speechRate: 0.45
+                     delayAfter: TechniqueLessonViewModel.calcDelay(for: "다운", speechRate: 0.3),
+                     speechRate: 0.3
                    ),
 
                    // 다운업 (두번째 박자 빠르게 붙임)
                    TechniqueLessonSubStep(
                      ttsText: "다운업",
                      audioFile: nil,
-                     delayAfter: TechniqueLessonViewModel.calcDelay(for: "다운업", speechRate: 0.65),
-                     speechRate: 0.65
+                     delayAfter: TechniqueLessonViewModel.calcDelay(for: "다운업", speechRate: 0.3),
+                     speechRate: 0.3
                    ),
 
                    // 업 (세번째 박자 빠르게)
                    TechniqueLessonSubStep(
                      ttsText: "업",
                      audioFile: nil,
-                     delayAfter: TechniqueLessonViewModel.calcDelay(for: "업", speechRate: 0.75),
-                     speechRate: 0.75
+                     delayAfter: TechniqueLessonViewModel.calcDelay(for: "업", speechRate: 0.3),
+                     speechRate: 0.3
                    ),
 
                    // 다운업 (네번째 박자 빠르게 붙임)
                    TechniqueLessonSubStep(
                      ttsText: "다운업",
                      audioFile: nil,
-                     delayAfter: TechniqueLessonViewModel.calcDelay(for: "다운업", speechRate: 0.65),
-                     speechRate: 0.65
+                     delayAfter: TechniqueLessonViewModel.calcDelay(for: "다운업", speechRate: 0.3),
+                     speechRate: 0.3
                    ),
                    TechniqueLessonSubStep(ttsText: NSLocalizedString("따라서 말해보며 리듬을 익혀보세요.", comment: ""), audioFile: nil, delayAfter: nil, speechRate: nil)],
         featureDescription: NSLocalizedString("이전 학습으로 넘어가시려면 \"이전\", 다음 학습으로 넘어가시려면 \"다음\"을, 다시 들으시려면 \"다시\"를 말씀해 주세요.", comment: "")
