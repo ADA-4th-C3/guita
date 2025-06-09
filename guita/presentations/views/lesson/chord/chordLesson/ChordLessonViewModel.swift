@@ -99,7 +99,9 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
         index: state.index + 1,
         isReplay: false
       ))
-      playStepChangeSound()
+      playStepChangeSound {
+        self.play()
+      }
     }
   }
 
@@ -117,7 +119,9 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
       index: state.index - 1,
       isReplay: false
     ))
-    playStepChangeSound()
+    playStepChangeSound {
+      self.play()
+    }
   }
 
   /// 권한 승인
@@ -148,14 +152,8 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
       commands: [
         VoiceCommand(keyword: .play, handler: play),
         VoiceCommand(keyword: .retry, handler: play),
-        VoiceCommand(keyword: .next, handler: {
-          self.goNext()
-          self.play()
-        }),
-        VoiceCommand(keyword: .previous, handler: {
-          self.goPrevious()
-          self.play()
-        }),
+        VoiceCommand(keyword: .next, handler: goNext),
+        VoiceCommand(keyword: .previous, handler: goPrevious),
       ]
     )
     emit(state.copy(

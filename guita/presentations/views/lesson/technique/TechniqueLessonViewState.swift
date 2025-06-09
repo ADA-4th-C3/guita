@@ -6,7 +6,7 @@ struct TechniqueLessonViewState {
   var currentStep: TechniqueLessonStep {
     steps[currentStepIndex]
   }
-  
+
   var totalStep: Int { steps.count }
 
   func copy(currentStepIndex: Int? = nil, steps: [TechniqueLessonStep]? = nil) -> TechniqueLessonViewState {
