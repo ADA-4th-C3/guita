@@ -2,8 +2,6 @@
 import Foundation
 
 struct TechniqueLessonStep {
-  let step: Int
-  let totalSteps: Int
   let description: String
   let imageName: String?
   let subSteps: [TechniqueLessonSubStep]

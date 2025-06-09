@@ -23,7 +23,7 @@ struct TechniqueLessonView: View {
           Spacer()
 
           // MARK: Step/TotalStep
-          Text("\(state.currentStep.step)/\(state.currentStep.totalSteps) 단계")
+          Text("\(state.currentStepIndex + 1)/\(state.totalStep) 단계")
             .fontKoddi(22, color: .darkGrey, weight: .regular)
             .accessibilityHidden(true)
 
