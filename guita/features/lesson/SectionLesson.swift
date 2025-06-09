@@ -12,7 +12,7 @@ enum SectionLesson {
         imageName: nil,
         sectionLessonInfo: [SectionLessonInfo(ttsText: nil, chords: [.A, .A, .E, .E])],
         audioFile: .section_repeat_1,
-        featureDescription: "다음 학습으로 넘어가시려면 \"다음\"을, 다시 들으시려면 \"다시\"를 말씀해 주세요."
+        featureDescription: "다음 학습으로 넘어가시려면 \"다음\"을, 다시 들으시려면 \"다시\"를, 이전 학습으로 되돌아가시려면 \"이전\" 을 말씀해 주세요."
       ),
       SectionLessonStep(
         song: nil,
@@ -21,7 +21,7 @@ enum SectionLesson {
         imageName: nil,
         sectionLessonInfo: [SectionLessonInfo(ttsText: nil, chords: [.B7, .B7, .E, .E])],
         audioFile: .section_repeat_2,
-        featureDescription: "이전 학습으로 넘어가시려면 \"이전\", 다음 학습으로 넘어가시려면 \"다음\"을, 다시 들으시려면 \"다시\"를 말씀해 주세요."
+        featureDescription: ""
       ),
       SectionLessonStep(
         song: nil,
@@ -30,7 +30,7 @@ enum SectionLesson {
         imageName: nil,
         sectionLessonInfo: [SectionLessonInfo(ttsText: nil, chords: [.E, .E, .E, .E])],
         audioFile: .section_repeat_3,
-        featureDescription: "이전 학습으로 넘어가시려면 \"이전\", 다음 학습으로 넘어가시려면 \"다음\"을, 다시 들으시려면 \"다시\"를 말씀해 주세요."
+        featureDescription: ""
       ),
       SectionLessonStep(
         song: nil,
@@ -39,7 +39,7 @@ enum SectionLesson {
         imageName: nil,
         sectionLessonInfo: [SectionLessonInfo(ttsText: nil, chords: [.A, .A, .E, .E])],
         audioFile: .section_repeat_4,
-        featureDescription: "이전 학습으로 넘어가시려면 \"이전\", 다음 학습으로 넘어가시려면 \"다음\"을, 다시 들으시려면 \"다시\"를 말씀해 주세요."
+        featureDescription: ""
       ),
       SectionLessonStep(
         song: nil,
@@ -48,7 +48,7 @@ enum SectionLesson {
         imageName: nil,
         sectionLessonInfo: [SectionLessonInfo(ttsText: nil, chords: [.B7, .B7, .E, .E])],
         audioFile: .section_repeat_5,
-        featureDescription: "이전 학습으로 넘어가시려면 \"이전\", 다음 학습으로 넘어가시려면 \"다음\"을, 다시 들으시려면 \"다시\"를 말씀해 주세요."
+        featureDescription: ""
       ),
       SectionLessonStep(
         song: nil,
@@ -57,7 +57,7 @@ enum SectionLesson {
         imageName: nil,
         sectionLessonInfo: [SectionLessonInfo(ttsText: nil, chords: [.E, .E, .E, .E])],
         audioFile: .section_repeat_6,
-        featureDescription: "이전 학습으로 넘어가시려면 \"이전\", 다음 학습으로 넘어가시려면 \"다음\"을, 다시 들으시려면 \"다시\"를 말씀해 주세요."
+        featureDescription: ""
       ),
       SectionLessonStep(
         song: nil,
@@ -66,7 +66,7 @@ enum SectionLesson {
         imageName: nil,
         sectionLessonInfo: [SectionLessonInfo(ttsText: nil, chords: [.A, .A, .E, .E])],
         audioFile: .section_repeat_7,
-        featureDescription: "이전 학습으로 넘어가시려면 \"이전\", 다음 학습으로 넘어가시려면 \"다음\"을, 다시 들으시려면 \"다시\"를 말씀해 주세요."
+        featureDescription: ""
       ),
       SectionLessonStep(
         song: nil,
@@ -75,7 +75,7 @@ enum SectionLesson {
         imageName: nil,
         sectionLessonInfo: [SectionLessonInfo(ttsText: nil, chords: [.B7, .B7, .E, .E])],
         audioFile: .section_repeat_8,
-        featureDescription: "이전 학습으로 넘어가시려면 \"이전\", 다음 학습으로 넘어가시려면 \"다음\"을, 다시 들으시려면 \"다시\"를 말씀해 주세요."
+        featureDescription: ""
       ),
       SectionLessonStep(
         song: nil,
@@ -84,7 +84,7 @@ enum SectionLesson {
         imageName: nil,
         sectionLessonInfo: [SectionLessonInfo(ttsText: nil, chords: [.A, .A, .E, .E])],
         audioFile: .section_repeat_9,
-        featureDescription: "이전 학습으로 넘어가시려면 \"이전\", 다음 학습으로 넘어가시려면 \"다음\"을, 다시 들으시려면 \"다시\"를 말씀해 주세요."
+        featureDescription: ""
       ),
       SectionLessonStep(
         song: nil,
@@ -93,7 +93,7 @@ enum SectionLesson {
         imageName: nil,
         sectionLessonInfo: [SectionLessonInfo(ttsText: nil, chords: [.B7, .B7, .E, .E])],
         audioFile: .section_repeat_10,
-        featureDescription: "이전 학습으로 넘어가시려면 \"이전\", 다음 학습으로 넘어가시려면 \"다음\"을, 다시 들으시려면 \"다시\"를 말씀해 주세요."
+        featureDescription: ""
       ),
       SectionLessonStep(
         song: nil,
@@ -102,7 +102,7 @@ enum SectionLesson {
         imageName: nil,
         sectionLessonInfo: [SectionLessonInfo(ttsText: nil, chords: [.A, .A, .E, .E])],
         audioFile: .section_repeat_11,
-        featureDescription: "이전 학습으로 넘어가시려면 \"이전\", 다음 학습으로 넘어가시려면 \"다음\"을, 다시 들으시려면 \"다시\"를 말씀해 주세요."
+        featureDescription: ""
       ),
       SectionLessonStep(
         song: nil,
@@ -111,7 +111,7 @@ enum SectionLesson {
         imageName: nil,
         sectionLessonInfo: [SectionLessonInfo(ttsText: nil, chords: [.B7, .B7, .E, .E])],
         audioFile: .section_repeat_12,
-        featureDescription: "이전 학습으로 넘어가시려면 \"이전\", 다시 들으시려면 \"다시\"를 말씀해 주세요."
+        featureDescription: ""
       ),
     ]
     return steps
