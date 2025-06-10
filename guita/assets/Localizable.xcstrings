@@ -1401,6 +1401,17 @@
         }
       }
     },
+    "곡 구간 학습 개요" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Song Section Learning Overview"
+          }
+        }
+      }
+    },
     "곡 구간 학습은 제공하는 음성 안내를 통해 곡을 구간별로 학습할 수 있습니다." : {
       "localizations" : {
         "en" : {
