@@ -20,8 +20,8 @@ struct FullLessonView: View {
         VStack(spacing: 0) {
           // MARK: Toolbar
           Toolbar(
-            title: "곡 전체 학습",
-            accessibilityHint: "곡을 연주해 봅시다. 재생이라고 말씀하시면 곡의 코드를 불러줄게요.",
+            title: NSLocalizedString("곡 전체 학습", comment: ""),
+            accessibilityHint: NSLocalizedString(state.isPermissionGranted ? "FullLesson.Title.Hint.Granted" : "FullLesson.Title.Hint.NotGranted", comment: ""),
             trailing: {
             IconButton("info", color: .light, isSystemImage: false) {
               router.push(.fullLessonGuide)
@@ -62,7 +62,6 @@ struct FullLessonView: View {
             Text("다시 듣기")
               .fontKoddi(26, color: .darkGrey, weight: .bold)
           }
-          .accessibilityAddTraits(.isButton)
           .accessibilityLabel("다시 듣기")
 
           Spacer()
@@ -73,7 +72,6 @@ struct FullLessonView: View {
             IconButton("slow", color: .accent, size: 75, disabled: viewModel.isMinPlaybackRate()) {
               viewModel.decreasePlaybackRate()
             }
-            .accessibilityAddTraits(.isButton)
             .accessibilityLabel("느리게")
 
             Spacer()
@@ -86,7 +84,6 @@ struct FullLessonView: View {
               case .playing: viewModel.pause()
               }
             }
-            .accessibilityAddTraits(.isButton)
             .accessibilityLabel(state.playerState.isPlaying ? "일시정지" : "재생")
 
             Spacer()
@@ -95,7 +92,6 @@ struct FullLessonView: View {
             IconButton("fast", color: .accent, size: 75, disabled: viewModel.isMaxPlaybackRate()) {
               viewModel.increasePlaybackRate()
             }
-            .accessibilityAddTraits(.isButton)
             .accessibilityLabel("빠르게")
           }
           .padding(.horizontal, 32)
