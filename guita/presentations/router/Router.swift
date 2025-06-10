@@ -46,9 +46,9 @@ final class Router: BaseViewModel<RouterViewState> {
 }
 
 extension Router {
-  var previousTitle: String? {
+  var previousTitle: String {
     if state.subPages.count > 1 {
-      return state.subPages.dropLast().last?.title
+      return state.subPages.dropLast().last!.title
     } else {
       return state.rootPage.title
     }

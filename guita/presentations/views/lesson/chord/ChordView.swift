@@ -16,7 +16,7 @@ struct ChordView: View {
         // MARK: Toolbar
         Toolbar(
           title: NSLocalizedString("코드 학습", comment: ""),
-          accessibilityText: String(
+          accessibilityHint: String(
             format: NSLocalizedString("Lesson.Accessibility.Description", comment: ""),
             "\(state.songInfo.chords)"
           )

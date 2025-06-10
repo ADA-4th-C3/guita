@@ -16,8 +16,9 @@ struct LessonView: View {
         let chords = songInfo.chords.map { $0.description }.joined(separator: ", ")
         Toolbar(
           title: songInfo.level,
-          accessibilityText: String(
-            format: NSLocalizedString("Lesson.Accessibility.Description", comment: "학습 선택 화면 설명"),
+          accessibilityLabel: NSLocalizedString("Lesson.Accessibility.Label", comment: ""),
+          accessibilityHint: String(
+            format: NSLocalizedString("Lesson.Accessibility.Description", comment: ""),
             title,
             chords
           )

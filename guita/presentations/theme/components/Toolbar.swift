@@ -6,49 +6,60 @@ import SwiftUI
 
 struct Toolbar<Leading: View, Trailing: View>: View {
   @EnvironmentObject var router: Router
-
+  
   let title: String
-  let accessibilityText: String
+  let accessibilityLabel: String
+  let accessibilityHint: String
   let titleColor: Color?
   let leading: () -> Leading
   let trailing: () -> Trailing
   let isPopButton: Bool
-
+  
   init(
     title: String = "",
-    accessibilityText: String? = nil,
+    accessibilityLabel: String? = nil,
+    accessibilityHint: String? = nil,
     titleColor: Color? = nil,
     isPopButton: Bool = true,
     @ViewBuilder leading: @escaping () -> Leading = { EmptyView() },
     @ViewBuilder trailing: @escaping () -> Trailing = { EmptyView() }
   ) {
     self.title = title
-    self.accessibilityText = accessibilityText ?? title
+    self.accessibilityLabel = accessibilityLabel ?? title
+    self.accessibilityHint = accessibilityHint ?? ""
     self.titleColor = titleColor
     self.leading = leading
     self.trailing = trailing
     self.isPopButton = isPopButton
   }
-
+  
   var body: some View {
-    ZStack {
+//    Logger.d(router.previousTitle)
+    return ZStack {
       HStack {
         // MARK: Leading
         if isPopButton {
           IconButton("arrow-left", color: .light, isSystemImage: false) {
             router.pop()
           }
-          .accessibilityLabel("첫 버튼, \(router.previousTitle ?? "") 화면으로 돌아 가기")
+          .accessibilityLabel("나가기")
+          .accessibilityAddTraits(.isButton)
+          .accessibilityHint(
+            String(
+              format: NSLocalizedString("ExitButton.Desc", comment: ""),
+              router.previousTitle
+            )
+          )
         } else {
           leading()
         }
-
+        
         Spacer()
-
+        
         // MARK: Trailing
         trailing()
       }
-
+      
       // MARK: Title
       if !title.isEmpty {
         Text(title)
@@ -56,8 +67,9 @@ struct Toolbar<Leading: View, Trailing: View>: View {
           .fontKoddi(24, weight: .bold)
           .lineSpacing(1.4)
           .accessibilityElement(children: .ignore)
-          .accessibilityLabel("\(title) 머릿말, \(accessibilityText)")
+          .accessibilityLabel(accessibilityLabel)
           .accessibilityAddTraits(.isHeader)
+          .accessibilityHint(accessibilityHint)
       }
     }
     .frame(height: 44)

@@ -47,8 +47,9 @@ struct IconButton: View {
         .foregroundColor(_color)
         .padding(padding ?? (isSystemImage ? 20 : 16))
         .frame(width: size ?? 56, height: size ?? 56)
-    }.opacity(disabled ? 0.5 : 1.0)
-      .accessibilityRespondsToUserInteraction(!disabled)
+    }
+    .opacity(disabled ? 0.5 : 1.0)
+    .accessibilityRespondsToUserInteraction(!disabled)
   }
 }
 

@@ -25,8 +25,11 @@ struct ChordLessonView: View {
               format: NSLocalizedString("%@ 코드", comment: ""),
               "\(state.chord.rawValue)"
             ),
-            accessibilityText: String(
-              format: NSLocalizedString("ChordLessonView.Accessibility.Description", comment: ""),
+            accessibilityHint: String(
+              format: NSLocalizedString(
+                state.isPermissionGranted ? "ChordLessonView.Accessibility.Description"
+                : "ChordLessonView.Accessibility.Description.NoPermission",
+                comment: ""),
               "\(state.chord.rawValue)"
             ),
             trailing: {

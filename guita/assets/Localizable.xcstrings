@@ -54,16 +54,6 @@
         }
       }
     },
-    "%@ 머릿말, %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$@ Header, %2$@"
-          }
-        }
-      }
-    },
     "%@ 재생" : {
 
     },
@@ -573,6 +563,23 @@
         }
       }
     },
+    "ChordLessonView.Accessibility.Description.NoPermission" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This is the screen where you can learn the %@ code. To start learning, please press the play button."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 코드를 학습하는 화면입니다. 학습을 시작하려면 재생 버튼을 눌러주세요."
+          }
+        }
+      }
+    },
     "ChordView.Accessibility.Description" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -600,12 +607,62 @@
         }
       }
     },
+    "Curriculum.Hint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "It consists of a total of 1 song. Please select the song you wish to learn."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "총 1개의 곡으로 이루어져 있습니다. 학습을 희망하는 곡을 선택해주십시오."
+          }
+        }
+      }
+    },
+    "Curriculum.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Curriculum"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "학습 목록"
+          }
+        }
+      }
+    },
     "Dev" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dev"
+          }
+        }
+      }
+    },
+    "ExitButton.Desc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Return to %@ screen."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 화면으로 돌아갑니다."
           }
         }
       }
@@ -770,7 +827,38 @@
       }
     },
     "Lesson.Accessibility.Description" : {
-      "comment" : "학습 선택 화면 설명"
+      "comment" : "학습 선택 화면 설명",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The song title is %1$@. This song uses the %2$@ chord. You can learn chords, learn playing techniques, learn by section, and learn the entire song. Swipe the screen left and right to select the learning you want."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "곡 제목은 %1$@ 입니다. %2$@  코드를 사용하는 곡입니다. 코드 학습하기 , 주법 학습하기, 곡 구간별 학습하기, 곡 전체 학습하기 를 할 수 있습니다. 화면을 좌우로 쓸어넘기며 희망하는 학습을 선택해주십시오."
+          }
+        }
+      }
+    },
+    "Lesson.Accessibility.Label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Learning Selection"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "학습 선택"
+          }
+        }
+      }
     },
     "Next" : {
       "extractionState" : "manual",
@@ -873,6 +961,228 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@번째"
+          }
+        }
+      }
+    },
+    "Router.Chord" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chord Lesson"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "코드 학습"
+          }
+        }
+      }
+    },
+    "Router.ChordLesson" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@Chord"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@코드"
+          }
+        }
+      }
+    },
+    "Router.ChordLessonGuide" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chord Lesson Guide"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "코드 학습 도움말"
+          }
+        }
+      }
+    },
+    "Router.Curriculum" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Curriculum"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "학습 목록"
+          }
+        }
+      }
+    },
+    "Router.FullLesson" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Full Song Lesson"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 곡 전체 학습"
+          }
+        }
+      }
+    },
+    "Router.FullLessonGuide" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Full Song Lesson Guide"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "곡 전체 학습 도움말"
+          }
+        }
+      }
+    },
+    "Router.Home" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start Guita"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "귀타 시작"
+          }
+        }
+      }
+    },
+    "Router.Lesson" : {
+      "comment" : "level",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Learning Selection"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "레슨 선택"
+          }
+        }
+      }
+    },
+    "Router.SectionLesson" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Section Lesson"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "곡 구간 학습"
+          }
+        }
+      }
+    },
+    "Router.SectionLessonGuide" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Section Lesson Guide"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "곡 구간 학습 도움말"
+          }
+        }
+      }
+    },
+    "Router.Splash" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "로딩"
+          }
+        }
+      }
+    },
+    "Router.TechniqueLesson" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Technique Lesson"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "주법 학습"
+          }
+        }
+      }
+    },
+    "Router.TechniqueLessonGuide" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Technique Lesson Guide"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "주법 학습 도움말"
           }
         }
       }
@@ -1348,6 +1658,16 @@
     "업과 다운을 조합하여 다양한 리듬을 만들 수 있어요. 가장 많이 사용되는 칼립소 리듬을 알려줄게요." : {
 
     },
+    "열" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ten"
+          }
+        }
+      }
+    },
     "여덟" : {
       "localizations" : {
         "en" : {
@@ -1394,16 +1714,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Let’s go on a trip"
-          }
-        }
-      }
-    },
-    "열" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ten"
           }
         }
       }
@@ -1478,43 +1788,35 @@
         }
       }
     },
-    "음성 명령을 통해 주법 학습 화면을 조작할 수 있으며, 사용할 수 있는 음성 명령은 총 3가지가 있습니다.\n\n첫 번째로 \"다시\" 또는 \"재생\"이라고 음성으로 명령하면 음성 안내를 다시 들을 수 있습니다.\n\n두 번째로 \"다음\"이라고 음성으로 명령하면 다음 학습 단계로 넘어갈 수 있습니다.\n\n세 번째로 \"이전\"이라고 음성으로 명령하면 이전 학습 단계로 되돌아갈 수 있습니다." : {
+    "음성 명령을 통해 주법 학습 화면을 조작할 수 있으며, 사용할 수 있는 음성 명령은 총 3가지가 있습니다.\n\n첫 번째로 \"다시\" 또는 \"재생\"이라고 음성으로 명령하면 음성 안내를 다시 들을 수 있습니다.\n\n두 번째로 \"다음\"이라고 음성으로 명령하면 다음 학습 단계로 넘어갈 수 있습니다.\n\n세 번째로 \"이전\"이라고 음성으로 명령하면 이전 학습 단계로 되돌아갈 수 있습니다.\n\n음성 명령어를 사용하기 위해선 마이크 사용 권한과 음성 인식 권한이 필요합니다." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Voice commands allow you to control the learning screen. There are 3 available voice commands.\n\nFirst, saying “Replay” or “Play” will repeat the voice instruction.\n\nSecond, saying “Next” moves to the next learning step.\n\nThird, saying “Previous” returns to the previous step."
-          }
-        }
-      }
-    },
-    "음성 명령을 통해 코드 학습 화면을 조작할 수 있으며, 사용할 수 있는 음성 명령은 총 3가지가 있습니다.\n\n첫 번째로 \"다시\" 또는 \"재생\"이라고 음성으로 명령하면 음성 안내를 다시 들을 수 있습니다.\n\n두 번째로 \"다음\"이라고 음성으로 명령하면 다음 학습 단계로 넘어갈 수 있습니다.\n\n세 번째로 \"이전\"이라고 음성으로 명령하면 이전 학습 단계로 되돌아갈 수 있습니다." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Voice commands allow you to control the learning screen. There are 3 available voice commands.\n\nFirst, saying “Replay” or “Play” will repeat the voice instruction.\n\nSecond, saying “Next” moves to the next learning step.\n\nThird, saying “Previous” returns to the previous step."
+            "value" : "Voice commands allow you to control the learning screen. There are 3 available voice commands.\n\nFirst, saying “Replay” or “Play” will repeat the voice instruction.\n\nSecond, saying “Next” moves to the next learning step.\n\nThird, saying “Previous” returns to the previous step.\n\nTo use voice commands, you need permission to use the microphone and voice recognition."
           }
         }
       }
     },
     "음성 명령을 통해 코드 학습 화면을 조작할 수 있으며, 사용할 수 있는 음성 명령은 총 3가지가 있습니다.\n\n첫 번째로 \"다시\" 또는 \"재생\"이라고 음성으로 명령하면 음성 안내를 다시 들을 수 있습니다.\n\n두 번째로 \"다음\"이라고 음성으로 명령하면 다음 학습 단계로 넘어갈 수 있습니다.\n\n세 번째로 \"이전\"이라고 음성으로 명령하면 이전 학습 단계로 되돌아갈 수 있습니다.\n\n음성 명령어를 사용하기 위해선 마이크 사용 권한과 음성 인식 권한이 필요합니다." : {
-
-    },
-    "음성 명령을 통해 코드 학습 화면을 조작할 수 있으며, 사용할 수 있는 음성 명령은 총 5가지가 있습니다.\n\n첫 번째로 \"재생\"이라고 음성으로 명령하면 곡을 재생할 수 있습니다.\n\n두 번째로 \"정지\"이라고 음성으로 명령하면 곡 재생을 멈출 수 있습니다.\n\n세 번째로 \"다시\"이라고 음성으로 명령하면 곡을 처음부터 재생할 수 있습니다.\n\n네 번째로 \"느리게\"이라고 음성으로 명령하면 곡을 느리게 재생할 수 있습니다.\n\n다섯 번째로 \"빠르게\"이라고 음성으로 명령하면 곡을 빠르게 재생할 수 있습니다." : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You can control the code learning screen through voice commands, and there are a total of 5 voice commands that you can use.\n\nFirst, you can play the song by voice commanding \"play\".\n\nSecond, you can stop the song by voice commanding \"stop\".\n\nThird, you can play the song from the beginning by voice commanding \"again\".\n\nFourth, you can play the song slowly by voice commanding \"slow\".\n\nFifth, you can play the song quickly by voice commanding \"fast\"."
+            "value" : "Voice commands allow you to control the learning screen. There are 3 available voice commands.\n\nFirst, saying “Replay” or “Play” will repeat the voice instruction.\n\nSecond, saying “Next” moves to the next learning step.\n\nThird, saying “Previous” returns to the previous step.\n\nTo use voice commands, you need permission to use the microphone and voice recognition."
           }
         }
       }
     },
     "음성 명령을 통해 코드 학습 화면을 조작할 수 있으며, 사용할 수 있는 음성 명령은 총 5가지가 있습니다.\n\n첫 번째로 \"재생\"이라고 음성으로 명령하면 곡을 재생할 수 있습니다.\n\n두 번째로 \"정지\"이라고 음성으로 명령하면 곡 재생을 멈출 수 있습니다.\n\n세 번째로 \"다시\"이라고 음성으로 명령하면 곡을 처음부터 재생할 수 있습니다.\n\n네 번째로 \"느리게\"이라고 음성으로 명령하면 곡을 느리게 재생할 수 있습니다.\n\n다섯 번째로 \"빠르게\"이라고 음성으로 명령하면 곡을 빠르게 재생할 수 있습니다.\n\n음성 명령어를 사용하기 위해선 마이크 사용 권한과 음성 인식 권한이 필요합니다." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can control the code learning screen through voice commands, and there are a total of 5 voice commands that you can use.\n\nFirst, you can play the song by voice commanding \"play\".\n\nSecond, you can stop the song by voice commanding \"stop\".\n\nThird, you can play the song from the beginning by voice commanding \"again\".\n\nFourth, you can play the song slowly by voice commanding \"slow\".\n\nFifth, you can play the song quickly by voice commanding \"fast\".\n\nTo use voice commands, you need permission to use the microphone and voice recognition."
+          }
+        }
+      }
     },
     "음성 인식(필수)" : {
       "localizations" : {
@@ -1691,9 +1993,6 @@
         }
       }
     },
-    "첫 버튼, %@ 화면으로 돌아 가기" : {
-
-    },
     "첫 번째" : {
       "localizations" : {
         "en" : {
@@ -1713,9 +2012,6 @@
           }
         }
       }
-    },
-    "총 1개의 곡으로 이루어져 있습니다. 화면을 좌우로 쓸어넘기며 학습을 희망하는 곡을 선택해주십시오." : {
-
     },
     "총 재생 시간 %@ 중 %@" : {
       "localizations" : {
@@ -1889,16 +2185,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "One"
-          }
-        }
-      }
-    },
-    "학습 목록" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Learning List"
           }
         }
       }

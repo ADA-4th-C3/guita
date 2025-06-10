@@ -19,7 +19,10 @@ struct FullLessonView: View {
       ) {
         VStack(spacing: 0) {
           // MARK: Toolbar
-          Toolbar(title: "곡 전체 학습", accessibilityText: "곡을 연주해 봅시다. 재생이라고 말씀하시면 곡의 코드를 불러줄게요.", trailing: {
+          Toolbar(
+            title: "곡 전체 학습",
+            accessibilityHint: "곡을 연주해 봅시다. 재생이라고 말씀하시면 곡의 코드를 불러줄게요.",
+            trailing: {
             IconButton("info", color: .light, isSystemImage: false) {
               router.push(.fullLessonGuide)
             }.accessibilityAddTraits(.isButton)
