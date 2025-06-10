@@ -8,6 +8,9 @@ struct TechniqueLessonViewState {
   }
 
   var totalStep: Int { steps.count }
+  var isLastStep: Bool {
+    currentStepIndex == totalStep - 1
+  }
 
   func copy(currentStepIndex: Int? = nil, steps: [TechniqueLessonStep]? = nil) -> TechniqueLessonViewState {
     return TechniqueLessonViewState(

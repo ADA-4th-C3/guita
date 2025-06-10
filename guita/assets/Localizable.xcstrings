@@ -134,7 +134,7 @@
         }
       }
     },
-    "ChordLesson.Button.Next.Hint" : {
+    "ChordLesson.Button.Next.Hint.NextChord" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -147,6 +147,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "다음으로 학습할 코드는 %@ 코드 입니다."
+          }
+        }
+      }
+    },
+    "ChordLesson.Button.Next.Hint.NextChord.End" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "End of learning code."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "코드 학습을 종료합니다."
           }
         }
       }
@@ -1400,7 +1417,14 @@
 
     },
     "기타 몸통에 있는 구멍을 사운드 홀이라고 부릅니다. 사운드 홀을 찾아보세요." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The hole in the body of the guitar is called the sound hole. See if you can find it."
+          }
+        }
+      }
     },
     "기타 연주 소리를 듣고 학습 피드백을 드리기 위해 마이크 접근 권한이 필요" : {
       "localizations" : {
@@ -1427,7 +1451,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "“Introduction to Guitar Techniques and Strumming”\n"
+            "value" : "Introduction to Guitar Techniques and Strumming\n"
           }
         }
       }
@@ -1563,7 +1587,14 @@
       }
     },
     "다운, 다운업, 업, 다운업" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Down, Down-up, Up, Down-up"
+          }
+        }
+      }
     },
     "다음" : {
       "localizations" : {
@@ -1574,9 +1605,6 @@
           }
         }
       }
-    },
-    "다음 학습으로 넘어가시려면 \"다음\"을, 다시 들으시려면 \"다시\"를, 이전 학습으로 되돌아가시려면 \"이전\" 을 말씀해 주세요." : {
-
     },
     "두 번째" : {
       "localizations" : {
@@ -1597,9 +1625,6 @@
           }
         }
       }
-    },
-    "따라서 말해보며 순서를 익혀보세요." : {
-
     },
     "마이크(필수)" : {
       "localizations" : {
@@ -1637,6 +1662,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Help Guide"
+          }
+        }
+      }
+    },
+    "사운드 홀 위에서 아무 코드를 잡지 않은 상태로 6번 줄부터 1번 줄까지 아래 방향으로 모든 줄을 쓸어내리면 이런 소리가 납니다." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "When you sweep down all the strings, from the 6th string to the 1st string, just above the sound hole without holding any frets, this is the sound you'll hear."
           }
         }
       }
@@ -1755,7 +1790,14 @@
 
     },
     "업과 다운을 조합하여 다양한 리듬을 만들 수 있어요. 가장 많이 사용되는 칼립소 리듬을 알려줄게요." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can create many different rhythms by combining up and down strokes. Let me teach you the most commonly used Calypso rhythm."
+          }
+        }
+      }
     },
     "여덟" : {
       "localizations" : {
@@ -1767,12 +1809,32 @@
         }
       }
     },
+    "열" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ten"
+          }
+        }
+      }
+    },
     "여덟 번째" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Eighth"
+          }
+        }
+      }
+    },
+    "여러번 들어보며 다운과 업의 순서를 익혀보세요." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listen many times and learn the order of down and up strokes."
           }
         }
       }
@@ -1803,16 +1865,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Let’s go on a trip"
-          }
-        }
-      }
-    },
-    "열" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ten"
           }
         }
       }
@@ -1937,8 +1989,45 @@
         }
       }
     },
+    "이것을 다운 스트로크라고 해요. 줄을 쓸어내려 다운 스트로크를 연주해보세요." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "That's called a downstroke. Try playing a downstroke by sweeping down the strings."
+          }
+        }
+      }
+    },
+    "이것을 업 스트로크라고 해요. 줄을 쓸어올려 업 스트로크를 연주해보세요." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "That's called an upstroke. Try playing an upstroke by sweeping up the strings."
+          }
+        }
+      }
+    },
     "이렇게 들립니다. 칼립소 리듬을 연주해 보세요." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "this is what it sounds like. Now, try playing the Calypso rhythm."
+          }
+        }
+      }
+    },
+    "이번엔 1번 줄부터 6번 줄까지 위쪽 방향으로 줄을 쓸어올려 볼게요. 그러면 이런 소리가 납니다." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Now, let's try sweeping the strings upwards, from the 1st string to the 6th string. This is the sound you'll hear."
+          }
+        }
+      }
     },
     "이전" : {
       "localizations" : {
@@ -2051,10 +2140,14 @@
       }
     },
     "주법 학습이 완료되었습니다." : {
-
-    },
-    "주법 학습이 완료되었습니다. " : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Strumming technique learning is complete."
+          }
+        }
+      }
     },
     "주법 학습하기" : {
       "localizations" : {
@@ -2067,10 +2160,24 @@
       }
     },
     "주법은 코드를 잡지 않은 다른 손으로 기타 줄을 연주하는 방법을 말합니다. 손이나 피크로 줄을 위아래로 쓸듯이 쳐서 리듬감 있게 연주하는 방법인 스트로크를 배워봅시다." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A strumming pattern is how you use your free hand to play the guitar strings. Let's learn strumming, which involves sweeping your hand or a pick up and down the strings to create rhythm."
+          }
+        }
+      }
     },
     "주법을 학습하는 화면입니다. 학습을 시작하고자 하시는 재생버튼을 눌러주세요." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This is the screen where you can learn the main law. Please press the play button to start learning."
+          }
+        }
+      }
     },
     "주법의 다운에 대한 설명" : {
       "localizations" : {
@@ -2123,10 +2230,24 @@
       }
     },
     "칼립소 리듬에 대한 설명" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Explanation of Calypso Rhythm"
+          }
+        }
+      }
     },
     "칼립소 리듬을 기타로 연주하면 " : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "When you play the Calypso rhythm on the guitar"
+          }
+        }
+      }
     },
     "코드 소리를 깔끔하게 연주하는 방법" : {
       "localizations" : {

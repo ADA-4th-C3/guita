@@ -4,11 +4,11 @@ import SwiftUI
 
 struct TechniqueLessonView: View {
   @EnvironmentObject var router: Router
-
+  
   var body: some View {
     PermissionView {
       BaseView(
-        create: { TechniqueLessonViewModel() }
+        create: { TechniqueLessonViewModel(router) }
       ) { viewModel, state in
         VStack {
           // MARK: Toolbar
@@ -16,20 +16,19 @@ struct TechniqueLessonView: View {
             title: NSLocalizedString("주법 학습", comment: ""),
             accessibilityHint: NSLocalizedString("주법을 학습하는 화면입니다. 학습을 시작하고자 하시는 재생버튼을 눌러주세요.", comment: ""),
             trailing: {
-            IconButton("info", color: .light, isSystemImage: false) {
-              router.push(.techniqueLessonGuide)
-            }.accessibilityAddTraits(.isButton)
+              IconButton("info", color: .light, isSystemImage: false) {
+                router.push(.techniqueLessonGuide)
+              }
               .accessibilityLabel("사용법 도움말")
-
-          })
-
+            })
+          
           Spacer()
-
+          
           // MARK: Step/TotalStep
           Text("\(state.currentStepIndex + 1)/\(state.totalStep) 단계")
             .fontKoddi(22, color: .darkGrey, weight: .regular)
             .accessibilityHidden(true)
-
+          
           // MARK: description
           VStack {
             if let image = viewModel.currentImage() {
@@ -38,7 +37,7 @@ struct TechniqueLessonView: View {
                 .scaledToFit()
                 .frame(width: 87, height: 95)
             }
-
+            
             Text(state.currentStep.description)
               .fontKoddi(26, color: .light, weight: .bold)
               .padding(.horizontal, 30)
@@ -46,45 +45,36 @@ struct TechniqueLessonView: View {
           }
           .frame(maxWidth: .infinity, maxHeight: .infinity)
           .accessibilityHidden(true)
-
-          // MARK: Button(back/play/next)
-
+          
+          // MARK: Buttons
           HStack {
             let isFirstStep = (state.currentStepIndex == 0)
-            Button(action: {
-              if !isFirstStep {
-                viewModel.previousStep()
-              }
-            }) {
-              Image("chevron-left")
-                .resizable()
-                .frame(width: 75, height: 75)
-                .padding(.trailing, 42)
+            
+            // MARK: Prebious Button
+            IconButton("chevron-left", color: .light, size: 95, disabled: isFirstStep) {
+              viewModel.previousStep()
             }
-            .accessibilityAddTraits(.isButton)
-            .accessibilityLabel(isFirstStep ? "이전 (비활성화)" : "이전")
-            .opacity(isFirstStep ? 0.5 : 1.0)
-            .accessibilityAddTraits([.isButton, .startsMediaSession])
+            .accessibilityLabel(
+              NSLocalizedString("ChordLesson.Button.Previous.Label", comment: "")
+            )
+            .accessibilityHint(
+              NSLocalizedString(isFirstStep ? "ChordLesson.Button.Previous.Hint.Inactive" : "", comment: "")
+            )
+            
+            
+            // MARK: Play Button
+            IconButton("play", color: .accent, size: 95) {
+              viewModel.play()
+            }
+            .accessibilityLabel(NSLocalizedString("ChordLesson.Button.Play.Label", comment: ""))
 
-            Button(action: { viewModel.play() }) {
-              Image("play")
-                .resizable()
-                .frame(width: 95, height: 95)
-            }.accessibilityAddTraits(.isButton)
-              .accessibilityLabel("재생")
-              .accessibilityAddTraits([.isButton, .startsMediaSession])
-
-            Button(action: {
+            // MARK: Next Button
+            IconButton("chevron-right", size: 95) {
               viewModel.nextStep()
-            }) {
-              Image("chevron-right")
-                .resizable()
-                .frame(width: 75, height: 75)
-                .padding(.leading, 42)
             }
-            .accessibilityAddTraits(.isButton)
-            .accessibilityLabel("다음")
-            .accessibilityAddTraits([.isButton, .startsMediaSession])
+            .accessibilityLabel(
+              NSLocalizedString("ChordLesson.Button.Next.Label", comment: "")
+            )
           }
         }.padding(.bottom, 5)
           .onAppear {

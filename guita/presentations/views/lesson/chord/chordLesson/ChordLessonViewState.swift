@@ -47,13 +47,15 @@ struct ChordLessonViewState {
 
   var nextChordAccessibilityHint: String {
     let isLastStep = index + 1 == totalStep
-    if isLastStep, let nextChord = nextChord {
+    let isNextChord = nextChord != nil
+    if isLastStep, isNextChord {
       return String(
-        format: NSLocalizedString("ChordLesson.Button.Next.Hint", comment: ""),
-        "\(nextChord.rawValue)"
+        format: NSLocalizedString("ChordLesson.Button.Next.Hint.NextChord", comment: ""),
+        "\(nextChord!.rawValue)"
       )
+    } else if isLastStep, !isNextChord {
+      return NSLocalizedString("ChordLesson.Button.Next.Hint.NextChord.End", comment: "")
     }
-
     return ""
   }
 
