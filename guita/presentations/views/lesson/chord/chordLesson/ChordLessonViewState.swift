@@ -45,16 +45,16 @@ struct ChordLessonViewState {
     return nextIndex < chords.count ? chords[nextIndex] : nil
   }
 
-  var nextChordAccessibilityLabel: String {
+  var nextChordAccessibilityHint: String {
     let isLastStep = index + 1 == totalStep
     if isLastStep, let nextChord = nextChord {
       return String(
-        format: NSLocalizedString("ChordLesson.NextLabel1", comment: ""),
+        format: NSLocalizedString("ChordLesson.Button.Next.Hint", comment: ""),
         "\(nextChord.rawValue)"
       )
     }
 
-    return NSLocalizedString("Next", comment: "")
+    return ""
   }
 
   func copy(

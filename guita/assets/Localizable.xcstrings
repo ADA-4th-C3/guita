@@ -54,9 +54,6 @@
         }
       }
     },
-    "%@ 재생" : {
-
-    },
     "%@ 코드" : {
       "localizations" : {
         "en" : {
@@ -133,6 +130,108 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chord recognition interval : %@s"
+          }
+        }
+      }
+    },
+    "ChordLesson.Button.Next.Hint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "The next code we'll learn is the %@ code."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다음으로 학습할 코드는 %@ 코드 입니다."
+          }
+        }
+      }
+    },
+    "ChordLesson.Button.Next.Label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go to next lesson"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다음 레슨으로 이동"
+          }
+        }
+      }
+    },
+    "ChordLesson.Button.Play.Hint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ lesson begins."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 레슨을 시작합니다."
+          }
+        }
+      }
+    },
+    "ChordLesson.Button.Play.Label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Play"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "재생"
+          }
+        }
+      }
+    },
+    "ChordLesson.Button.Previous.Hint.Inactive" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Disabled because there is no previous learning step."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이전 학습 단계가 없어 비활성화 되어 있습니다."
+          }
+        }
+      }
+    },
+    "ChordLesson.Button.Previous.Label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go to previous learning stage"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이전 학습 단계로 이동"
           }
         }
       }
@@ -1658,16 +1757,6 @@
     "업과 다운을 조합하여 다양한 리듬을 만들 수 있어요. 가장 많이 사용되는 칼립소 리듬을 알려줄게요." : {
 
     },
-    "열" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ten"
-          }
-        }
-      }
-    },
     "여덟" : {
       "localizations" : {
         "en" : {
@@ -1714,6 +1803,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Let’s go on a trip"
+          }
+        }
+      }
+    },
+    "열" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ten"
           }
         }
       }
