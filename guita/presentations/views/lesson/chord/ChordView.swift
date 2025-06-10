@@ -4,18 +4,24 @@ import SwiftUI
 
 struct ChordView: View {
   @EnvironmentObject var router: Router
-//  @AccessibilityFocusState private var focusedChord: Chord?
-
+  //  @AccessibilityFocusState private var focusedChord: Chord?
+  
   let songInfo: SongInfo
-
+  
   var body: some View {
     BaseView(
       create: { ChordViewModel(songInfo) }
     ) { _, state in
       VStack(spacing: 0) {
         // MARK: Toolbar
-        Toolbar(title: "코드 학습", accessibilityText: "\(state.songInfo.chords) 를 배우는 화면입니다. 기타를 들고 배우고 싶은 코드를 선택해 주세요.")
-
+        Toolbar(
+          title: NSLocalizedString("코드 학습", comment: ""),
+          accessibilityText: String(
+            format: NSLocalizedString("Lesson.Accessibility.Description", comment: ""),
+            "\(state.songInfo.chords)"
+          )
+        )
+        
         // MARK: Chord Button
         ListDivider()
           .padding(.top, 32)
@@ -30,7 +36,7 @@ struct ChordView: View {
           }
           .accessibilityLabel("\(chord.rawValue) 코드 학습하기")
           .accessibilityAddTraits(.isButton)
-
+          
           ListDivider()
         }
         Spacer()

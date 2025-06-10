@@ -4,8 +4,15 @@
     " " : {
 
     },
-    " 첫 버튼, %@ 화면으로 돌아 가기" : {
-
+    "[%@] %@" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "[%1$@] %2$@"
+          }
+        }
+      }
     },
     "* 설정 > Guita 앱에서 권한 변경이 가능합니다." : {
       "extractionState" : "stale",
@@ -48,6 +55,7 @@
       }
     },
     "%@ %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -190,6 +198,40 @@
         }
       }
     },
+    "ChordLessonView.Accessibility.Description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This is the screen for learning the %@ chord. Say “play” to start the lesson."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 코드를 학습하는 화면입니다. 학습을 시작하고자 하시면 재생이라고 말해주세요."
+          }
+        }
+      }
+    },
+    "ChordView.Accessibility.Description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This is the screen for learning %@ Pick up your guitar and select the chord you want to learn."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@를 배우는 화면입니다. 기타를 들고 배우고 싶은 코드를 선택해 주세요."
+          }
+        }
+      }
+    },
     "Commands" : {
       "localizations" : {
         "en" : {
@@ -240,6 +282,40 @@
         }
       }
     },
+    "GuideView.Description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can listen to help about %@"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@에 대한 도움말을 들을 수 있습니다."
+          }
+        }
+      }
+    },
+    "GuideView.Title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Help for %@"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 도움말"
+          }
+        }
+      }
+    },
     "Guita 앱의 편리한 이용을 위해\n아래 접근권한의 허용이 필요합니다" : {
       "localizations" : {
         "en" : {
@@ -256,6 +332,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "History"
+          }
+        }
+      }
+    },
+    "Lesson.Accessibility.Description" : {
+      "comment" : "학습 선택 화면 설명",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The song title is %@. This song uses the %@ chords. You can learn chords, techniques, song sections, or the full song. Swipe left or right to choose your preferred learning option."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "곡 제목은 %@ 입니다. %@ 코드를 사용하는 곡입니다. 코드 학습하기, 주법 학습하기, 곡 구간별 학습하기, 곡 전체 학습하기를 할 수 있습니다. 화면을 좌우로 쓸어넘기며 희망하는 학습을 선택해주십시오."
           }
         }
       }
@@ -381,7 +475,14 @@
       }
     },
     "귀로 치는 기타, 귀타가 시작되었습니다. 기타 학습을 시작하기 위해서는 기타 학습 버튼을 눌러주십시오." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Guita you play with your ears, Guita has begun. To start learning guitar, please press the ‘Learn Guitar’ button."
+          }
+        }
+      }
     },
     "기타 몸통에 있는 구멍을 사운드 홀이라고 부릅니다. 사운드 홀을 찾아보세요." : {
 
@@ -412,6 +513,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "“Introduction to Guitar Techniques and Strumming”\n"
+          }
+        }
+      }
+    },
+    "기타 줄 번호 안내" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guitar String Number Guide"
           }
         }
       }
@@ -605,6 +716,16 @@
         }
       }
     },
+    "손가락 번호 안내" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finger Number Guide"
+          }
+        }
+      }
+    },
     "알림창입니다." : {
       "localizations" : {
         "en" : {
@@ -621,12 +742,22 @@
     "업과 다운을 조합하여 다양한 리듬을 만들 수 있어요. 가장 많이 사용되는 칼립소 리듬을 알려줄게요." : {
 
     },
+    "여행을 떠나요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Let’s go on a trip"
+          }
+        }
+      }
+    },
     "올바른 소리 효과음 재생" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Play correct sound effect."
+            "value" : "Play correct sound effect"
           }
         }
       }
@@ -636,7 +767,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Play correct sound effect"
+            "value" : "Play correct sound effect  ▶"
           }
         }
       }
@@ -657,6 +788,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : " Voice command feature cannot be used"
+          }
+        }
+      }
+    },
+    "음성 명령어 사용법" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How to Use Voice Commands"
           }
         }
       }
@@ -890,6 +1031,22 @@
         }
       }
     },
+    "첫 버튼, %@ 화면으로 돌아 가기" : {
+
+    },
+    "초급1" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Basic1"
+          }
+        }
+      }
+    },
+    "총 1개의 곡으로 이루어져 있습니다. 화면을 좌우로 쓸어넘기며 학습을 희망하는 곡을 선택해주십시오." : {
+
+    },
     "총 재생 시간 %@ 중 %@" : {
       "localizations" : {
         "en" : {
@@ -934,12 +1091,52 @@
         }
       }
     },
+    "코드 소리를 깔끔하게 연주하는 방법" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How to Play Chords Cleanly"
+          }
+        }
+      }
+    },
     "코드 학습" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chord Learning"
+          }
+        }
+      }
+    },
+    "코드 학습 개요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chord Learning Overview"
+          }
+        }
+      }
+    },
+    "코드 학습 진행 순서" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chord Learning Sequence"
+          }
+        }
+      }
+    },
+    "코드 학습 화면 효과음 안내" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chord Learning Screen Sound Effects Guide"
           }
         }
       }
@@ -1029,7 +1226,27 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Play page-turn sound effect"
+            "value" : "Play page-turn sound effect  ▶"
+          }
+        }
+      }
+    },
+    "프렛 안내" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fret Guide"
+          }
+        }
+      }
+    },
+    "학습 목록" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Learning List"
           }
         }
       }

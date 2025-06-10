@@ -6,7 +6,7 @@ struct ChordLessonView: View {
   @EnvironmentObject var router: Router
   let chord: Chord
   let chords: [Chord]
-
+  
   var body: some View {
     BaseView(
       create: { ChordLessonViewModel(router, chord, chords) }
@@ -20,29 +20,38 @@ struct ChordLessonView: View {
       ) {
         VStack(spacing: 0) {
           // MARK: Toolbar
-          Toolbar(title: "\(state.chord.rawValue) 코드", accessibilityText: "\(state.chord.rawValue) 코드를 학습하는 화면입니다. 학습을 시작하고자 하시면 재생이라고 말해주세요.", trailing: {
-            IconButton("info") {
-              router.push(.chordLessonGuide)
-            }.accessibilityAddTraits(.isButton)
-              .accessibilityLabel("사용법 도움말")
-          })
-
+          Toolbar(
+            title: String(
+              format: NSLocalizedString("%@ 코드", comment: ""),
+              "\(state.chord.rawValue)"
+            ),
+            accessibilityText: String(
+              format: NSLocalizedString("ChordLessonView.Accessibility.Description", comment: ""),
+              "\(state.chord.rawValue)"
+            ),
+            trailing: {
+              IconButton("info") {
+                router.push(.chordLessonGuide)
+              }.accessibilityAddTraits(.isButton)
+                .accessibilityLabel("사용법 도움말")
+            })
+          
           // MARK: Index
           Text("\(state.index + 1)/\(state.totalStep) 단계")
             .fontKoddi(22, color: .darkGrey)
             .padding(.top, 16)
             .accessibilityHidden(true)
           Spacer()
-
+          
           // MARK: Step description
           Text(state.description)
             .fontKoddi(26, color: .light)
             .lineSpacing(1.45)
             .multilineTextAlignment(.center)
             .accessibilityHidden(true)
-
+          
           Spacer()
-
+          
           // MARK: Controllers
           HStack {
             IconButton("chevron-left", color: .light, size: 95, disabled: state.step == .introduction) {
@@ -50,13 +59,13 @@ struct ChordLessonView: View {
             }.accessibilityAddTraits(.isButton)
               .accessibilityLabel(state.step == .introduction ? "이전 (비활성화)" : "이전")
               .accessibilityAddTraits([.isButton, .startsMediaSession])
-
+            
             IconButton("play", color: .accent, size: 95) {
               viewModel.play()
             }.accessibilityAddTraits(.isButton)
               .accessibilityLabel("\(state.description) 재생")
               .accessibilityAddTraits([.isButton, .startsMediaSession])
-
+            
             IconButton("chevron-right", size: 95) {
               viewModel.goNext()
             }.accessibilityAddTraits(.isButton)

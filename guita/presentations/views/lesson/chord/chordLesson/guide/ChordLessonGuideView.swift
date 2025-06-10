@@ -8,10 +8,10 @@ struct ChordLessonGuideView: View {
       create: { ChordLessonGuideViewModel() }
     ) { viewModel, _ in
       GuideView(
-        title: "코드 학습",
+        title: NSLocalizedString("코드 학습", comment: ""),
         sections: [
           GuideSection(
-            title: "코드 학습 개요",
+            title: NSLocalizedString("코드 학습 개요", comment: ""),
             content: {
               Text("""
               코드 학습 화면에선 코드를 잡는데 필요한 운지 방법을 음성 안내를 통해 학습할 수 있습니다.
@@ -19,7 +19,7 @@ struct ChordLessonGuideView: View {
             }
           ),
           GuideSection(
-            title: "음성 명령어 사용법",
+            title: NSLocalizedString("음성 명령어 사용법", comment: ""),
             content: {
               Text("""
               음성 명령을 통해 코드 학습 화면을 조작할 수 있으며, 사용할 수 있는 음성 명령은 총 3가지가 있습니다.
@@ -33,7 +33,7 @@ struct ChordLessonGuideView: View {
             }
           ),
           GuideSection(
-            title: "코드 학습 진행 순서",
+            title: NSLocalizedString("코드 학습 진행 순서", comment: ""),
             content: {
               Text("""
               코드 학습은 다음과 같은 순서로 진행됩니다.
@@ -49,7 +49,7 @@ struct ChordLessonGuideView: View {
             }
           ),
           GuideSection(
-            title: "손가락 번호 안내",
+            title: NSLocalizedString("손가락 번호 안내", comment: ""),
             content: {
               Text("""
               코드 학습에서 안내드리는 손가락 번호는 엄지, 검지, 중지, 약지, 소지 순서대로 첫 번째 두 번째, 세 번째, 네 번째, 다섯 번째로 부르고 있습니다.
@@ -57,7 +57,7 @@ struct ChordLessonGuideView: View {
             }
           ),
           GuideSection(
-            title: "기타 줄 번호 안내",
+            title: NSLocalizedString("기타 줄 번호 안내", comment: ""),
             content: {
               Text("""
               기타는 총 여섯 개의 줄로 구성되어 있으며, 코드 학습시 사용하는 기타 줄 번호는 가장 아래쪽에 얇은 줄을 1번 줄로, 그 다음 윗 줄을 2번 줄로, 순서대로 올라가서 가장 위쪽에 두꺼운 줄을 6번 줄로 안내 드리고 있습니다.
@@ -67,7 +67,7 @@ struct ChordLessonGuideView: View {
             }
           ),
           GuideSection(
-            title: "프렛 안내",
+            title: NSLocalizedString("프렛 안내", comment: ""),
             content: {
               Text("""
               코드 학습시 안내드리는 프렛에 대해 알려드리겠습니다.
@@ -85,7 +85,7 @@ struct ChordLessonGuideView: View {
             }
           ),
           GuideSection(
-            title: "코드 소리를 깔끔하게 연주하는 방법",
+            title: NSLocalizedString("코드 소리를 깔끔하게 연주하는 방법", comment: ""),
             content: {
               Text("""
               코드를 잡은 뒤 6번 줄부터 차례대로 한 줄씩 튕기며 어떤 줄의 소리가 제대로 안나는지 확인할 수 있습니다.
@@ -99,7 +99,7 @@ struct ChordLessonGuideView: View {
             }
           ),
           GuideSection(
-            title: "코드 학습 화면 효과음 안내",
+            title: NSLocalizedString("코드 학습 화면 효과음 안내", comment: ""),
             content: {
               VStack(alignment: .leading, spacing: 25.2) {
                 Text("""
