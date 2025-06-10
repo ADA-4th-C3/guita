@@ -7,19 +7,13 @@ struct PermissionGuideDialog: View {
   var body: some View {
     VStack(spacing: 0) {
       VStack(spacing: 14) {
-        Text("알림창입니다.")
-          .font(.caption)
-          .foregroundColor(.clear)
-          .accessibilityHidden(false)
-          .accessibilityLabel("알림창입니다.")
-          .accessibilityAddTraits(.isHeader)
-
         Image("pick-check")
           .resizable()
           .frame(width: 54, height: 54)
           .accessibilityHidden(true)
 
-        Text("Guita 앱의 편리한 이용을 위해\n아래 접근권한의 허용이 필요합니다")
+        Text("귀타 앱의 편리한 이용을 위해\n아래 접근권한의 허용이 필요합니다.")
+          .accessibilityAddTraits(.isHeader)
           .multilineTextAlignment(.center)
           .fontKoddi(17, color: .dark, weight: .bold)
 
@@ -28,21 +22,21 @@ struct PermissionGuideDialog: View {
         VStack(alignment: .leading, spacing: 18) {
           VStack(alignment: .leading, spacing: 7) {
             Text("음성 인식(필수)")
-              .accessibilityLabel("음성 인식 권한이 필요합니다.")
               .fontKoddi(15, color: .dark, weight: .bold)
             Text("음성 명령으로 기능 제어시 사용")
               .fontKoddi(13, color: .dark)
-              .accessibilityLabel("음성 명령으로 기능 제어시 사용됩니다.")
           }
+          .accessibilityElement(children: .ignore)
+          .accessibilityLabel("기타를 연주하면서 음성 명령으로 앱을 제어하기 위해 음성 인식 권한이 필요합니다.")
 
           VStack(alignment: .leading, spacing: 7) {
             Text("마이크(필수)")
-              .accessibilityLabel("마이크 권한 인식이 필요합니다.")
               .fontKoddi(15, color: .dark, weight: .bold)
             Text("기타 연주 소리를 듣고 학습 피드백을 드리기 위해 마이크 접근 권한이 필요")
-              .accessibilityLabel("기타 연주 소리를 듣고 학습 피드백을 드리기 위해 마이크 접근 권한이 필요합니다.")
               .fontKoddi(13, color: .dark)
           }
+          .accessibilityElement(children: .ignore)
+          .accessibilityLabel("기타 연주 소리를 듣고 학습 피드백을 드리기 위해 마이크 접근 권한이 필요합니다.")
         }
         dividerView()
 

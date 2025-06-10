@@ -20,13 +20,23 @@ struct GuideView: View {
 
   var body: some View {
     VStack(spacing: 0) {
-      Toolbar(title: "\(title) 도움말", accessibilityText: "\(title)에 대한 도움말을 들을 수 있습니다.")
+      Toolbar(
+        title: String(
+          format: NSLocalizedString("GuideView.Title", comment: ""),
+          title
+        ),
+        accessibilityText: String(
+          format: NSLocalizedString("GuideView.Description", comment: ""),
+          title
+        )
+      )
       ScrollView {
         VStack(alignment: .leading, spacing: 32) {
           // MARK: Table of contents
           VStack(alignment: .leading, spacing: 4) {
             Text("목차")
               .fontKoddi(18, color: .light, weight: .bold)
+              .accessibilityAddTraits(.isHeader)
 
             ForEach(Array(sections.enumerated()), id: \.element.id) { index, section in
               Text("\(index + 1). \(section.title)")

@@ -7,7 +7,7 @@ struct CurriculumItemCell: View {
 
   var body: some View {
     HStack(alignment: .center) {
-      Text("\(songInfo.level) \(songInfo.truncatedTitle)")
+      Text("[\(songInfo.level)] \(songInfo.truncatedTitle)")
         .fontKoddi(18, color: .light, weight: .bold)
         .frame(width: UIScreen.main.bounds.width * 0.6, alignment: .leading)
         .padding(.leading, 25)

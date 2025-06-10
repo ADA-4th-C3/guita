@@ -38,7 +38,7 @@ struct Toolbar<Leading: View, Trailing: View>: View {
           IconButton("arrow-left", color: .light, isSystemImage: false) {
             router.pop()
           }
-          .accessibilityLabel(" 첫 버튼, \(router.previousTitle ?? "") 화면으로 돌아 가기")
+          .accessibilityLabel("첫 버튼, \(router.previousTitle ?? "") 화면으로 돌아 가기")
         } else {
           leading()
         }
@@ -57,6 +57,7 @@ struct Toolbar<Leading: View, Trailing: View>: View {
           .lineSpacing(1.4)
           .accessibilityElement(children: .ignore)
           .accessibilityLabel("\(title) 머릿말, \(accessibilityText)")
+          .accessibilityAddTraits(.isHeader)
       }
     }
     .frame(height: 44)

@@ -22,7 +22,7 @@ struct NoteClassification {
     buffer: AVAudioPCMBuffer,
     sampleRate: Double,
     windowSize: Int,
-    minVolumeThreshold: Double = 0.01,
+    minVolumeThreshold: Double = 0.025,
     minConfidenceThreshold: Double = 0.5
   ) -> (note: Note, confidence: Float)? {
     // Audio data in buffer

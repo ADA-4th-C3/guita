@@ -26,14 +26,15 @@ final class TextToSpeechManager: BaseViewModel<TextToSpeechState>, AVSpeechSynth
     }
   }
 
-  func speak(_ text: String, language: String = "ko-KR", rate: Float? = nil) async {
+  func speak(_ text: String, locale: Locale = Locale.current, rate: Float? = nil) async {
     stop()
     if text.isEmpty { return }
     await withTaskCancellationHandler(operation: {
       await withCheckedContinuation { continuation in
         self.continuation = continuation
+        Logger.d("🗣️ TTS : \(text)")
         let utterance = AVSpeechUtterance(string: text)
-        utterance.voice = AVSpeechSynthesisVoice(language: language)
+        utterance.voice = AVSpeechSynthesisVoice(language: locale.ttsLanguage)
         utterance.rate = rate ?? configManager.state.ttsSpeed.value
         speechSynthesizer.speak(utterance)
       }

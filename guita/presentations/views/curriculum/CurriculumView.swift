@@ -9,7 +9,7 @@ struct CurriculumView: View {
       create: { CurriculumViewModel() }
     ) { viewModel, _ in
       VStack {
-        Toolbar(title: "학습 목록", accessibilityText: "총 1개의 곡으로 이루어져 있습니다. 화면을 좌우로 쓸어넘기며 학습을 희망하는 곡을 선택해주십시오.")
+        Toolbar(title: NSLocalizedString("학습 목록", comment: ""), accessibilityText: NSLocalizedString("총 1개의 곡으로 이루어져 있습니다. 화면을 좌우로 쓸어넘기며 학습을 희망하는 곡을 선택해주십시오.", comment: ""))
         ListDivider()
           .padding(.top, 32)
         Spacer()

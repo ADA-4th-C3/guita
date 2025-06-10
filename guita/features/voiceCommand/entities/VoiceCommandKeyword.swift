@@ -1,5 +1,7 @@
 //  Copyright © 2025 ADA 4th Challenge3 Team1. All rights reserved.
 
+import Foundation
+
 enum VoiceCommandKeyword: CaseIterable {
   case start
   case stop
@@ -11,15 +13,16 @@ enum VoiceCommandKeyword: CaseIterable {
   case fast
 
   var phrases: [String] {
+    let isKo = Locale.current.isKo
     switch self {
-    case .start: ["시작", "스타트"]
-    case .stop: ["정지", "멈춰", "스탑"]
-    case .play: ["재생", "플레이"]
-    case .retry: ["다시", "처음부터"]
-    case .next: ["다음"]
-    case .previous: ["이전"]
-    case .slow: ["느리게"]
-    case .fast: ["빠르게"]
+    case .start: return isKo ? ["시작"] : ["start"]
+    case .stop: return isKo ? ["정지", "멈춰", "스탑"] : ["stop"]
+    case .play: return isKo ? ["재생", "플레이"] : ["play"]
+    case .retry: return isKo ? ["다시", "처음부터"] : ["retry", "replay", "repeat"]
+    case .next: return isKo ? ["다음"] : ["next"]
+    case .previous: return isKo ? ["이전"] : ["previous"]
+    case .slow: return isKo ? ["느리게"] : ["slow"]
+    case .fast: return isKo ? ["빠르게"] : ["fast"]
     }
   }
 }

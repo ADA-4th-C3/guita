@@ -101,7 +101,7 @@ final class AudioPlayerManager: BaseViewModel<AudioPlayerManagerState> {
       await withCheckedContinuation { continuation in
         self.continuation = continuation
         if let file = self.audioFile {
-          self.playerNode.scheduleFile(file, at: nil) {
+          self.playerNode.scheduleFile(file, at: nil, completionCallbackType: .dataPlayedBack) { _ in
             // 재생 완료 콜백
             self.continuation?.resume()
             self.continuation = nil

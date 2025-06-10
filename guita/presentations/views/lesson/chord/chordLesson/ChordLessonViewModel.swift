@@ -52,9 +52,10 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
       switch state.step {
       case .introduction:
         await chordLesson.startIntroduction(state.isReplay)
-      case let .lineFingering(nString, nFret, nFinger, coordIdx):
+      case let .lineFingering(nString, nFret, nFinger, coordIdx, isFirst):
         await chordLesson.startLineFingering(
-          state.isReplay,
+          isFirst: isFirst,
+          isReplay: state.isReplay,
           index: state.index,
           nString: nString,
           nFret: nFret,
@@ -200,20 +201,5 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
     cancelPlayTask()
     voiceCommandManager.stop()
     audioRecorderManager.stop()
-  }
-}
-
-extension ChordLessonViewModel {
-  var nextChordAccessibilityLabel: String {
-    let isLastStep = state.index + 1 == state.totalStep
-    if isLastStep {
-      if let nextChord = state.nextChord {
-        return "다음으로 학습할 코드는 \(nextChord.rawValue) 코드 입니다. \(nextChord.rawValue) 코드로 넘어가기"
-      } else {
-        return "다음"
-      }
-    } else {
-      return "다음"
-    }
   }
 }

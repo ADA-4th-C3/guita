@@ -8,7 +8,7 @@ final class VoiceCommandManager: BaseViewModel<VoiceCommandManagerState> {
   private let speechToTextManager = SpeechToTextManager.shared
 
   private init() {
-    super.init(state: .init(isRecognizing: false, previousText: "", history: []))
+    super.init(state: .init(isRecognizing: false, isPaused: false, previousText: "", history: []))
   }
 
   func start(
@@ -22,14 +22,23 @@ final class VoiceCommandManager: BaseViewModel<VoiceCommandManagerState> {
     speechToTextManager.start { text in
       if !self.state.isRecognizing { return }
       sttResult?(text)
+
       self.matchCommand(text, commands, historyListener)
     }
     emit(state.copy(
       isRecognizing: true,
+      isPaused: false,
       previousText: "",
       history: []
     ))
     Logger.w("🎙️ Voice Command - Started")
+  }
+
+  func pause(during asyncOperation: @escaping () async -> Void) async {
+    emit(state.copy(isPaused: true))
+    await asyncOperation()
+    try? await Task.sleep(nanoseconds: 300_000_000)
+    emit(state.copy(isPaused: false))
   }
 
   func stop() {
@@ -38,6 +47,7 @@ final class VoiceCommandManager: BaseViewModel<VoiceCommandManagerState> {
     speechToTextManager.stop()
     emit(state.copy(
       isRecognizing: false,
+      isPaused: false,
       previousText: ""
     ))
     Logger.d("🎙️ Voice Command - Stopped")
@@ -49,6 +59,12 @@ final class VoiceCommandManager: BaseViewModel<VoiceCommandManagerState> {
 
   private func matchCommand(_ text: String, _ commands: [VoiceCommand], _ historyListener: (([VoiceCommandHistory]) -> Void)? = nil) {
     let previous = state.previousText
+
+    if state.isPaused {
+      // isPaused == true인 경우, 넘어온 텍스트 스킵
+      emit(state.copy(previousText: text))
+      return
+    }
 
     let targetText: String
     if previous.isEmpty {
@@ -65,7 +81,7 @@ final class VoiceCommandManager: BaseViewModel<VoiceCommandManagerState> {
       for phrase in command.keyword.phrases {
         // Use regex to match whole word phrase
         let pattern = "\\b" + NSRegularExpression.escapedPattern(for: phrase) + "\\b"
-        if let _ = targetText.range(of: pattern, options: .regularExpression) {
+        if let _ = targetText.range(of: pattern, options: [.regularExpression, .caseInsensitive]) {
           Logger.d("🎙️ Voice Command - Executed: \(command.keyword)(\(phrase))")
           command.handler()
           let history = VoiceCommandHistory(

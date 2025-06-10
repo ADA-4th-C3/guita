@@ -21,6 +21,6 @@ extension SongInfo {
   }
 
   static var curriculum: [SongInfo] = [
-    SongInfo(level: "[초급1]", title: "여행을 떠나요", chords: [.A, .E, .B7], fullSong: .basic_1),
+    SongInfo(level: NSLocalizedString("초급1", comment: ""), title: NSLocalizedString("여행을 떠나요", comment: ""), chords: [.A, .E, .B7], fullSong: .basic_1),
   ]
 }

@@ -4,7 +4,7 @@ import SwiftUI
 
 struct ChordView: View {
   @EnvironmentObject var router: Router
-//  @AccessibilityFocusState private var focusedChord: Chord?
+  //  @AccessibilityFocusState private var focusedChord: Chord?
 
   let songInfo: SongInfo
 
@@ -14,7 +14,13 @@ struct ChordView: View {
     ) { _, state in
       VStack(spacing: 0) {
         // MARK: Toolbar
-        Toolbar(title: "코드 학습", accessibilityText: "\(state.songInfo.chords) 를 배우는 화면입니다. 기타를 들고 배우고 싶은 코드를 선택해 주세요.")
+        Toolbar(
+          title: NSLocalizedString("코드 학습", comment: ""),
+          accessibilityText: String(
+            format: NSLocalizedString("Lesson.Accessibility.Description", comment: ""),
+            "\(state.songInfo.chords)"
+          )
+        )
 
         // MARK: Chord Button
         ListDivider()
@@ -23,7 +29,7 @@ struct ChordView: View {
           Button(action: { router.push(.chordLesson(chord: chord, chords: state.songInfo.chords)) }) {
             VStack {
               Text("\(chord.rawValue) 코드")
-                .fontKoddi(26, color: .light, weight: .regular)
+                .fontKoddi(26, color: .light, weight: .bold)
                 .padding(.vertical, 36)
             }
             .frame(maxWidth: .infinity)

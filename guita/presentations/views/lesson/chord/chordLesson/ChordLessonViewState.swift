@@ -1,5 +1,7 @@
 //  Copyright © 2025 ADA 4th Challenge3 Team1. All rights reserved.
 
+import Foundation
+
 struct ChordLessonViewState {
   /// 전체 코드
   let chords: [Chord]
@@ -41,6 +43,18 @@ struct ChordLessonViewState {
     }
     let nextIndex = currentIndex + 1
     return nextIndex < chords.count ? chords[nextIndex] : nil
+  }
+
+  var nextChordAccessibilityLabel: String {
+    let isLastStep = index + 1 == totalStep
+    if isLastStep, let nextChord = nextChord {
+      return String(
+        format: NSLocalizedString("ChordLesson.NextLabel1", comment: ""),
+        "\(nextChord.rawValue)"
+      )
+    }
+
+    return NSLocalizedString("Next", comment: "")
   }
 
   func copy(

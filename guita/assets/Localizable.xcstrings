@@ -4,11 +4,17 @@
     " " : {
 
     },
-    " 첫 버튼, %@ 화면으로 돌아 가기" : {
-
+    "[%@] %@" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "[%1$@] %2$@"
+          }
+        }
+      }
     },
-    "* 설정 > Guita 앱에서 권한 변경이 가능합니다." : {
-      "extractionState" : "stale",
+    "* 설정 > 귀타 앱에서 권한 변경이 가능합니다." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -17,9 +23,6 @@
           }
         }
       }
-    },
-    "* 설정 > 귀타 앱에서 권한 변경이 가능합니다." : {
-
     },
     "%@" : {
       "localizations" : {
@@ -38,28 +41,6 @@
             "state" : "translated",
             "value" : "%1$@ (%2$@)"
           }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ (%2$@)"
-          }
-        }
-      }
-    },
-    "%@ %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$@ %2$@"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ %2$@"
-          }
         }
       }
     },
@@ -70,12 +51,6 @@
             "state" : "translated",
             "value" : "%1$@ %2$@ Learn Button"
           }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ %2$@ 학습하기 버튼"
-          }
         }
       }
     },
@@ -85,12 +60,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%1$@ Header, %2$@"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ 머릿말, %2$@"
           }
         }
       }
@@ -135,12 +104,6 @@
             "state" : "translated",
             "value" : "%1$lld. %2$@"
           }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld. %2$@"
-          }
         }
       }
     },
@@ -150,12 +113,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%1$lld/%2$lld Step"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld/%2$lld 단계"
           }
         }
       }
@@ -190,6 +147,449 @@
         }
       }
     },
+    "ChordLesson.ChordFingering.Desc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%4$@, use your %1$@ finger, press the %2$@ fret on the %3$@ string from below. "
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%4$@, %1$@로 %2$@ 프렛에 아래서 %3$@ 줄을 눌러주세요. "
+          }
+        }
+      }
+    },
+    "ChordLesson.ChordFingering.Intro" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Let's try the %@ chord."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 코드를 잡아봅시다."
+          }
+        }
+      }
+    },
+    "ChordLesson.ChordSoundCheck.Desc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hold the %@ chord, and slowly strum all the strings downward to hear this sound."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 코드를 잡고, 위에서 아래로 모든 줄을 천천히 쓸어내렸을 때 이런 소리가 들려야 해요."
+          }
+        }
+      }
+    },
+    "ChordLesson.ChordSoundCheck.Intro" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Let’s check the sound of the %@ chord."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 코드 소리를 확인해 봅시다."
+          }
+        }
+      }
+    },
+    "ChordLesson.ChordSoundCheck2" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Now try strumming all the strings from top to bottom."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이제 모든 줄을 위에서 아래로 쓸어내려보세요."
+          }
+        }
+      }
+    },
+    "ChordLesson.CurrentStep" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Step %1$@ of %2$@"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "총 %2$@ 단계 중 %1$@ 단계"
+          }
+        }
+      }
+    },
+    "ChordLesson.Finish.Done" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "If you say \\\"Next\\\", you will return to the previous \\\"Chord Selection\\\" screen. "
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " \\\"다음\\\"이라고 말씀하시면 이전 \\\"코드 선택\\\"화면으로 이동됩니다. "
+          }
+        }
+      }
+    },
+    "ChordLesson.Finish.Intro" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ chord lesson has ended. "
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 코드 학습이 종료되었습니다. "
+          }
+        }
+      }
+    },
+    "ChordLesson.Finish.Next" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "If you would like to learn the %@ code next, please say \\\"Next\\\". "
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " 다음으로 %@ 코드를 학습하고 싶으시면 \\\"다음\\\"이라고 말씀해 주세요. "
+          }
+        }
+      }
+    },
+    "ChordLesson.Intro.Desc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The %1$@ chord uses %2$@ flats, and requires %3$@ fingers."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@코드는 %2$@ 플렛이 사용되고, %3$@개의 손가락을 사용합니다."
+          }
+        }
+      }
+    },
+    "ChordLesson.LineFingering.Desc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "With your %3$@ finger, place the %1$@ flat, and hold the %2$@ string from below."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%3$@로, %1$@ 플랫, 아래에서 %2$@ 줄을 잡으세요."
+          }
+        }
+      }
+    },
+    "ChordLesson.LineFingering.Intro" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Let’s play the %@ chord one string at a time."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 코드를 한 줄씩 잡아봅시다."
+          }
+        }
+      }
+    },
+    "ChordLesson.LineSoundCheck.Desc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ string should sound like this when plucked."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 줄을 튕겼을 때 이런 소리가 들려야 해요."
+          }
+        }
+      }
+    },
+    "ChordLesson.LineSoundCheck.Desc2" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Let’s pluck the %@ string."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 줄을 튕겨 봅시다."
+          }
+        }
+      }
+    },
+    "ChordLesson.LineSoundCheck.Intro" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Let’s check the %@ code sound."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 코드 소리를 확인해 봅시다."
+          }
+        }
+      }
+    },
+    "ChordLesson.LineSoundCheck.SoundDesc" : {
+      "extractionState" : "manual"
+    },
+    "ChordLesson.NextLabel1" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The next code we'll learn is the %@ code. Let's move on to the %@ code."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다음으로 학습할 코드는 %@ 코드 입니다. %@ 코드로 넘어가기"
+          }
+        }
+      }
+    },
+    "ChordLesson.OnlyCurrentStep" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Step"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 단계"
+          }
+        }
+      }
+    },
+    "ChordLesson.Step.ChordFingering" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Chord Fingering Explanation"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 코드 운지법 설명"
+          }
+        }
+      }
+    },
+    "ChordLesson.Step.ChordSoundCheck" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Chord Sound Check"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 코드 소리 확인"
+          }
+        }
+      }
+    },
+    "ChordLesson.Step.Finish" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ End Chord Learning"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 코드 학습 종료"
+          }
+        }
+      }
+    },
+    "ChordLesson.Step.Intro" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Chord Overview"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 코드 개요"
+          }
+        }
+      }
+    },
+    "ChordLesson.Step.LineFingering" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ Chord %2$@ Finger Fingering Explanation"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ 코드 %2$@ 손가락 운지법 설명"
+          }
+        }
+      }
+    },
+    "ChordLesson.Step.LineSoundCheck" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ Chord %2$@ String Sound Check"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ 코드 %2$@ 줄 소리 확인"
+          }
+        }
+      }
+    },
+    "ChordLesson.VoiceCommandGuide" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "If you want to go to the next lesson, say \\\"Next\\\"; to listen again, say \\\"Repeat\\\"; to go back to the previous lesson, say \\\"Previous\\\"."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다음 학습으로 넘어가시려면 \\\"다음\\\"을, 다시 들으시려면 \\\"다시\\\"를, 이전 학습으로 되돌아가시려면 \\\"이전\\\"을 말씀해 주세요."
+          }
+        }
+      }
+    },
+    "ChordLessonView.Accessibility.Description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This is the screen for learning the %@ chord. Say “play” to start the lesson."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 코드를 학습하는 화면입니다. 학습을 시작하고자 하시면 재생이라고 말해주세요."
+          }
+        }
+      }
+    },
+    "ChordView.Accessibility.Description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This is the screen for learning %@ Pick up your guitar and select the chord you want to learn."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@를 배우는 화면입니다. 기타를 들고 배우고 싶은 코드를 선택해 주세요."
+          }
+        }
+      }
+    },
     "Commands" : {
       "localizations" : {
         "en" : {
@@ -220,6 +620,91 @@
         }
       }
     },
+    "Finger.1" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "thumb"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "엄지"
+          }
+        }
+      }
+    },
+    "Finger.2" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "index"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "검지"
+          }
+        }
+      }
+    },
+    "Finger.3" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "middle"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "중지"
+          }
+        }
+      }
+    },
+    "Finger.4" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ring"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "약지"
+          }
+        }
+      }
+    },
+    "Finger.5" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "pinky"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "소지"
+          }
+        }
+      }
+    },
     "Full Track Play Speed" : {
       "localizations" : {
         "en" : {
@@ -240,12 +725,36 @@
         }
       }
     },
-    "Guita 앱의 편리한 이용을 위해\n아래 접근권한의 허용이 필요합니다" : {
+    "GuideView.Description" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "For convenient use of the Guita app some access permissions are required."
+            "value" : "You can listen to help about %@"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@에 대한 도움말을 들을 수 있습니다."
+          }
+        }
+      }
+    },
+    "GuideView.Title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Help for %@"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 도움말"
           }
         }
       }
@@ -256,6 +765,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "History"
+          }
+        }
+      }
+    },
+    "Lesson.Accessibility.Description" : {
+      "comment" : "학습 선택 화면 설명"
+    },
+    "Next" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다음"
           }
         }
       }
@@ -276,6 +805,74 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Note Recognition Interval: %@s"
+          }
+        }
+      }
+    },
+    "Order.First" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "First"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "먼저"
+          }
+        }
+      }
+    },
+    "Order.Last" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lastly"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "마지막으로"
+          }
+        }
+      }
+    },
+    "Order.Next" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다음으로"
+          }
+        }
+      }
+    },
+    "ordinal" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@th"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@번째"
           }
         }
       }
@@ -381,6 +978,16 @@
       }
     },
     "귀로 치는 기타, 귀타가 시작되었습니다. 기타 학습을 시작하기 위해서는 기타 학습 버튼을 눌러주십시오." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Guita you play with your ears, Guita has begun. To start learning guitar, please press the ‘Learn Guitar’ button."
+          }
+        }
+      }
+    },
+    "귀타 앱의 편리한 이용을 위해\n아래 접근권한의 허용이 필요합니다." : {
 
     },
     "기타 몸통에 있는 구멍을 사운드 홀이라고 부릅니다. 사운드 홀을 찾아보세요." : {
@@ -416,6 +1023,16 @@
         }
       }
     },
+    "기타 줄 번호 안내" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guitar String Number Guide"
+          }
+        }
+      }
+    },
     "기타 학습" : {
       "localizations" : {
         "en" : {
@@ -432,6 +1049,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "The guitar consists of a total of six strings, and when learning chords, the guitar string numbers used are numbered from the bottom string as string 1, the next thinnest string as string 2, sequentially going up to the thickest string at the top as string 6.\n\nWhen using a pick, it is recommended to play the 6th, 5th, and 4th strings with the thumb, the 3rd string with the middle finger, the 2nd string with the ring finger, and the 1st string with the pinky finger."
+          }
+        }
+      }
+    },
+    "기타를 연주하면서 음성 명령으로 앱을 제어하기 위해 음성 인식 권한이 필요합니다." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voice recognition permission is required to control the app with voice commands while playing the guitar."
           }
         }
       }
@@ -456,6 +1083,26 @@
         }
       }
     },
+    "네 번째" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fourth"
+          }
+        }
+      }
+    },
+    "넷" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Four"
+          }
+        }
+      }
+    },
     "녹음 권한이 필요합니다." : {
       "localizations" : {
         "en" : {
@@ -472,6 +1119,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Slow"
+          }
+        }
+      }
+    },
+    "다섯" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Five"
+          }
+        }
+      }
+    },
+    "다섯 번째" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fifth"
           }
         }
       }
@@ -502,18 +1169,28 @@
     "다음 학습으로 넘어가시려면 \"다음\"을, 다시 들으시려면 \"다시\"를, 이전 학습으로 되돌아가시려면 \"이전\" 을 말씀해 주세요." : {
 
     },
-    "따라서 말해보며 순서를 익혀보세요." : {
-
-    },
-    "마이크 권한 인식이 필요합니다." : {
+    "두 번째" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Microphone permission is required."
+            "value" : "Second"
           }
         }
       }
+    },
+    "둘" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Two"
+          }
+        }
+      }
+    },
+    "따라서 말해보며 순서를 익혀보세요." : {
+
     },
     "마이크(필수)" : {
       "localizations" : {
@@ -595,12 +1272,62 @@
         }
       }
     },
+    "세 번째" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Third"
+          }
+        }
+      }
+    },
+    "셋" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Three"
+          }
+        }
+      }
+    },
     "속도 조절 버튼을 통해 재생되는 안내 음성과 멜로디의 속도를 조절할 수 있습니다.\n\n한 손가락으로 화면을 좌우로 쓸어내리며 원하는 버튼을 선택할 수 있습니다.\n\n속도 조절은 느리게, 빠르게로 조절 가능합니다." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "You can control the speed of the guidance audio and melody using the speed adjustment button.\n\nSwipe left or right with one finger to select the desired button.\n\nSpeed can be adjusted to slow or fast."
+          }
+        }
+      }
+    },
+    "손가락 번호 안내" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finger Number Guide"
+          }
+        }
+      }
+    },
+    "아홉" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nine"
+          }
+        }
+      }
+    },
+    "아홉 번째" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ninth"
           }
         }
       }
@@ -621,12 +1348,82 @@
     "업과 다운을 조합하여 다양한 리듬을 만들 수 있어요. 가장 많이 사용되는 칼립소 리듬을 알려줄게요." : {
 
     },
+    "여덟" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eight"
+          }
+        }
+      }
+    },
+    "여섯" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Six"
+          }
+        }
+      }
+    },
+    "열" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ten"
+          }
+        }
+      }
+    },
+    "여덟 번째" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eighth"
+          }
+        }
+      }
+    },
+    "여섯 번째" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sixth"
+          }
+        }
+      }
+    },
+    "여행을 떠나요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Let’s go on a trip"
+          }
+        }
+      }
+    },
+    "열 번째" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tenth"
+          }
+        }
+      }
+    },
     "올바른 소리 효과음 재생" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Play correct sound effect."
+            "value" : "Play correct sound effect"
           }
         }
       }
@@ -636,7 +1433,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Play correct sound effect"
+            "value" : "Play correct sound effect  ▶"
           }
         }
       }
@@ -661,22 +1458,22 @@
         }
       }
     },
+    "음성 명령어 사용법" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How to Use Voice Commands"
+          }
+        }
+      }
+    },
     "음성 명령으로 기능 제어시 사용" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Used when controlling functions with voice commands"
-          }
-        }
-      }
-    },
-    "음성 명령으로 기능 제어시 사용됩니다." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Used to control functions with voice commands."
           }
         }
       }
@@ -701,26 +1498,12 @@
         }
       }
     },
-    "음성 명령을 통해 코드 학습 화면을 조작할 수 있으며, 사용할 수 있는 음성 명령은 총 3가지가 있습니다.\n\n첫 번째로 \"재생\"이라고 음성으로 명령하면 곡을 재생할 수 있습니다.\n\n두 번째로 \"정지\"이라고 음성으로 명령하면 곡 재생을 멈출 수 있습니다.\n\n세 번째로 \"다시\"이라고 음성으로 명령하면 곡을 처음부터 재생할 수 있습니다." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You can control the code learning screen using voice commands, and there are three available commands.\n\nFirst, say “Play” to start playing the song.\n\nSecond, say “Stop” to pause the song.\n\nThird, say “Restart” to play the song from the beginning."
-          }
-        }
-      }
-    },
     "음성 명령을 통해 코드 학습 화면을 조작할 수 있으며, 사용할 수 있는 음성 명령은 총 5가지가 있습니다.\n\n첫 번째로 \"재생\"이라고 음성으로 명령하면 곡을 재생할 수 있습니다.\n\n두 번째로 \"정지\"이라고 음성으로 명령하면 곡 재생을 멈출 수 있습니다.\n\n세 번째로 \"다시\"이라고 음성으로 명령하면 곡을 처음부터 재생할 수 있습니다.\n\n네 번째로 \"느리게\"이라고 음성으로 명령하면 곡을 느리게 재생할 수 있습니다.\n\n다섯 번째로 \"빠르게\"이라고 음성으로 명령하면 곡을 빠르게 재생할 수 있습니다." : {
-
-    },
-    "음성 인식 권한이 필요합니다." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Voice Recognition permission is required."
+            "value" : "You can control the code learning screen through voice commands, and there are a total of 5 voice commands that you can use.\n\nFirst, you can play the song by voice commanding \"play\".\n\nSecond, you can stop the song by voice commanding \"stop\".\n\nThird, you can play the song from the beginning by voice commanding \"again\".\n\nFourth, you can play the song slowly by voice commanding \"slow\".\n\nFifth, you can play the song quickly by voice commanding \"fast\"."
           }
         }
       }
@@ -768,12 +1551,22 @@
         }
       }
     },
-    "이전(비활성화)" : {
+    "일곱" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Previous (inactive)"
+            "value" : "Seven"
+          }
+        }
+      }
+    },
+    "일곱 번째" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seventh"
           }
         }
       }
@@ -890,18 +1683,38 @@
         }
       }
     },
+    "첫 버튼, %@ 화면으로 돌아 가기" : {
+
+    },
+    "첫 번째" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "First"
+          }
+        }
+      }
+    },
+    "초급1" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Basic1"
+          }
+        }
+      }
+    },
+    "총 1개의 곡으로 이루어져 있습니다. 화면을 좌우로 쓸어넘기며 학습을 희망하는 곡을 선택해주십시오." : {
+
+    },
     "총 재생 시간 %@ 중 %@" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%2$@ out of %1$@ total play time"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "총 재생 시간 %1$@ 중 %2$@"
           }
         }
       }
@@ -912,24 +1725,12 @@
     "칼립소 리듬을 기타로 연주하면 " : {
 
     },
-    "칼립소 주법에 대한 설명" : {
-      "extractionState" : "stale",
+    "코드 소리를 깔끔하게 연주하는 방법" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Explanation of the Calypso Technique"
-          }
-        }
-      }
-    },
-    "칼립소 주법에 리듬에 대한 설명" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Explanation of the Calypso Rhythm Technique"
+            "value" : "How to Play Chords Cleanly"
           }
         }
       }
@@ -940,6 +1741,36 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chord Learning"
+          }
+        }
+      }
+    },
+    "코드 학습 개요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chord Learning Overview"
+          }
+        }
+      }
+    },
+    "코드 학습 진행 순서" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chord Learning Sequence"
+          }
+        }
+      }
+    },
+    "코드 학습 화면 효과음 안내" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chord Learning Screen Sound Effects Guide"
           }
         }
       }
@@ -1029,7 +1860,37 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Play page-turn sound effect"
+            "value" : "Play page-turn sound effect  ▶"
+          }
+        }
+      }
+    },
+    "프렛 안내" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fret Guide"
+          }
+        }
+      }
+    },
+    "하나" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One"
+          }
+        }
+      }
+    },
+    "학습 목록" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Learning List"
           }
         }
       }

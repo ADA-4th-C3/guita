@@ -19,6 +19,7 @@ struct HomeView: View {
               router.push(.dev)
             }.accessibilityHidden(true)
         })
+
         Spacer()
         Button {
           router.push(.curriculum)

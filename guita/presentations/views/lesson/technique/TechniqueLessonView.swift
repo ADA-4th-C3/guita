@@ -59,7 +59,7 @@ struct TechniqueLessonView: View {
                 .padding(.trailing, 42)
             }
             .accessibilityAddTraits(.isButton)
-            .accessibilityLabel(isFirstStep ? "이전(비활성화)" : "이전")
+            .accessibilityLabel(isFirstStep ? "이전 (비활성화)" : "이전")
             .opacity(isFirstStep ? 0.5 : 1.0)
             .accessibilityAddTraits([.isButton, .startsMediaSession])
 

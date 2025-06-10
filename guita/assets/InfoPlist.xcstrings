@@ -8,7 +8,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "귀타"
+            "value" : "Guita"
           }
         },
         "ko" : {
@@ -25,7 +25,7 @@
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "guita"
           }
         },
@@ -37,13 +37,30 @@
         }
       }
     },
+    "ChordLessonGuideViewTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chord Lesson"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "코드 학습"
+          }
+        }
+      }
+    },
     "NSMicrophoneUsageDescription" : {
       "comment" : "Privacy - Microphone Usage Description",
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "To hear your guitar playing and provide learning feedback, microphone access is required."
           }
         },
@@ -61,7 +78,7 @@
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "To control functions using voice commands, voice recognition permission is required."
           }
         },
