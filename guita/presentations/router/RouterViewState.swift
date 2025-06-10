@@ -60,7 +60,7 @@ extension SubPage {
       return "\(songInfo.level)"
     case .chord:
       return "코드 학습"
-    case let .chordLesson(chord, chords):
+    case let .chordLesson(chord, _):
       return "\(chord)코드"
     case .chordLessonGuide:
       return "코드 학습 도움말"

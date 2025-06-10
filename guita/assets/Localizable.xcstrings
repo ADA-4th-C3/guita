@@ -14,8 +14,7 @@
         }
       }
     },
-    "* 설정 > Guita 앱에서 권한 변경이 가능합니다." : {
-      "extractionState" : "stale",
+    "* 설정 > 귀타 앱에서 권한 변경이 가능합니다." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -24,9 +23,6 @@
           }
         }
       }
-    },
-    "* 설정 > 귀타 앱에서 권한 변경이 가능합니다." : {
-
     },
     "%@" : {
       "localizations" : {
@@ -763,16 +759,6 @@
         }
       }
     },
-    "Guita 앱의 편리한 이용을 위해\n아래 접근권한의 허용이 필요합니다" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "For convenient use of the Guita app some access permissions are required."
-          }
-        }
-      }
-    },
     "History" : {
       "localizations" : {
         "en" : {
@@ -1001,6 +987,9 @@
         }
       }
     },
+    "귀타 앱의 편리한 이용을 위해\n아래 접근권한의 허용이 필요합니다." : {
+
+    },
     "기타 몸통에 있는 구멍을 사운드 홀이라고 부릅니다. 사운드 홀을 찾아보세요." : {
 
     },
@@ -1060,6 +1049,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "The guitar consists of a total of six strings, and when learning chords, the guitar string numbers used are numbered from the bottom string as string 1, the next thinnest string as string 2, sequentially going up to the thickest string at the top as string 6.\n\nWhen using a pick, it is recommended to play the 6th, 5th, and 4th strings with the thumb, the 3rd string with the middle finger, the 2nd string with the ring finger, and the 1st string with the pinky finger."
+          }
+        }
+      }
+    },
+    "기타를 연주하면서 음성 명령으로 앱을 제어하기 위해 음성 인식 권한이 필요합니다." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voice recognition permission is required to control the app with voice commands while playing the guitar."
           }
         }
       }
@@ -1192,16 +1191,6 @@
     },
     "따라서 말해보며 순서를 익혀보세요." : {
 
-    },
-    "마이크 권한 인식이 필요합니다." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Microphone permission is required."
-          }
-        }
-      }
     },
     "마이크(필수)" : {
       "localizations" : {
@@ -1369,22 +1358,12 @@
         }
       }
     },
-    "여섯 번째" : {
+    "여섯" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sixth"
-          }
-        }
-      }
-    },
-    "여행을 떠나요" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Let’s go on a trip"
+            "value" : "Six"
           }
         }
       }
@@ -1409,12 +1388,22 @@
         }
       }
     },
-    "여섯" : {
+    "여섯 번째" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Six"
+            "value" : "Sixth"
+          }
+        }
+      }
+    },
+    "여행을 떠나요" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Let’s go on a trip"
           }
         }
       }
@@ -1489,16 +1478,6 @@
         }
       }
     },
-    "음성 명령으로 기능 제어시 사용됩니다." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Used to control functions with voice commands."
-          }
-        }
-      }
-    },
     "음성 명령을 통해 주법 학습 화면을 조작할 수 있으며, 사용할 수 있는 음성 명령은 총 3가지가 있습니다.\n\n첫 번째로 \"다시\" 또는 \"재생\"이라고 음성으로 명령하면 음성 안내를 다시 들을 수 있습니다.\n\n두 번째로 \"다음\"이라고 음성으로 명령하면 다음 학습 단계로 넘어갈 수 있습니다.\n\n세 번째로 \"이전\"이라고 음성으로 명령하면 이전 학습 단계로 되돌아갈 수 있습니다." : {
       "localizations" : {
         "en" : {
@@ -1519,26 +1498,12 @@
         }
       }
     },
-    "음성 명령을 통해 코드 학습 화면을 조작할 수 있으며, 사용할 수 있는 음성 명령은 총 3가지가 있습니다.\n\n첫 번째로 \"재생\"이라고 음성으로 명령하면 곡을 재생할 수 있습니다.\n\n두 번째로 \"정지\"이라고 음성으로 명령하면 곡 재생을 멈출 수 있습니다.\n\n세 번째로 \"다시\"이라고 음성으로 명령하면 곡을 처음부터 재생할 수 있습니다." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You can control the code learning screen using voice commands, and there are three available commands.\n\nFirst, say “Play” to start playing the song.\n\nSecond, say “Stop” to pause the song.\n\nThird, say “Restart” to play the song from the beginning."
-          }
-        }
-      }
-    },
     "음성 명령을 통해 코드 학습 화면을 조작할 수 있으며, 사용할 수 있는 음성 명령은 총 5가지가 있습니다.\n\n첫 번째로 \"재생\"이라고 음성으로 명령하면 곡을 재생할 수 있습니다.\n\n두 번째로 \"정지\"이라고 음성으로 명령하면 곡 재생을 멈출 수 있습니다.\n\n세 번째로 \"다시\"이라고 음성으로 명령하면 곡을 처음부터 재생할 수 있습니다.\n\n네 번째로 \"느리게\"이라고 음성으로 명령하면 곡을 느리게 재생할 수 있습니다.\n\n다섯 번째로 \"빠르게\"이라고 음성으로 명령하면 곡을 빠르게 재생할 수 있습니다." : {
-
-    },
-    "음성 인식 권한이 필요합니다." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Voice Recognition permission is required."
+            "value" : "You can control the code learning screen through voice commands, and there are a total of 5 voice commands that you can use.\n\nFirst, you can play the song by voice commanding \"play\".\n\nSecond, you can stop the song by voice commanding \"stop\".\n\nThird, you can play the song from the beginning by voice commanding \"again\".\n\nFourth, you can play the song slowly by voice commanding \"slow\".\n\nFifth, you can play the song quickly by voice commanding \"fast\"."
           }
         }
       }
@@ -1759,17 +1724,6 @@
     },
     "칼립소 리듬을 기타로 연주하면 " : {
 
-    },
-    "칼립소 주법에 리듬에 대한 설명" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Explanation of the Calypso Rhythm Technique"
-          }
-        }
-      }
     },
     "코드 소리를 깔끔하게 연주하는 방법" : {
       "localizations" : {
