@@ -8,7 +8,7 @@ final class VoiceCommandManager: BaseViewModel<VoiceCommandManagerState> {
   private let speechToTextManager = SpeechToTextManager.shared
 
   private init() {
-    super.init(state: .init(isRecognizing: false, previousText: "", history: []))
+    super.init(state: .init(isRecognizing: false, isPaused: false, previousText: "", history: []))
   }
 
   func start(
@@ -22,14 +22,24 @@ final class VoiceCommandManager: BaseViewModel<VoiceCommandManagerState> {
     speechToTextManager.start { text in
       if !self.state.isRecognizing { return }
       sttResult?(text)
+      
       self.matchCommand(text, commands, historyListener)
     }
     emit(state.copy(
       isRecognizing: true,
+      isPaused: false,
       previousText: "",
       history: []
     ))
     Logger.w("🎙️ Voice Command - Started")
+  }
+  
+  func pause() {
+    emit(state.copy(isPaused: true))
+  }
+  
+  func resume() {
+    emit(state.copy(isPaused: false))
   }
 
   func stop() {
@@ -38,6 +48,7 @@ final class VoiceCommandManager: BaseViewModel<VoiceCommandManagerState> {
     speechToTextManager.stop()
     emit(state.copy(
       isRecognizing: false,
+      isPaused: false,
       previousText: ""
     ))
     Logger.d("🎙️ Voice Command - Stopped")
@@ -49,6 +60,12 @@ final class VoiceCommandManager: BaseViewModel<VoiceCommandManagerState> {
 
   private func matchCommand(_ text: String, _ commands: [VoiceCommand], _ historyListener: (([VoiceCommandHistory]) -> Void)? = nil) {
     let previous = state.previousText
+
+    if state.isPaused {
+      // isPaused == true인 경우, 넘어온 텍스트 스킵
+      emit(state.copy(previousText: text))
+      return
+    }
 
     let targetText: String
     if previous.isEmpty {

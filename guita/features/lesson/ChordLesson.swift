@@ -3,9 +3,10 @@
 import Foundation
 
 final class ChordLesson: BaseLesson {
+  private let voiceCommandManager = VoiceCommandManager.shared
   private let audioPlayerManager = AudioPlayerManager.shared
   private let textToSpeechManager = TextToSpeechManager.shared
-  private let functionText = "다음 학습으로 넘어가시려면 \"다음\"을, 다시 들으시려면 \"다시\"를, 이전 학습으로 되돌아가시려면 \"이전\"을 말씀해 주세요."
+  private let voiceCommandGuide = NSLocalizedString("ChordLesson.VoiceCommandGuide", comment: "")
   private var isNoteClassificationEnabled: Bool = false
   private var isChordClassificationEnabled: Bool = false
   let chord: Chord
@@ -52,7 +53,7 @@ final class ChordLesson: BaseLesson {
     return isReplay
     ? ""
     : String(
-      format: NSLocalizedString("ChordLessong.CurrentStep", comment: ""),
+      format: NSLocalizedString("ChordLesson.CurrentStep", comment: ""),
       totalStep.ordinal,
       (index + 1).ordinal
     )
@@ -79,14 +80,23 @@ final class ChordLesson: BaseLesson {
       {
         let plets = self.chord.frets.map { $0.ordinal }
         let nFingers = self.chord.nFingers
-        let text = "\(self.chord)코드는 \(plets) 플랫이 사용되고, \(nFingers)개의 손가락을 사용합니다."
+        let text = String(
+          format: NSLocalizedString("ChordLesson.Description", comment: ""),
+          "\(self.chord)",
+          "\(plets)",
+          "\(nFingers)"
+        )
         await self.textToSpeechManager.speak(text)
       },
       
       // MARK: 기능
       {
-        let text = self.doNotReplayText(isReplay, self.functionText)
+        let text = self.doNotReplayText(isReplay, self.voiceCommandGuide)
+        
+        // TTS feedback loop 이슈 해결
+        self.voiceCommandManager.pause()
         await self.textToSpeechManager.speak(text)
+        self.voiceCommandManager.resume()
       },
     ])
   }
@@ -113,13 +123,7 @@ final class ChordLesson: BaseLesson {
       {
         let text = "\(fret) 플랫, 아래에서 \(string) 줄을 \(finger) 손가락으로 잡으세요."
         await self.textToSpeechManager.speak(text)
-      },
-      
-      // MARK: 기능
-      //      {
-      //        let text = self.doNotReplayText(isReplay, self.functionText)
-      //        await self.textToSpeechManager.speak(text)
-      //      },
+      }
     ])
   }
   
@@ -163,13 +167,7 @@ final class ChordLesson: BaseLesson {
         let text = "이제 \(string) 줄을 튕겨볼까요?"
         await self.textToSpeechManager.speak(text)
         self.isNoteClassificationEnabled = true
-      },
-      
-      // MARK: 기능
-      //      {
-      //        let text = self.doNotReplayText(isReplay, self.functionText)
-      //        await self.textToSpeechManager.speak(text)
-      //      },
+      }
     ])
   }
   
@@ -206,13 +204,7 @@ final class ChordLesson: BaseLesson {
         }
         text += "잡아주세요."
         await self.textToSpeechManager.speak(text)
-      },
-      
-      // MARK: 기능
-      //      {
-      //        let text = self.doNotReplayText(isReplay, self.functionText)
-      //        await self.textToSpeechManager.speak(text)
-      //      },
+      }
     ])
   }
   
@@ -266,13 +258,7 @@ final class ChordLesson: BaseLesson {
         let text = "이제 피크로 쓸어내려보세요."
         await self.textToSpeechManager.speak(text)
         self.isChordClassificationEnabled = true
-      },
-      
-      // MARK: 기능
-      //      {
-      //        let text = self.doNotReplayText(isReplay, self.functionText)
-      //        await self.textToSpeechManager.speak(text)
-      //      },
+      }
     ])
   }
   
