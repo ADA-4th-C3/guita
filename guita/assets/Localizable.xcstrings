@@ -667,14 +667,14 @@
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "This is the screen for learning the %@ chord. Say “play” to start the lesson."
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ 코드를 학습하는 화면입니다. 학습을 시작하고자 하시면 재생이라고 말해주세요."
+            "value" : "%@ 코드를 학습하는 화면입니다. 재생이라고 말하여 학습을 시작하세요."
           }
         }
       }
@@ -684,14 +684,14 @@
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "This is the screen where you can learn the %@ code. To start learning, please press the play button."
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ 코드를 학습하는 화면입니다. 학습을 시작하려면 재생 버튼을 눌러주세요."
+            "value" : "%@ 코드를 학습하는 화면입니다. 재생 버튼을 눌러 학습을 시작하세요."
           }
         }
       }
@@ -1309,6 +1309,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Speech To Text"
+          }
+        }
+      }
+    },
+    "TechniqueLesson.Title.Hint.Granted" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This is the screen for learning strumming techniques. Say \"play\" to begin the lesson."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "주법을 학습하는 화면입니다. 재생이라고 말하여 학습을 시작하세요."
+          }
+        }
+      }
+    },
+    "TechniqueLesson.Title.Hint.NotGranted" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This is the screen for learning strumming techniques. Press the play button to start the lesson."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "주법을 학습하는 화면입니다. 재생버튼을 눌러 학습을 시작하세요."
           }
         }
       }
@@ -2170,6 +2204,7 @@
       }
     },
     "주법을 학습하는 화면입니다. 재생버튼을 눌러 학습을 시작하세요." : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

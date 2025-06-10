@@ -72,7 +72,13 @@ final class TechniqueLessonViewModel: BaseViewModel<TechniqueLessonViewState> {
         featureDescription: ""
       ),
     ]
-    super.init(state: TechniqueLessonViewState(currentStepIndex: 0, steps: steps))
+    super.init(
+      state: TechniqueLessonViewState(
+        isPermissionGranted: false,
+        currentStepIndex: 0,
+        steps: steps
+      )
+    )
   }
   
   private func cancelPlayTask() {
@@ -179,6 +185,15 @@ final class TechniqueLessonViewModel: BaseViewModel<TechniqueLessonViewState> {
       await AudioPlayerManager.shared.start(audioFile: .next)
       try? await Task.sleep(nanoseconds: 200_000_000)
       completion?()
+    }
+  }
+  
+  /// 권한 승인
+  func onPermissionGranted() {
+    if state.isPermissionGranted { return }
+    DispatchQueue.main.async {
+      self.emit(self.state.copy(isPermissionGranted: true))
+      self.startVoiceCommand()
     }
   }
   

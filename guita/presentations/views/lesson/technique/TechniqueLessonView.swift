@@ -6,15 +6,25 @@ struct TechniqueLessonView: View {
   @EnvironmentObject var router: Router
   
   var body: some View {
-    PermissionView {
-      BaseView(
-        create: { TechniqueLessonViewModel(router) }
-      ) { viewModel, state in
+    BaseView(
+      create: { TechniqueLessonViewModel(router) }
+    ) { viewModel, state in
+      PermissionView(
+        permissionListener: { isGranted in
+          if isGranted {
+            viewModel.onPermissionGranted()
+          }
+        }
+      ) {
         VStack {
           // MARK: Toolbar
           Toolbar(
             title: NSLocalizedString("주법 학습", comment: ""),
-            accessibilityHint: NSLocalizedString("주법을 학습하는 화면입니다. 재생버튼을 눌러 학습을 시작하세요.", comment: ""),
+            accessibilityHint: NSLocalizedString(
+              state.isPermissionGranted
+              ? "TechniqueLesson.Title.Hint.Granted"
+              : "TechniqueLesson.Title.Hint.NotGranted",
+              comment: ""),
             trailing: {
               IconButton("info", color: .light, isSystemImage: false) {
                 router.push(.techniqueLessonGuide)
@@ -67,7 +77,7 @@ struct TechniqueLessonView: View {
               viewModel.play()
             }
             .accessibilityLabel(NSLocalizedString("ChordLesson.Button.Play.Label", comment: ""))
-
+            
             // MARK: Next Button
             IconButton("chevron-right", size: 95) {
               viewModel.nextStep()
@@ -76,13 +86,11 @@ struct TechniqueLessonView: View {
               NSLocalizedString("ChordLesson.Button.Next.Label", comment: "")
             )
           }
-        }.padding(.bottom, 5)
-          .onAppear {
-            viewModel.startVoiceCommand()
-          }
-          .onDisappear {
-            viewModel.dispose()
-          }
+        }
+        .padding(.bottom, 5)
+        .onDisappear {
+          viewModel.dispose()
+        }
       }
     }
   }
