@@ -1303,6 +1303,40 @@
         }
       }
     },
+    "SectionLesson.Title.Hint.Granted" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Let's learn the song section by section, four measures at a time. Say \"Play\" to start the lesson."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "곡을 네 마디씩 나누어 학습해 봅시다. 재생이라고 말하고 레슨을 시작하세요."
+          }
+        }
+      }
+    },
+    "SectionLesson.Title.Hint.NotGranted" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Let's learn the song four measures at a time. Press the play button to start the lesson."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "곡을 네 마디씩 나누어 학습해 봅시다. 재생버튼을 눌러 레슨을 시작하세요."
+          }
+        }
+      }
+    },
     "Speech To Text" : {
       "localizations" : {
         "en" : {
@@ -1362,7 +1396,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Track Section Learning"
+            "value" : "Song Section Learning"
           }
         }
       }
@@ -1382,7 +1416,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Start Track Section Learning"
+            "value" : "Start Song Section Learning"
           }
         }
       }
@@ -1631,6 +1665,7 @@
       }
     },
     "다음" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1833,6 +1868,16 @@
         }
       }
     },
+    "여덟" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eight"
+          }
+        }
+      }
+    },
     "여덟 번째" : {
       "localizations" : {
         "en" : {
@@ -1863,26 +1908,6 @@
         }
       }
     },
-    "열" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ten"
-          }
-        }
-      }
-    },
-    "여덟" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eight"
-          }
-        }
-      }
-    },
     "여섯 번째" : {
       "localizations" : {
         "en" : {
@@ -1899,6 +1924,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Let’s go on a trip"
+          }
+        }
+      }
+    },
+    "열" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ten"
           }
         }
       }
@@ -2075,6 +2110,7 @@
       }
     },
     "이전" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2085,6 +2121,7 @@
       }
     },
     "이전 (비활성화)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

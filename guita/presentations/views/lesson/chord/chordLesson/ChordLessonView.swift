@@ -58,6 +58,7 @@ struct ChordLessonView: View {
 
           // MARK: Controllers
           HStack {
+            // MARK: Previous Button
             IconButton("chevron-left", color: .light, size: 95, disabled: state.step == .introduction) {
               viewModel.goPrevious()
             }
@@ -68,6 +69,7 @@ struct ChordLessonView: View {
               NSLocalizedString(state.step == .introduction ? "ChordLesson.Button.Previous.Hint.Inactive" : "", comment: "")
             )
 
+            // MARK: Play Button
             IconButton("play", color: .accent, size: 95) {
               viewModel.play()
             }
@@ -79,6 +81,7 @@ struct ChordLessonView: View {
               )
             )
 
+            // MARK: Next Button
             IconButton("chevron-right", size: 95) {
               viewModel.goNext()
             }
