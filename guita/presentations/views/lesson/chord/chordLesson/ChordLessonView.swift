@@ -6,7 +6,7 @@ struct ChordLessonView: View {
   @EnvironmentObject var router: Router
   let chord: Chord
   let chords: [Chord]
-  
+
   var body: some View {
     BaseView(
       create: { ChordLessonViewModel(router, chord, chords) }
@@ -34,24 +34,25 @@ struct ChordLessonView: View {
                 router.push(.chordLessonGuide)
               }.accessibilityAddTraits(.isButton)
                 .accessibilityLabel("사용법 도움말")
-            })
-          
+            }
+          )
+
           // MARK: Index
           Text("\(state.index + 1)/\(state.totalStep) 단계")
             .fontKoddi(22, color: .darkGrey)
             .padding(.top, 16)
             .accessibilityHidden(true)
           Spacer()
-          
+
           // MARK: Step description
           Text(state.description)
             .fontKoddi(26, color: .light)
             .lineSpacing(1.45)
             .multilineTextAlignment(.center)
             .accessibilityHidden(true)
-          
+
           Spacer()
-          
+
           // MARK: Controllers
           HStack {
             IconButton("chevron-left", color: .light, size: 95, disabled: state.step == .introduction) {
@@ -59,13 +60,13 @@ struct ChordLessonView: View {
             }.accessibilityAddTraits(.isButton)
               .accessibilityLabel(state.step == .introduction ? "이전 (비활성화)" : "이전")
               .accessibilityAddTraits([.isButton, .startsMediaSession])
-            
+
             IconButton("play", color: .accent, size: 95) {
               viewModel.play()
             }.accessibilityAddTraits(.isButton)
               .accessibilityLabel("\(state.description) 재생")
               .accessibilityAddTraits([.isButton, .startsMediaSession])
-            
+
             IconButton("chevron-right", size: 95) {
               viewModel.goNext()
             }.accessibilityAddTraits(.isButton)

@@ -59,7 +59,7 @@ extension Int {
       return "\(self)"
     }
   }
-  
+
   var fingerName: String {
     switch self {
     case 1:

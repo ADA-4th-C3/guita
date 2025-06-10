@@ -5,9 +5,9 @@ import SwiftUI
 struct ChordView: View {
   @EnvironmentObject var router: Router
   //  @AccessibilityFocusState private var focusedChord: Chord?
-  
+
   let songInfo: SongInfo
-  
+
   var body: some View {
     BaseView(
       create: { ChordViewModel(songInfo) }
@@ -21,7 +21,7 @@ struct ChordView: View {
             "\(state.songInfo.chords)"
           )
         )
-        
+
         // MARK: Chord Button
         ListDivider()
           .padding(.top, 32)
@@ -36,7 +36,7 @@ struct ChordView: View {
           }
           .accessibilityLabel("\(chord.rawValue) 코드 학습하기")
           .accessibilityAddTraits(.isButton)
-          
+
           ListDivider()
         }
         Spacer()

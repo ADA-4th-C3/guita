@@ -44,7 +44,7 @@ struct ChordLessonViewState {
     let nextIndex = currentIndex + 1
     return nextIndex < chords.count ? chords[nextIndex] : nil
   }
-  
+
   var nextChordAccessibilityLabel: String {
     let isLastStep = index + 1 == totalStep
     if isLastStep, let nextChord = nextChord {
@@ -53,7 +53,7 @@ struct ChordLessonViewState {
         "\(nextChord.rawValue)"
       )
     }
-    
+
     return NSLocalizedString("Next", comment: "")
   }
 

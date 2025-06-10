@@ -22,7 +22,7 @@ final class VoiceCommandManager: BaseViewModel<VoiceCommandManagerState> {
     speechToTextManager.start { text in
       if !self.state.isRecognizing { return }
       sttResult?(text)
-      
+
       self.matchCommand(text, commands, historyListener)
     }
     emit(state.copy(
@@ -33,7 +33,7 @@ final class VoiceCommandManager: BaseViewModel<VoiceCommandManagerState> {
     ))
     Logger.w("🎙️ Voice Command - Started")
   }
-  
+
   func pause(during asyncOperation: @escaping () async -> Void) async {
     emit(state.copy(isPaused: true))
     await asyncOperation()

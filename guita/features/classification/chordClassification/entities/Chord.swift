@@ -38,7 +38,7 @@ enum Chord: String, CaseIterable, CustomStringConvertible {
     case .Em: return [([(2, 5)], 3), ([(2, 4)], 4)]
     case .Am: return [([(1, 2)], 2), ([(2, 4)], 3), ([(2, 3)], 4)]
     // MARK: 7
-    case .B7: return [([(1, 4)], 2), ([(2, 5)], 3), ([(2, 3)], 4)/*, ([(2, 1)], 5) */ ] // 약식으로 잡음
+    case .B7: return [([(1, 4)], 2), ([(2, 5)], 3), ([(2, 3)], 4) /* , ([(2, 1)], 5) */ ] // 약식으로 잡음
     }
   }
 
