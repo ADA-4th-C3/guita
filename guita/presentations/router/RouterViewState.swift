@@ -16,6 +16,7 @@ enum RootPage {
 }
 
 enum SubPage: Hashable {
+  case setting
   case curriculum
   case lesson(songInfo: SongInfo)
   case chord(songInfo: SongInfo)
@@ -56,6 +57,8 @@ struct RouterViewState {
 extension SubPage {
   var title: String {
     switch self {
+    case .setting:
+      return "설정"
     case .curriculum:
       return NSLocalizedString("Router.Curriculum", comment: "학습 목록")
     case let .lesson(songInfo):
