@@ -34,11 +34,10 @@ final class VoiceCommandManager: BaseViewModel<VoiceCommandManagerState> {
     Logger.w("🎙️ Voice Command - Started")
   }
   
-  func pause() {
+  func pause(during asyncOperation: @escaping () async -> Void) async {
     emit(state.copy(isPaused: true))
-  }
-  
-  func resume() {
+    await asyncOperation()
+    try? await Task.sleep(nanoseconds: 300_000_000)
     emit(state.copy(isPaused: false))
   }
 

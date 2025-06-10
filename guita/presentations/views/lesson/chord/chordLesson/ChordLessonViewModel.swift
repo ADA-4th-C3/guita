@@ -52,9 +52,10 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
       switch state.step {
       case .introduction:
         await chordLesson.startIntroduction(state.isReplay)
-      case let .lineFingering(nString, nFret, nFinger, coordIdx):
+      case let .lineFingering(nString, nFret, nFinger, coordIdx, isFirst):
         await chordLesson.startLineFingering(
-          state.isReplay,
+          isFirst: isFirst,
+          isReplay: state.isReplay,
           index: state.index,
           nString: nString,
           nFret: nFret,

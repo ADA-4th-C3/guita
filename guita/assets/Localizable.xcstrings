@@ -48,17 +48,6 @@
         }
       }
     },
-    "%@ %@" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$@ %2$@"
-          }
-        }
-      }
-    },
     "%@ %@ 학습하기 버튼" : {
       "localizations" : {
         "en" : {
@@ -162,6 +151,90 @@
         }
       }
     },
+    "ChordLesson.ChordFingering.Desc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%4$@, use your %1$@ finger, press the %2$@ fret on the %3$@ string from below. "
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%4$@, %1$@로 %2$@ 프렛에 아래서 %3$@ 줄을 눌러주세요. "
+          }
+        }
+      }
+    },
+    "ChordLesson.ChordFingering.Intro" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Let's try the %@ chord."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 코드를 잡아봅시다."
+          }
+        }
+      }
+    },
+    "ChordLesson.ChordSoundCheck.Desc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hold the %@ chord, and slowly strum all the strings downward to hear this sound."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 코드를 잡고, 위에서 아래로 모든 줄을 천천히 쓸어내렸을 때 이런 소리가 들려야 해요."
+          }
+        }
+      }
+    },
+    "ChordLesson.ChordSoundCheck.Intro" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Let’s check the sound of the %@ chord."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 코드 소리를 확인해 봅시다."
+          }
+        }
+      }
+    },
+    "ChordLesson.ChordSoundCheck2" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Now try strumming all the strings from top to bottom."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이제 모든 줄을 위에서 아래로 쓸어내려보세요."
+          }
+        }
+      }
+    },
     "ChordLesson.CurrentStep" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -174,13 +247,61 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "총 %2$@ 단계 중 %1$@단계"
+            "value" : "총 %2$@ 단계 중 %1$@ 단계"
           }
         }
       }
     },
-    "ChordLesson.Description" : {
-
+    "ChordLesson.Finish.Done" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "If you say \\\"Next\\\", you will return to the previous \\\"Chord Selection\\\" screen. "
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " \\\"다음\\\"이라고 말씀하시면 이전 \\\"코드 선택\\\"화면으로 이동됩니다. "
+          }
+        }
+      }
+    },
+    "ChordLesson.Finish.Intro" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ chord lesson has ended. "
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 코드 학습이 종료되었습니다. "
+          }
+        }
+      }
+    },
+    "ChordLesson.Finish.Next" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "If you would like to learn the %@ code next, please say \\\"Next\\\". "
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " 다음으로 %@ 코드를 학습하고 싶으시면 \\\"다음\\\"이라고 말씀해 주세요. "
+          }
+        }
+      }
     },
     "ChordLesson.Intro.Desc" : {
       "extractionState" : "manual",
@@ -188,13 +309,203 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The %1$@ chord uses %2$@ flats and requires %3$@ fingers."
+            "value" : "The %1$@ chord uses %2$@ flats, and requires %3$@ fingers."
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%1$@코드는 %2$@ 플렛이 사용되고, %3$@개의 손가락을 사용합니다."
+          }
+        }
+      }
+    },
+    "ChordLesson.LineFingering.Desc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "With your %3$@ finger, place the %1$@ flat, and hold the %2$@ string from below."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%3$@로, %1$@ 플랫, 아래에서 %2$@ 줄을 잡으세요."
+          }
+        }
+      }
+    },
+    "ChordLesson.LineFingering.Intro" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Let’s play the %@ chord one string at a time."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 코드를 한 줄씩 잡아봅시다."
+          }
+        }
+      }
+    },
+    "ChordLesson.LineSoundCheck.Desc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ string should sound like this when plucked."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 줄을 튕겼을 때 이런 소리가 들려야 해요."
+          }
+        }
+      }
+    },
+    "ChordLesson.LineSoundCheck.Intro" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Let’s check the %@ code sound."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 코드 소리를 확인해 봅시다."
+          }
+        }
+      }
+    },
+    "ChordLesson.LineSoundCheck.SoundDesc" : {
+      "extractionState" : "manual"
+    },
+    "ChordLesson.OnlyCurrentStep" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Step"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 단계"
+          }
+        }
+      }
+    },
+    "ChordLesson.Step.ChordFingering" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Chord Fingering Explanation"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 코드 운지법 설명"
+          }
+        }
+      }
+    },
+    "ChordLesson.Step.ChordSoundCheck" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Chord Sound Check"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 코드 소리 확인"
+          }
+        }
+      }
+    },
+    "ChordLesson.Step.Finish" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ End Chord Learning"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 코드 학습 종료"
+          }
+        }
+      }
+    },
+    "ChordLesson.Step.Intro" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Chord Overview"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 코드 개요"
+          }
+        }
+      }
+    },
+    "ChordLesson.Step.LineFingering" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ Chord %2$@ Finger Fingering Explanation"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ 코드 %2$@ 손가락 운지법 설명"
+          }
+        }
+      }
+    },
+    "ChordLesson.Step.LineSoundCheck" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ Chord %2$@ String Sound Check"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ 코드 %2$@ 줄 소리 확인"
           }
         }
       }
@@ -276,6 +587,91 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Features"
+          }
+        }
+      }
+    },
+    "Finger.1" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "thumb"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "엄지"
+          }
+        }
+      }
+    },
+    "Finger.2" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "index"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "검지"
+          }
+        }
+      }
+    },
+    "Finger.3" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "middle"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "중지"
+          }
+        }
+      }
+    },
+    "Finger.4" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ring"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "약지"
+          }
+        }
+      }
+    },
+    "Finger.5" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "pinky"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "소지"
           }
         }
       }
@@ -373,6 +769,57 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Note Recognition Interval: %@s"
+          }
+        }
+      }
+    },
+    "Order.First" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "First"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "먼저"
+          }
+        }
+      }
+    },
+    "Order.Last" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lastly"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "마지막으로"
+          }
+        }
+      }
+    },
+    "Order.Next" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다음으로"
           }
         }
       }
@@ -862,16 +1309,6 @@
     "업과 다운을 조합하여 다양한 리듬을 만들 수 있어요. 가장 많이 사용되는 칼립소 리듬을 알려줄게요." : {
 
     },
-    "열" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ten"
-          }
-        }
-      }
-    },
     "여덟" : {
       "localizations" : {
         "en" : {
@@ -918,6 +1355,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Let’s go on a trip"
+          }
+        }
+      }
+    },
+    "열" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ten"
           }
         }
       }
@@ -1262,17 +1709,6 @@
     },
     "칼립소 리듬을 기타로 연주하면 " : {
 
-    },
-    "칼립소 주법에 대한 설명" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Explanation of the Calypso Technique"
-          }
-        }
-      }
     },
     "칼립소 주법에 리듬에 대한 설명" : {
       "extractionState" : "stale",

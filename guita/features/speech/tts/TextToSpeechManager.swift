@@ -32,6 +32,7 @@ final class TextToSpeechManager: BaseViewModel<TextToSpeechState>, AVSpeechSynth
     await withTaskCancellationHandler(operation: {
       await withCheckedContinuation { continuation in
         self.continuation = continuation
+        Logger.d("🗣️ TTS : \(text)")
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = AVSpeechSynthesisVoice(language: locale.ttsLanguage)
         utterance.rate = rate ?? configManager.state.ttsSpeed.value

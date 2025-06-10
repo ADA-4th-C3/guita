@@ -1,8 +1,10 @@
 //  Copyright © 2025 ADA 4th Challenge3 Team1. All rights reserved.
 
+import Foundation
+
 enum ChordLessonStep: Equatable {
   case introduction
-  case lineFingering(nString: Int, nFret: Int, nFinger: Int, coordIdx: Int)
+  case lineFingering(nString: Int, nFret: Int, nFinger: Int, coordIdx: Int, isFirst: Bool)
   case lineSoundCheck(nString: Int, nFret: Int, nFinger: Int, coordIdx: Int)
   case chordFingering
   case chordSoundCheck
@@ -25,17 +27,37 @@ enum ChordLessonStep: Equatable {
   func getDescription(_ chord: Chord, index _: Int) -> String {
     switch self {
     case .introduction:
-      return "\(chord.rawValue) 코드 개요"
-    case let .lineFingering(nString, _, _, _):
-      return "\(chord.rawValue) 코드 \(nString.ordinal) 줄 운지법 설명"
+      return String(
+        format: NSLocalizedString("ChordLesson.Step.Intro", comment: ""),
+        "\(chord.rawValue)"
+      )
+    case let .lineFingering(_, _, nFinger, _, _):
+      return String(
+        format: NSLocalizedString("ChordLesson.Step.LineFingering", comment: ""),
+        "\(chord.rawValue)",
+        "\(nFinger.ordinal)"
+      )
     case let .lineSoundCheck(nString, _, _, _):
-      return "\(chord.rawValue) 코드 \(nString.ordinal) 줄 소리 확인"
+      return String(
+        format: NSLocalizedString("ChordLesson.Step.LineSoundCheck", comment: ""),
+        "\(chord.rawValue)",
+        "\(nString.ordinal)"
+      )
     case .chordFingering:
-      return "\(chord.rawValue) 코드 운지법 설명"
+      return String(
+        format: NSLocalizedString("ChordLesson.Step.ChordFingering", comment: ""),
+        "\(chord.rawValue)"
+      )
     case .chordSoundCheck:
-      return "\(chord.rawValue) 코드 소리 확인"
+      return String(
+        format: NSLocalizedString("ChordLesson.Step.ChordSoundCheck", comment: ""),
+        "\(chord.rawValue)"
+      )
     case .finish:
-      return "\(chord.rawValue) 코드 학습 종료"
+      return String(
+        format: NSLocalizedString("ChordLesson.Step.Finish", comment: ""),
+        "\(chord.rawValue)"
+      )
     }
   }
 }

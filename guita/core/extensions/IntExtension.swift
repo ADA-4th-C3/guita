@@ -59,4 +59,19 @@ extension Int {
       return "\(self)"
     }
   }
+  
+  var fingerName: String {
+    switch self {
+    case 1:
+      return NSLocalizedString("Finger.1", comment: "")
+    case 2:
+      return NSLocalizedString("Finger.2", comment: "")
+    case 3:
+      return NSLocalizedString("Finger.3", comment: "")
+    case 4:
+      return NSLocalizedString("Finger.4", comment: "")
+    default:
+      return NSLocalizedString("Finger.5", comment: "")
+    }
+  }
 }
