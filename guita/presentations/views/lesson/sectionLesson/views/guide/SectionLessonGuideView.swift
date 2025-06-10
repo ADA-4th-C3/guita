@@ -10,10 +10,10 @@ struct SectionLessonGuideView: View {
       create: { SectionLessonGuideViewModel() }
     ) { viewModel, _ in
       GuideView(
-        title: "곡 구간 학습",
+        title: NSLocalizedString("곡 구간 학습", comment: ""),
         sections: [
           GuideSection(
-            title: "코드 학습 개요",
+            title: NSLocalizedString("곡 구간 학습 개요", comment: ""),
             content: {
               Text("""
               곡 구간 학습은 제공하는 음성 안내를 통해 곡을 구간별로 학습할 수 있습니다.
@@ -21,7 +21,7 @@ struct SectionLessonGuideView: View {
             }
           ),
           GuideSection(
-            title: "음성 명령어 사용법",
+            title: NSLocalizedString("음성 명령어 사용법", comment: ""),
             content: {
               Text("""
               음성 명령을 통해 코드 학습 화면을 조작할 수 있으며, 사용할 수 있는 음성 명령은 총 3가지가 있습니다.
@@ -31,11 +31,13 @@ struct SectionLessonGuideView: View {
               두 번째로 "다음"이라고 음성으로 명령하면 다음 학습 단계로 넘어갈 수 있습니다.
 
               세 번째로 "이전"이라고 음성으로 명령하면 이전 학습 단계로 되돌아갈 수 있습니다.
+
+              음성 명령어를 사용하기 위해선 마이크 사용 권한과 음성 인식 권한이 필요합니다.
               """)
             }
           ),
           GuideSection(
-            title: "주법 학습 화면 효과음 안내",
+            title: NSLocalizedString("효과음 안내", comment: ""),
             content: {
               VStack(alignment: .leading, spacing: 25.2) {
                 Text("""

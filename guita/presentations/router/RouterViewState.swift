@@ -1,14 +1,16 @@
 //  Copyright © 2025 ADA 4th Challenge3 Team1. All rights reserved.
 
+import Foundation
+
 enum RootPage {
   case splash
   case home
   var title: String {
     switch self {
     case .home:
-      return "귀타 시작"
+      return NSLocalizedString("Router.Home", comment: "귀타 시작")
     case .splash:
-      return "스플래쉬"
+      return NSLocalizedString("Router.Splash", comment: "스플래쉬")
     }
   }
 }
@@ -55,27 +57,36 @@ extension SubPage {
   var title: String {
     switch self {
     case .curriculum:
-      return "학습 목록"
+      return NSLocalizedString("Router.Curriculum", comment: "학습 목록")
     case let .lesson(songInfo):
-      return "\(songInfo.level)"
+      return String(
+        format: NSLocalizedString("Router.Lesson", comment: ""),
+        "\(songInfo.level)"
+      )
     case .chord:
-      return "코드 학습"
+      return NSLocalizedString("Router.Chord", comment: "코드 학습")
     case let .chordLesson(chord, _):
-      return "\(chord)코드"
+      return String(
+        format: NSLocalizedString("Router.ChordLesson", comment: ""),
+        "\(chord)"
+      )
     case .chordLessonGuide:
-      return "코드 학습 도움말"
+      return NSLocalizedString("Router.ChordLessonGuide", comment: "코드 학습 도움말")
     case .techniqueLesson:
-      return "주법 학습"
+      return NSLocalizedString("Router.TechniqueLesson", comment: "주법 학습")
     case .techniqueLessonGuide:
-      return "주법 학습 도움말"
+      return NSLocalizedString("Router.TechniqueLessonGuide", comment: "")
     case .sectionLesson:
-      return "곡 구간 학습 "
+      return NSLocalizedString("Router.SectionLesson", comment: "")
     case .sectionLessonGuide:
-      return "곡 구간 학습 도움말"
+      return NSLocalizedString("Router.SectionLessonGuide", comment: "")
     case let .fullLesson(songInfo):
-      return "\(songInfo.title) 곡 전체 학습"
+      return String(
+        format: NSLocalizedString("Router.FullLesson", comment: ""),
+        "\(songInfo.title)"
+      )
     case .fullLessonGuide:
-      return "곡 전체 학습 도움말"
+      return NSLocalizedString("Router.FullLessonGuide", comment: "")
     case .dev:
       return "개발"
     case .devNoteClassification:

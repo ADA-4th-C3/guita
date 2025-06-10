@@ -6,19 +6,33 @@ struct TechniqueLessonView: View {
   @EnvironmentObject var router: Router
 
   var body: some View {
-    PermissionView {
-      BaseView(
-        create: { TechniqueLessonViewModel() }
-      ) { viewModel, state in
+    BaseView(
+      create: { TechniqueLessonViewModel(router) }
+    ) { viewModel, state in
+      PermissionView(
+        permissionListener: { isGranted in
+          if isGranted {
+            viewModel.onPermissionGranted()
+          }
+        }
+      ) {
         VStack {
           // MARK: Toolbar
-          Toolbar(title: NSLocalizedString("주법 학습", comment: ""), accessibilityText: NSLocalizedString("주법을 학습하는 화면입니다. 학습을 시작하고자 하시는 재생버튼을 눌러주세요.", comment: ""), trailing: {
-            IconButton("info", color: .light, isSystemImage: false) {
-              router.push(.techniqueLessonGuide)
-            }.accessibilityAddTraits(.isButton)
+          Toolbar(
+            title: NSLocalizedString("주법 학습", comment: ""),
+            accessibilityHint: NSLocalizedString(
+              state.isPermissionGranted
+                ? "TechniqueLesson.Title.Hint.Granted"
+                : "TechniqueLesson.Title.Hint.NotGranted",
+              comment: ""
+            ),
+            trailing: {
+              IconButton("info", color: .light, isSystemImage: false) {
+                router.push(.techniqueLessonGuide)
+              }
               .accessibilityLabel("사용법 도움말")
-
-          })
+            }
+          )
 
           Spacer()
 
@@ -44,52 +58,40 @@ struct TechniqueLessonView: View {
           .frame(maxWidth: .infinity, maxHeight: .infinity)
           .accessibilityHidden(true)
 
-          // MARK: Button(back/play/next)
-
+          // MARK: Buttons
           HStack {
             let isFirstStep = (state.currentStepIndex == 0)
-            Button(action: {
-              if !isFirstStep {
-                viewModel.previousStep()
-              }
-            }) {
-              Image("chevron-left")
-                .resizable()
-                .frame(width: 75, height: 75)
-                .padding(.trailing, 42)
+
+            // MARK: Prebious Button
+            IconButton("chevron-left", color: .light, size: 95, disabled: isFirstStep) {
+              viewModel.previousStep()
             }
-            .accessibilityAddTraits(.isButton)
-            .accessibilityLabel(isFirstStep ? "이전 (비활성화)" : "이전")
-            .opacity(isFirstStep ? 0.5 : 1.0)
-            .accessibilityAddTraits([.isButton, .startsMediaSession])
+            .accessibilityLabel(
+              NSLocalizedString("ChordLesson.Button.Previous.Label", comment: "")
+            )
+            .accessibilityHint(
+              NSLocalizedString(isFirstStep ? "ChordLesson.Button.Previous.Hint.Inactive" : "", comment: "")
+            )
 
-            Button(action: { viewModel.play() }) {
-              Image("play")
-                .resizable()
-                .frame(width: 95, height: 95)
-            }.accessibilityAddTraits(.isButton)
-              .accessibilityLabel("재생")
-              .accessibilityAddTraits([.isButton, .startsMediaSession])
+            // MARK: Play Button
+            IconButton("play", color: .accent, size: 95) {
+              viewModel.play()
+            }
+            .accessibilityLabel(NSLocalizedString("ChordLesson.Button.Play.Label", comment: ""))
 
-            Button(action: {
+            // MARK: Next Button
+            IconButton("chevron-right", size: 95) {
               viewModel.nextStep()
-            }) {
-              Image("chevron-right")
-                .resizable()
-                .frame(width: 75, height: 75)
-                .padding(.leading, 42)
             }
-            .accessibilityAddTraits(.isButton)
-            .accessibilityLabel("다음")
-            .accessibilityAddTraits([.isButton, .startsMediaSession])
+            .accessibilityLabel(
+              NSLocalizedString("ChordLesson.Button.Next.Label", comment: "")
+            )
           }
-        }.padding(.bottom, 5)
-          .onAppear {
-            viewModel.startVoiceCommand()
-          }
-          .onDisappear {
-            viewModel.dispose()
-          }
+        }
+        .padding(.bottom, 5)
+        .onDisappear {
+          viewModel.dispose()
+        }
       }
     }
   }

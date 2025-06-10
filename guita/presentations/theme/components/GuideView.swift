@@ -25,7 +25,7 @@ struct GuideView: View {
           format: NSLocalizedString("GuideView.Title", comment: ""),
           title
         ),
-        accessibilityText: String(
+        accessibilityHint: String(
           format: NSLocalizedString("GuideView.Description", comment: ""),
           title
         )

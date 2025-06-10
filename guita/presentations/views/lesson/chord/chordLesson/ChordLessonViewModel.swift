@@ -51,7 +51,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
     playTask = Task {
       switch state.step {
       case .introduction:
-        await chordLesson.startIntroduction(state.isReplay)
+        await chordLesson.startIntroduction(state.isReplay, announceVoiceCommand: state.isPermissionGranted)
       case let .lineFingering(nString, nFret, nFinger, coordIdx, isFirst):
         await chordLesson.startLineFingering(
           isFirst: isFirst,

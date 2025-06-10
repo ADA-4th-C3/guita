@@ -8,22 +8,26 @@ struct Toolbar<Leading: View, Trailing: View>: View {
   @EnvironmentObject var router: Router
 
   let title: String
-  let accessibilityText: String
+  let accessibilityLabel: String
+  let accessibilityHint: String
   let titleColor: Color?
   let leading: () -> Leading
   let trailing: () -> Trailing
   let isPopButton: Bool
+  @AccessibilityFocusState var initFocusToTitle: Bool
 
   init(
     title: String = "",
-    accessibilityText: String? = nil,
+    accessibilityLabel: String? = nil,
+    accessibilityHint: String? = nil,
     titleColor: Color? = nil,
     isPopButton: Bool = true,
     @ViewBuilder leading: @escaping () -> Leading = { EmptyView() },
     @ViewBuilder trailing: @escaping () -> Trailing = { EmptyView() }
   ) {
     self.title = title
-    self.accessibilityText = accessibilityText ?? title
+    self.accessibilityLabel = accessibilityLabel ?? title
+    self.accessibilityHint = accessibilityHint ?? ""
     self.titleColor = titleColor
     self.leading = leading
     self.trailing = trailing
@@ -31,14 +35,22 @@ struct Toolbar<Leading: View, Trailing: View>: View {
   }
 
   var body: some View {
-    ZStack {
+    //    Logger.d(router.previousTitle)
+    return ZStack {
       HStack {
         // MARK: Leading
         if isPopButton {
           IconButton("arrow-left", color: .light, isSystemImage: false) {
             router.pop()
           }
-          .accessibilityLabel("첫 버튼, \(router.previousTitle ?? "") 화면으로 돌아 가기")
+          .accessibilityLabel("나가기")
+          .accessibilityAddTraits(.isButton)
+          .accessibilityHint(
+            String(
+              format: NSLocalizedString("ExitButton.Desc", comment: ""),
+              router.previousTitle
+            )
+          )
         } else {
           leading()
         }
@@ -55,12 +67,24 @@ struct Toolbar<Leading: View, Trailing: View>: View {
           .foregroundColor(.primary)
           .fontKoddi(24, weight: .bold)
           .lineSpacing(1.4)
+          .padding(.horizontal, 52)
+          .lineLimit(1)
+          .minimumScaleFactor(0.5)
+          .truncationMode(.tail)
           .accessibilityElement(children: .ignore)
-          .accessibilityLabel("\(title) 머릿말, \(accessibilityText)")
+          .accessibilityLabel(accessibilityLabel)
           .accessibilityAddTraits(.isHeader)
+          .accessibilityHint(accessibilityHint)
+          .accessibilityFocused($initFocusToTitle)
       }
     }
     .frame(height: 44)
+    .onAppear {
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        // 시작시 Title 포커싱하기 기능 (잘 안됨)
+        // initFocusToTitle = true
+      }
+    }
   }
 }
 

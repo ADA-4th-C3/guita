@@ -30,7 +30,7 @@ final class SectionLessonViewModel: BaseViewModel<SectionLessonViewState> {
     startVoiceCommand()
   }
 
-  /// 정지???!?!
+  /// 정지
   private func cancelPlayTask() {
     playTask?.cancel()
   }
@@ -44,9 +44,11 @@ final class SectionLessonViewModel: BaseViewModel<SectionLessonViewState> {
 
         let currentStep = state.steps[state.currentStepIndex]
         let stepNumber = currentStep.step
-        let totalSteps = state.steps.count
-
-        await textToSpeechManager.speak("총 \(totalSteps) 단계 중 \(stepNumber) 단계")
+        let step = String(
+          format: NSLocalizedString("ChordLesson.OnlyCurrentStep", comment: ""),
+          "\(stepNumber.ordinal)"
+        )
+        await textToSpeechManager.speak(step)
 
         for lessonInfo in currentStep.sectionLessonInfo {
           try Task.checkCancellation()
@@ -61,7 +63,10 @@ final class SectionLessonViewModel: BaseViewModel<SectionLessonViewState> {
           }
         }
         if !isRetry {
-          await textToSpeechManager.speak(currentStep.featureDescription)
+          try Task.checkCancellation()
+          await voiceCommandManager.pause {
+            await self.textToSpeechManager.speak(currentStep.featureDescription)
+          }
         }
       } catch {
         textToSpeechManager.stop()
@@ -130,5 +135,6 @@ final class SectionLessonViewModel: BaseViewModel<SectionLessonViewState> {
     cancelPlayTask()
     voiceCommandManager.stop()
     audioRecorderManager.stop()
+    textToSpeechManager.stop()
   }
 }

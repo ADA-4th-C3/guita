@@ -59,13 +59,15 @@ final class ChordLesson: BaseLesson {
         format: NSLocalizedString("ChordLesson.OnlyCurrentStep", comment: ""),
         (index + 1).ordinal
       )
-//    return isReplay
-//    ? ""
-//    : String(
-//      format: NSLocalizedString("ChordLesson.CurrentStep", comment: ""),
-//      (index + 1).ordinal,
-//      totalStep.ordinal
-//    )
+
+    /// verbose version
+    // return isReplay
+    // ? ""
+    // : String(
+    //   format: NSLocalizedString("ChordLesson.CurrentStep", comment: ""),
+    //   (index + 1).ordinal,
+    //   totalStep.ordinal
+    // )
   }
 
   /// Replay에서 읽지 않는 텍스트
@@ -74,7 +76,7 @@ final class ChordLesson: BaseLesson {
   }
 
   /// 개요
-  func startIntroduction(_ isReplay: Bool) async {
+  func startIntroduction(_ isReplay: Bool, announceVoiceCommand: Bool) async {
     isNoteClassificationEnabled = false
     isChordClassificationEnabled = false
 
@@ -98,13 +100,15 @@ final class ChordLesson: BaseLesson {
         await self.textToSpeechManager.speak(text)
       },
 
-      // MARK: 기능
+      // MARK: Voice Command 기능 설명
       {
-        let text = self.doNotReplayText(isReplay, self.voiceCommandGuide)
+        if announceVoiceCommand {
+          let text = self.doNotReplayText(isReplay, self.voiceCommandGuide)
 
-        // TTS feedback loop 이슈 해결
-        await self.voiceCommandManager.pause {
-          await self.textToSpeechManager.speak(text)
+          // TTS feedback loop 이슈 해결
+          await self.voiceCommandManager.pause {
+            await self.textToSpeechManager.speak(text)
+          }
         }
       },
     ])
