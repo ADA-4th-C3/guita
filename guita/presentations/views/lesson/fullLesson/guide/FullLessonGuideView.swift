@@ -10,10 +10,10 @@ struct FullLessonGuideView: View {
       create: { FullLessonGuideViewModel() }
     ) { viewModel, _ in
       GuideView(
-        title: "곡 전체 학습",
+        title: NSLocalizedString("곡 전체 학습", comment: ""),
         sections: [
           GuideSection(
-            title: "곡 전체 학습 개요",
+            title: NSLocalizedString("곡 전체 학습 개요", comment: ""),
             content: {
               Text("""
               곡 전체 학습은 제공하는 음성 안내를 통해 곡을 구간별로 학습할 수 있습니다.
@@ -21,7 +21,7 @@ struct FullLessonGuideView: View {
             }
           ),
           GuideSection(
-            title: "음성 명령어 사용법",
+            title: NSLocalizedString("음성 명령어 사용법", comment: ""),
             content: {
               Text("""
               음성 명령을 통해 코드 학습 화면을 조작할 수 있으며, 사용할 수 있는 음성 명령은 총 5가지가 있습니다.
@@ -41,7 +41,7 @@ struct FullLessonGuideView: View {
             }
           ),
           GuideSection(
-            title: "구간 조절 안내",
+            title: NSLocalizedString("재생 위치 조절 방법", comment: ""),
             content: {
               Text("""
               음원 재생 구간을 조절하고 싶으면 슬라이더가 선택된 상태에서 한손가락으로 원하는 쪽으로 밀면 값이 증가하고, 아래로 쓸어내리면 값이 감소합니다.
@@ -51,7 +51,7 @@ struct FullLessonGuideView: View {
             }
           ),
           GuideSection(
-            title: "속도 조절 안내",
+            title: NSLocalizedString("속도 조절 방법", comment: ""),
             content: {
               Text("""
               속도 조절 버튼을 통해 재생되는 안내 음성과 멜로디의 속도를 조절할 수 있습니다.
@@ -59,27 +59,9 @@ struct FullLessonGuideView: View {
               한 손가락으로 화면을 좌우로 쓸어내리며 원하는 버튼을 선택할 수 있습니다.
 
               속도 조절은 느리게, 빠르게로 조절 가능합니다.
-              """)
+              """)   
             }
-          ),
-          GuideSection(
-            title: "주법 학습 화면 효과음 안내",
-            content: {
-              VStack(alignment: .leading, spacing: 25.2) {
-                Text("""
-                주법 학습 화면에선 다음 학습 단계로 넘어갈 때 페이지가 넘어가는 효과음이 실행됩니다.
-                """)
-
-                Button(action: {
-                  viewModel.playSound(.next)
-                }) {
-                  Text("페이지 전환 효과음 재생 ▶")
-                }
-                .accessibilityLabel("페이지 전환 효과음 재생")
-                .accessibilityAddTraits([.isButton, .startsMediaSession])
-              }
-            }
-          ),
+          )
         ]
       )
     }

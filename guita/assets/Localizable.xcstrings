@@ -1525,7 +1525,18 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Full Track Learning"
+            "value" : "Full Song Learning"
+          }
+        }
+      }
+    },
+    "곡 전체 학습 개요" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Full Song Learning Overview"
           }
         }
       }
@@ -1561,7 +1572,14 @@
       }
     },
     "귀타 앱의 편리한 이용을 위해\n아래 접근권한의 허용이 필요합니다." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To conveniently use the Guita app, you need to allow the following access permissions."
+          }
+        }
+      }
     },
     "기타 몸통에 있는 구멍을 사운드 홀이라고 부릅니다. 사운드 홀을 찾아보세요." : {
       "localizations" : {
@@ -1880,6 +1898,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Three"
+          }
+        }
+      }
+    },
+    "속도 조절 방법" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How to Adjust Speed"
           }
         }
       }
@@ -2256,6 +2285,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Play / Retry / Next / Previous"
+          }
+        }
+      }
+    },
+    "재생 위치 조절 방법" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How to Adjust Playback Position"
           }
         }
       }
