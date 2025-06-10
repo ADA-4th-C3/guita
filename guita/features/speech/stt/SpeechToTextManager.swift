@@ -5,7 +5,7 @@ import Speech
 
 final class SpeechToTextManager: BaseViewModel<SpeechToTextState> {
   static let shared = SpeechToTextManager()
-  private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "ko-KR"))
+  private let speechRecognizer = SFSpeechRecognizer(locale: Locale.current.sttLocale)
   private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
   private var recognitionTask: SFSpeechRecognitionTask?
   private let audioEngine = AVAudioEngine()

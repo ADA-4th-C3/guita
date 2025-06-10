@@ -65,7 +65,7 @@ final class VoiceCommandManager: BaseViewModel<VoiceCommandManagerState> {
       for phrase in command.keyword.phrases {
         // Use regex to match whole word phrase
         let pattern = "\\b" + NSRegularExpression.escapedPattern(for: phrase) + "\\b"
-        if let _ = targetText.range(of: pattern, options: .regularExpression) {
+        if let _ = targetText.range(of: pattern, options: [.regularExpression, .caseInsensitive]) {
           Logger.d("🎙️ Voice Command - Executed: \(command.keyword)(\(phrase))")
           command.handler()
           let history = VoiceCommandHistory(

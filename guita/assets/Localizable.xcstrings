@@ -45,12 +45,6 @@
             "state" : "translated",
             "value" : "%1$@ (%2$@)"
           }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ (%2$@)"
-          }
         }
       }
     },
@@ -60,12 +54,6 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%1$@ %2$@"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "new",
             "value" : "%1$@ %2$@"
           }
         }
@@ -78,12 +66,6 @@
             "state" : "translated",
             "value" : "%1$@ %2$@ Learn Button"
           }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ %2$@ 학습하기 버튼"
-          }
         }
       }
     },
@@ -93,12 +75,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%1$@ Header, %2$@"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ 머릿말, %2$@"
           }
         }
       }
@@ -143,12 +119,6 @@
             "state" : "translated",
             "value" : "%1$lld. %2$@"
           }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld. %2$@"
-          }
         }
       }
     },
@@ -158,12 +128,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%1$lld/%2$lld Step"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld/%2$lld 단계"
           }
         }
       }
@@ -194,6 +158,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chord recognition interval : %@s"
+          }
+        }
+      }
+    },
+    "ChordLessong.CurrentStep" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Step %1$@ of %2$@"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "총 %2$@ 단계 중 %1$@단계"
           }
         }
       }
@@ -370,6 +351,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Note Recognition Interval: %@s"
+          }
+        }
+      }
+    },
+    "ordinal" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@th"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@번째"
           }
         }
       }
@@ -567,6 +565,26 @@
         }
       }
     },
+    "네 번째" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fourth"
+          }
+        }
+      }
+    },
+    "넷" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Four"
+          }
+        }
+      }
+    },
     "녹음 권한이 필요합니다." : {
       "localizations" : {
         "en" : {
@@ -583,6 +601,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Slow"
+          }
+        }
+      }
+    },
+    "다섯" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Five"
+          }
+        }
+      }
+    },
+    "다섯 번째" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fifth"
           }
         }
       }
@@ -612,6 +650,26 @@
     },
     "다음 학습으로 넘어가시려면 \"다음\"을, 다시 들으시려면 \"다시\"를, 이전 학습으로 되돌아가시려면 \"이전\" 을 말씀해 주세요." : {
 
+    },
+    "두 번째" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Second"
+          }
+        }
+      }
+    },
+    "둘" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Two"
+          }
+        }
+      }
     },
     "따라서 말해보며 순서를 익혀보세요." : {
 
@@ -706,6 +764,26 @@
         }
       }
     },
+    "세 번째" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Third"
+          }
+        }
+      }
+    },
+    "셋" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Three"
+          }
+        }
+      }
+    },
     "속도 조절 버튼을 통해 재생되는 안내 음성과 멜로디의 속도를 조절할 수 있습니다.\n\n한 손가락으로 화면을 좌우로 쓸어내리며 원하는 버튼을 선택할 수 있습니다.\n\n속도 조절은 느리게, 빠르게로 조절 가능합니다." : {
       "localizations" : {
         "en" : {
@@ -726,6 +804,26 @@
         }
       }
     },
+    "아홉" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nine"
+          }
+        }
+      }
+    },
+    "아홉 번째" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ninth"
+          }
+        }
+      }
+    },
     "알림창입니다." : {
       "localizations" : {
         "en" : {
@@ -742,12 +840,72 @@
     "업과 다운을 조합하여 다양한 리듬을 만들 수 있어요. 가장 많이 사용되는 칼립소 리듬을 알려줄게요." : {
 
     },
+    "여덟 번째" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eighth"
+          }
+        }
+      }
+    },
+    "여섯 번째" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sixth"
+          }
+        }
+      }
+    },
+    "열" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ten"
+          }
+        }
+      }
+    },
+    "여덟" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eight"
+          }
+        }
+      }
+    },
+    "여섯" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Six"
+          }
+        }
+      }
+    },
     "여행을 떠나요" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Let’s go on a trip"
+          }
+        }
+      }
+    },
+    "열 번째" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tenth"
           }
         }
       }
@@ -909,12 +1067,22 @@
         }
       }
     },
-    "이전(비활성화)" : {
+    "일곱" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Previous (inactive)"
+            "value" : "Seven"
+          }
+        }
+      }
+    },
+    "일곱 번째" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seventh"
           }
         }
       }
@@ -1034,6 +1202,16 @@
     "첫 버튼, %@ 화면으로 돌아 가기" : {
 
     },
+    "첫 번째" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "First"
+          }
+        }
+      }
+    },
     "초급1" : {
       "localizations" : {
         "en" : {
@@ -1053,12 +1231,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%2$@ out of %1$@ total play time"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "총 재생 시간 %1$@ 중 %2$@"
           }
         }
       }
@@ -1237,6 +1409,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fret Guide"
+          }
+        }
+      }
+    },
+    "하나" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One"
           }
         }
       }

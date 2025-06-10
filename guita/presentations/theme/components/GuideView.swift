@@ -36,6 +36,7 @@ struct GuideView: View {
           VStack(alignment: .leading, spacing: 4) {
             Text("목차")
               .fontKoddi(18, color: .light, weight: .bold)
+              .accessibilityAddTraits(.isHeader)
 
             ForEach(Array(sections.enumerated()), id: \.element.id) { index, section in
               Text("\(index + 1). \(section.title)")

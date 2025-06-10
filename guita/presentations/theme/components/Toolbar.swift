@@ -57,6 +57,7 @@ struct Toolbar<Leading: View, Trailing: View>: View {
           .lineSpacing(1.4)
           .accessibilityElement(children: .ignore)
           .accessibilityLabel("\(title) 머릿말, \(accessibilityText)")
+          .accessibilityAddTraits(.isHeader)
       }
     }
     .frame(height: 44)

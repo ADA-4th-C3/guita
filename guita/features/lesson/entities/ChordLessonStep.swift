@@ -27,9 +27,9 @@ enum ChordLessonStep: Equatable {
     case .introduction:
       return "\(chord.rawValue) 코드 개요"
     case let .lineFingering(nString, _, _, _):
-      return "\(chord.rawValue) 코드 \(nString.koOrd) 줄 운지법 설명"
+      return "\(chord.rawValue) 코드 \(nString.ordinal) 줄 운지법 설명"
     case let .lineSoundCheck(nString, _, _, _):
-      return "\(chord.rawValue) 코드 \(nString.koOrd) 줄 소리 확인"
+      return "\(chord.rawValue) 코드 \(nString.ordinal) 줄 소리 확인"
     case .chordFingering:
       return "\(chord.rawValue) 코드 운지법 설명"
     case .chordSoundCheck:
