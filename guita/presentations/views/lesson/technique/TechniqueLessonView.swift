@@ -14,7 +14,7 @@ struct TechniqueLessonView: View {
           // MARK: Toolbar
           Toolbar(
             title: NSLocalizedString("주법 학습", comment: ""),
-            accessibilityHint: NSLocalizedString("주법을 학습하는 화면입니다. 학습을 시작하고자 하시는 재생버튼을 눌러주세요.", comment: ""),
+            accessibilityHint: NSLocalizedString("주법을 학습하는 화면입니다. 재생버튼을 눌러 학습을 시작하세요.", comment: ""),
             trailing: {
               IconButton("info", color: .light, isSystemImage: false) {
                 router.push(.techniqueLessonGuide)

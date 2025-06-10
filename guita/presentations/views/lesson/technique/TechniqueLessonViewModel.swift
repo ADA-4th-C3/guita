@@ -109,24 +109,15 @@ final class TechniqueLessonViewModel: BaseViewModel<TechniqueLessonViewState> {
           stepNumber.ordinal
         )
         await textToSpeechManager.speak(step)
-        
-        //        for subStep in currentStep.subSteps {
-        //          try Task.checkCancellation()
-        //          if let ttsText = subStep.ttsText {
-        //            await textToSpeechManager.speak(ttsText)
-        //          }
-        //          try Task.checkCancellation()
-        //          if let audioFile = subStep.audioFile {
-        //            await AudioPlayerManager.shared.start(audioFile: audioFile)
-        //          }
-        //        }
         for subStep in currentStep.subSteps {
           try Task.checkCancellation()
           if let ttsText = subStep.ttsText {
-            if let rate = subStep.speechRate {
-              await textToSpeechManager.speak(ttsText, rate: rate)
-            } else {
-              await textToSpeechManager.speak(ttsText)
+            await voiceCommandManager.pause {
+              if let rate = subStep.speechRate {
+                await self.textToSpeechManager.speak(ttsText, rate: rate)
+              } else {
+                await self.textToSpeechManager.speak(ttsText)
+              }
             }
             if let delay = subStep.delayAfter {
               try? await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
@@ -138,7 +129,9 @@ final class TechniqueLessonViewModel: BaseViewModel<TechniqueLessonViewState> {
           }
         }
         if !isRetry {
-          await textToSpeechManager.speak(currentStep.featureDescription)
+          await voiceCommandManager.pause {
+            await self.textToSpeechManager.speak(currentStep.featureDescription)
+          }
         }
       } catch {
         textToSpeechManager.stop()

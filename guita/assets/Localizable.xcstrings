@@ -1799,22 +1799,22 @@
         }
       }
     },
-    "여덟" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eight"
-          }
-        }
-      }
-    },
     "열" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ten"
+          }
+        }
+      }
+    },
+    "여덟" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eight"
           }
         }
       }
@@ -2169,12 +2169,12 @@
         }
       }
     },
-    "주법을 학습하는 화면입니다. 학습을 시작하고자 하시는 재생버튼을 눌러주세요." : {
+    "주법을 학습하는 화면입니다. 재생버튼을 눌러 학습을 시작하세요." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "This is the screen where you can learn the main law. Please press the play button to start learning."
+            "value" : "This is the screen for learning strumming techniques. Press the play button to start learning."
           }
         }
       }
