@@ -6,7 +6,7 @@ final class TechniqueLessonViewModel: BaseViewModel<TechniqueLessonViewState> {
   private let textToSpeechManager = TextToSpeechManager.shared
   private let voiceCommandManager = VoiceCommandManager.shared
   private var playTask: Task<Void, Error>? = nil
-  
+
   init(_ router: Router) {
     self.router = router
     let steps: [TechniqueLessonStep] = [
@@ -27,8 +27,8 @@ final class TechniqueLessonViewModel: BaseViewModel<TechniqueLessonViewState> {
         imageName: "",
         subSteps: [
           TechniqueLessonSubStep(ttsText: NSLocalizedString("사운드 홀 위에서 아무 코드를 잡지 않은 상태로 6번 줄부터 1번 줄까지 아래 방향으로 모든 줄을 쓸어내리면 이런 소리가 납니다.", comment: ""), audioFile: .stroke_down, delayAfter: nil, speechRate: nil),
-          
-          TechniqueLessonSubStep(ttsText: NSLocalizedString("이것을 다운 스트로크라고 해요. 줄을 쓸어내려 다운 스트로크를 연주해보세요.", comment: ""), audioFile: nil, delayAfter: nil, speechRate: nil)
+
+          TechniqueLessonSubStep(ttsText: NSLocalizedString("이것을 다운 스트로크라고 해요. 줄을 쓸어내려 다운 스트로크를 연주해보세요.", comment: ""), audioFile: nil, delayAfter: nil, speechRate: nil),
         ],
         featureDescription: ""
       ),
@@ -37,12 +37,12 @@ final class TechniqueLessonViewModel: BaseViewModel<TechniqueLessonViewState> {
         imageName: "",
         subSteps: [
           TechniqueLessonSubStep(ttsText: NSLocalizedString("이번엔 1번 줄부터 6번 줄까지 위쪽 방향으로 줄을 쓸어올려 볼게요. 그러면 이런 소리가 납니다.", comment: ""), audioFile: .stroke_up, delayAfter: nil, speechRate: nil),
-          
-          TechniqueLessonSubStep(ttsText: NSLocalizedString("이것을 업 스트로크라고 해요. 줄을 쓸어올려 업 스트로크를 연주해보세요.", comment: ""), audioFile: nil, delayAfter: nil, speechRate: nil)
+
+          TechniqueLessonSubStep(ttsText: NSLocalizedString("이것을 업 스트로크라고 해요. 줄을 쓸어올려 업 스트로크를 연주해보세요.", comment: ""), audioFile: nil, delayAfter: nil, speechRate: nil),
         ],
         featureDescription: ""
       ),
-      
+
       TechniqueLessonStep(
         description: NSLocalizedString("칼립소 리듬에 대한 설명", comment: ""),
         imageName: "audio-file",
@@ -58,8 +58,8 @@ final class TechniqueLessonViewModel: BaseViewModel<TechniqueLessonViewState> {
         imageName: "audio-file",
         subSteps: [
           TechniqueLessonSubStep(ttsText: NSLocalizedString("칼립소 리듬을 기타로 연주하면 ", comment: ""), audioFile: .stroke_calipso, delayAfter: nil, speechRate: nil),
-          
-          TechniqueLessonSubStep(ttsText: NSLocalizedString("이렇게 들립니다. 칼립소 리듬을 연주해 보세요.", comment: ""), audioFile: nil, delayAfter: nil, speechRate: nil)
+
+          TechniqueLessonSubStep(ttsText: NSLocalizedString("이렇게 들립니다. 칼립소 리듬을 연주해 보세요.", comment: ""), audioFile: nil, delayAfter: nil, speechRate: nil),
         ],
         featureDescription: ""
       ),
@@ -67,7 +67,7 @@ final class TechniqueLessonViewModel: BaseViewModel<TechniqueLessonViewState> {
         description: NSLocalizedString("주법 학습이 완료되었습니다.", comment: ""),
         imageName: "",
         subSteps: [
-          TechniqueLessonSubStep(ttsText: NSLocalizedString("주법 학습이 완료되었습니다.", comment: ""), audioFile: nil, delayAfter: nil, speechRate: nil)
+          TechniqueLessonSubStep(ttsText: NSLocalizedString("주법 학습이 완료되었습니다.", comment: ""), audioFile: nil, delayAfter: nil, speechRate: nil),
         ],
         featureDescription: ""
       ),
@@ -80,11 +80,11 @@ final class TechniqueLessonViewModel: BaseViewModel<TechniqueLessonViewState> {
       )
     )
   }
-  
+
   private func cancelPlayTask() {
     playTask?.cancel()
   }
-  
+
   func startVoiceCommand() {
     voiceCommandManager.start(
       commands: [
@@ -96,18 +96,18 @@ final class TechniqueLessonViewModel: BaseViewModel<TechniqueLessonViewState> {
       ]
     )
   }
-  
+
   func stopVoiceCommand() {
     voiceCommandManager.stop()
     textToSpeechManager.stop()
   }
-  
+
   func play(isRetry: Bool = false) {
     cancelPlayTask()
     playTask = Task {
       do {
         try await Task.sleep(nanoseconds: 100_000_000)
-        
+
         let currentStep = state.steps[state.currentStepIndex]
         let stepNumber = state.currentStepIndex + 1
         let step = String(
@@ -145,29 +145,29 @@ final class TechniqueLessonViewModel: BaseViewModel<TechniqueLessonViewState> {
       }
     }
   }
-  
+
   override func dispose() {
     cancelPlayTask()
     stopVoiceCommand()
     textToSpeechManager.stop()
   }
-  
+
   func nextStep() {
     if state.isLastStep {
       router.pop()
       return
     }
-    
+
     cancelPlayTask()
     guard state.currentStepIndex < state.steps.count - 1 else { return }
-    
+
     let newIndex = state.currentStepIndex + 1
     emit(state.copy(currentStepIndex: newIndex))
     playStepChangeSound {
       self.play()
     }
   }
-  
+
   func previousStep() {
     cancelPlayTask()
     guard state.currentStepIndex > 0 else { return }
@@ -179,7 +179,7 @@ final class TechniqueLessonViewModel: BaseViewModel<TechniqueLessonViewState> {
       self.play()
     }
   }
-  
+
   private func playStepChangeSound(completion: (() -> Void)? = nil) {
     Task {
       await AudioPlayerManager.shared.start(audioFile: .next)
@@ -187,7 +187,7 @@ final class TechniqueLessonViewModel: BaseViewModel<TechniqueLessonViewState> {
       completion?()
     }
   }
-  
+
   /// 권한 승인
   func onPermissionGranted() {
     if state.isPermissionGranted { return }
@@ -196,7 +196,7 @@ final class TechniqueLessonViewModel: BaseViewModel<TechniqueLessonViewState> {
       self.startVoiceCommand()
     }
   }
-  
+
   func currentImage() -> Image? {
     guard let imageName = state.currentStep.imageName, !imageName.isEmpty
     else {
@@ -204,7 +204,7 @@ final class TechniqueLessonViewModel: BaseViewModel<TechniqueLessonViewState> {
     }
     return Image(imageName)
   }
-  
+
   private static func calcDelay(for text: String, speechRate: Float, targetBeat: TimeInterval = 0.6) -> TimeInterval {
     let baseDuration = Double(text.count) * 0.065 / Double(speechRate)
     let delay = max(0.0, targetBeat - baseDuration)

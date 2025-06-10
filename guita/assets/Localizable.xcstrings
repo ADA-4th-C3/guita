@@ -134,6 +134,23 @@
         }
       }
     },
+    "Chord.Hint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Chord Learning Screen. Grab your guitar and select the chord you'd like to learn."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 코드를 배우는 화면입니다. 기타를 들고 배우고 싶은 코드를 선택해 주세요."
+          }
+        }
+      }
+    },
     "ChordLesson.Button.Next.Hint.NextChord" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -462,13 +479,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ string should sound like this when plucked."
+            "value" : "This is the sound you should hear when you pluck the %@ string from below."
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ 줄을 튕겼을 때 이런 소리가 들려야 해요."
+            "value" : "아래에서 %@ 줄을 튕겼을 때 이런 소리가 들려야 해요."
           }
         }
       }
@@ -478,13 +495,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Let’s pluck the %@ string."
+            "value" : "Let's pluck the %@ string from below."
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ 줄을 튕겨 봅시다."
+            "value" : "아래에서 %@ 줄을 튕겨 봅시다."
           }
         }
       }
@@ -966,6 +983,23 @@
         }
       }
     },
+    "Guita" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guita"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "귀타"
+          }
+        }
+      }
+    },
     "History" : {
       "localizations" : {
         "en" : {
@@ -982,13 +1016,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The song title is %1$@. This song uses the %2$@ chord. You can learn chords, learn playing techniques, learn by section, and learn the entire song. Swipe the screen left and right to select the learning you want."
+            "value" : "The song title is %1$@. This song uses the %2$@ chord. You can learn chords, learn playing techniques, learn by section, and learn the entire song. Select the learning you want."
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "곡 제목은 %1$@ 입니다. %2$@  코드를 사용하는 곡입니다. 코드 학습하기 , 주법 학습하기, 곡 구간별 학습하기, 곡 전체 학습하기 를 할 수 있습니다. 화면을 좌우로 쓸어넘기며 희망하는 학습을 선택해주십시오."
+            "value" : "곡 제목은 %1$@ 입니다. %2$@  코드를 사용하는 곡입니다. 코드 학습하기 , 주법 학습하기, 곡 구간별 학습하기, 곡 전체 학습하기 를 할 수 있습니다. 희망하는 학습을 선택해주십시오."
           }
         }
       }
@@ -998,14 +1032,14 @@
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Learning Selection"
+            "state" : "translated",
+            "value" : "%@ Learning"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "학습 선택"
+            "value" : "%@ 학습"
           }
         }
       }
@@ -1976,6 +2010,26 @@
         }
       }
     },
+    "여섯 번째" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sixth"
+          }
+        }
+      }
+    },
+    "열" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ten"
+          }
+        }
+      }
+    },
     "여덟" : {
       "localizations" : {
         "en" : {
@@ -2012,26 +2066,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Six"
-          }
-        }
-      }
-    },
-    "여섯 번째" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sixth"
-          }
-        }
-      }
-    },
-    "열" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ten"
           }
         }
       }

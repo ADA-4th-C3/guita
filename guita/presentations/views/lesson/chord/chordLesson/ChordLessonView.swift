@@ -28,8 +28,9 @@ struct ChordLessonView: View {
             accessibilityHint: String(
               format: NSLocalizedString(
                 state.isPermissionGranted ? "ChordLessonView.Accessibility.Description"
-                : "ChordLessonView.Accessibility.Description.NoPermission",
-                comment: ""),
+                  : "ChordLessonView.Accessibility.Description.NoPermission",
+                comment: ""
+              ),
               "\(state.chord.rawValue)"
             ),
             trailing: {

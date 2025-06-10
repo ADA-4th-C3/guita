@@ -8,7 +8,7 @@ struct FullLessonGuideView: View {
   var body: some View {
     BaseView(
       create: { FullLessonGuideViewModel() }
-    ) { viewModel, _ in
+    ) { _, _ in
       GuideView(
         title: NSLocalizedString("곡 전체 학습", comment: ""),
         sections: [
@@ -35,7 +35,7 @@ struct FullLessonGuideView: View {
               네 번째로 "느리게"이라고 음성으로 명령하면 곡을 느리게 재생할 수 있습니다.
 
               다섯 번째로 "빠르게"이라고 음성으로 명령하면 곡을 빠르게 재생할 수 있습니다.
-              
+
               음성 명령어를 사용하기 위해선 마이크 사용 권한과 음성 인식 권한이 필요합니다.
               """)
             }
@@ -59,9 +59,9 @@ struct FullLessonGuideView: View {
               한 손가락으로 화면을 좌우로 쓸어내리며 원하는 버튼을 선택할 수 있습니다.
 
               속도 조절은 느리게, 빠르게로 조절 가능합니다.
-              """)   
+              """)
             }
-          )
+          ),
         ]
       )
     }

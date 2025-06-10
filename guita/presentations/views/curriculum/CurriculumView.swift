@@ -11,7 +11,8 @@ struct CurriculumView: View {
       VStack {
         Toolbar(
           title: NSLocalizedString("Curriculum.title", comment: ""),
-          accessibilityHint: NSLocalizedString("Curriculum.Hint", comment: ""))
+          accessibilityHint: NSLocalizedString("Curriculum.Hint", comment: "")
+        )
         ListDivider()
           .padding(.top, 32)
         Spacer()

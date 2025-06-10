@@ -23,11 +23,12 @@ struct FullLessonView: View {
             title: NSLocalizedString("곡 전체 학습", comment: ""),
             accessibilityHint: NSLocalizedString(state.isPermissionGranted ? "FullLesson.Title.Hint.Granted" : "FullLesson.Title.Hint.NotGranted", comment: ""),
             trailing: {
-            IconButton("info", color: .light, isSystemImage: false) {
-              router.push(.fullLessonGuide)
-            }.accessibilityAddTraits(.isButton)
-              .accessibilityLabel("사용법 도움말")
-          })
+              IconButton("info", color: .light, isSystemImage: false) {
+                router.push(.fullLessonGuide)
+              }.accessibilityAddTraits(.isButton)
+                .accessibilityLabel("사용법 도움말")
+            }
+          )
 
           // MARK: Full Song description
           Image("audio-file")

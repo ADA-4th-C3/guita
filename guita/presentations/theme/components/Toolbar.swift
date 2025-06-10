@@ -6,7 +6,7 @@ import SwiftUI
 
 struct Toolbar<Leading: View, Trailing: View>: View {
   @EnvironmentObject var router: Router
-  
+
   let title: String
   let accessibilityLabel: String
   let accessibilityHint: String
@@ -14,7 +14,8 @@ struct Toolbar<Leading: View, Trailing: View>: View {
   let leading: () -> Leading
   let trailing: () -> Trailing
   let isPopButton: Bool
-  
+  @AccessibilityFocusState var initFocusToTitle: Bool
+
   init(
     title: String = "",
     accessibilityLabel: String? = nil,
@@ -32,9 +33,9 @@ struct Toolbar<Leading: View, Trailing: View>: View {
     self.trailing = trailing
     self.isPopButton = isPopButton
   }
-  
+
   var body: some View {
-//    Logger.d(router.previousTitle)
+    //    Logger.d(router.previousTitle)
     return ZStack {
       HStack {
         // MARK: Leading
@@ -53,13 +54,13 @@ struct Toolbar<Leading: View, Trailing: View>: View {
         } else {
           leading()
         }
-        
+
         Spacer()
-        
+
         // MARK: Trailing
         trailing()
       }
-      
+
       // MARK: Title
       if !title.isEmpty {
         Text(title)
@@ -74,9 +75,16 @@ struct Toolbar<Leading: View, Trailing: View>: View {
           .accessibilityLabel(accessibilityLabel)
           .accessibilityAddTraits(.isHeader)
           .accessibilityHint(accessibilityHint)
+          .accessibilityFocused($initFocusToTitle)
       }
     }
     .frame(height: 44)
+    .onAppear {
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        // 시작시 Title 포커싱하기 기능 (잘 안됨)
+        // initFocusToTitle = true
+      }
+    }
   }
 }
 
