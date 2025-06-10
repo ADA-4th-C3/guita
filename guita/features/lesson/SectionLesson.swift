@@ -12,7 +12,7 @@ enum SectionLesson {
         imageName: nil,
         sectionLessonInfo: [SectionLessonInfo(ttsText: nil, chords: [.A, .A, .E, .E])],
         audioFile: .section_repeat_1,
-        featureDescription: "다음 학습으로 넘어가시려면 \"다음\"을, 다시 들으시려면 \"다시\"를, 이전 학습으로 되돌아가시려면 \"이전\" 을 말씀해 주세요."
+        featureDescription: NSLocalizedString("ChordLesson.VoiceCommandGuide", comment: "")
       ),
       SectionLessonStep(
         song: nil,

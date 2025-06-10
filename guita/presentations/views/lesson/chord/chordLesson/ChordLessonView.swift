@@ -25,8 +25,12 @@ struct ChordLessonView: View {
               format: NSLocalizedString("%@ 코드", comment: ""),
               "\(state.chord.rawValue)"
             ),
-            accessibilityText: String(
-              format: NSLocalizedString("ChordLessonView.Accessibility.Description", comment: ""),
+            accessibilityHint: String(
+              format: NSLocalizedString(
+                state.isPermissionGranted ? "ChordLessonView.Accessibility.Description"
+                  : "ChordLessonView.Accessibility.Description.NoPermission",
+                comment: ""
+              ),
               "\(state.chord.rawValue)"
             ),
             trailing: {
@@ -55,23 +59,37 @@ struct ChordLessonView: View {
 
           // MARK: Controllers
           HStack {
+            // MARK: Previous Button
             IconButton("chevron-left", color: .light, size: 95, disabled: state.step == .introduction) {
               viewModel.goPrevious()
-            }.accessibilityAddTraits(.isButton)
-              .accessibilityLabel(state.step == .introduction ? "이전 (비활성화)" : "이전")
-              .accessibilityAddTraits([.isButton, .startsMediaSession])
+            }
+            .accessibilityLabel(
+              NSLocalizedString("ChordLesson.Button.Previous.Label", comment: "")
+            )
+            .accessibilityHint(
+              NSLocalizedString(state.step == .introduction ? "ChordLesson.Button.Previous.Hint.Inactive" : "", comment: "")
+            )
 
+            // MARK: Play Button
             IconButton("play", color: .accent, size: 95) {
               viewModel.play()
-            }.accessibilityAddTraits(.isButton)
-              .accessibilityLabel("\(state.description) 재생")
-              .accessibilityAddTraits([.isButton, .startsMediaSession])
+            }
+            .accessibilityLabel(NSLocalizedString("ChordLesson.Button.Play.Label", comment: ""))
+            .accessibilityHint(
+              String(
+                format: NSLocalizedString("ChordLesson.Button.Play.Hint", comment: ""),
+                state.description
+              )
+            )
 
+            // MARK: Next Button
             IconButton("chevron-right", size: 95) {
               viewModel.goNext()
-            }.accessibilityAddTraits(.isButton)
-              .accessibilityLabel(state.nextChordAccessibilityLabel)
-              .accessibilityAddTraits([.isButton, .startsMediaSession])
+            }
+            .accessibilityLabel(
+              NSLocalizedString("ChordLesson.Button.Next.Label", comment: "")
+            )
+            .accessibilityHint(state.nextChordAccessibilityHint)
           }
         }
       }

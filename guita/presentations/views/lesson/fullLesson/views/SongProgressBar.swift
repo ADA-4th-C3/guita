@@ -13,9 +13,18 @@ struct SongProgressBar: View {
     let seconds = Int(time) % 60
 
     if minutes == 0 {
-      return "\(seconds)초"
+      return String(
+        format: NSLocalizedString("Time.sec", comment: ""),
+        "\(seconds)"
+      )
     } else {
-      return "\(minutes)분 \(seconds)초"
+      return String(
+        format: NSLocalizedString("Time.minute", comment: ""),
+        "\(minutes)"
+      ) + " " + String(
+        format: NSLocalizedString("Time.sec", comment: ""),
+        "\(seconds)"
+      )
     }
   }
 
@@ -30,7 +39,13 @@ struct SongProgressBar: View {
       // Interactive Slider
       Slider(value: $currentTime, in: 0 ... totalDuration)
         .accentColor(.primary)
-        .accessibilityValue("총 재생 시간 \(voiceOverFormatTime(totalDuration)) 중 \(voiceOverFormatTime(currentTime))")
+        .accessibilityValue(
+          String(
+            format: NSLocalizedString("총 재생 시간", comment: ""),
+            "\(voiceOverFormatTime(totalDuration))",
+            "\(voiceOverFormatTime(currentTime))"
+          )
+        )
         .accessibilityAdjustableAction { direction in
           if direction == .increment {
             onSliderIncrease()

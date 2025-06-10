@@ -18,12 +18,20 @@ struct SectionLessonView: View {
       ) {
         VStack(spacing: 0) {
           // MARK: Toolbar
-          Toolbar(title: "곡 구간 학습", accessibilityText: "칼립소 주법을 이용해 곡을 구간으로 나누어 학습할 수 있습니다. 레슨을 시작하려면 재생이라고 말하세요.", trailing: {
-            IconButton("info", color: .light, isSystemImage: false) {
-              router.push(.sectionLessonGuide)
-            }.accessibilityAddTraits(.isButton)
-              .accessibilityLabel("사용법 도움말")
-          })
+          Toolbar(
+            title: NSLocalizedString("곡 구간 학습", comment: ""),
+            accessibilityHint: NSLocalizedString(
+              state.isPermissionGranted
+                ? "SectionLesson.Title.Hint.Granted"
+                : "SectionLesson.Title.Hint.NotGranted", comment: ""
+            ),
+            trailing: {
+              IconButton("info", color: .light, isSystemImage: false) {
+                router.push(.sectionLessonGuide)
+              }.accessibilityAddTraits(.isButton)
+                .accessibilityLabel("사용법 도움말")
+            }
+          )
           Spacer()
             .aspectRatio(2.5, contentMode: .fit)
 
@@ -44,25 +52,30 @@ struct SectionLessonView: View {
 
           // MARK: Controllers
           HStack {
+            // MARK: Previous Button
             IconButton("chevron-left", size: 95, disabled: state.currentStepIndex == 0) {
               viewModel.previousStep()
-            }.accessibilityAddTraits(.isButton)
-              .accessibilityLabel(state.currentStepIndex == 0 ? "이전 (비활성화)" : "이전")
-              .accessibilityAddTraits([.isButton, .startsMediaSession])
+            }
+            .accessibilityLabel(
+              NSLocalizedString("ChordLesson.Button.Previous.Label", comment: "")
+            )
+            .accessibilityHint(
+              NSLocalizedString(state.currentStepIndex == 0 ? "ChordLesson.Button.Previous.Hint.Inactive" : "", comment: "")
+            )
 
+            // MARK: Play Button
             IconButton("play", color: .accent, size: 95) {
               viewModel.play()
             }
-            .accessibilityAddTraits(.isButton)
-            .accessibilityLabel("재생")
-            .accessibilityAddTraits([.isButton, .startsMediaSession])
+            .accessibilityLabel(NSLocalizedString("ChordLesson.Button.Play.Label", comment: ""))
 
+            // MARK: Next Button
             IconButton("chevron-right", size: 95, disabled: state.currentStepIndex == state.steps.count - 1) {
               viewModel.nextStep()
             }
-            .accessibilityAddTraits(.isButton)
-            .accessibilityLabel("다음")
-            .accessibilityAddTraits([.isButton, .startsMediaSession])
+            .accessibilityLabel(
+              NSLocalizedString("ChordLesson.Button.Next.Label", comment: "")
+            )
           }
         }
       }

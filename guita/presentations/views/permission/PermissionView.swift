@@ -22,10 +22,10 @@ struct PermissionView<Content: View>: View {
           content()
         }
         .accessibilityElement(children: .contain)
-        .accessibilityHidden(state.showGuideDialog || state.showDeniedDialog)
+        .accessibilityHidden(state.showGuideDialog)
 
         // MARK: Background
-        if state.showGuideDialog || state.showDeniedDialog {
+        if state.showGuideDialog {
           Color.dark.opacity(0.2)
             .ignoresSafeArea()
         }
@@ -43,12 +43,13 @@ struct PermissionView<Content: View>: View {
         }
 
         // MARK: Denied dialog
-        if state.showDeniedDialog {
-          PermissionDeniedDialog(
-            onConfirm: viewModel.openSettings,
-            onCancel: router.pop
-          )
-        }
+        // 거절되어도 앱 사용 가능하도록 설정으로 보내는 팝업 안띄움
+        // if state.showDeniedDialog {
+        //   PermissionDeniedDialog(
+        //     onConfirm: viewModel.openSettings,
+        //     onCancel: router.pop
+        //   )
+        // }
       }
       .onAppear {
         permissionListener?(state.isGranted)
