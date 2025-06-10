@@ -1833,26 +1833,6 @@
         }
       }
     },
-    "열" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ten"
-          }
-        }
-      }
-    },
-    "여덟" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eight"
-          }
-        }
-      }
-    },
     "여덟 번째" : {
       "localizations" : {
         "en" : {
@@ -1879,6 +1859,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Six"
+          }
+        }
+      }
+    },
+    "열" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ten"
+          }
+        }
+      }
+    },
+    "여덟" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eight"
           }
         }
       }
@@ -2009,6 +2009,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Voice Recognition(Required)"
+          }
+        }
+      }
+    },
+    "음성 학습 안내" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voice Learning Guide"
           }
         }
       }
@@ -2149,6 +2160,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Technique learning"
+          }
+        }
+      }
+    },
+    "주법 학습 개요" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Overview of Playing Techniques"
           }
         }
       }
@@ -2324,16 +2346,6 @@
         }
       }
     },
-    "코드 학습 화면 효과음 안내" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chord Learning Screen Sound Effects Guide"
-          }
-        }
-      }
-    },
     "코드 학습 화면에는 다양한 효과음이 준비되어 있습니다.\n\n첫 번째로 다음 학습 단계로 넘어갈 때 페이지가 넘어가는 효과음이 실행됩니다." : {
       "localizations" : {
         "en" : {
@@ -2450,6 +2462,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Check"
+          }
+        }
+      }
+    },
+    "효과음 안내" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sound Effect Guide"
           }
         }
       }

@@ -101,7 +101,7 @@ struct ChordLessonGuideView: View {
             }
           ),
           GuideSection(
-            title: NSLocalizedString("코드 학습 화면 효과음 안내", comment: ""),
+            title: NSLocalizedString("효과음 안내", comment: ""),
             content: {
               VStack(alignment: .leading, spacing: 25.2) {
                 Text("""
