@@ -371,6 +371,22 @@
         }
       }
     },
+    "ChordLesson.LineSoundCheck.Desc2" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Let’s pluck the %@ string."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 줄을 튕겨 봅시다."
+          }
+        }
+      }
+    },
     "ChordLesson.LineSoundCheck.Intro" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -390,6 +406,23 @@
     },
     "ChordLesson.LineSoundCheck.SoundDesc" : {
       "extractionState" : "manual"
+    },
+    "ChordLesson.NextLabel1" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The next code we'll learn is the %@ code. Let's move on to the %@ code."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다음으로 학습할 코드는 %@ 코드 입니다. %@ 코드로 넘어가기"
+          }
+        }
+      }
     },
     "ChordLesson.OnlyCurrentStep" : {
       "extractionState" : "manual",
@@ -752,6 +785,23 @@
     },
     "Lesson.Accessibility.Description" : {
       "comment" : "학습 선택 화면 설명"
+    },
+    "Next" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다음"
+          }
+        }
+      }
     },
     "Note Throttle Interval" : {
       "localizations" : {
@@ -1319,26 +1369,6 @@
         }
       }
     },
-    "여덟 번째" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eighth"
-          }
-        }
-      }
-    },
-    "여섯" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Six"
-          }
-        }
-      }
-    },
     "여섯 번째" : {
       "localizations" : {
         "en" : {
@@ -1365,6 +1395,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ten"
+          }
+        }
+      }
+    },
+    "여덟 번째" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eighth"
+          }
+        }
+      }
+    },
+    "여섯" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Six"
           }
         }
       }

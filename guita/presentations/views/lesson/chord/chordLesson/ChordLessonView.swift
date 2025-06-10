@@ -69,7 +69,7 @@ struct ChordLessonView: View {
             IconButton("chevron-right", size: 95) {
               viewModel.goNext()
             }.accessibilityAddTraits(.isButton)
-              .accessibilityLabel(viewModel.nextChordAccessibilityLabel)
+              .accessibilityLabel(state.nextChordAccessibilityLabel)
               .accessibilityAddTraits([.isButton, .startsMediaSession])
           }
         }

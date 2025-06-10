@@ -18,7 +18,7 @@ enum VoiceCommandKeyword: CaseIterable {
     case .start: return isKo ? ["시작"] : ["start"]
     case .stop: return isKo ? ["정지", "멈춰", "스탑"] : ["stop"]
     case .play: return isKo ? ["재생", "플레이"] : ["play"]
-    case .retry: return isKo ? ["다시", "처음부터"] : ["retry", "replay"]
+    case .retry: return isKo ? ["다시", "처음부터"] : ["retry", "replay", "repeat"]
     case .next: return isKo ? ["다음"] : ["next"]
     case .previous: return isKo ? ["이전"] : ["previous"]
     case .slow: return isKo ? ["느리게"] : ["slow"]
