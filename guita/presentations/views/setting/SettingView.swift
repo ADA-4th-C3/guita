@@ -10,10 +10,10 @@ struct SettingView: View {
       VStack {
         // MARK: Toolbar
         Toolbar(title: NSLocalizedString("설정", comment: ""))
-        
+
         VStack(spacing: 0) {
           ListDivider()
-          
+
           // MARK: 음성 명령 섹션
           HStack {
             VStack(alignment: .leading, spacing: 4) {
@@ -46,9 +46,9 @@ struct SettingView: View {
             state.isVoiceCommandEnabled ? "ON" : "OFF"
           )
           .accessibilityHint("학습 화면에서 음성으로 앱의 일부 기능을 제어할 수 있습니다.")
-          
+
           ListDivider()
-          
+
           // MARK: 강의 속도 조절 섹션
           HStack {
             VStack(alignment: .leading, spacing: 4) {
@@ -69,7 +69,7 @@ struct SettingView: View {
               )
             )
             Spacer()
-            
+
             // MARK: 조절 Buttons
             HStack(spacing: 0) {
               Button("-") {
@@ -84,7 +84,7 @@ struct SettingView: View {
               RoundedRectangle(cornerRadius: 1)
                 .frame(width: 1, height: 18)
                 .foregroundColor(.llLightGrey)
-              
+
               Button("+") {
                 viewModel.updateTtsSpeed(isSpeedUp: true)
               }
@@ -98,10 +98,10 @@ struct SettingView: View {
           }
           .padding()
           .frame(minHeight: 90)
-          
+
           ListDivider()
         }
-        
+
         Spacer()
       }
     }

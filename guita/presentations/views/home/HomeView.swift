@@ -33,7 +33,7 @@ struct HomeView: View {
             .frame(width: 47, height: 54)
             .padding(.bottom, 43)
             .accessibilityHidden(true)
-          
+
           // MARK: 기타 학습
           Button {
             router.push(.curriculum)
@@ -44,7 +44,7 @@ struct HomeView: View {
               .padding(16)
           }
           .accessibilityHint("학습 목록 화면으로 이동")
-          
+
           // MARK: 설정
           Button {
             router.push(.setting)
