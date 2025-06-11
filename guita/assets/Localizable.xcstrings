@@ -151,6 +151,40 @@
         }
       }
     },
+    "Chord.Minor" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Minor"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "마이너"
+          }
+        }
+      }
+    },
+    "Chord.Seven" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seven"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "세븐"
+          }
+        }
+      }
+    },
     "ChordLesson.Button.Next.Hint.NextChord" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2010,16 +2044,6 @@
         }
       }
     },
-    "여섯 번째" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sixth"
-          }
-        }
-      }
-    },
     "열" : {
       "localizations" : {
         "en" : {
@@ -2066,6 +2090,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Six"
+          }
+        }
+      }
+    },
+    "여섯 번째" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sixth"
           }
         }
       }
