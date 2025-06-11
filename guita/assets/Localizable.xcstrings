@@ -1,7 +1,13 @@
 {
   "sourceLanguage" : "ko",
   "strings" : {
+    "" : {
+
+    },
     " " : {
+
+    },
+    "-" : {
 
     },
     "[%@] %@" : {
@@ -104,6 +110,9 @@
         }
       }
     },
+    "+" : {
+
+    },
     "4" : {
       "localizations" : {
         "en" : {
@@ -147,6 +156,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ 코드를 배우는 화면입니다. 기타를 들고 배우고 싶은 코드를 선택해 주세요."
+          }
+        }
+      }
+    },
+    "Chord.Minor" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Minor"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "마이너"
+          }
+        }
+      }
+    },
+    "Chord.Seven" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seven"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "세븐"
           }
         }
       }
@@ -895,15 +938,8 @@
         }
       }
     },
-    "Full Track Play Speed" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Full Track Play Spped"
-          }
-        }
-      }
+    "Full Song Play Speed" : {
+
     },
     "FullLesson.Title.Hint.Granted" : {
       "extractionState" : "manual",
@@ -911,7 +947,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Let's play the entire song. Say Play to start the lesson."
+            "value" : "Let's play the full song. Say Play to start the lesson."
           }
         },
         "ko" : {
@@ -928,7 +964,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Let's play the entire song. Click the play button to start the lesson."
+            "value" : "Let's play full song. Click the play button to start the lesson."
           }
         },
         "ko" : {
@@ -1016,7 +1052,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The song title is %1$@. This song uses the %2$@ chord. You can learn chords, learn playing techniques, learn by section, and learn the entire song. Select the learning you want."
+            "value" : "The song title is %1$@. This song uses the %2$@ chord. You can learn chords, learn playing techniques, learn by section, and learn full song. Select the learning you want."
           }
         },
         "ko" : {
@@ -1077,6 +1113,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Note Recognition Interval: %@s"
+          }
+        }
+      }
+    },
+    "OFF" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Off"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "비활성화"
+          }
+        }
+      }
+    },
+    "ON" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "활성화"
           }
         }
       }
@@ -1493,6 +1561,53 @@
         }
       }
     },
+    "TTSSpeed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "current %@ speed"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "현재 %@ 배속"
+          }
+        }
+      }
+    },
+    "TTSSpeedTest" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Adjust the speed of the lecture."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "강의 속도를 조절합니다."
+          }
+        }
+      }
+    },
+    "x%@" : {
+
+    },
+    "강의 속도 조절" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Control the lecture speed"
+          }
+        }
+      }
+    },
     "곡 구간 학습" : {
       "localizations" : {
         "en" : {
@@ -1519,7 +1634,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : " Track section learning lets you learn by sections through voice instructions."
+            "value" : "Song section learning lets you learn by sections through voice instructions."
           }
         }
       }
@@ -1580,7 +1695,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Full Track Learning allows you to learn the song section by section through the provided voice guidance."
+            "value" : "Full Song Learning allows you to learn the song section by section through the provided voice guidance."
           }
         }
       }
@@ -1590,7 +1705,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Start Full Track Learning"
+            "value" : "Start Full Song Learning"
           }
         }
       }
@@ -1795,17 +1910,6 @@
         }
       }
     },
-    "다음" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Next"
-          }
-        }
-      }
-    },
     "두 번째" : {
       "localizations" : {
         "en" : {
@@ -1906,6 +2010,16 @@
         }
       }
     },
+    "설정 화면으로 이동" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go to Settings screen"
+          }
+        }
+      }
+    },
     "설정으로 이동" : {
       "localizations" : {
         "en" : {
@@ -1936,6 +2050,16 @@
         }
       }
     },
+    "속도 감소" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "speed decrease"
+          }
+        }
+      }
+    },
     "속도 조절 방법" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1953,6 +2077,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "You can control the speed of the guidance audio and melody using the speed adjustment button.\n\nSwipe left or right with one finger to select the desired button.\n\nSpeed can be adjusted to slow or fast."
+          }
+        }
+      }
+    },
+    "속도 증가" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "speed increase"
           }
         }
       }
@@ -2001,34 +2135,7 @@
 
     },
     "업과 다운을 조합하여 다양한 리듬을 만들 수 있어요. 가장 많이 사용되는 칼립소 리듬을 알려줄게요." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You can create many different rhythms by combining up and down strokes. Let me teach you the most commonly used Calypso rhythm."
-          }
-        }
-      }
-    },
-    "여섯 번째" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sixth"
-          }
-        }
-      }
-    },
-    "열" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ten"
-          }
-        }
-      }
+
     },
     "여덟" : {
       "localizations" : {
@@ -2070,12 +2177,32 @@
         }
       }
     },
+    "여섯 번째" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sixth"
+          }
+        }
+      }
+    },
     "여행을 떠나요" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Let’s go on a trip"
+          }
+        }
+      }
+    },
+    "열" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ten"
           }
         }
       }
@@ -2110,6 +2237,16 @@
         }
       }
     },
+    "음성 명령" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voice Commands"
+          }
+        }
+      }
+    },
     "음성 명령 기능을 사용하려면\n'음성인식' 접근권한을 허용해야합니다.\n음성 명령 기능을 사용하고 싶으면 '설정'\n버튼을 눌러 '음성인식' 접근을 허용해주세요." : {
       "localizations" : {
         "en" : {
@@ -2126,6 +2263,27 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : " Voice command feature cannot be used"
+          }
+        }
+      }
+    },
+    "음성 명령 사용" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use Voice Commands"
+          }
+        }
+      }
+    },
+    "음성 명령 사용 여부" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use Voice Commands"
           }
         }
       }
@@ -2201,6 +2359,16 @@
         }
       }
     },
+    "음성으로 앱의 기능을 제어하는 기능입니다." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Control app functions with your voice."
+          }
+        }
+      }
+    },
     "음원 재생 구간을 조절하고 싶으면 슬라이더가 선택된 상태에서 한손가락으로 원하는 쪽으로 밀면 값이 증가하고, 아래로 쓸어내리면 값이 감소합니다.\n\n이러한 제스쳐를 통해 재생 위치를 10%씩 이동시킬 수 있습니다." : {
       "localizations" : {
         "en" : {
@@ -2247,28 +2415,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Now, let's try sweeping the strings upwards, from the 1st string to the 6th string. This is the sound you'll hear."
-          }
-        }
-      }
-    },
-    "이전" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Previous"
-          }
-        }
-      }
-    },
-    "이전 (비활성화)" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Previous (inactive)"
           }
         }
       }
@@ -2349,7 +2495,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Technique learning"
+            "value" : "Technique Learning"
           }
         }
       }
@@ -2411,17 +2557,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "A strumming pattern is how you use your free hand to play the guitar strings. Let's learn strumming, which involves sweeping your hand or a pick up and down the strings to create rhythm."
-          }
-        }
-      }
-    },
-    "주법을 학습하는 화면입니다. 재생버튼을 눌러 학습을 시작하세요." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "This is the screen for learning strumming techniques. Press the play button to start learning."
           }
         }
       }
@@ -2649,6 +2784,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "One"
+          }
+        }
+      }
+    },
+    "학습 목록 화면으로 이동" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go to curriculum screen"
+          }
+        }
+      }
+    },
+    "학습 화면에서 음성으로 앱의 일부 기능을 제어할 수 있습니다." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can control some app functions by voice on the learning screen."
           }
         }
       }

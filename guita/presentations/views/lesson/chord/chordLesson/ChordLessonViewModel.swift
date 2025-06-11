@@ -149,6 +149,9 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
 
   /// 음성 명령 인식 시작
   private func startVoiceCommand() {
+    // 설정에서 음성 명령이 비활성화되어 있으면 시작하지 않음
+    guard ConfigManager.shared.state.isVoiceCommandEnabled else { return }
+
     voiceCommandManager.start(
       commands: [
         VoiceCommand(keyword: .play, handler: play),

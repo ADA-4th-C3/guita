@@ -9,7 +9,8 @@ final class ConfigManager: BaseViewModel<Config> {
       ttsSpeed: .x0_45,
       fullTrackPlaySpeed: .x1_0,
       noteThrottleInterval: 1.0,
-      chordThrottleInterval: 1.0
+      chordThrottleInterval: 1.0,
+      isVoiceCommandEnabled: true
     ))
   }
 

@@ -15,6 +15,9 @@ struct SplashView: View {
       }
       .onAppear {
         TextToSpeechManager.shared.configureAudioSession()
+        Task {
+          await TextToSpeechManager.shared.speak(" ")
+        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
           viewModel.onLoaded()
           router.setRoot(.home)
