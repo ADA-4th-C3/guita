@@ -895,12 +895,16 @@
         }
       }
     },
+    "Full Song Play Speed" : {
+
+    },
     "Full Track Play Speed" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Full Track Play Spped"
+            "value" : "Full Song Play Spped"
           }
         }
       }
@@ -911,7 +915,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Let's play the entire song. Say Play to start the lesson."
+            "value" : "Let's play the full song. Say Play to start the lesson."
           }
         },
         "ko" : {
@@ -928,7 +932,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Let's play the entire song. Click the play button to start the lesson."
+            "value" : "Let's play full song. Click the play button to start the lesson."
           }
         },
         "ko" : {
@@ -1016,7 +1020,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The song title is %1$@. This song uses the %2$@ chord. You can learn chords, learn playing techniques, learn by section, and learn the entire song. Select the learning you want."
+            "value" : "The song title is %1$@. This song uses the %2$@ chord. You can learn chords, learn playing techniques, learn by section, and learn full song. Select the learning you want."
           }
         },
         "ko" : {
@@ -1519,7 +1523,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : " Track section learning lets you learn by sections through voice instructions."
+            "value" : "Song section learning lets you learn by sections through voice instructions."
           }
         }
       }
@@ -1580,7 +1584,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Full Track Learning allows you to learn the song section by section through the provided voice guidance."
+            "value" : "Full Song Learning allows you to learn the song section by section through the provided voice guidance."
           }
         }
       }
@@ -1590,7 +1594,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Start Full Track Learning"
+            "value" : "Start Full Song Learning"
           }
         }
       }
@@ -2010,26 +2014,6 @@
         }
       }
     },
-    "여섯 번째" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sixth"
-          }
-        }
-      }
-    },
-    "열" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ten"
-          }
-        }
-      }
-    },
     "여덟" : {
       "localizations" : {
         "en" : {
@@ -2070,12 +2054,32 @@
         }
       }
     },
+    "여섯 번째" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sixth"
+          }
+        }
+      }
+    },
     "여행을 떠나요" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Let’s go on a trip"
+          }
+        }
+      }
+    },
+    "열" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ten"
           }
         }
       }

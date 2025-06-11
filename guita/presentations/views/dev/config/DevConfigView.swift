@@ -20,7 +20,7 @@ struct DevConfigView: View {
           }
 
           // MARK: Full Track Play Speed
-          Section(header: Text("Full Track Play Speed")) {
+          Section(header: Text("Full Song Play Speed")) {
             Text("곡 재생 속도 : x\(state.fullTrackPlaySpeed.value.formatted(2))")
             Tile(title: "느리게", subtitle: "🐢", action: { viewModel.updateFullTrackPlaySpeed(isSpeedUp: false) })
             Tile(title: "빠르게", subtitle: "🐇", action: { viewModel.updateFullTrackPlaySpeed(isSpeedUp: true) })
