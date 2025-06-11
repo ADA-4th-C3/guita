@@ -1938,7 +1938,14 @@
       }
     },
     "설정 화면으로 이동" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go to Settings screen"
+          }
+        }
+      }
     },
     "설정으로 이동" : {
       "localizations" : {
@@ -2047,6 +2054,16 @@
         }
       }
     },
+    "여덟 번째" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eighth"
+          }
+        }
+      }
+    },
     "여러번 들어보며 다운과 업의 순서를 익혀보세요." : {
       "localizations" : {
         "en" : {
@@ -2057,12 +2074,12 @@
         }
       }
     },
-    "여섯" : {
+    "여행을 떠나요" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Six"
+            "value" : "Let’s go on a trip"
           }
         }
       }
@@ -2077,12 +2094,12 @@
         }
       }
     },
-    "여덟 번째" : {
+    "여섯" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Eighth"
+            "value" : "Six"
           }
         }
       }
@@ -2093,16 +2110,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sixth"
-          }
-        }
-      }
-    },
-    "여행을 떠나요" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Let’s go on a trip"
           }
         }
       }
@@ -2642,6 +2649,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "One"
+          }
+        }
+      }
+    },
+    "학습 목록 화면으로 이동" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go to curriculum screen"
           }
         }
       }
