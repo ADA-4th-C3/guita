@@ -9,11 +9,11 @@ struct SettingView: View {
     ) { viewModel, state in
       VStack {
         // MARK: Toolbar
-        Toolbar(title: "Config")
-
+        Toolbar(title: NSLocalizedString("설정", comment: ""))
+        
         VStack(spacing: 0) {
           ListDivider()
-
+          
           // MARK: 음성 명령 섹션
           HStack {
             VStack(alignment: .leading, spacing: 4) {
@@ -21,7 +21,7 @@ struct SettingView: View {
                 .font(.headline)
                 .padding(.bottom, 4)
                 .foregroundColor(.white)
-              Text("음성 명령은 기능 제어시 사용됩니다")
+              Text("음성으로 앱의 기능을 제어하는 기능입니다.")
                 .font(.subheadline)
                 .fixedSize(horizontal: true, vertical: false)
                 .foregroundColor(.gray)
@@ -39,9 +39,16 @@ struct SettingView: View {
           }
           .padding()
           .frame(minHeight: 90)
-
+          .accessibilityElement(children: .ignore)
+          .accessibilityLabel("음성 명령 사용")
+          .accessibilityAddTraits(.isToggle)
+          .accessibilityValue(
+            state.isVoiceCommandEnabled ? "ON" : "OFF"
+          )
+          .accessibilityHint("학습 화면에서 음성으로 앱의 일부 기능을 제어할 수 있습니다.")
+          
           ListDivider()
-
+          
           // MARK: 강의 속도 조절 섹션
           HStack {
             VStack(alignment: .leading, spacing: 4) {
@@ -53,7 +60,17 @@ struct SettingView: View {
                 .font(.subheadline)
                 .foregroundColor(.gray)
             }
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel("강의 속도 조절")
+            .accessibilityValue(
+              String(
+                format: NSLocalizedString("TTSSpeed", comment: ""),
+                "\(state.ttsSpeed.value.formatted(2))"
+              )
+            )
             Spacer()
+            
+            // MARK: 조절 Buttons
             HStack(spacing: 0) {
               Button("-") {
                 viewModel.updateTtsSpeed(isSpeedUp: false)
@@ -62,7 +79,12 @@ struct SettingView: View {
               .background(Color.gray.opacity(0.3))
               .foregroundColor(.white)
               .font(.title2)
+              .accessibilityLabel("속도 감소")
 
+              RoundedRectangle(cornerRadius: 1)
+                .frame(width: 1, height: 18)
+                .foregroundColor(.llLightGrey)
+              
               Button("+") {
                 viewModel.updateTtsSpeed(isSpeedUp: true)
               }
@@ -70,15 +92,16 @@ struct SettingView: View {
               .background(Color.gray.opacity(0.3))
               .foregroundColor(.white)
               .font(.title2)
+              .accessibilityLabel("속도 증가")
             }
             .clipShape(RoundedRectangle(cornerRadius: 8))
           }
           .padding()
           .frame(minHeight: 90)
-
+          
           ListDivider()
         }
-
+        
         Spacer()
       }
     }

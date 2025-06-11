@@ -19,9 +19,11 @@ final class SettingViewModel: BaseViewModel<Config> {
 
   func updateTtsSpeed(isSpeedUp: Bool) {
     emit(state.copy(ttsSpeed: isSpeedUp ? state.ttsSpeed.next : state.ttsSpeed.previous))
+    
+    textToSpeechManager.stop()
     Task {
-      textToSpeechManager.stop()
-      await textToSpeechManager.speak("텍스트를 읽어주는 속도를 조절합니다")
+      try await Task.sleep(nanoseconds: 1000_000_000)
+      await textToSpeechManager.speak(NSLocalizedString("TTSSpeedTest", comment: ""))
     }
   }
 
