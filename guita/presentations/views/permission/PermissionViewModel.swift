@@ -6,11 +6,11 @@ import UIKit
 final class PermissionViewModel: BaseViewModel<PermissionViewState> {
   private let audioRecorderManager = AudioRecorderManager.shared
   private let speechToTextManager = SpeechToTextManager.shared
-  private let permissionStatesListener: ((_ isGranted: Bool) -> Void)?
+  var permissionStatesListener: ((_ isGranted: Bool) -> Void)?
 
   init(
     permissionCategories: [PermissionCategory],
-    permissionStatesListener: ((_ isGranted: Bool) -> Void)?
+    permissionStatesListener: ((_ isGranted: Bool) -> Void)? = nil
   ) {
     self.permissionStatesListener = permissionStatesListener
     var permissions: [PermissionCategory: PermissionResult] = [:]
