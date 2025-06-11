@@ -96,7 +96,7 @@ struct LessonView: View {
               ListDivider()
 
               Rectangle()
-                .fill(.dark)
+                .fill(.black)
                 .frame(width: boxWidth, height: boxHeight)
                 .accessibilityHidden(true)
             }

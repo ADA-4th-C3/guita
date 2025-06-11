@@ -12,7 +12,7 @@ struct Config: Codable {
     fullTrackPlaySpeed: PlaySpeed? = nil,
     noteThrottleInterval: Double? = nil,
     chordThrottleInterval: Double? = nil,
-    isVoiceCommandEnabled: Bool? = nil,
+    isVoiceCommandEnabled: Bool? = nil
   ) -> Config {
     return Config(
       ttsSpeed: ttsSpeed ?? self.ttsSpeed,

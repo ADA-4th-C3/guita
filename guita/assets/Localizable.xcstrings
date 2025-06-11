@@ -941,17 +941,6 @@
     "Full Song Play Speed" : {
 
     },
-    "Full Track Play Speed" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Full Song Play Spped"
-          }
-        }
-      }
-    },
     "FullLesson.Title.Hint.Granted" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1848,17 +1837,6 @@
         }
       }
     },
-    "다음" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Next"
-          }
-        }
-      }
-    },
     "두 번째" : {
       "localizations" : {
         "en" : {
@@ -2205,8 +2183,7 @@
     "음성 명령은 기능 제어시 사용됩니다" : {
 
     },
-    "음성 명령을 통해 주법 학습 화면을 조작할 수 있으며, 사용할 수 있는 음성 명령은 총 3가지가 있습니다.\n\n첫 번째로 \"다시\" 또는 \"재생\"이라고 음성으로 명령하면 음성 안내를 다시 들을 수 있습니다.\n\n두 번째로 \"다음\"이라고 음성으로 명령하면 다음 학습 단계로 넘어갈 수 있습니다.\n\n세 번째로 \"이전\"이라고 음성으로 명령하면 이전 학습 단계로 되돌아갈 수 있습니다." : {
-      "extractionState" : "stale",
+    "음성 명령을 통해 주법 학습 화면을 조작할 수 있으며, 사용할 수 있는 음성 명령은 총 3가지가 있습니다.\n\n첫 번째로 \"다시\" 또는 \"재생\"이라고 음성으로 명령하면 음성 안내를 다시 들을 수 있습니다.\n\n두 번째로 \"다음\"이라고 음성으로 명령하면 다음 학습 단계로 넘어갈 수 있습니다.\n\n세 번째로 \"이전\"이라고 음성으로 명령하면 이전 학습 단계로 되돌아갈 수 있습니다.\n\n음성 명령어를 사용하기 위해선 마이크 사용 권한과 음성 인식 권한이 필요합니다." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2215,9 +2192,6 @@
           }
         }
       }
-    },
-    "음성 명령을 통해 주법 학습 화면을 조작할 수 있으며, 사용할 수 있는 음성 명령은 총 3가지가 있습니다.\n\n첫 번째로 \"다시\" 또는 \"재생\"이라고 음성으로 명령하면 음성 안내를 다시 들을 수 있습니다.\n\n두 번째로 \"다음\"이라고 음성으로 명령하면 다음 학습 단계로 넘어갈 수 있습니다.\n\n세 번째로 \"이전\"이라고 음성으로 명령하면 이전 학습 단계로 되돌아갈 수 있습니다.\n\n음성 명령어를 사용하기 위해선 마이크 사용 권한과 음성 인식 권한이 필요합니다." : {
-
     },
     "음성 명령을 통해 코드 학습 화면을 조작할 수 있으며, 사용할 수 있는 음성 명령은 총 3가지가 있습니다.\n\n첫 번째로 \"다시\" 또는 \"재생\"이라고 음성으로 명령하면 음성 안내를 다시 들을 수 있습니다.\n\n두 번째로 \"다음\"이라고 음성으로 명령하면 다음 학습 단계로 넘어갈 수 있습니다.\n\n세 번째로 \"이전\"이라고 음성으로 명령하면 이전 학습 단계로 되돌아갈 수 있습니다.\n\n음성 명령어를 사용하기 위해선 마이크 사용 권한과 음성 인식 권한이 필요합니다." : {
       "localizations" : {
@@ -2306,28 +2280,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Now, let's try sweeping the strings upwards, from the 1st string to the 6th string. This is the sound you'll hear."
-          }
-        }
-      }
-    },
-    "이전" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Previous"
-          }
-        }
-      }
-    },
-    "이전 (비활성화)" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Previous (inactive)"
           }
         }
       }
@@ -2470,17 +2422,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "A strumming pattern is how you use your free hand to play the guitar strings. Let's learn strumming, which involves sweeping your hand or a pick up and down the strings to create rhythm."
-          }
-        }
-      }
-    },
-    "주법을 학습하는 화면입니다. 재생버튼을 눌러 학습을 시작하세요." : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "This is the screen for learning strumming techniques. Press the play button to start learning."
           }
         }
       }
