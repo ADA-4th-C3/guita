@@ -72,6 +72,7 @@ struct LessonView: View {
                   .accessibilityLabel("주법 학습하기")
               }
               ListDivider()
+
               Button(action: {
                 router.push(.sectionLesson)
               }) {
@@ -82,6 +83,7 @@ struct LessonView: View {
                   .accessibilityLabel("곡 구간 학습하기")
               }
               ListDivider()
+
               Button(action: {
                 router.push(.fullLesson(songInfo: songInfo))
               }) {
@@ -92,6 +94,11 @@ struct LessonView: View {
                   .accessibilityLabel("곡 전체 학습하기")
               }
               ListDivider()
+
+              Rectangle()
+                .fill(.black)
+                .frame(width: boxWidth, height: boxHeight)
+                .accessibilityHidden(true)
             }
           }
         }

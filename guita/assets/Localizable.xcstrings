@@ -2047,6 +2047,16 @@
         }
       }
     },
+    "여덟 번째" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eighth"
+          }
+        }
+      }
+    },
     "여러번 들어보며 다운과 업의 순서를 익혀보세요." : {
       "localizations" : {
         "en" : {
@@ -2067,26 +2077,6 @@
         }
       }
     },
-    "열" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ten"
-          }
-        }
-      }
-    },
-    "여덟 번째" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eighth"
-          }
-        }
-      }
-    },
     "여섯 번째" : {
       "localizations" : {
         "en" : {
@@ -2103,6 +2093,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Let’s go on a trip"
+          }
+        }
+      }
+    },
+    "열" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ten"
           }
         }
       }
@@ -2184,7 +2184,14 @@
 
     },
     "음성 명령을 통해 주법 학습 화면을 조작할 수 있으며, 사용할 수 있는 음성 명령은 총 3가지가 있습니다.\n\n첫 번째로 \"다시\" 또는 \"재생\"이라고 음성으로 명령하면 음성 안내를 다시 들을 수 있습니다.\n\n두 번째로 \"다음\"이라고 음성으로 명령하면 다음 학습 단계로 넘어갈 수 있습니다.\n\n세 번째로 \"이전\"이라고 음성으로 명령하면 이전 학습 단계로 되돌아갈 수 있습니다.\n\n음성 명령어를 사용하기 위해선 마이크 사용 권한과 음성 인식 권한이 필요합니다." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voice commands allow you to control the learning screen. There are 3 available voice commands.\n\nFirst, saying “Replay” or “Play” will repeat the voice instruction.\n\nSecond, saying “Next” moves to the next learning step.\n\nThird, saying “Previous” returns to the previous step.\n\nTo use voice commands, you need permission to use the microphone and voice recognition."
+          }
+        }
+      }
     },
     "음성 명령을 통해 코드 학습 화면을 조작할 수 있으며, 사용할 수 있는 음성 명령은 총 3가지가 있습니다.\n\n첫 번째로 \"다시\" 또는 \"재생\"이라고 음성으로 명령하면 음성 안내를 다시 들을 수 있습니다.\n\n두 번째로 \"다음\"이라고 음성으로 명령하면 다음 학습 단계로 넘어갈 수 있습니다.\n\n세 번째로 \"이전\"이라고 음성으로 명령하면 이전 학습 단계로 되돌아갈 수 있습니다.\n\n음성 명령어를 사용하기 위해선 마이크 사용 권한과 음성 인식 권한이 필요합니다." : {
       "localizations" : {
@@ -2353,7 +2360,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Technique learning"
+            "value" : "Technique Learning"
           }
         }
       }
