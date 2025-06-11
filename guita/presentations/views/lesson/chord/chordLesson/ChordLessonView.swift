@@ -50,7 +50,7 @@ struct ChordLessonView: View {
 
           // MARK: Step description
           Text(state.description)
-            .fontKoddi(26, color: .light)
+            .fontKoddi(26, color: .light, weight: .bold)
             .lineSpacing(1.45)
             .multilineTextAlignment(.center)
             .accessibilityHidden(true)

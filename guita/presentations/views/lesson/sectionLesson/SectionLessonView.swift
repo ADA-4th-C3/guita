@@ -32,14 +32,15 @@ struct SectionLessonView: View {
                 .accessibilityLabel("사용법 도움말")
             }
           )
-          Spacer()
-            .aspectRatio(2.5, contentMode: .fit)
 
           // MARK: Index
           Text("\(state.currentStepIndex + 1)/\(state.steps.count) 단계")
             .fontKoddi(22, color: .darkGrey)
             .padding(.top, 16)
             .accessibilityHidden(true)
+
+          Spacer()
+            .aspectRatio(2.5, contentMode: .fit)
 
           // MARK: Step description
           if let firstInfo = state.currentStep.sectionLessonInfo.first {
