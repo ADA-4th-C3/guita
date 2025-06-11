@@ -1117,6 +1117,38 @@
         }
       }
     },
+    "OFF" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Off"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "비활성화"
+          }
+        }
+      }
+    },
+    "ON" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "활성화"
+          }
+        }
+      }
+    },
     "Order.First" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1529,11 +1561,52 @@
         }
       }
     },
+    "TTSSpeed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "current %@ speed"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "현재 %@ 배속"
+          }
+        }
+      }
+    },
+    "TTSSpeedTest" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Adjust the speed of the lecture."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "강의 속도를 조절합니다."
+          }
+        }
+      }
+    },
     "x%@" : {
 
     },
     "강의 속도 조절" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Control the lecture speed"
+          }
+        }
+      }
     },
     "곡 구간 학습" : {
       "localizations" : {
@@ -1938,7 +2011,14 @@
       }
     },
     "설정 화면으로 이동" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go to Settings screen"
+          }
+        }
+      }
     },
     "설정으로 이동" : {
       "localizations" : {
@@ -1970,6 +2050,16 @@
         }
       }
     },
+    "속도 감소" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "speed decrease"
+          }
+        }
+      }
+    },
     "속도 조절 방법" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1987,6 +2077,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "You can control the speed of the guidance audio and melody using the speed adjustment button.\n\nSwipe left or right with one finger to select the desired button.\n\nSpeed can be adjusted to slow or fast."
+          }
+        }
+      }
+    },
+    "속도 증가" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "speed increase"
           }
         }
       }
@@ -2138,7 +2238,14 @@
       }
     },
     "음성 명령" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voice Commands"
+          }
+        }
+      }
     },
     "음성 명령 기능을 사용하려면\n'음성인식' 접근권한을 허용해야합니다.\n음성 명령 기능을 사용하고 싶으면 '설정'\n버튼을 눌러 '음성인식' 접근을 허용해주세요." : {
       "localizations" : {
@@ -2156,6 +2263,27 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : " Voice command feature cannot be used"
+          }
+        }
+      }
+    },
+    "음성 명령 사용" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use Voice Commands"
+          }
+        }
+      }
+    },
+    "음성 명령 사용 여부" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use Voice Commands"
           }
         }
       }
@@ -2179,9 +2307,6 @@
           }
         }
       }
-    },
-    "음성 명령은 기능 제어시 사용됩니다" : {
-
     },
     "음성 명령을 통해 주법 학습 화면을 조작할 수 있으며, 사용할 수 있는 음성 명령은 총 3가지가 있습니다.\n\n첫 번째로 \"다시\" 또는 \"재생\"이라고 음성으로 명령하면 음성 안내를 다시 들을 수 있습니다.\n\n두 번째로 \"다음\"이라고 음성으로 명령하면 다음 학습 단계로 넘어갈 수 있습니다.\n\n세 번째로 \"이전\"이라고 음성으로 명령하면 이전 학습 단계로 되돌아갈 수 있습니다.\n\n음성 명령어를 사용하기 위해선 마이크 사용 권한과 음성 인식 권한이 필요합니다." : {
       "localizations" : {
@@ -2230,6 +2355,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Voice Learning Guide"
+          }
+        }
+      }
+    },
+    "음성으로 앱의 기능을 제어하는 기능입니다." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Control app functions with your voice."
           }
         }
       }
@@ -2649,6 +2784,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "One"
+          }
+        }
+      }
+    },
+    "학습 목록 화면으로 이동" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go to curriculum screen"
+          }
+        }
+      }
+    },
+    "학습 화면에서 음성으로 앱의 일부 기능을 제어할 수 있습니다." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can control some app functions by voice on the learning screen."
           }
         }
       }
