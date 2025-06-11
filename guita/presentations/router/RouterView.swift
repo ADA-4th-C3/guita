@@ -25,6 +25,7 @@ struct RouterView: View {
         .navigationDestination(for: SubPage.self) { subPage in
           switch subPage {
           // MARK: User
+          case .setting: SettingView()
           case .curriculum: CurriculumView()
           case let .lesson(songInfo): LessonView(songInfo: songInfo)
           case let .chord(songInfo): ChordView(songInfo: songInfo)

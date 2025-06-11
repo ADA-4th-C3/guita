@@ -26,20 +26,33 @@ struct HomeView: View {
         )
 
         Spacer()
-        Button {
-          router.push(.curriculum)
-        } label: {
-          VStack {
-            Image("pick")
-              .resizable()
-              .frame(width: 47, height: 54)
-              .padding(.bottom, 43)
-            Text("기타 학습")
+        VStack(spacing: 10) {
+          Button {
+            router.push(.curriculum)
+          } label: {
+            VStack {
+              Image("pick")
+                .resizable()
+                .frame(width: 47, height: 54)
+                .padding(.bottom, 43)
+              Text("기타 학습")
 
-              .fontKoddi(32, color: .light, weight: .bold)
-          }.offset(y: -80)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .fontKoddi(32, color: .light, weight: .bold)
+            }.offset(y: -80)
+              .frame(maxWidth: .infinity, maxHeight: .infinity)
+          }
+          Button {
+            router.push(.setting)
+          } label: {
+            Text("설정")
+              .fontKoddi(20, color: .lightGrey, weight: .regular)
+          }
+          .accessibilityLabel("설정 화면으로 이동")
+          .accessibilityAddTraits(.isButton)
         }
+        .offset(y: -80)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        Spacer()
       }
     }
   }
