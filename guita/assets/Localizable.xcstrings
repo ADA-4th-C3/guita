@@ -151,6 +151,40 @@
         }
       }
     },
+    "Chord.Minor" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Minor"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "마이너"
+          }
+        }
+      }
+    },
+    "Chord.Seven" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seven"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "세븐"
+          }
+        }
+      }
+    },
     "ChordLesson.Button.Next.Hint.NextChord" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2010,6 +2044,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "You can create many different rhythms by combining up and down strokes. Let me teach you the most commonly used Calypso rhythm."
+          }
+        }
+      }
+    },
+    "열" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ten"
           }
         }
       }

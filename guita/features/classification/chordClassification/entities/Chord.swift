@@ -1,3 +1,7 @@
+//  Copyright © 2025 ADA 4th Challenge3 Team1. All rights reserved.
+
+import Foundation
+
 enum Chord: String, CaseIterable, CustomStringConvertible {
   case C, D, E, F, G, A, B
   case Dm, Em, Am
@@ -71,8 +75,8 @@ enum Chord: String, CaseIterable, CustomStringConvertible {
 
   var description: String {
     let name = rawValue
-      .replacingOccurrences(of: "m", with: " 마이너")
-      .replacingOccurrences(of: "7", with: " 세븐")
+      .replacingOccurrences(of: "m", with: " " + NSLocalizedString("Chord.Minor", comment: ""))
+      .replacingOccurrences(of: "7", with: " " + NSLocalizedString("Chord.Seven", comment: ""))
     return name
   }
 }
