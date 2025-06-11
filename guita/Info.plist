@@ -12,5 +12,9 @@
 		<string>KoddiUDOnGothic-ExtraBold.ttf</string>
 		<string>KoddiUDOnGothic-Regular.ttf</string>
 	</array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
 </dict>
 </plist>
