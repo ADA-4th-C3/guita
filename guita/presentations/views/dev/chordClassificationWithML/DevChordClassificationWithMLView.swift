@@ -18,15 +18,8 @@ struct DevChordClassificationWithMLView: View {
           Toolbar(title: "Code Classification with ML")
           Spacer()
           if state.isStarted {
-            Text(state.isSilence ? "Silence" : "\(state.chord)")
+            Text(state.isSilence ? "Silence" : "\(state.chord.rawValue)")
               .fontKoddi(24, color: .accent)
-            
-            if let cgImage = cgImage(from: state.pixel!) {
-              Image(decorative: cgImage, scale: 1.0)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 128, height: 128)
-            }
           }
           Spacer()
         }

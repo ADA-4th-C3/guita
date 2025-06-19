@@ -14,7 +14,7 @@ struct DevConfigView: View {
         Form {
           // MARK: TTS Speed
           Section(header: Text("TTS Speed")) {
-            Text("곡 재생 속도 : \(state.ttsSpeed.value.formatted(2))")
+            Text("TTS 재생 속도 : \(state.ttsSpeed.value.formatted(2))")
             Tile(title: "느리게", subtitle: "🐢", action: { viewModel.updateTtsSpeed(isSpeedUp: false) })
             Tile(title: "빠르게", subtitle: "🐇", action: { viewModel.updateTtsSpeed(isSpeedUp: true) })
           }
@@ -38,6 +38,25 @@ struct DevConfigView: View {
             Text("Note 인식 간격 : \(state.noteThrottleInterval.formatted(2))s")
             Tile(title: "느리게", subtitle: "🐢", action: { viewModel.updateNoteThrottleInterval(isSpeedUp: false) })
             Tile(title: "빠르게", subtitle: "🐇", action: { viewModel.updateNoteThrottleInterval(isSpeedUp: true) })
+          }
+          
+          // MARK:
+          Section(header: Text("Chord Classification")) {
+            Text("Note 인식 간격")
+            Picker(
+              selection: Binding(
+                get: { state.chordClassificationType },
+                set: {
+                  viewModel.updateChordClassificationType(type: $0)
+                }
+              ),
+              label: Text("코드 인식 방법")
+            ) {
+              ForEach(ChordClassificationType.allCases, id: \.self) { type in
+                Text(type.rawValue)
+                  .tag(type)
+              }
+            }
           }
         }
       }

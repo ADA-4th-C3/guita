@@ -123,6 +123,9 @@
         }
       }
     },
+    "Chord Classification" : {
+
+    },
     "Chord Throttle Interval" : {
       "localizations" : {
         "en" : {
@@ -1114,6 +1117,9 @@
         }
       }
     },
+    "Note 인식 간격" : {
+
+    },
     "Note 인식 간격 : %@s" : {
       "localizations" : {
         "en" : {
@@ -1480,6 +1486,9 @@
         }
       }
     },
+    "Silence" : {
+
+    },
     "Speech To Text" : {
       "localizations" : {
         "en" : {
@@ -1567,6 +1576,9 @@
           }
         }
       }
+    },
+    "TTS 재생 속도 : %@" : {
+
     },
     "TTSSpeed" : {
       "extractionState" : "manual",
@@ -1657,6 +1669,7 @@
       }
     },
     "곡 재생 속도 : %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2164,22 +2177,22 @@
         }
       }
     },
-    "여러번 들어보며 다운과 업의 순서를 익혀보세요." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Listen many times and learn the order of down and up strokes."
-          }
-        }
-      }
-    },
     "열" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ten"
+          }
+        }
+      }
+    },
+    "여러번 들어보며 다운과 업의 순서를 익혀보세요." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listen many times and learn the order of down and up strokes."
           }
         }
       }
@@ -2654,6 +2667,9 @@
           }
         }
       }
+    },
+    "코드 인식 방법" : {
+
     },
     "코드 학습" : {
       "localizations" : {

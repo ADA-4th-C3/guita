@@ -5,7 +5,7 @@ import SwiftUI
 
 final class DevChordClassificationViewModel: BaseViewModel<DevChordClassificationViewState> {
   private let audioRecorderManager: AudioRecorderManager = .shared
-  private let chordClassification = ChordClassification()
+  private let chordClassification = ChordClassificationWithSimilarity()
   private let throttleAggregator = ThrottleAggregator<Chord>(
     interval: ConfigManager.shared.state.chordThrottleInterval
   )
@@ -29,6 +29,7 @@ final class DevChordClassificationViewModel: BaseViewModel<DevChordClassificatio
         windowSize: self.audioRecorderManager.windowSize,
         activeChords: self.state.selectedCodes
       ) {
+        guard let chord = chord else { return }
         if let throttled = self.throttleAggregator.add(value: chord, confidence: confidence) {
           // UI 업데이트
           self.emit(self.state.copy(
