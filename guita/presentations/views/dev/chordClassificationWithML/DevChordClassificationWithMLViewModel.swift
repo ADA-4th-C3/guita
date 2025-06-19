@@ -2,7 +2,7 @@
 
 final class DevChordClassificationWithMLViewModel: BaseViewModel<DevChordClassificationWithMLViewState> {
   
-  private let chordClassificationWithModel = ChordClassificationWithML()
+  private let chordClassificationWithModel = ChordClassificationWithRegression()
   private let audioRecorderManager: AudioRecorderManager = .shared
   
   init() {
@@ -20,17 +20,20 @@ final class DevChordClassificationWithMLViewModel: BaseViewModel<DevChordClassif
     Logger.d("Start prediction")
     audioRecorderManager.start { [weak self] buffer, _ in
       guard let self = self else { return }
-      if let (chord, _, pixel) = chordClassificationWithModel.run(
+      if let (chord, _) = chordClassificationWithModel.run(
         buffer: buffer,
         windowSize: self.audioRecorderManager.windowSize
       ) {
         emit(state.copy(
           isStarted: true,
           isSilence: chord == nil,
-          chord: chord,
-          pixel: { pixel }
+          chord: chord
         ))
       }
     }
+  }
+  
+  override func dispose() {
+    audioRecorderManager.stop()
   }
 }

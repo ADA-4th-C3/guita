@@ -10,7 +10,8 @@ final class ConfigManager: BaseViewModel<Config> {
       fullTrackPlaySpeed: .x1_0,
       noteThrottleInterval: 1.0,
       chordThrottleInterval: 1.0,
-      isVoiceCommandEnabled: true
+      isVoiceCommandEnabled: true,
+      chordClassificationType: .similarity
     ))
   }
 

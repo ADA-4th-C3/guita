@@ -1,303 +1,0 @@
-¢
-
-dense_input
-*
-†ÄR
-Identity
-*
-†Ä¢l¢9
-#com.github.apple.coremltools.sourcetensorflow==2.14.0¢-
-$com.github.apple.coremltools.version8.3.0≤Ó¿
-main∑
-!
-dense_input
-
-
-CoreML5à
-CoreML5¸Identityz
-const#
-dense_input_to_fp16_dtype_0
-*1
-name)
-!
-"
-dense_input_to_fp16_dtype_0*
-val
-
-
-"
-fp16¬
-const;
-%transpose_0_cast_fp16_to_fp32_to_fp16
-
-
- 
-*;
-name3
-+
-)"'
-%transpose_0_cast_fp16_to_fp32_to_fp16*?
-val8
-
-
- 
-*"
-@model_path/weights/weight.bin@ª
-const7
-'sequential_dense_BiasAdd_bias_0_to_fp16
-
-
-
- *=
-name5
--
-+")
-'sequential_dense_BiasAdd_bias_0_to_fp16*:
-val3
-
-
-
- *#
-@model_path/weights/weight.binÄè
-cast(
-dtype
-
-dense_input_to_fp16_dtype_0
-x
-
-dense_input)
-dense_input_to_fp16
-
-
-
-*
-name
-
-
-"
-cast_1Ñ
-linear3
-weight)
-'
-%transpose_0_cast_fp16_to_fp32_to_fp163
-bias+
-)
-'sequential_dense_BiasAdd_bias_0_to_fp16
-x
-
-dense_input_to_fp168
-"sequential_dense_BiasAdd_cast_fp16
-
-
-
- *8
-name0
-(
-&"$
-"sequential_dense_BiasAdd_cast_fp16°
-relu+
-x&
-$
-"sequential_dense_BiasAdd_cast_fp165
-sequential_dense_Relu_cast_fp16
-
-
-
- *5
-name-
-%
-#"!
-sequential_dense_Relu_cast_fp16√
-const;
-%transpose_1_cast_fp16_to_fp32_to_fp16
-
-
-
- *;
-name3
-+
-)"'
-%transpose_1_cast_fp16_to_fp32_to_fp16*@
-val9
-
-
-
- *#
-@model_path/weights/weight.binÄø
-const9
-)sequential_dense_1_BiasAdd_bias_0_to_fp16
-
-
-
-*?
-name7
-/
--"+
-)sequential_dense_1_BiasAdd_bias_0_to_fp16*:
-val3
-
-
-
-*#
-@model_path/weights/weight.bin¿ñ
-linear3
-weight)
-'
-%transpose_1_cast_fp16_to_fp32_to_fp165
-bias-
-+
-)sequential_dense_1_BiasAdd_bias_0_to_fp16(
-x#
-!
-sequential_dense_Relu_cast_fp16:
-$sequential_dense_1_BiasAdd_cast_fp16
-
-
-
-*:
-name2
-*
-("&
-$sequential_dense_1_BiasAdd_cast_fp16ß
-relu-
-x(
-&
-$sequential_dense_1_BiasAdd_cast_fp167
-!sequential_dense_1_Relu_cast_fp16
-
-
-
-*7
-name/
-'
-%"#
-!sequential_dense_1_Relu_cast_fp16√
-const;
-%transpose_2_cast_fp16_to_fp32_to_fp16
-
-
-
-*;
-name3
-+
-)"'
-%transpose_2_cast_fp16_to_fp32_to_fp16*@
-val9
-
-
-
-*#
-@model_path/weights/weight.bin¿Æ
-const9
-)sequential_dense_2_BiasAdd_bias_0_to_fp16
-
-
-
-*?
-name7
-/
--"+
-)sequential_dense_2_BiasAdd_bias_0_to_fp16*)
-val"
-
-
-
-
-:
-≠∞˚,.0¯±M ò
-linear3
-weight)
-'
-%transpose_2_cast_fp16_to_fp32_to_fp165
-bias-
-+
-)sequential_dense_2_BiasAdd_bias_0_to_fp16*
-x%
-#
-!sequential_dense_1_Relu_cast_fp16:
-$sequential_dense_2_BiasAdd_cast_fp16
-
-
-
-*:
-name2
-*
-("&
-$sequential_dense_2_BiasAdd_cast_fp16å
-const)
-!sequential_dense_2_Softmax_axis_0
-*7
-name/
-'
-%"#
-!sequential_dense_2_Softmax_axis_0*
-val
-
-
-
-ˇˇˇˇˇˇˇˇˇﬂ
-softmax-
-x(
-&
-$sequential_dense_2_BiasAdd_cast_fp16-
-axis%
-#
-!sequential_dense_2_Softmax_axis_0:
-$sequential_dense_2_Softmax_cast_fp16
-
-
-
-*:
-name2
-*
-("&
-$sequential_dense_2_Softmax_cast_fp16¨
-const<
-4sequential_dense_2_Softmax_cast_fp16_to_fp32_dtype_0
-*J
-nameB
-:
-8"6
-4sequential_dense_2_Softmax_cast_fp16_to_fp32_dtype_0*
-val
-
-
-"
-fp32∂
-castA
-dtype8
-6
-4sequential_dense_2_Softmax_cast_fp16_to_fp32_dtype_0-
-x(
-&
-$sequential_dense_2_Softmax_cast_fp16
-Identity
-
-
-*
-name
-
-
-"
-cast_0"¶
-	buildInfoò"
-
-
-Ö"Ç
-8
-!
-
-"
-coremltools-version
-
-	"
-8.3.0
-F
-.
-&
-$""
- coremltools-component-tensorflow
-
-
-"
-2.14.0
