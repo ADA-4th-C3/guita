@@ -33,6 +33,7 @@ enum SubPage: Hashable {
   case dev
   case devNoteClassification
   case devCodeClassification
+  case devChordClassificationWithML
   case devVoiceCommand
   case devConfig
   case devPermission
@@ -96,6 +97,8 @@ extension SubPage {
       return "노트 분류"
     case .devCodeClassification:
       return "코드 분류"
+    case .devChordClassificationWithML:
+      return "코드 분류(ML)"
     case .devVoiceCommand:
       return "음성 명령"
     case .devConfig:

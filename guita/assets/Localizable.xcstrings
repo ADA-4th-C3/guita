@@ -773,6 +773,9 @@
         }
       }
     },
+    "Classification" : {
+
+    },
     "Commands" : {
       "localizations" : {
         "en" : {
@@ -826,6 +829,9 @@
         }
       }
     },
+    "Etc" : {
+
+    },
     "ExitButton.Desc" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -844,6 +850,7 @@
       }
     },
     "Features" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2137,16 +2144,6 @@
     "업과 다운을 조합하여 다양한 리듬을 만들 수 있어요. 가장 많이 사용되는 칼립소 리듬을 알려줄게요." : {
 
     },
-    "열" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ten"
-          }
-        }
-      }
-    },
     "여덟" : {
       "localizations" : {
         "en" : {
@@ -2173,6 +2170,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Listen many times and learn the order of down and up strokes."
+          }
+        }
+      }
+    },
+    "열" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ten"
           }
         }
       }
