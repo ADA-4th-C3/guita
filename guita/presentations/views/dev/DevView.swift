@@ -23,15 +23,22 @@ struct DevView: View {
               router.push(.devPermission)
             }
           }
-
-          // MARK: Features
-          Section(header: Text("Features")) {
+          
+          // MARK: Classification
+          Section(header: Text("Classification")) {
             Tile(title: "Note Classification") {
               router.push(.devNoteClassification)
             }
             Tile(title: "Code Classification") {
               router.push(.devCodeClassification)
             }
+            Tile(title: "Code Classification with ML") {
+              router.push(.devChordClassificationWithML)
+            }
+          }
+
+          // MARK: Etc
+          Section(header: Text("Etc")) {
             Tile(title: "Voice Command") {
               router.push(.devVoiceCommand)
             }
