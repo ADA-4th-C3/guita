@@ -44,7 +44,7 @@ struct NoteClassification {
     for i in 0 ..< windowSize {
       // Hamming Window
       // - FFT는 입력 신호가 주기적이고 무한하다고 가정하지만 실제 오디오 신호는 짧은 구간만 자른 것(프레임)이라 양 끝이 갑자기 끊키면서 스펙트럼 누설(leakage)이라는 왜곡을 유발함.
-      // - 신호의 양 끝을 부드럽게 0에 가깝게 만드는 창(window) 함수로   FFT에 부드러운 경계 조건을 만들어줌.
+      // - 신호의 양 끝을 부드럽게 0에 가깝게 만드는 창(window) 함수로 FFT에 부드러운 경계 조건을 만들어줌.
       let window = 0.5 * (1 - cos(2 * Double.pi * Double(i) / Double(windowSize - 1)))
 
       // 복소수로 표현 (허수부 0으로 구현)

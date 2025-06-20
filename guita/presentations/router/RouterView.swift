@@ -44,7 +44,8 @@ struct RouterView: View {
           case .devVoiceCommand: DevVoiceCommandView()
           case .devTextToSpeech: DevTextToSpeechView()
           case .devNoteClassification: DevNoteClassificationView()
-          case .devCodeClassification: DevChordClassificationView()
+          case .devCodeClassificationWithSimilarity: DevChordClassificationWithSimilarityView()
+          case .devChordClassificationWithRegression: DevChordClassificationWithRegressionView()
           }
         }
         .toolbarBackground(.hidden, for: .navigationBar)

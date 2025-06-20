@@ -8,7 +8,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
   private let audioPlayerManager: AudioPlayerManager = .shared
   private let textToSpeechManager: TextToSpeechManager = .shared
   private let noteClassification: NoteClassification = .init()
-  private let chordClassification: ChordClassification = .init()
+  private let chordClassification: ChordClassification = .init(type: ConfigManager.shared.state.chordClassificationType)
   private let noteThrottle = ThrottleAggregator<Note>(
     interval: ConfigManager.shared.state.noteThrottleInterval
   )
@@ -174,6 +174,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
         windowSize: self.audioRecorderManager.windowSize,
         activeChords: [self.state.chord]
       ) {
+        guard let chord = chord else { return }
         if let throttledChord = self.chordThrottle.add(value: chord, confidence: chordConfidence) {
           self.chordLesson.onChordClassified(userChord: throttledChord.value)
         }

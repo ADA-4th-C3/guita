@@ -1,6 +1,6 @@
 //  Copyright © 2025 ADA 4th Challenge3 Team1. All rights reserved.
 
-struct DevChordClassificationViewState {
+struct DevChordClassificationWithSimilarityViewState {
   let recordPermissionState: PermissionResult
   let chord: Chord?
   let confidence: Float
@@ -11,8 +11,8 @@ struct DevChordClassificationViewState {
     chord: (() -> Chord?)? = nil,
     confidence: Float? = nil,
     selectedCodes: [Chord]? = nil
-  ) -> DevChordClassificationViewState {
-    return DevChordClassificationViewState(
+  ) -> DevChordClassificationWithSimilarityViewState {
+    return DevChordClassificationWithSimilarityViewState(
       recordPermissionState: recordPermissionState ?? self.recordPermissionState,
       chord: chord == nil ? self.chord : chord!(),
       confidence: confidence ?? self.confidence,

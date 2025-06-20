@@ -4,18 +4,33 @@ import Accelerate
 import AVFoundation
 import Foundation
 
-final class ChordClassification {
+/// 코사인 유사도 70% & 유클리드 거리 기반 유사도 30%를 가중합하여 confidence 생성
+final class ChordClassificationWithSimilarity: ChordClassificationUseCase {
   private let chromaExtractor = ChromaExtractor()
+  private let activeChords: [Chord] = Chord.allCases
 
   // MARK: - 버퍼 입력 감지
   func run(
     buffer: AVAudioPCMBuffer,
     windowSize: Int,
     activeChords: [Chord] = Chord.allCases,
+    minVolumeThreshold: Double = 0.025,
     minConfidenceThreshold: Float = 0.5
-  ) -> (chord: Chord, confidence: Float)? {
+  ) -> (chord: Chord?, confidence: Float)? {
     guard let data = buffer.floatChannelData?[0] else { return nil }
     let frameLength = Int(buffer.frameLength)
+
+    // RMS : min volume threshold
+    var sumSquares: Double = 0
+    for i in 0 ..< frameLength {
+      let sample = Double(data[i])
+      sumSquares += sample * sample
+    }
+    let rms = sqrt(sumSquares / Double(frameLength))
+    if rms < minVolumeThreshold {
+      return nil
+    }
+
     let audioArray = Array(UnsafeBufferPointer(start: data, count: frameLength))
     let chroma = chromaExtractor.extract(
       from: audioArray,
