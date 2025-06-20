@@ -3,7 +3,7 @@
 import AVFoundation
 import SwiftUI
 
-final class DevChordClassificationViewModel: BaseViewModel<DevChordClassificationViewState> {
+final class DevChordClassificationWithSimilarityViewModel: BaseViewModel<DevChordClassificationWithSimilarityViewState> {
   private let audioRecorderManager: AudioRecorderManager = .shared
   private let chordClassification = ChordClassificationWithSimilarity()
   private let throttleAggregator = ThrottleAggregator<Chord>(

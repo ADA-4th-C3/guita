@@ -2,10 +2,10 @@
 
 import SwiftUI
 
-struct DevChordClassificationWithMLView: View {
+struct DevChordClassificationWithRegressionView: View {
   var body: some View {
     BaseView(
-      create: { DevChordClassificationWithMLViewModel() }
+      create: { DevChordClassificationWithRegressionViewModel() }
     ) { viewModel, state in
       PermissionView(
         permissionListener: { isGranted in
@@ -35,5 +35,5 @@ struct DevChordClassificationWithMLView: View {
 }
 
 #Preview {
-  DevChordClassificationWithMLView()
+  DevChordClassificationWithRegressionView()
 }
