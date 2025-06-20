@@ -19,7 +19,7 @@ final class ChordClassificationWithSimilarity: ChordClassificationUseCase {
   ) -> (chord: Chord?, confidence: Float)? {
     guard let data = buffer.floatChannelData?[0] else { return nil }
     let frameLength = Int(buffer.frameLength)
-    
+
     // RMS : min volume threshold
     var sumSquares: Double = 0
     for i in 0 ..< frameLength {
@@ -30,7 +30,7 @@ final class ChordClassificationWithSimilarity: ChordClassificationUseCase {
     if rms < minVolumeThreshold {
       return nil
     }
-    
+
     let audioArray = Array(UnsafeBufferPointer(start: data, count: frameLength))
     let chroma = chromaExtractor.extract(
       from: audioArray,

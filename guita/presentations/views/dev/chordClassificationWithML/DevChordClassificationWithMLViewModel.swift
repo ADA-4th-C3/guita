@@ -1,10 +1,9 @@
 //  Copyright © 2025 ADA 4th Challenge3 Team1. All rights reserved.
 
 final class DevChordClassificationWithMLViewModel: BaseViewModel<DevChordClassificationWithMLViewState> {
-  
   private let chordClassificationWithModel = ChordClassificationWithRegression()
   private let audioRecorderManager: AudioRecorderManager = .shared
-  
+
   init() {
     super.init(state: .init(
       isStarted: false,
@@ -13,10 +12,10 @@ final class DevChordClassificationWithMLViewModel: BaseViewModel<DevChordClassif
       pixel: nil
     ))
   }
-  
+
   func start() {
     if state.isStarted { return }
-    
+
     Logger.d("Start prediction")
     audioRecorderManager.start { [weak self] buffer, _ in
       guard let self = self else { return }
@@ -32,7 +31,7 @@ final class DevChordClassificationWithMLViewModel: BaseViewModel<DevChordClassif
       }
     }
   }
-  
+
   override func dispose() {
     audioRecorderManager.stop()
   }

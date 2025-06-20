@@ -39,7 +39,7 @@ struct DevConfigView: View {
             Tile(title: "느리게", subtitle: "🐢", action: { viewModel.updateNoteThrottleInterval(isSpeedUp: false) })
             Tile(title: "빠르게", subtitle: "🐇", action: { viewModel.updateNoteThrottleInterval(isSpeedUp: true) })
           }
-          
+
           // MARK:
           Section(header: Text("Chord Classification")) {
             Text("Note 인식 간격")

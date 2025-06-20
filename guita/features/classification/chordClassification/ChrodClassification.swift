@@ -3,20 +3,20 @@
 import AVFAudio
 
 enum ChordClassificationType: String, Codable, CaseIterable {
-  case similarity="similarity"
-  case regression="regression"
+  case similarity
+  case regression
 }
 
 final class ChordClassification: ChordClassificationUseCase {
   let useCase: ChordClassificationUseCase
-  
+
   init(type: ChordClassificationType) {
-    self.useCase = switch type {
+    useCase = switch type {
     case .similarity: ChordClassificationWithSimilarity()
     case .regression: ChordClassificationWithRegression()
     }
   }
-  
+
   func run(
     buffer: AVAudioPCMBuffer,
     windowSize: Int,
