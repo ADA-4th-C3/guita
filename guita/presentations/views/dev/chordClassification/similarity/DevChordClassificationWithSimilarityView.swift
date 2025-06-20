@@ -2,10 +2,10 @@
 
 import SwiftUI
 
-struct DevChordClassificationView: View {
+struct DevChordClassificationWithSimilarityView: View {
   var body: some View {
     BaseView(
-      create: { DevChordClassificationViewModel() }
+      create: { DevChordClassificationWithSimilarityViewModel() }
     ) { viewModel, state in
       VStack {
         // MARK: Toolbar
@@ -46,6 +46,6 @@ struct DevChordClassificationView: View {
 
 #Preview {
   BasePreview {
-    DevChordClassificationView()
+    DevChordClassificationWithSimilarityView()
   }
 }

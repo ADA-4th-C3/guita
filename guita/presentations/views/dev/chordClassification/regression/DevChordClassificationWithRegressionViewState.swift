@@ -2,7 +2,7 @@
 
 import AVFoundation
 
-struct DevChordClassificationWithMLViewState {
+struct DevChordClassificationWithRegressionViewState {
   let isStarted: Bool
   let isSilence: Bool
   let chord: Chord
@@ -13,8 +13,8 @@ struct DevChordClassificationWithMLViewState {
     isSilence: Bool? = nil,
     chord: Chord? = nil,
     pixel: (() -> CVPixelBuffer)? = nil
-  ) -> DevChordClassificationWithMLViewState {
-    return DevChordClassificationWithMLViewState(
+  ) -> DevChordClassificationWithRegressionViewState {
+    return DevChordClassificationWithRegressionViewState(
       isStarted: isStarted ?? self.isStarted,
       isSilence: isSilence ?? self.isSilence,
       chord: chord ?? self.chord,

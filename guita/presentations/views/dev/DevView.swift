@@ -29,11 +29,11 @@ struct DevView: View {
             Tile(title: "Note Classification") {
               router.push(.devNoteClassification)
             }
-            Tile(title: "Code Classification") {
-              router.push(.devCodeClassification)
+            Tile(title: "Code Classification with Similarity") {
+              router.push(.devCodeClassificationWithSimilarity)
             }
-            Tile(title: "Code Classification with ML") {
-              router.push(.devChordClassificationWithML)
+            Tile(title: "Code Classification with Regression") {
+              router.push(.devChordClassificationWithRegression)
             }
           }
 
