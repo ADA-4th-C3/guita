@@ -26,11 +26,11 @@ struct DevChordClassificationWithMLView: View {
       }
     }
   }
-  
+
   func cgImage(from pixelBuffer: CVPixelBuffer) -> CGImage? {
-      let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
-      let context = CIContext()
-      return context.createCGImage(ciImage, from: ciImage.extent)
+    let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
+    let context = CIContext()
+    return context.createCGImage(ciImage, from: ciImage.extent)
   }
 }
 

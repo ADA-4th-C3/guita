@@ -2,8 +2,8 @@
 
 import Accelerate
 import AVFoundation
-import Foundation
 import CoreML
+import Foundation
 
 /// Regression을 이용하여 코드 추측
 final class ChordClassificationWithRegression: ChordClassificationUseCase {
@@ -11,7 +11,7 @@ final class ChordClassificationWithRegression: ChordClassificationUseCase {
   private let chromaExtractor = ChromaExtractor()
   private let labels: [Chord?] = [.A, .B7, .C, .E, .G, nil]
 
-  init () {
+  init() {
     do {
       model = try ChordClassifierRegressionModel()
     } catch {
@@ -19,7 +19,7 @@ final class ChordClassificationWithRegression: ChordClassificationUseCase {
       Logger.e(error.localizedDescription)
     }
   }
-  
+
   /// Silence인 경우 nil 반환
   func run(
     buffer: AVAudioPCMBuffer,
@@ -30,7 +30,7 @@ final class ChordClassificationWithRegression: ChordClassificationUseCase {
   ) -> (chord: Chord?, confidence: Float)? {
     guard let data = buffer.floatChannelData?[0] else { return nil }
     let frameLength = Int(buffer.frameLength)
-    
+
     // RMS : min volume threshold
     var sumSquares: Double = 0
     for i in 0 ..< frameLength {
@@ -41,7 +41,7 @@ final class ChordClassificationWithRegression: ChordClassificationUseCase {
     if rms < minVolumeThreshold {
       return (nil, 1.0)
     }
-    
+
     let audioArray = Array(UnsafeBufferPointer(start: data, count: frameLength))
     let chroma = chromaExtractor.extract(
       from: audioArray,
@@ -49,13 +49,14 @@ final class ChordClassificationWithRegression: ChordClassificationUseCase {
       windowSize: windowSize,
       hopSize: Int(windowSize / 2)
     )
-    
+
     // Model 입력 변환
     guard let input = convertSwiftArrayToMLMultiArray(chroma),
-          let prediction = try? model?.prediction(dense_input: input) else {
+          let prediction = try? model?.prediction(dense_input: input)
+    else {
       return nil
     }
-    
+
     // ['A', 'B7', 'C', 'E', 'G', 'Silence']
     Logger.d("prediction : \(prediction.Identity)")
     let results = convertMLMultiArrayToSwiftArray(prediction.Identity)
@@ -74,28 +75,28 @@ final class ChordClassificationWithRegression: ChordClassificationUseCase {
     }
     return nil
   }
-  
+
   func convertSwiftArrayToMLMultiArray(_ array: [Float]) -> MLMultiArray? {
-      let rows = 1
-      let columns = array.count
-      guard let mlArray = try? MLMultiArray(shape: [NSNumber(value: rows), NSNumber(value: columns)], dataType: .float32) else {
-          return nil
-      }
+    let rows = 1
+    let columns = array.count
+    guard let mlArray = try? MLMultiArray(shape: [NSNumber(value: rows), NSNumber(value: columns)], dataType: .float32) else {
+      return nil
+    }
 
-      for (index, value) in array.enumerated() {
-          mlArray[[0, NSNumber(value: index)]] = NSNumber(value: value)
-      }
+    for (index, value) in array.enumerated() {
+      mlArray[[0, NSNumber(value: index)]] = NSNumber(value: value)
+    }
 
-      return mlArray
+    return mlArray
   }
-  
+
   private func convertMLMultiArrayToSwiftArray(_ multiArray: MLMultiArray) -> [Float] {
     guard multiArray.dataType == .float32 || multiArray.dataType == .double else {
       return []
     }
-    
+
     var swiftArray: [Float] = []
-    for i in 0..<multiArray.count {
+    for i in 0 ..< multiArray.count {
       swiftArray.append(multiArray[i].floatValue)
     }
     return swiftArray

@@ -23,7 +23,7 @@ struct DevView: View {
               router.push(.devPermission)
             }
           }
-          
+
           // MARK: Classification
           Section(header: Text("Classification")) {
             Tile(title: "Note Classification") {
