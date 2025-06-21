@@ -14,6 +14,14 @@ struct PermissionViewState {
     permissionStates.values.count { $0 == .granted } == permissionStates.values.count
   }
 
+  var isDenied: Bool {
+    permissionStates.values.contains { $0 == .denied }
+  }
+
+  var isUndetermined: Bool {
+    permissionStates.values.contains { $0 == .undetermined }
+  }
+
   func copy(
     permissionStates: [PermissionCategory: PermissionResult]? = nil,
     showGuideDialog: Bool? = nil,

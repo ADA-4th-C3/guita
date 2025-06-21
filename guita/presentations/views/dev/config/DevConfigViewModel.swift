@@ -37,6 +37,10 @@ final class DevConfigViewModel: BaseViewModel<Config> {
     emit(state.copy(noteThrottleInterval: value))
   }
 
+  func updateChordClassificationType(type: ChordClassificationType) {
+    emit(state.copy(chordClassificationType: type))
+  }
+
   override func dispose() {
     textToSpeechManager.stop()
   }
