@@ -16,7 +16,7 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
     interval: ConfigManager.shared.state.chordThrottleInterval
   )
   private var chordLesson: ChordLesson
-  private var playTask: Task<Void, Never>? = nil
+  private var playTask: Task<Void, Never>?
   private let router: Router
 
   init(_ router: Router, _ chord: Chord, _ chords: [Chord]) {

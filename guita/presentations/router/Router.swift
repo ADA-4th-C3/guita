@@ -29,7 +29,7 @@ final class Router: BaseViewModel<RouterViewState> {
 
   /// Push to sub page list
   func push(_ subPage: SubPage) {
-    if !state.subPages.isEmpty && state.subPages.last == subPage {
+    if !state.subPages.isEmpty, state.subPages.last == subPage {
       return
     }
     emit(

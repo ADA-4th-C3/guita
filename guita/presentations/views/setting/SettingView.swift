@@ -32,7 +32,8 @@ struct SettingView: View {
                 get: { viewModel.effectiveVoiceCommandEnabled },
                 set: { enabled in
                   viewModel.updateUserWantsVoiceCommand(enabled)
-                }))
+                }
+              ))
             }
             .padding()
             .frame(minHeight: 90)
