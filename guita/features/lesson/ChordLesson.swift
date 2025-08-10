@@ -147,6 +147,7 @@ final class ChordLesson: BaseLesson {
           string,
           finger
         )
+        // TODO: - 바코드라면 어떻게 처리해야 하는지 넣어놓기
         await self.textToSpeechManager.speak(text)
       },
     ])
