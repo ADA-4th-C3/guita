@@ -8,7 +8,7 @@ final class SectionLessonViewModel: BaseViewModel<SectionLessonViewState> {
   private let audioPlayerManager: AudioPlayerManager = .shared
   private let textToSpeechManager = TextToSpeechManager.shared
 
-  private var playTask: Task<Void, Never>? = nil
+  private var playTask: Task<Void, Never>?
   private let router: Router
 
   init(_ router: Router) {

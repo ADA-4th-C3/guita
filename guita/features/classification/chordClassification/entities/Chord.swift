@@ -29,7 +29,7 @@ enum Chord: String, CaseIterable, CustomStringConvertible {
 
   var coordinates: [([(fret: Int, string: Int)], finger: Int)] {
     switch self {
-      // MARK: Major
+    // MARK: Major
     case .C: return [([(1, 2)], 2), ([(2, 4)], 3), ([(3, 5)], 4)]
     case .D: return [([(2, 3)], 2), ([(2, 1)], 3), ([(3, 2)], 4)]
     case .E: return [([(1, 3)], 2), ([(2, 5)], 3), ([(2, 4)], 4)]
@@ -37,11 +37,11 @@ enum Chord: String, CaseIterable, CustomStringConvertible {
     case .G: return [([(2, 5)], 2), ([(3, 6)], 3), ([(3, 1)], 5)]
     case .A: return [([(2, 4)], 3), ([(2, 3)], 4), ([(2, 2)], 5)]
     case .B: return [([(2, 1), (2, 5), (2, 6)], 2), ([(4, 4)], 3), ([(4, 3)], 4), ([(4, 2)], 5)]
-      // MARK: Minor
+    // MARK: Minor
     case .Dm: return [([(1, 1)], 2), ([(2, 3)], 3), ([(3, 2)], 4)]
     case .Em: return [([(2, 5)], 3), ([(2, 4)], 4)]
     case .Am: return [([(1, 2)], 2), ([(2, 4)], 3), ([(2, 3)], 4)]
-      // MARK: 7
+    // MARK: 7
     case .B7: return [([(1, 4)], 2), ([(2, 5)], 3), ([(2, 3)], 4) /* , ([(2, 1)], 5) */ ] // 약식으로 잡음
     case .C7: return [([(1, 2)], 1), ([(2, 4)], 2), ([(3, 5)], 3), ([(3, 3)], 4)]
     case .D7: return [([(1, 2)], 1), ([(2, 3)], 2), ([(2, 1)], 3)]
@@ -49,7 +49,6 @@ enum Chord: String, CaseIterable, CustomStringConvertible {
     case .F7: return [([(1, 1), (1, 2), (1, 4), (1, 6)], 1), ([(2, 3)], 2), ([(3, 5)], 3)]
     case .G7: return [([(1, 1)], 1), ([(2, 5)], 2), ([(3, 6)], 3)]
     case .A7: return [([(2, 4)], 1), ([(2, 2)], 2)]
-      
     }
   }
 
@@ -83,7 +82,6 @@ enum Chord: String, CaseIterable, CustomStringConvertible {
     case .G7: return chromaVector(for: [7, 11, 2, 5], weights: [1.0, 0.7, 0.7, 0.5])
     case .A7: return chromaVector(for: [9, 1, 4, 7], weights: [1.0, 0.7, 0.7, 0.5])
     case .B7: return chromaVector(for: [11, 3, 6, 9], weights: [1.0, 0.7, 0.7, 0.5])
-      
     }
   }
 
