@@ -55,7 +55,6 @@ enum Chord: String, CaseIterable, CustomStringConvertible {
     case .Gm: return [([(1, 1), (1, 2), (1, 3), (1, 6)], 1), ([(3, 5)], 3), ([(3, 4)], 4)]
     case .Am: return [([(1, 2)], 1), ([(2, 4)], 2), ([(2, 3)], 3)]
     case .Bm: return [([(2, 1), (2, 5), (2, 6)], 1), ([(3, 2)], 2), ([(4, 4)], 3), ([(4, 3)], 4)]
-
     // MARK: Minor7
     case .Cm7: return [([(3, 1), (3, 5)], 2), ([(4, 2)], 3), ([(5, 4)], 4)]
     case .Dm7: return [([(1, 1), (1, 2)], 2), ([(2, 3)], 3)]
@@ -64,7 +63,6 @@ enum Chord: String, CaseIterable, CustomStringConvertible {
     case .Gm7: return [([(3, 1), (3, 2), (3, 3), (3, 6)], 2), ([(5, 5)], 4)]
     case .Am7: return [([(1, 2)], 1), ([(2, 4)], 2)]
     case .Bm7: return [([(2, 1), (2, 2), (2, 5)], 2), ([(4, 4)], 4), ([(3, 3)], 3)]
-
     // MARK: Major7
     case .CM7: return [([(2, 4)], 2), ([(3, 5)], 3)]
     case .DM7: return [([(2, 3)], 2), ([(2, 2)], 3), ([(2, 1)], 4)]
@@ -97,7 +95,7 @@ enum Chord: String, CaseIterable, CustomStringConvertible {
     case .G: return chromaVector(for: [7, 11, 2], weights: [1.0, 0.7, 0.7])
     case .A: return chromaVector(for: [9, 1, 4], weights: [1.0, 0.7, 0.7])
     case .B: return chromaVector(for: [11, 3, 6], weights: [1.0, 0.7, 0.7])
-      // MARK: 7
+    // MARK: 7
     case .C7: return chromaVector(for: [0, 4, 7, 10], weights: [1.0, 0.7, 0.7, 0.5])
     case .D7: return chromaVector(for: [2, 6, 9, 0], weights: [1.0, 0.7, 0.7, 0.5])
     case .E7: return chromaVector(for: [4, 8, 11, 2], weights: [1.0, 0.7, 0.7, 0.5])
@@ -113,7 +111,6 @@ enum Chord: String, CaseIterable, CustomStringConvertible {
     case .Gm: return chromaVector(for: [7, 10, 2], weights: [1.0, 0.7, 0.7])
     case .Am: return chromaVector(for: [9, 0, 4], weights: [1.0, 0.7, 0.7])
     case .Bm: return chromaVector(for: [11, 2, 6], weights: [1.0, 0.7, 0.7])
-
     // MARK: Minor7
     case .Cm7: return chromaVector(for: [0, 3, 7, 10], weights: [1.0, 0.7, 0.7, 0.5])
     case .Dm7: return chromaVector(for: [2, 5, 9, 0], weights: [1.0, 0.7, 0.7, 0.5])
@@ -122,7 +119,6 @@ enum Chord: String, CaseIterable, CustomStringConvertible {
     case .Gm7: return chromaVector(for: [7, 10, 2, 5], weights: [1.0, 0.7, 0.7, 0.5])
     case .Am7: return chromaVector(for: [9, 0, 4, 7], weights: [1.0, 0.7, 0.7, 0.5])
     case .Bm7: return chromaVector(for: [11, 2, 6, 9], weights: [1.0, 0.7, 0.7, 0.5])
-
     // MARK: Major7
     case .CM7: return chromaVector(for: [0, 4, 7, 11], weights: [1.0, 0.7, 0.7, 0.5])
     case .DM7: return chromaVector(for: [2, 6, 9, 1], weights: [1.0, 0.7, 0.7, 0.5])
