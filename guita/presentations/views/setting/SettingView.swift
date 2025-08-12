@@ -8,69 +8,70 @@ struct SettingView: View {
       create: { SettingViewModel() }
     ) { viewModel, state in
       GeometryReader { geo in
-          VStack {
-            // MARK: Toolbar
-            toolBar
+        VStack {
+          // MARK: Toolbar
+          toolBar
 
-            VStack(spacing: 0) {
-              ListDivider()
-              // MARK: 음성 명령 섹션
-              voiceCommandSection(
-                size: geo.size,
-                enabled: viewModel.effectiveVoiceCommandEnabled,
-                onToggle: { enabled in
-                  viewModel.updateUserWantsVoiceCommand(enabled)
-                }
-              )
+          VStack(spacing: 0) {
+            ListDivider()
 
-              ListDivider()
-
-              // MARK: 강의 속도 조절 섹션
-              lectureSpeedSection(
-                speedText: state.config.ttsSpeed.value.formatted(2),
-                onDecrease: { viewModel.updateTtsSpeed(isSpeedUp: false) },
-                onIncrease: { viewModel.updateTtsSpeed(isSpeedUp: true) }
-              )
-
-              ListDivider()
-            }
-
-            Spacer()
-          }
-          .frame(maxWidth: geo.size.width, minHeight: 90)
-          .accessibilityElement(children: .contain)
-          .accessibilityHidden(state.showGuideDialog)
-
-          // MARK: Background + Guide dialog
-          if state.showGuideDialog {
-            Color.dark.opacity(0.2)
-              .ignoresSafeArea()
-            PermissionGuideDialog(
-              onConfirm: {
-                withAnimation {
-                  viewModel.hideGuideDialog()
-                }
-                viewModel.requestPermissions()
+            // MARK: 음성 명령 섹션
+            voiceCommandSection(
+              size: geo.size,
+              enabled: viewModel.effectiveVoiceCommandEnabled,
+              onToggle: { enabled in
+                viewModel.updateUserWantsVoiceCommand(enabled)
               }
             )
+
+            ListDivider()
+
+            // MARK: 강의 속도 조절 섹션
+            lectureSpeedSection(
+              speedText: state.config.ttsSpeed.value.formatted(2),
+              onDecrease: { viewModel.updateTtsSpeed(isSpeedUp: false) },
+              onIncrease: { viewModel.updateTtsSpeed(isSpeedUp: true) }
+            )
+
+            ListDivider()
           }
 
-          // MARK: Denied dialog
-          if state.showDeniedDialog {
-            PermissionDeniedDialog(
-              onConfirm: viewModel.openSettings,
-              onCancel: viewModel.onDeniedDialogCanceled
-            )
-          }
+          Spacer()
+        }
+        .frame(maxWidth: geo.size.width, minHeight: 90)
+        .accessibilityElement(children: .contain)
+        .accessibilityHidden(state.showGuideDialog)
+
+        // MARK: Background + Guide dialog
+        if state.showGuideDialog {
+          Color.dark.opacity(0.2)
+            .ignoresSafeArea()
+          PermissionGuideDialog(
+            onConfirm: {
+              withAnimation {
+                viewModel.hideGuideDialog()
+              }
+              viewModel.requestPermissions()
+            }
+          )
+        }
+
+        // MARK: Denied dialog
+        if state.showDeniedDialog {
+          PermissionDeniedDialog(
+            onConfirm: viewModel.openSettings,
+            onCancel: viewModel.onDeniedDialogCanceled
+          )
+        }
       }
     }
   }
-  
-  private var toolBar : some View {
+
+  private var toolBar: some View {
     Toolbar(title: NSLocalizedString("설정", comment: ""))
   }
-  
-  private func voiceCommandSection(size: CGSize ,enabled: Bool, onToggle: @escaping (Bool) -> Void) -> some View {
+
+  private func voiceCommandSection(size: CGSize, enabled: Bool, onToggle: @escaping (Bool) -> Void) -> some View {
     HStack {
       VStack(alignment: .leading, spacing: 4) {
         Text("음성 명령")
@@ -96,7 +97,7 @@ struct SettingView: View {
     )
     .accessibilityHint("학습 화면에서 음성으로 앱의 일부 기능을 제어할 수 있습니다.")
   }
-  
+
   private func lectureSpeedSection(speedText: String, onDecrease: @escaping () -> Void, onIncrease: @escaping () -> Void) -> some View {
     HStack {
       VStack(alignment: .leading, spacing: 4) {
