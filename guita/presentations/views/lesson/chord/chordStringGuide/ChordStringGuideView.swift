@@ -7,8 +7,31 @@ struct ChordStringGuideView: View {
 
   private let fretCount = 4
   private let stringCount = 6
-  private let fretSpacing: CGFloat = 50
-  private let stringSpacing: CGFloat = 40
+  private let fretSpacing: CGFloat = 80
+  private let stringSpacing: CGFloat = 50
+  private let firstFretWidth: CGFloat = 20
+
+  private var firstFretHeight: CGFloat {
+      let height = CGFloat(stringCount - 1) * stringSpacing + 3
+      let hasString1 = chord.coordinates
+          .flatMap { $0.0 }
+          .contains { $0.string == 1 }
+      let hasString6 = chord.coordinates
+          .flatMap { $0.0 }
+          .contains { $0.string == 6 }
+      
+      if hasString1 || hasString6 {
+        return height + 1
+      }
+      return height
+  }
+  // 시작 프렛 (코드가 3프렛부터면 3)
+  private var startFret: Int {
+      if let minFret = chord.frets.min(), minFret >= 3 {
+          return minFret
+      }
+      return 1
+  }
 
   var body: some View {
     VStack(spacing: 20) {
@@ -23,50 +46,74 @@ struct ChordStringGuideView: View {
         // 손가락 위치 표시
         fingerPositionsView
       }
-      .frame(width: CGFloat(fretCount) * fretSpacing + 40,
-             height: CGFloat(stringCount - 1) * stringSpacing + 40)
+      .frame(width: CGFloat(fretCount) * fretSpacing + 40, height: CGFloat(stringCount - 1) * stringSpacing + 40)
     }
     .padding()
+    .accessibilityHidden(true)
   }
 
   // 프렛보드 뷰
   private var fretboardView: some View {
+    
     ZStack {
+      // 세로 줄 (프렛) - 왼쪽에서 오른쪽으로
+      ForEach(1 ... fretCount - 1, id: \.self) { fret in
+        Rectangle()
+          .fill(.lightGrey)
+          .frame(
+            width: fret == 0 ? (startFret == 1 ? firstFretWidth : 6) : 6,
+            height: CGFloat(stringCount - 1) * stringSpacing + 3
+          )
+          .offset(x: CGFloat(fret) * fretSpacing - CGFloat(fretCount) * fretSpacing / 2)
+      }
+      
       // 가로 줄 (스트링) - 위에서 아래로 1번~6번
       ForEach(0 ..< stringCount, id: \.self) { string in
         Rectangle()
-          .fill(Color.white)
-          .frame(width: CGFloat(fretCount) * fretSpacing, height: 2)
-          .offset(y: CGFloat(string) * stringSpacing - CGFloat(stringCount - 1) * stringSpacing / 2)
-      }
-
-      // 세로 줄 (프렛) - 왼쪽에서 오른쪽으로
-      ForEach(0 ... fretCount, id: \.self) { fret in
-        Rectangle()
-          .fill(chord.frets.contains(fret) ? Color.yellow : Color.white)
-          .frame(width: 2, height: CGFloat(stringCount - 1) * stringSpacing)
-          .offset(x: CGFloat(fret) * fretSpacing - CGFloat(fretCount) * fretSpacing / 2)
-      }
-
-      // 프렛 번호 표시 (위쪽에)
-      ForEach(1 ... fretCount, id: \.self) { fret in
-        Text("\(fret)")
-          .font(.caption)
-          .foregroundColor(.gray)
+          .fill(
+            chord.coordinates
+              .flatMap { $0.0 }
+              .contains(where: { $0.string == string + 1 }) ? .accent : .lightGrey
+          )
+          .frame(
+            width: CGFloat(fretCount) * fretSpacing,
+            height: chord.coordinates
+              .flatMap { $0.0 }
+              .contains(where: { $0.string == string + 1 }) ? 4 : 3
+          )
           .offset(
-            x: CGFloat(fret) * fretSpacing - CGFloat(fretCount) * fretSpacing / 2 - fretSpacing / 2,
-            y: -CGFloat(stringCount - 1) * stringSpacing / 2 - 20
+            y: CGFloat(string) * stringSpacing - CGFloat(stringCount - 1) * stringSpacing / 2
           )
       }
+      
+      Rectangle()
+        .fill(.lightGrey)
+        .frame(
+          width: startFret == 1 ? firstFretWidth : 6,
+          height: firstFretHeight
+        )
+        .offset(x: -CGFloat(fretCount) * fretSpacing / 2)
 
       // 스트링 번호 표시 (왼쪽에)
       ForEach(0 ..< stringCount, id: \.self) { string in
         Text("\(string + 1)")
-          .font(.caption)
-          .foregroundColor(.gray)
+          .fontKoddi(24, color: .white, weight: .bold)
           .offset(
             x: -CGFloat(fretCount) * fretSpacing / 2 - 20,
             y: CGFloat(string) * stringSpacing - CGFloat(stringCount - 1) * stringSpacing / 2
+          )
+          .padding(.trailing, 20)
+      }
+
+      // 시작 프렛 표기 (예: 3)
+      if startFret > 1 {
+        Text("\(startFret)")
+          .fontKoddi(22, color: .black, weight: .bold)
+          .padding(6)
+          .background(.white, in: Circle())
+          .offset(
+            x: -CGFloat(fretCount) * fretSpacing / 2 + 6,
+            y: CGFloat(stringCount - 1) * stringSpacing / 2 + stringSpacing / 2
           )
       }
     }
@@ -87,16 +134,17 @@ struct ChordStringGuideView: View {
             // 단일 위치는 동그라미로 표시
             let position = group.first!
             Circle()
-              .fill(fingerColor(finger))
-              .frame(width: 25, height: 25)
+              .fill(.accent)
+              .frame(width: 40, height: 42)
               .overlay(
                 Text("\(finger)")
-                  .foregroundColor(.white)
-                  .font(.caption)
-                  .fontWeight(.bold)
+                  .fontKoddi(24, color: .black, weight: .bold)
               )
               .offset(
-                x: CGFloat(position.fret) * fretSpacing - CGFloat(fretCount) * fretSpacing / 2 - fretSpacing / 2,
+                x: {
+                  let visibleIndex = max(1, min(fretCount, (position.fret - startFret + 1)))
+                  return CGFloat(visibleIndex) * fretSpacing - CGFloat(fretCount) * fretSpacing / 2 - fretSpacing / 2
+                }(),
                 y: CGFloat(position.string - 1) * stringSpacing - CGFloat(stringCount - 1) * stringSpacing / 2
               )
           } else {
@@ -107,19 +155,18 @@ struct ChordStringGuideView: View {
 
             let startY = CGFloat(minString - 1) * stringSpacing - CGFloat(stringCount - 1) * stringSpacing / 2
             let endY = CGFloat(maxString - 1) * stringSpacing - CGFloat(stringCount - 1) * stringSpacing / 2
-            let x = CGFloat(fret) * fretSpacing - CGFloat(fretCount) * fretSpacing / 2 - fretSpacing / 2
+            let visibleIndex = max(1, min(fretCount, (fret - startFret + 1)))
+            let x = CGFloat(visibleIndex) * fretSpacing - CGFloat(fretCount) * fretSpacing / 2 - fretSpacing / 2
 
             // 바레 라인
-            Rectangle()
-              .fill(fingerColor(finger))
-              .frame(width: 8, height: endY - startY + 25)
+            RoundedRectangle(cornerSize: .init(width: 21, height: 21))
+              .fill(.accent)
+              .frame(width: 44, height: endY - startY + 25)
               .offset(x: x, y: (startY + endY) / 2)
 
             // 손가락 번호 표시
             Text("\(finger)")
-              .foregroundColor(.white)
-              .font(.caption)
-              .fontWeight(.bold)
+              .fontKoddi(24, color: .black, weight: .bold)
               .offset(x: x, y: (startY + endY) / 2)
           }
         }
@@ -155,23 +202,14 @@ struct ChordStringGuideView: View {
 
     return groups
   }
-
-  // 손가락 번호에 따른 색상 반환
-  private func fingerColor(_ finger: Int) -> Color {
-    switch finger {
-    case 1: return .red
-    case 2: return .blue
-    case 3: return .green
-    case 4: return .orange
-    case 5: return .purple
-    default: return .gray
-    }
-  }
 }
 
 #Preview {
-  VStack(spacing: 30) {
-    ChordStringGuideView(chord: .Cm)
-    ChordStringGuideView(chord: .F)
+  ScrollView {
+    VStack(spacing: 30) {
+      ForEach(Chord.allCases, id: \.self) { chord in
+        ChordStringGuideView(chord: chord)
+      }
+    }
   }
 }
