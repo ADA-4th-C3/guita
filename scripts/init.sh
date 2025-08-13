@@ -36,3 +36,19 @@ echo "Environment variables have been set. Please check your ~/.zshrc file."
 # Create a pre-push hook
 cp -f scripts/hooks/pre-push .git/hooks/pre-push && chmod +x .git/hooks/pre-push
 echo "Pre-push hook has been set up."
+
+# Clone env repository only if .env directory does not exist
+if [ ! -d ".env" ]; then
+    echo ".env folder not found. Cloning guita-env.."
+    git clone https://github.com/ADA-4th-C3/guita-env .env
+else
+    echo ".env folder already exists. Skipping clone."
+fi
+
+# Create symbolic link for fastlane/.env if it does not exist
+if [ ! -e "fastlane/.env" ]; then
+    echo "Creating symbolic link for fastlane/.env..."
+    ln -s ../.env/.env.fastlane fastlane/.env
+else
+    echo "fastlane/.env already exists. Skipping link creation."
+fi
