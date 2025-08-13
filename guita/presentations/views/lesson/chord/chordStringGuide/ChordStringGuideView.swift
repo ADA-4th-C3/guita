@@ -12,25 +12,26 @@ struct ChordStringGuideView: View {
   private let firstFretWidth: CGFloat = 20
 
   private var firstFretHeight: CGFloat {
-      let height = CGFloat(stringCount - 1) * stringSpacing + 3
-      let hasString1 = chord.coordinates
-          .flatMap { $0.0 }
-          .contains { $0.string == 1 }
-      let hasString6 = chord.coordinates
-          .flatMap { $0.0 }
-          .contains { $0.string == 6 }
-      
-      if hasString1 || hasString6 {
-        return height + 1
-      }
-      return height
+    let height = CGFloat(stringCount - 1) * stringSpacing + 3
+    let hasString1 = chord.coordinates
+      .flatMap { $0.0 }
+      .contains { $0.string == 1 }
+    let hasString6 = chord.coordinates
+      .flatMap { $0.0 }
+      .contains { $0.string == 6 }
+
+    if hasString1 || hasString6 {
+      return height + 1
+    }
+    return height
   }
+
   // 시작 프렛 (코드가 3프렛부터면 3)
   private var startFret: Int {
-      if let minFret = chord.frets.min(), minFret >= 3 {
-          return minFret
-      }
-      return 1
+    if let minFret = chord.frets.min(), minFret >= 3 {
+      return minFret
+    }
+    return 1
   }
 
   var body: some View {
@@ -54,7 +55,6 @@ struct ChordStringGuideView: View {
 
   // 프렛보드 뷰
   private var fretboardView: some View {
-    
     ZStack {
       // 세로 줄 (프렛) - 왼쪽에서 오른쪽으로
       ForEach(1 ... fretCount - 1, id: \.self) { fret in
@@ -66,7 +66,7 @@ struct ChordStringGuideView: View {
           )
           .offset(x: CGFloat(fret) * fretSpacing - CGFloat(fretCount) * fretSpacing / 2)
       }
-      
+
       // 가로 줄 (스트링) - 위에서 아래로 1번~6번
       ForEach(0 ..< stringCount, id: \.self) { string in
         Rectangle()
@@ -85,7 +85,7 @@ struct ChordStringGuideView: View {
             y: CGFloat(string) * stringSpacing - CGFloat(stringCount - 1) * stringSpacing / 2
           )
       }
-      
+
       Rectangle()
         .fill(.lightGrey)
         .frame(
@@ -142,7 +142,7 @@ struct ChordStringGuideView: View {
               )
               .offset(
                 x: {
-                  let visibleIndex = max(1, min(fretCount, (position.fret - startFret + 1)))
+                  let visibleIndex = max(1, min(fretCount, position.fret - startFret + 1))
                   return CGFloat(visibleIndex) * fretSpacing - CGFloat(fretCount) * fretSpacing / 2 - fretSpacing / 2
                 }(),
                 y: CGFloat(position.string - 1) * stringSpacing - CGFloat(stringCount - 1) * stringSpacing / 2
@@ -155,7 +155,7 @@ struct ChordStringGuideView: View {
 
             let startY = CGFloat(minString - 1) * stringSpacing - CGFloat(stringCount - 1) * stringSpacing / 2
             let endY = CGFloat(maxString - 1) * stringSpacing - CGFloat(stringCount - 1) * stringSpacing / 2
-            let visibleIndex = max(1, min(fretCount, (fret - startFret + 1)))
+            let visibleIndex = max(1, min(fretCount, fret - startFret + 1))
             let x = CGFloat(visibleIndex) * fretSpacing - CGFloat(fretCount) * fretSpacing / 2 - fretSpacing / 2
 
             // 바레 라인
