@@ -11,13 +11,14 @@ struct ChordLessonView: View {
     BaseView(
       create: { ChordLessonViewModel(router, chord, chords) }
     ) { viewModel, state in
-      PermissionView(
-        permissionListener: { isGranted in
-          if isGranted {
-            viewModel.onPermissionGranted()
-          }
-        }
-      ) {
+//      PermissionView(
+//        permissionListener: { isGranted in
+//          if isGranted {
+//            viewModel.onPermissionGranted()
+//          }
+//        }
+//      )
+//      {
         VStack(spacing: 0) {
           // MARK: Toolbar
           Toolbar(
@@ -50,28 +51,37 @@ struct ChordLessonView: View {
           )
 
           // MARK: Index
-          Text("\(state.index + 1)/\(state.totalStep) 단계")
-            .fontKoddi(22, color: .darkGrey)
-            .padding(.top, 16)
-            .accessibilityHidden(true)
-          Spacer()
+          HStack {
+            Spacer()
+            Text("\(state.index + 1)/\(state.totalStep)")
+              .fontKoddi(22, color: .darkGrey)
+              .padding(.top, 16)
+              .padding(.trailing, 10)
+              .accessibilityHidden(true)
+          }
+          
+          
+          ChordStringGuideView(chord: state.chord)
+            
 
           // MARK: Step description
           Text(state.description)
             .fontKoddi(26, color: .light, weight: .bold)
             .lineSpacing(1.45)
+            .padding(.top, 20)
             .multilineTextAlignment(.center)
             .accessibilityHidden(true)
+            
 
           Spacer()
 
           // MARK: Controllers
           BottomController(
-            disabled: state.step == .introduction,
+            previousDisabled: state.step == .introduction,
             isIntroduction: state.step == .introduction,
-            description:                 state.description,
+            description: state.description,
             nextChordAccessibilityHint: state.nextChordAccessibilityHint,
-            goPrevious:               {viewModel.goPrevious()},
+            goPrevious: {viewModel.goPrevious()},
             play: {viewModel.play()},
             goNext: {viewModel.goNext()}
           )
@@ -80,7 +90,7 @@ struct ChordLessonView: View {
       }
     }
   }
-}
+//}
 
 #Preview {
   BasePreview {
