@@ -4,6 +4,35 @@ import SwiftUI
 
 struct ChordStringGuideView: View {
   let chord: Chord
+  private let maxDisplayStep: Int?
+  @Binding private var currentStep: Int?
+  
+  init(chord: Chord) {
+    self.chord = chord
+    self.maxDisplayStep = nil
+    self._currentStep = .constant(nil)
+  }
+  
+  init(chord: Chord, maxDisplayStep: Int) {
+    self.chord = chord
+    self.maxDisplayStep = maxDisplayStep
+    self._currentStep = .constant(nil)
+  }
+  
+  init(chord: Chord, currentStep: Binding<Int>) {
+    self.chord = chord
+    self.maxDisplayStep = nil
+    self._currentStep = Binding(
+      get: { currentStep.wrappedValue },
+      set: { currentStep.wrappedValue = $0 ?? 0 }
+    )
+  }
+  
+  init(chord: Chord, maxDisplayStep: Int? = nil, currentStep: Binding<Int?>? = nil) {
+    self.chord = chord
+    self.maxDisplayStep = maxDisplayStep
+    self._currentStep = currentStep ?? .constant(nil)
+  }
 
   private let fretCount = 4
   private let stringCount = 6
@@ -13,10 +42,10 @@ struct ChordStringGuideView: View {
 
   private var firstFretHeight: CGFloat {
     let height = CGFloat(stringCount - 1) * stringSpacing + 3
-    let hasString1 = chord.coordinates
+    let hasString1 = displayedCoordinates
       .flatMap { $0.0 }
       .contains { $0.string == 1 }
-    let hasString6 = chord.coordinates
+    let hasString6 = displayedCoordinates
       .flatMap { $0.0 }
       .contains { $0.string == 6 }
 
@@ -24,6 +53,18 @@ struct ChordStringGuideView: View {
       return height + 1
     }
     return height
+  }
+
+  private var displayedCoordinates: [([(fret: Int, string: Int)], finger: Int)] {
+    if let step = currentStep {
+      let clampedStep = max(0, min(step, chord.coordinates.count - 1))
+      return Array(chord.coordinates.prefix(clampedStep + 1))
+    } else if let maxStep = maxDisplayStep {
+      let clampedStep = max(0, min(maxStep, chord.coordinates.count - 1))
+      return Array(chord.coordinates.prefix(clampedStep + 1))
+    } else {
+      return chord.coordinates
+    }
   }
 
   // 시작 프렛 (코드가 3프렛부터면 3)
@@ -71,13 +112,13 @@ struct ChordStringGuideView: View {
       ForEach(0 ..< stringCount, id: \.self) { string in
         Rectangle()
           .fill(
-            chord.coordinates
+            displayedCoordinates
               .flatMap { $0.0 }
               .contains(where: { $0.string == string + 1 }) ? .accent : .lightGrey
           )
           .frame(
             width: CGFloat(fretCount) * fretSpacing,
-            height: chord.coordinates
+            height: displayedCoordinates
               .flatMap { $0.0 }
               .contains(where: { $0.string == string + 1 }) ? 4 : 3
           )
@@ -122,7 +163,7 @@ struct ChordStringGuideView: View {
   // 손가락 위치 표시 뷰
   private var fingerPositionsView: some View {
     ZStack {
-      ForEach(Array(chord.coordinates.enumerated()), id: \.offset) { _, coordinate in
+      ForEach(Array(displayedCoordinates.enumerated()), id: \.offset) { _, coordinate in
         let positions = coordinate.0
         let finger = coordinate.1
 
@@ -205,11 +246,14 @@ struct ChordStringGuideView: View {
 }
 
 #Preview {
-  ScrollView {
-    VStack(spacing: 30) {
-      ForEach(Chord.allCases, id: \.self) { chord in
-        ChordStringGuideView(chord: chord)
-      }
-    }
-  }
+  // 전체 코드 확인 Preview
+//  ScrollView {
+//    VStack(spacing: 30) {
+//      ForEach(Chord.allCases, id: \.self) { chord in
+//        ChordStringGuideView(chord: chord)
+//      }
+//    }
+//  }
+  @Previewable @State var currentStep: Int? = 1
+  ChordStringGuideView(chord: .C, maxDisplayStep: 2, currentStep:  $currentStep)
 }
