@@ -6,32 +6,32 @@ struct ChordStringGuideView: View {
   let chord: Chord
   private let maxDisplayStep: Int?
   @Binding private var currentStep: Int?
-  
+
   init(chord: Chord) {
     self.chord = chord
-    self.maxDisplayStep = nil
-    self._currentStep = .constant(nil)
+    maxDisplayStep = nil
+    _currentStep = .constant(nil)
   }
-  
+
   init(chord: Chord, maxDisplayStep: Int) {
     self.chord = chord
     self.maxDisplayStep = maxDisplayStep
-    self._currentStep = .constant(nil)
+    _currentStep = .constant(nil)
   }
-  
+
   init(chord: Chord, currentStep: Binding<Int>) {
     self.chord = chord
-    self.maxDisplayStep = nil
-    self._currentStep = Binding(
+    maxDisplayStep = nil
+    _currentStep = Binding(
       get: { currentStep.wrappedValue },
       set: { currentStep.wrappedValue = $0 ?? 0 }
     )
   }
-  
+
   init(chord: Chord, maxDisplayStep: Int? = nil, currentStep: Binding<Int?>? = nil) {
     self.chord = chord
     self.maxDisplayStep = maxDisplayStep
-    self._currentStep = currentStep ?? .constant(nil)
+    _currentStep = currentStep ?? .constant(nil)
   }
 
   private let fretCount = 4
@@ -255,5 +255,5 @@ struct ChordStringGuideView: View {
 //    }
 //  }
   @Previewable @State var currentStep: Int? = 1
-  ChordStringGuideView(chord: .C, maxDisplayStep: 2, currentStep:  $currentStep)
+  ChordStringGuideView(chord: .C, maxDisplayStep: 2, currentStep: $currentStep)
 }
