@@ -12,10 +12,18 @@ struct HomeView: View {
       VStack {
         // MARK: Toolbar
         Toolbar(
+          titlePrefix: {
+            Image("titleIcon")
+              .resizable()
+              .scaledToFit()
+              .frame(width: 44, height: 44)
+              .accessibilityHidden(true)
+          },
           title: NSLocalizedString("Guita", comment: ""),
           accessibilityHint: NSLocalizedString("귀로 치는 기타, 귀타가 시작되었습니다. 기타 학습을 시작하기 위해서는 기타 학습 버튼을 눌러주십시오.", comment: ""),
           isPopButton: false,
-          trailing: {
+          centerTitle: true,
+          firstTrailing: {
             // MARK: Dev Button
             Text("Dev")
               .opacity(0.01)
