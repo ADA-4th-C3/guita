@@ -3,7 +3,6 @@
 import SwiftUI
 
 struct BottomController: View {
-
   let previousDisabled: Bool
   let isIntroduction: Bool
   let description: String
@@ -73,7 +72,7 @@ struct BottomController: View {
           description
         )
       )
-      
+
       // MARK: Next Button
       Button(action: goNext) {
         Image("chevron-right")
@@ -85,11 +84,10 @@ struct BottomController: View {
         NSLocalizedString("ChordLesson.Button.Next.Label", comment: "")
       )
       .accessibilityHint(nextChordAccessibilityHint)
-
-
     }
   }
 }
+
 #Preview {
   BottomController(
     previousDisabled: true,
