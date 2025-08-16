@@ -106,11 +106,11 @@ final class ChordLessonViewModel: BaseViewModel<ChordLessonViewState> {
     }
   }
 
-  func readDescription() {
-    Task {
-      await textToSpeechManager.speak(state.description)
-    }
-  }
+//  func readDescription() {
+//    Task {
+//      await textToSpeechManager.speak(state.description)
+//    }
+//  }
 
   /// 이전 레슨으로 이동
   func goPrevious() {

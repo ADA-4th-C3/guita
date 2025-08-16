@@ -14,7 +14,7 @@ struct BottomController: View {
   let goNext: () -> Void
 
   init(
-    disabled: Bool,
+    previousDisabled: Bool,
     isIntroduction: Bool,
     description: String,
     nextChordAccessibilityHint: String,
@@ -22,7 +22,7 @@ struct BottomController: View {
     play: @escaping () -> Void,
     goNext: @escaping () -> Void,
   ) {
-    self.previousDisabled = disabled
+    self.previousDisabled = previousDisabled
     self.isIntroduction = isIntroduction
     self.description = description
     self.nextChordAccessibilityHint = nextChordAccessibilityHint
@@ -40,6 +40,7 @@ struct BottomController: View {
           .scaledToFit()
           .frame(width: 75, height: 75)
       }
+      .disabled(previousDisabled)
       .opacity(previousDisabled ? 0.5 : 1.0)
       .accessibilityRespondsToUserInteraction(!previousDisabled)
       .accessibilityLabel(
@@ -91,7 +92,7 @@ struct BottomController: View {
 }
 #Preview {
   BottomController(
-    disabled: true,
+    previousDisabled: true,
     isIntroduction: false,
     description: "",
     nextChordAccessibilityHint: "",
