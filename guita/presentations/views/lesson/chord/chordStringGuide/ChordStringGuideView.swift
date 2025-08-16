@@ -254,6 +254,6 @@ struct ChordStringGuideView: View {
 //      }
 //    }
 //  }
-  @Previewable @State var currentStep: Int? = 1
-  ChordStringGuideView(chord: .C, maxDisplayStep: 2, currentStep: $currentStep)
+  @Previewable @State var currentStep: Int? = 0
+  ChordStringGuideView(chord: .C, maxDisplayStep: 1, currentStep: $currentStep)
 }

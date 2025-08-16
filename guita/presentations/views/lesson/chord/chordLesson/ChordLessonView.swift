@@ -27,7 +27,8 @@ struct ChordLessonView: View {
             ),
             accessibilityHint: String(
               format: NSLocalizedString(
-                state.isPermissionGranted ? "ChordLessonView.Accessibility.Description"
+                state.isPermissionGranted
+                  ? "ChordLessonView.Accessibility.Description"
                   : "ChordLessonView.Accessibility.Description.NoPermission",
                 comment: ""
               ),
@@ -58,39 +59,16 @@ struct ChordLessonView: View {
           Spacer()
 
           // MARK: Controllers
-          HStack {
-            // MARK: Previous Button
-            IconButton("chevron-left", color: .light, size: 95, disabled: state.step == .introduction) {
-              viewModel.goPrevious()
-            }
-            .accessibilityLabel(
-              NSLocalizedString("ChordLesson.Button.Previous.Label", comment: "")
-            )
-            .accessibilityHint(
-              NSLocalizedString(state.step == .introduction ? "ChordLesson.Button.Previous.Hint.Inactive" : "", comment: "")
-            )
-
-            // MARK: Play Button
-            IconButton("play", color: .accent, size: 95) {
-              viewModel.play()
-            }
-            .accessibilityLabel(NSLocalizedString("ChordLesson.Button.Play.Label", comment: ""))
-            .accessibilityHint(
-              String(
-                format: NSLocalizedString("ChordLesson.Button.Play.Hint", comment: ""),
-                state.description
-              )
-            )
-
-            // MARK: Next Button
-            IconButton("chevron-right", size: 95) {
-              viewModel.goNext()
-            }
-            .accessibilityLabel(
-              NSLocalizedString("ChordLesson.Button.Next.Label", comment: "")
-            )
-            .accessibilityHint(state.nextChordAccessibilityHint)
-          }
+          BottomController(
+            disabled: state.step == .introduction,
+            isIntroduction: state.step == .introduction,
+            description:                 state.description,
+            nextChordAccessibilityHint: state.nextChordAccessibilityHint,
+            goPrevious:               {viewModel.goPrevious()},
+            play: {viewModel.play()},
+            goNext: {viewModel.goNext()}
+          )
+          
         }
       }
     }
