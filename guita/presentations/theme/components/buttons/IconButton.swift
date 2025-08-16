@@ -45,7 +45,7 @@ struct IconButton: View {
         .resizable()
         .scaledToFit()
         .foregroundColor(_color)
-        .padding(padding ?? (isSystemImage ? 10 : 8))
+        .padding(padding ?? (isSystemImage ? 6 : 6))
         .frame(width: size ?? 44, height: size ?? 44)
     }
     .opacity(disabled ? 0.5 : 1.0)

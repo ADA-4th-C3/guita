@@ -53,17 +53,17 @@ struct HomeView: View {
           }
           .accessibilityHint("학습 목록 화면으로 이동")
 
-          // MARK: 설정
-          Button {
-            router.push(.setting)
-          } label: {
-            Text("설정")
-              .fontKoddi(32, color: .light, weight: .bold)
-              .frame(maxWidth: .infinity, alignment: .center)
-              .padding(16)
-          }
-          .padding(.top, 8)
-          .accessibilityHint("설정 화면으로 이동")
+//          // MARK: 설정
+//          Button {
+//            router.push(.setting)
+//          } label: {
+//            Text("설정")
+//              .fontKoddi(32, color: .light, weight: .bold)
+//              .frame(maxWidth: .infinity, alignment: .center)
+//              .padding(16)
+//          }
+//          .padding(.top, 8)
+//          .accessibilityHint("설정 화면으로 이동")
         }
         .offset(y: -80)
         .frame(maxWidth: .infinity, maxHeight: .infinity)

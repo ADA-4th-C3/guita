@@ -41,10 +41,10 @@ struct ChordLessonView: View {
                 .accessibilityLabel("사용법 도움말")
             },
             secondTrailing: {
-              IconButton("info") {
-                router.push(.chordLessonGuide)
+              IconButton("gearshape", isSystemImage: true) {
+                router.push(.setting)
               }.accessibilityAddTraits(.isButton)
-                .accessibilityLabel("환경 설저")
+              .accessibilityHint("설정 화면으로 이동")
             }
             
           )
