@@ -22,7 +22,7 @@ struct FullLessonView: View {
           Toolbar(
             title: NSLocalizedString("곡 전체 학습", comment: ""),
             accessibilityHint: NSLocalizedString(state.isPermissionGranted ? "FullLesson.Title.Hint.Granted" : "FullLesson.Title.Hint.NotGranted", comment: ""),
-            trailing: {
+            firstTrailing: {
               IconButton("info", color: .light, isSystemImage: false) {
                 router.push(.fullLessonGuide)
               }.accessibilityAddTraits(.isButton)

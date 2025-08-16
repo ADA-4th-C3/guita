@@ -34,12 +34,19 @@ struct ChordLessonView: View {
               ),
               "\(state.chord.rawValue)"
             ),
-            trailing: {
+            firstTrailing: {
               IconButton("info") {
                 router.push(.chordLessonGuide)
               }.accessibilityAddTraits(.isButton)
                 .accessibilityLabel("사용법 도움말")
+            },
+            secondTrailing: {
+              IconButton("info") {
+                router.push(.chordLessonGuide)
+              }.accessibilityAddTraits(.isButton)
+                .accessibilityLabel("환경 설저")
             }
+            
           )
 
           // MARK: Index
