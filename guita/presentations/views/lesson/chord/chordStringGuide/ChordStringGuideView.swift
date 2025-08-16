@@ -178,7 +178,7 @@ struct ChordStringGuideView: View {
               .fill(.accent)
               .frame(width: 40, height: 42)
               .overlay(
-                Text(fingerLabel(finger)"))")
+                Text(fingerLabel(finger))
                   .fontKoddi(24, color: .black, weight: .bold)
               )
               .offset(
@@ -216,10 +216,9 @@ struct ChordStringGuideView: View {
   }
 
   private func fingerLabel(_ finger: Int) -> String {
-    [1:"엄",2:"검",3:"중",4:"약",5:"소"][finger] ?? "\(finger)"
+    [1: "엄", 2: "검", 3: "중", 4: "약", 5: "소"][finger] ?? "\(finger)"
   }
 
-  
   // 연속된 스트링들을 그룹으로 나누는 함수
   private func groupConsecutiveStrings(_ positions: [(fret: Int, string: Int)]) -> [[(fret: Int, string: Int)]] {
     let sortedPositions = positions.sorted { $0.string < $1.string }
