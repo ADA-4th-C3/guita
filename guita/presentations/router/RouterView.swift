@@ -26,6 +26,13 @@ struct RouterView: View {
           switch subPage {
           // MARK: User
           case .setting: SettingView()
+          case .dashboard: DashboardView()
+
+          // MARK: Guitar Tunar
+//          case .guitarTunar: GuitarTunarView()
+          // MARK: ChordCategoryView
+          case .chordCategory: ChordCategoryView()
+          // MARK: Curriculum
           case .curriculum: CurriculumView()
           case let .lesson(songInfo): LessonView(songInfo: songInfo)
           case let .chord(songInfo): ChordView(songInfo: songInfo)
