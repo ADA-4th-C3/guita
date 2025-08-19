@@ -23,6 +23,7 @@ enum SubPage: Hashable {
 
   // MARK: Total Code Lesson
   case chordCategory
+  case chordDetail(chord: Chord, chords: [Chord])
 
   // MARK: Curriculum
   case curriculum
@@ -72,6 +73,12 @@ extension SubPage {
       return NSLocalizedString("Router.Dashboard", comment: "대시보드")
     case .chordCategory:
       return NSLocalizedString("Router.ChordCategory", comment: "코드 카테고리")
+    case let .chordDetail(chord, chords):
+      return String(
+        format: NSLocalizedString("Router.ChordDetail", comment: "코드 디테일"),
+        "\(chord)",
+        "\(chords)"
+      )
     case .curriculum:
       return NSLocalizedString("Router.Curriculum", comment: "학습 목록")
     case let .lesson(songInfo):

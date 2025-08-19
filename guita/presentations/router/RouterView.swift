@@ -29,14 +29,17 @@ struct RouterView: View {
           case .dashboard: DashboardView()
 
           // MARK: Guitar Tunar
-//          case .guitarTunar: GuitarTunarView()
+          //          case .guitarTunar: GuitarTunarView()
           // MARK: ChordCategoryView
           case .chordCategory: ChordCategoryView()
+          case let .chordDetail(chord, chords):
+            ChordDetailView(chord: chord, chords: chords)
           // MARK: Curriculum
           case .curriculum: CurriculumView()
           case let .lesson(songInfo): LessonView(songInfo: songInfo)
           case let .chord(songInfo): ChordView(songInfo: songInfo)
-          case let .chordLesson(chord, chords): ChordLessonView(chord: chord, chords: chords)
+          case let .chordLesson(chord, chords):
+            ChordLessonView(chord: chord, chords: chords)
           case .chordLessonGuide: ChordLessonGuideView()
           case .techniqueLesson: TechniqueLessonView()
           case .techniqueLessonGuide: TechniqueLessonGuideView()
@@ -51,8 +54,10 @@ struct RouterView: View {
           case .devVoiceCommand: DevVoiceCommandView()
           case .devTextToSpeech: DevTextToSpeechView()
           case .devNoteClassification: DevNoteClassificationView()
-          case .devCodeClassificationWithSimilarity: DevChordClassificationWithSimilarityView()
-          case .devChordClassificationWithRegression: DevChordClassificationWithRegressionView()
+          case .devCodeClassificationWithSimilarity:
+            DevChordClassificationWithSimilarityView()
+          case .devChordClassificationWithRegression:
+            DevChordClassificationWithRegressionView()
           }
         }
         .toolbarBackground(.hidden, for: .navigationBar)

@@ -137,3 +137,31 @@ enum Chord: String, CaseIterable, CustomStringConvertible {
     return name
   }
 }
+
+extension Chord {
+  /// 현재 코드의 루트에 해당하는 모든 자식 코드들을 반환
+  var toChildren: [Chord] {
+    switch self {
+    case .C, .C7, .Cm, .Cm7, .CM7: return [.C, .C7, .Cm, .Cm7, .CM7]
+    case .D, .D7, .Dm, .Dm7, .DM7: return [.D, .D7, .Dm, .Dm7, .DM7]
+    case .E, .E7, .Em, .Em7, .EM7: return [.E, .E7, .Em, .Em7, .EM7]
+    case .F, .F7, .Fm, .Fm7, .FM7: return [.F, .F7, .Fm, .Fm7, .FM7]
+    case .G, .G7, .Gm, .Gm7, .GM7: return [.G, .G7, .Gm, .Gm7, .GM7]
+    case .A, .A7, .Am, .Am7, .AM7: return [.A, .A7, .Am, .Am7, .AM7]
+    case .B, .B7, .Bm, .Bm7, .BM7: return [.B, .B7, .Bm, .Bm7, .BM7]
+    }
+  }
+
+  /// 현재 코드의 루트 노트를 반환
+  var root: Chord {
+    switch self {
+    case .C, .C7, .Cm, .Cm7, .CM7: return .C
+    case .D, .D7, .Dm, .Dm7, .DM7: return .D
+    case .E, .E7, .Em, .Em7, .EM7: return .E
+    case .F, .F7, .Fm, .Fm7, .FM7: return .F
+    case .G, .G7, .Gm, .Gm7, .GM7: return .G
+    case .A, .A7, .Am, .Am7, .AM7: return .A
+    case .B, .B7, .Bm, .Bm7, .BM7: return .B
+    }
+  }
+}
