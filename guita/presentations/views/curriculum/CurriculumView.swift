@@ -39,7 +39,7 @@ struct CurriculumView: View {
         }
       }
       .onTapGesture {
-        selected = ""
+        selected = nil
       }
     }
   }
