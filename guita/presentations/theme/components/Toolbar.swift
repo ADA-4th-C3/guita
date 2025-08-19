@@ -2,8 +2,6 @@
 
 import SwiftUI
 
-import SwiftUI
-
 struct Toolbar<Leading: View, FirstTrailing: View, SecondTrailing: View>: View {
   @EnvironmentObject var router: Router
 
@@ -29,7 +27,9 @@ struct Toolbar<Leading: View, FirstTrailing: View, SecondTrailing: View>: View {
     centerTitle: Bool = false,
     @ViewBuilder leading: @escaping () -> Leading = { EmptyView() },
     @ViewBuilder firstTrailing: @escaping () -> FirstTrailing = { EmptyView() },
-    @ViewBuilder secondTrailing: @escaping () -> SecondTrailing = { EmptyView() }
+    @ViewBuilder secondTrailing: @escaping () -> SecondTrailing = {
+      EmptyView()
+    }
   ) {
     self.titlePrefix = { AnyView(titlePrefix()) }
     self.title = title
@@ -44,6 +44,7 @@ struct Toolbar<Leading: View, FirstTrailing: View, SecondTrailing: View>: View {
   }
 
   var body: some View {
+    // MARK: 중앙 정렬
     if centerTitle {
       ZStack {
         // Left/Right controls layer
@@ -61,6 +62,7 @@ struct Toolbar<Leading: View, FirstTrailing: View, SecondTrailing: View>: View {
                 router.previousTitle
               )
             )
+            .padding(.trailing, 5)
           } else {
             leading()
           }
@@ -77,7 +79,7 @@ struct Toolbar<Leading: View, FirstTrailing: View, SecondTrailing: View>: View {
           HStack(spacing: 0) {
             titlePrefix()
             VStack {
-              Spacer()
+//              Spacer()
               Text(title)
                 .foregroundColor(.primary)
                 .fontKoddi(32, weight: .bold)
@@ -101,57 +103,90 @@ struct Toolbar<Leading: View, FirstTrailing: View, SecondTrailing: View>: View {
         }
       }
     } else {
-      ZStack {
-        HStack {
-          // MARK: Leading
-          if isPopButton {
-            IconButton("chevron.left", color: .light, isSystemImage: true) {
-              router.pop()
-            }
-            .accessibilityLabel("나가기")
-            .accessibilityAddTraits(.isButton)
-            .accessibilityHint(
-              String(
-                format: NSLocalizedString("ExitButton.Desc", comment: ""),
-                router.previousTitle
-              )
+      HStack(spacing: 0) {
+        // MARK: Leading
+        if isPopButton {
+          IconButton("chevron.left", color: .light, isSystemImage: true) {
+            router.pop()
+          }
+          .accessibilityLabel("나가기")
+          .accessibilityAddTraits(.isButton)
+          .accessibilityHint(
+            String(
+              format: NSLocalizedString("ExitButton.Desc", comment: ""),
+              router.previousTitle
             )
-          } else {
-            leading()
-          }
-
-          // MARK: Title
-          if !title.isEmpty {
-            HStack(spacing: 8) {
-              titlePrefix()
-              Text(title)
-                .foregroundColor(.primary)
-                .fontKoddi(32, weight: .bold)
-                .lineSpacing(1.4)
-                .lineLimit(1)
-                .minimumScaleFactor(0.5)
-                .truncationMode(.tail)
-                .accessibilityElement(children: .ignore)
-                .accessibilityLabel(accessibilityLabel)
-                .accessibilityAddTraits(.isHeader)
-                .accessibilityHint(accessibilityHint)
-                .accessibilityFocused($initFocusToTitle)
-            }
-          }
-
-          Spacer()
-
-          // MARK: Trailing
-          firstTrailing()
-          secondTrailing()
+          )
+          .padding(.trailing, 5)
+        } else {
+          leading()
         }
+
+        // MARK: Title
+        if !title.isEmpty {
+          HStack(spacing: 0) {
+            titlePrefix()
+            Text(title)
+              .foregroundColor(.primary)
+              .fontKoddi(32, weight: .bold)
+              .lineSpacing(1.4)
+              .lineLimit(1)
+              .minimumScaleFactor(0.5)
+              .truncationMode(.tail)
+              .accessibilityElement(children: .ignore)
+              .accessibilityLabel(accessibilityLabel)
+              .accessibilityAddTraits(.isHeader)
+              .accessibilityHint(accessibilityHint)
+              .accessibilityFocused($initFocusToTitle)
+          }
+        }
+
+        Spacer()
+
+        // MARK: Trailing
+        firstTrailing()
+        secondTrailing()
       }
-      .frame(height: 44)
+      .frame(width: .infinity, height: 44)
       .onAppear {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
           // initFocusToTitle = true
         }
       }
+      .padding(.bottom, 20)
+    }
+  }
+}
+
+#Preview {
+  BasePreview {
+    VStack {
+      Toolbar(
+        title: "Preview",
+        firstTrailing: {
+          IconButton("info") {
+          }
+        },
+        secondTrailing: {
+          IconButton("gearshape", isSystemImage: true) {
+          }
+        }
+      )
+      .border(.red)
+      
+      Toolbar(
+        title: "Preview",
+        centerTitle: true,
+        firstTrailing: {
+          IconButton("info") {
+          }
+        },
+        secondTrailing: {
+          IconButton("gearshape", isSystemImage: true) {
+          }
+        }
+      )
+      .border(.red)
     }
   }
 }

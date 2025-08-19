@@ -12,6 +12,18 @@ struct CurriculumView: View {
         Toolbar(
           title: NSLocalizedString("Curriculum.title", comment: ""),
           accessibilityHint: NSLocalizedString("Curriculum.Hint", comment: "")
+          ,firstTrailing: {
+            IconButton("info") {
+              router.push(.chordLessonGuide)
+            }.accessibilityAddTraits(.isButton)
+              .accessibilityLabel("사용법 도움말")
+          },
+          secondTrailing: {
+            IconButton("gearshape", isSystemImage: true) {
+              router.push(.setting)
+            }.accessibilityAddTraits(.isButton)
+              .accessibilityHint("설정 화면으로 이동")
+          }
         )
         ListDivider()
           .padding(.top, 32)
