@@ -8,6 +8,8 @@ struct ChordView: View {
 
   let songInfo: SongInfo
 
+  @State private var selected: String? = nil
+
   var body: some View {
     BaseView(
       create: { ChordViewModel(songInfo) }
@@ -19,27 +21,45 @@ struct ChordView: View {
           accessibilityHint: String(
             format: NSLocalizedString("Chord.Hint", comment: ""),
             "\(state.songInfo.chords)"
-          )
+          ),
+          firstTrailing: {
+            IconButton("info") {
+              router.push(.chordLessonGuide)
+            }.accessibilityAddTraits(.isButton)
+              .accessibilityLabel("사용법 도움말")
+          },
+          secondTrailing: {
+            IconButton("gearshape", isSystemImage: true) {
+              router.push(.setting)
+            }.accessibilityAddTraits(.isButton)
+              .accessibilityHint("설정 화면으로 이동")
+          }
         )
 
         // MARK: Chord Button
         ListDivider()
-          .padding(.top, 32)
         ForEach(state.songInfo.chords, id: \.self) { chord in
-          Button(action: { router.push(.chordLesson(chord: chord, chords: state.songInfo.chords)) }) {
+          Button(action: { router.push(.chordLesson(chord: chord, chords: state.songInfo.chords))
+            selected = chord.rawValue
+          }) {
             VStack {
               Text("\(chord.rawValue) 코드")
-                .fontKoddi(26, color: .light, weight: .bold)
+                .fontKoddi(26, color: selected == chord.rawValue ? .black : .light, weight: .bold)
                 .padding(.vertical, 36)
             }
             .frame(maxWidth: .infinity)
           }
           .accessibilityLabel("\(chord.rawValue) 코드 학습하기")
           .accessibilityAddTraits(.isButton)
-
+          .if(selected == chord.rawValue) {
+            v in v.background(.accent)
+          }
           ListDivider()
         }
         Spacer()
+      }
+      .onTapGesture {
+        selected = ""
       }
     }
   }
