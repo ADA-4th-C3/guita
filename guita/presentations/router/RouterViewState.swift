@@ -17,6 +17,14 @@ enum RootPage {
 
 enum SubPage: Hashable {
   case setting
+  case dashboard
+
+  // MARK: Guita Tunar
+
+  // MARK: Total Code Lesson
+  case chordCategory
+
+  // MARK: Curriculum
   case curriculum
   case lesson(songInfo: SongInfo)
   case chord(songInfo: SongInfo)
@@ -60,6 +68,10 @@ extension SubPage {
     switch self {
     case .setting:
       return "설정"
+    case .dashboard:
+      return NSLocalizedString("Router.Dashboard", comment: "대시보드")
+    case .chordCategory:
+      return NSLocalizedString("Router.ChordCategory", comment: "코드 카테고리")
     case .curriculum:
       return NSLocalizedString("Router.Curriculum", comment: "학습 목록")
     case let .lesson(songInfo):
