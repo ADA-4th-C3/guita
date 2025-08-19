@@ -58,6 +58,7 @@ struct ChordView: View {
         }
         Spacer()
       }
+      .contentShape(Rectangle())
       .onTapGesture {
         selected = ""
       }

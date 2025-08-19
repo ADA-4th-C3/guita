@@ -54,7 +54,7 @@ struct LessonView: View {
             let boxWidth = geometry.size.width
             let boxHeight = geometry.size.height / 7
 
-            LazyVStack(spacing: 0) {
+            VStack(spacing: 0) {
               ListDivider()
 
               Button(action: {
@@ -133,16 +133,12 @@ struct LessonView: View {
                 v in v.background(.accent)
               }
               ListDivider()
-
-              Rectangle()
-                .fill(.black)
-                .frame(width: boxWidth, height: boxHeight)
-                .accessibilityHidden(true)
             }
           }
-        }
-        .onTapGesture {
-          selected = ""
+          .contentShape(Rectangle())
+          .onTapGesture {
+            selected = ""
+          }
         }
       }
     }
