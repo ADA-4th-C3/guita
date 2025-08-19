@@ -164,26 +164,22 @@ struct Toolbar<Leading: View, FirstTrailing: View, SecondTrailing: View>: View {
       Toolbar(
         title: "Preview",
         firstTrailing: {
-          IconButton("info") {
-          }
+          IconButton("info") {}
         },
         secondTrailing: {
-          IconButton("gearshape", isSystemImage: true) {
-          }
+          IconButton("gearshape", isSystemImage: true) {}
         }
       )
       .border(.red)
-      
+
       Toolbar(
         title: "Preview",
         centerTitle: true,
         firstTrailing: {
-          IconButton("info") {
-          }
+          IconButton("info") {}
         },
         secondTrailing: {
-          IconButton("gearshape", isSystemImage: true) {
-          }
+          IconButton("gearshape", isSystemImage: true) {}
         }
       )
       .border(.red)
