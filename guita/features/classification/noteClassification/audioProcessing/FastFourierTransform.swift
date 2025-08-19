@@ -3,7 +3,7 @@
 import Accelerate
 import AVFoundation
 
-final class FestFourierTransform {
+final class FastFourierTransform {
   func runForStudy(_ input: [Complex]) -> [Complex] {
     let n = input.count
     if n == 1 {
