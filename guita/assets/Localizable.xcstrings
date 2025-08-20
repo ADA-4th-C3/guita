@@ -100,6 +100,16 @@
         }
       }
     },
+    "%lld/%lld" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld/%2$lld"
+          }
+        }
+      }
+    },
     "%lld/%lld 단계" : {
       "localizations" : {
         "en" : {
@@ -1247,6 +1257,12 @@
         }
       }
     },
+    "Router.ChordCategory" : {
+      "comment" : "코드 카테고리"
+    },
+    "Router.ChordDetail" : {
+      "comment" : "코드 디테일"
+    },
     "Router.ChordLesson" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1297,6 +1313,9 @@
           }
         }
       }
+    },
+    "Router.Dashboard" : {
+      "comment" : "대시보드"
     },
     "Router.FullLesson" : {
       "extractionState" : "manual",
@@ -1668,6 +1687,12 @@
         }
       }
     },
+    "곡 연습" : {
+
+    },
+    "곡 연습하기" : {
+
+    },
     "곡 재생 속도 : %@" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -1799,6 +1824,12 @@
           }
         }
       }
+    },
+    "기타 튜닝" : {
+
+    },
+    "기타 튜닝하기" : {
+
     },
     "기타 학습" : {
       "localizations" : {
@@ -2157,22 +2188,22 @@
     "업과 다운을 조합하여 다양한 리듬을 만들 수 있어요. 가장 많이 사용되는 칼립소 리듬을 알려줄게요." : {
 
     },
-    "열" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ten"
-          }
-        }
-      }
-    },
     "여덟" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Eight"
+          }
+        }
+      }
+    },
+    "열" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ten"
           }
         }
       }
@@ -2499,6 +2530,12 @@
           }
         }
       }
+    },
+    "전체 코드 학습" : {
+
+    },
+    "전체 코드 학습하기" : {
+
     },
     "접근 권한 요청하기" : {
       "localizations" : {
