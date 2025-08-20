@@ -57,8 +57,8 @@ struct ChordCategoryView: View {
         ForEach(rootChords, id: \.self) { root in
           Button(action: {
             // TODO: - 루트별 코드 리스트로 routing
-            router.push(.chordDetail(chord: root, chords: root.toChildren))
             selected = root.rawValue
+            router.push(.chordDetail(chord: root, chords: root.toChildren))
           }) {
             Text("\(root.rawValue) 코드")
               .fontKoddi(
