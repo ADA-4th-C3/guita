@@ -60,7 +60,7 @@ struct ChordDetailView: View {
           Button(action: {
             // TODO: - 루트별 코드 리스트로 routing
             selected = root.rawValue
-            router.push(.chordLesson(chord: chord, chords: chords))
+            router.push(.chordLesson(chord: root, chords: chords))
           }) {
             Text("\(root.rawValue) 코드")
               .fontKoddi(
