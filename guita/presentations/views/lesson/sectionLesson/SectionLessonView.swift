@@ -25,7 +25,7 @@ struct SectionLessonView: View {
                 ? "SectionLesson.Title.Hint.Granted"
                 : "SectionLesson.Title.Hint.NotGranted", comment: ""
             ),
-            trailing: {
+            firstTrailing: {
               IconButton("info", color: .light, isSystemImage: false) {
                 router.push(.sectionLessonGuide)
               }.accessibilityAddTraits(.isButton)

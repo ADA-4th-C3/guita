@@ -5,7 +5,7 @@ final class TechniqueLessonViewModel: BaseViewModel<TechniqueLessonViewState> {
   private let router: Router
   private let textToSpeechManager = TextToSpeechManager.shared
   private let voiceCommandManager = VoiceCommandManager.shared
-  private var playTask: Task<Void, Error>? = nil
+  private var playTask: Task<Void, Error>?
 
   init(_ router: Router) {
     self.router = router

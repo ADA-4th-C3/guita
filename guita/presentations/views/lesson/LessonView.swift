@@ -5,93 +5,132 @@ import SwiftUI
 struct LessonView: View {
   let songInfo: SongInfo
   @EnvironmentObject var router: Router
+  @State private var selected: String? = nil
 
   var body: some View {
     BaseView(
       create: { LessonViewModel() }
     ) { _, _ in
-      VStack {
-        // MARK: Toolbar
-        let title = songInfo.title
-        let chords = songInfo.chords.map { $0.description }.joined(separator: ", ")
-        Toolbar(
-          title: songInfo.level,
-          accessibilityLabel: String(
-            format: NSLocalizedString("Lesson.Accessibility.Label", comment: ""),
-            "[\(songInfo.level)] \(title)"
-          ),
-          accessibilityHint: String(
-            format: NSLocalizedString("Lesson.Accessibility.Description", comment: ""),
-            title,
-            chords
-          )
-        )
-
-        Spacer()
-
-        // MARK: SongTitle & Code
+      ZStack {
         VStack {
-          VStack {
-            Text(songInfo.title)
-              .fontKoddi(26, color: .light, weight: .bold)
-              .accessibilityHidden(true)
-              .padding(.bottom, 6)
-
-            Text(songInfo.chords.map { "\($0.rawValue)" }.joined(separator: ", "))
-              .fontKoddi(18, color: .darkGrey, weight: .regular)
-              .accessibilityHidden(true)
-          }
-          .frame(maxWidth: .infinity, maxHeight: 220)
+          // MARK: Toolbar
+          let title = songInfo.title
+          let chords = songInfo.chords.map { $0.description }.joined(
+            separator: ", "
+          )
+          Toolbar(
+            title: songInfo.title,
+            accessibilityLabel: String(
+              format: NSLocalizedString(
+                "Lesson.Accessibility.Label",
+                comment: ""
+              ),
+              "[\(songInfo.title)] \(title)"
+            ),
+            accessibilityHint: String(
+              format: NSLocalizedString(
+                "Lesson.Accessibility.Description",
+                comment: ""
+              ),
+              title,
+              chords
+            ),
+            firstTrailing: {
+              IconButton("info") {
+                router.push(.chordLessonGuide)
+              }.accessibilityAddTraits(.isButton)
+                .accessibilityLabel("사용법 도움말")
+            },
+            secondTrailing: {
+              IconButton("gearshape", isSystemImage: true) {
+                router.push(.setting)
+              }.accessibilityAddTraits(.isButton)
+                .accessibilityHint("설정 화면으로 이동")
+            }
+          )
 
           // MARK: Learning Buttons
           GeometryReader { geometry in
             let boxWidth = geometry.size.width
-            let boxHeight = geometry.size.height / 4
+            let boxHeight = geometry.size.height / 7
 
             LazyVStack(spacing: 0) {
               ListDivider()
 
               Button(action: {
                 router.push(.chord(songInfo: songInfo))
+                selected = "chordLearning"
               }) {
                 Text("코드 학습")
-                  .fontKoddi(26, color: .light, weight: .bold)
+                  .fontKoddi(
+                    26,
+                    color: selected == "chordLearning" ? .black : .light,
+                    weight: .bold
+                  )
                   .frame(width: boxWidth, height: boxHeight)
                   .accessibilityAddTraits(.isButton)
                   .accessibilityLabel("코드 학습하기")
               }
+              .if(selected == "chordLearning") {
+                v in v.background(.accent)
+              }
+
               ListDivider()
 
               Button(action: {
-                router.push(.techniqueLesson) // 임시로 라우팅 해둠
+                router.push(.techniqueLesson)
+                selected = "techniqueLearning"
               }) {
                 Text("주법 학습")
-                  .fontKoddi(26, color: .light, weight: .bold)
+                  .fontKoddi(
+                    26,
+                    color: selected == "techniqueLearning" ? .black : .light,
+                    weight: .bold
+                  )
                   .frame(width: boxWidth, height: boxHeight)
                   .accessibilityAddTraits(.isButton)
                   .accessibilityLabel("주법 학습하기")
+              }
+              .if(selected == "techniqueLearning") {
+                v in v.background(.accent)
               }
               ListDivider()
 
               Button(action: {
                 router.push(.sectionLesson)
+                selected = "songSectionLearning"
               }) {
                 Text("곡 구간 학습")
-                  .fontKoddi(26, color: .light, weight: .bold)
+                  .fontKoddi(
+                    26,
+                    color: selected == "songSectionLearning" ? .black : .light,
+                    weight: .bold
+                  )
                   .frame(width: boxWidth, height: boxHeight)
                   .accessibilityAddTraits(.isButton)
                   .accessibilityLabel("곡 구간 학습하기")
+              }
+              .if(selected == "songSectionLearning") {
+                v in v.background(.accent)
               }
               ListDivider()
 
               Button(action: {
                 router.push(.fullLesson(songInfo: songInfo))
+                selected = "fullSongLearning"
               }) {
                 Text("곡 전체 학습")
-                  .fontKoddi(26, color: .light, weight: .bold)
+                  .fontKoddi(
+                    26,
+                    color: selected == "fullSongLearning" ? .black : .light,
+                    weight: .bold
+                  )
                   .frame(width: boxWidth, height: boxHeight)
                   .accessibilityAddTraits(.isButton)
                   .accessibilityLabel("곡 전체 학습하기")
+              }
+              .if(selected == "fullSongLearning") {
+                v in v.background(.accent)
               }
               ListDivider()
 
@@ -101,6 +140,9 @@ struct LessonView: View {
                 .accessibilityHidden(true)
             }
           }
+        }
+        .onTapGesture {
+          selected = ""
         }
       }
     }
