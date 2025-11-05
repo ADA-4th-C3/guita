@@ -44,7 +44,7 @@ struct HomeView: View {
 
           // MARK: 기타 학습
           Button {
-            router.push(.curriculum)
+            router.push(.dashboard)
           } label: {
             Text("기타 학습")
               .fontKoddi(32, color: .light, weight: .bold)

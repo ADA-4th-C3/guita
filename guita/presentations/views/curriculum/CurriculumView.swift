@@ -5,7 +5,7 @@ import SwiftUI
 struct CurriculumView: View {
   @EnvironmentObject var router: Router
 
-  @State private var selected: String? = nil
+  @AccessibilityFocusState private var focusedItem: String?
 
   var body: some View {
     BaseView(
@@ -20,26 +20,32 @@ struct CurriculumView: View {
               router.push(.chordLessonGuide)
             }.accessibilityAddTraits(.isButton)
               .accessibilityLabel("사용법 도움말")
+              .accessibilityFocused($focusedItem, equals: "info")
           },
           secondTrailing: {
             IconButton("gearshape", isSystemImage: true) {
               router.push(.setting)
             }.accessibilityAddTraits(.isButton)
               .accessibilityHint("설정 화면으로 이동")
+              .accessibilityFocused($focusedItem, equals: "setting")
           }
         )
         ListDivider()
         ScrollView {
           LazyVStack(alignment: .leading, spacing: 0) {
             ForEach(viewModel.state) { songInfo in
-              CurriculumItemCell(songInfo: songInfo, selected: $selected)
+              CurriculumItemCell(
+                songInfo: songInfo,
+                focusedItem: focusedItem
+              )
+              .accessibilityFocused($focusedItem, equals: songInfo.title)
               ListDivider()
             }
           }
         }
       }
       .onTapGesture {
-        selected = nil
+        focusedItem = nil
       }
     }
   }

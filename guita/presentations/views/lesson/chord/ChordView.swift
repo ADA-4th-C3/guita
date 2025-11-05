@@ -4,11 +4,9 @@ import SwiftUI
 
 struct ChordView: View {
   @EnvironmentObject var router: Router
-  //  @AccessibilityFocusState private var focusedChord: Chord?
+  @AccessibilityFocusState private var focusedChord: String?
 
   let songInfo: SongInfo
-
-  @State private var selected: String? = nil
 
   var body: some View {
     BaseView(
@@ -27,40 +25,39 @@ struct ChordView: View {
               router.push(.chordLessonGuide)
             }.accessibilityAddTraits(.isButton)
               .accessibilityLabel("사용법 도움말")
+              .accessibilityFocused($focusedChord, equals: "info")
           },
           secondTrailing: {
             IconButton("gearshape", isSystemImage: true) {
               router.push(.setting)
             }.accessibilityAddTraits(.isButton)
               .accessibilityHint("설정 화면으로 이동")
+              .accessibilityFocused($focusedChord, equals: "setting")
           }
         )
 
         // MARK: Chord Button
         ListDivider()
         ForEach(state.songInfo.chords, id: \.self) { chord in
-          Button(action: { router.push(.chordLesson(chord: chord, chords: state.songInfo.chords))
-            selected = chord.rawValue
+          Button(action: {
+            router.push(.chordLesson(chord: chord, chords: state.songInfo.chords))
           }) {
-            VStack {
-              Text("\(chord.rawValue) 코드")
-                .fontKoddi(26, color: selected == chord.rawValue ? .black : .light, weight: .bold)
-                .padding(.vertical, 36)
-            }
-            .frame(maxWidth: .infinity)
+            Text("\(chord.rawValue) 코드")
+              .fontKoddi(26, color: focusedChord == chord.rawValue ? .black : .light, weight: .bold)
+              .padding(.vertical, 36)
+              .frame(maxWidth: .infinity)
+              .background(focusedChord == chord.rawValue ? Color.accent : Color.clear)
           }
           .accessibilityLabel("\(chord.rawValue) 코드 학습하기")
           .accessibilityAddTraits(.isButton)
-          .if(selected == chord.rawValue) {
-            v in v.background(.accent)
-          }
+          .accessibilityFocused($focusedChord, equals: chord.rawValue)
           ListDivider()
         }
         Spacer()
       }
       .contentShape(Rectangle())
       .onTapGesture {
-        selected = ""
+        focusedChord = nil
       }
     }
   }

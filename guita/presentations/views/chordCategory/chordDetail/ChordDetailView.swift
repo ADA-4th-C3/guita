@@ -4,7 +4,7 @@ import SwiftUI
 
 struct ChordDetailView: View {
   @EnvironmentObject var router: Router
-  @State var selected: String? = nil
+  @AccessibilityFocusState private var focusedChord: String?
 
   let chord: Chord
   let chords: [Chord]
@@ -25,7 +25,7 @@ struct ChordDetailView: View {
         }
         .contentShape(Rectangle())
         .onTapGesture {
-          selected = nil
+          focusedChord = nil
         }
       }
     }
@@ -39,12 +39,14 @@ struct ChordDetailView: View {
           router.push(.chordLessonGuide)
         }.accessibilityAddTraits(.isButton)
           .accessibilityLabel("사용법 도움말")
+          .accessibilityFocused($focusedChord, equals: "info")
       },
       secondTrailing: {
         IconButton("gearshape", isSystemImage: true) {
           router.push(.setting)
         }.accessibilityAddTraits(.isButton)
           .accessibilityHint("설정 화면으로 이동")
+          .accessibilityFocused($focusedChord, equals: "setting")
       }
     )
   }
@@ -59,23 +61,21 @@ struct ChordDetailView: View {
         ForEach(rootChords, id: \.self) { root in
           Button(action: {
             // TODO: - 루트별 코드 리스트로 routing
-            selected = root.rawValue
-            router.push(.chordLesson(chord: chord, chords: chords))
+            router.push(.chordLesson(chord: root, chords: chords))
           }) {
             Text("\(root.rawValue) 코드")
               .fontKoddi(
                 26,
-                color: selected == root.rawValue ? .black : .lightGrey,
+                color: focusedChord == root.rawValue ? .black : .lightGrey,
                 weight: .bold
               )
               .accessibilityAddTraits(.isButton)
               .accessibilityLabel("\(root.rawValue) 코드 학습하기")
+              .frame(height: 110)
+              .frame(maxWidth: .infinity)
+              .background(focusedChord == root.rawValue ? Color.accent : Color.clear)
           }
-          .frame(height: 110)
-          .frame(maxWidth: .infinity)
-          .if(selected == root.rawValue) {
-            v in v.background(.accent)
-          }
+          .accessibilityFocused($focusedChord, equals: root.rawValue)
 
           ListDivider()
         }

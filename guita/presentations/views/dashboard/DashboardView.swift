@@ -4,7 +4,7 @@ import SwiftUI
 
 struct DashboardView: View {
   @EnvironmentObject var router: Router
-  @State var selected: String? = nil
+  @AccessibilityFocusState private var focusedItem: String?
 
   var body: some View {
     BaseView(
@@ -15,6 +15,7 @@ struct DashboardView: View {
       ZStack {
         VStack(spacing: 0) {
           toolbar
+            .accessibilityElement(children: .contain)
 
           dashboardList
 
@@ -22,7 +23,7 @@ struct DashboardView: View {
         }
         .contentShape(Rectangle())
         .onTapGesture {
-          selected = nil
+          focusedItem = nil
         }
       }
     }
@@ -44,12 +45,14 @@ struct DashboardView: View {
 //          router.push(.chordLessonGuide)
         }.accessibilityAddTraits(.isButton)
           .accessibilityLabel("사용법 도움말")
+          .accessibilityFocused($focusedItem, equals: "info")
       },
       secondTrailing: {
         IconButton("gearshape", isSystemImage: true) {
           router.push(.setting)
         }.accessibilityAddTraits(.isButton)
           .accessibilityHint("설정 화면으로 이동")
+          .accessibilityFocused($focusedItem, equals: "setting")
       }
     )
   }
@@ -61,63 +64,57 @@ struct DashboardView: View {
       Button(action: {
         // TODO: - 기타튜닝 routing
         // router.push()
-        selected = "guitarTuining"
       }) {
         Text("기타 튜닝")
           .fontKoddi(
             26,
-            color: selected == "guitarTuining" ? .black : .lightGrey,
+            color: focusedItem == "guitarTuining" ? .black : .lightGrey,
             weight: .bold
           )
           .accessibilityAddTraits(.isButton)
           .accessibilityLabel("기타 튜닝하기")
+          .frame(height: 110)
+          .frame(maxWidth: .infinity)
+          .background(focusedItem == "guitarTuining" ? Color.accent : Color.clear)
       }
-      .frame(height: 110)
-      .frame(maxWidth: .infinity)
-      .if(selected == "guitarTuining") {
-        v in v.background(.accent)
-      }
+      .accessibilityFocused($focusedItem, equals: "guitarTuining")
 
       ListDivider()
 
       Button(action: {
         router.push(.chordCategory)
-        selected = "totalChordLearning"
       }) {
         Text("전체 코드 학습")
           .fontKoddi(
             26,
-            color: selected == "totalChordLearning" ? .black : .lightGrey,
+            color: focusedItem == "totalChordLearning" ? .black : .lightGrey,
             weight: .bold
           )
           .accessibilityAddTraits(.isButton)
           .accessibilityLabel("전체 코드 학습하기")
+          .frame(height: 110)
+          .frame(maxWidth: .infinity)
+          .background(focusedItem == "totalChordLearning" ? Color.accent : Color.clear)
       }
-      .frame(height: 110)
-      .frame(maxWidth: .infinity)
-      .if(selected == "totalChordLearning") {
-        v in v.background(.accent)
-      }
+      .accessibilityFocused($focusedItem, equals: "totalChordLearning")
       ListDivider()
 
       Button(action: {
         router.push(.curriculum)
-        selected = "songLearning"
       }) {
         Text("곡 연습")
           .fontKoddi(
             26,
-            color: selected == "songLearning" ? .black : .lightGrey,
+            color: focusedItem == "songLearning" ? .black : .lightGrey,
             weight: .bold
           )
           .accessibilityAddTraits(.isButton)
           .accessibilityLabel("곡 연습하기")
+          .frame(height: 110)
+          .frame(maxWidth: .infinity)
+          .background(focusedItem == "songLearning" ? Color.accent : Color.clear)
       }
-      .frame(height: 110)
-      .frame(maxWidth: .infinity)
-      .if(selected == "songLearning") {
-        v in v.background(.accent)
-      }
+      .accessibilityFocused($focusedItem, equals: "songLearning")
       ListDivider()
     }
   }
