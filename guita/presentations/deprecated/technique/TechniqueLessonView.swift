@@ -26,7 +26,7 @@ struct TechniqueLessonView: View {
                 : "TechniqueLesson.Title.Hint.NotGranted",
               comment: ""
             ),
-            trailing: {
+            firstTrailing: {
               IconButton("info", color: .light, isSystemImage: false) {
                 router.push(.techniqueLessonGuide)
               }

@@ -3,27 +3,49 @@
 import SwiftUI
 
 struct CurriculumView: View {
+  @EnvironmentObject var router: Router
+
+  @AccessibilityFocusState private var focusedItem: String?
+
   var body: some View {
-    @EnvironmentObject var router: Router
     BaseView(
       create: { CurriculumViewModel() }
     ) { viewModel, _ in
-      VStack {
+      VStack(spacing: 0) {
         Toolbar(
           title: NSLocalizedString("Curriculum.title", comment: ""),
-          accessibilityHint: NSLocalizedString("Curriculum.Hint", comment: "")
+          accessibilityHint: NSLocalizedString("Curriculum.Hint", comment: ""),
+          firstTrailing: {
+            IconButton("info") {
+              router.push(.chordLessonGuide)
+            }.accessibilityAddTraits(.isButton)
+              .accessibilityLabel("사용법 도움말")
+              .accessibilityFocused($focusedItem, equals: "info")
+          },
+          secondTrailing: {
+            IconButton("gearshape", isSystemImage: true) {
+              router.push(.setting)
+            }.accessibilityAddTraits(.isButton)
+              .accessibilityHint("설정 화면으로 이동")
+              .accessibilityFocused($focusedItem, equals: "setting")
+          }
         )
         ListDivider()
-          .padding(.top, 32)
-        Spacer()
         ScrollView {
-          LazyVStack(alignment: .leading, spacing: 8) {
-            ForEach(viewModel.state) { item in
-              CurriculumItemCell(songInfo: item)
+          LazyVStack(alignment: .leading, spacing: 0) {
+            ForEach(viewModel.state) { songInfo in
+              CurriculumItemCell(
+                songInfo: songInfo,
+                focusedItem: focusedItem
+              )
+              .accessibilityFocused($focusedItem, equals: songInfo.title)
               ListDivider()
             }
           }
         }
+      }
+      .onTapGesture {
+        focusedItem = nil
       }
     }
   }

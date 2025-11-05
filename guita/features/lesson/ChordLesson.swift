@@ -147,6 +147,7 @@ final class ChordLesson: BaseLesson {
           string,
           finger
         )
+        // TODO: - 바코드라면 어떻게 처리해야 하는지 넣어놓기
         await self.textToSpeechManager.speak(text)
       },
     ])
@@ -350,7 +351,7 @@ final class ChordLesson: BaseLesson {
   func onNoteClassified(userNote: Note?) {
     if !isNoteClassificationEnabled { return }
     guard let userNote = userNote else { return }
-    guard coordIdx >= 0 && coordIdx < chord.notes.count else { return }
+    guard coordIdx >= 0, coordIdx < chord.notes.count else { return }
     let note = chord.notes[coordIdx]
     // Logger.d("Note : \(note), User Note : \(userNote)")
     if note == userNote {

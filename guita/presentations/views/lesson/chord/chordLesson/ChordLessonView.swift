@@ -11,91 +11,82 @@ struct ChordLessonView: View {
     BaseView(
       create: { ChordLessonViewModel(router, chord, chords) }
     ) { viewModel, state in
-      PermissionView(
-        permissionListener: { isGranted in
-          if isGranted {
-            viewModel.onPermissionGranted()
+//      PermissionView(
+//        permissionListener: { isGranted in
+//          if isGranted {
+//            viewModel.onPermissionGranted()
+//          }
+//        }
+//      )
+//      {
+      VStack(spacing: 0) {
+        // MARK: Toolbar
+        Toolbar(
+          title: String(
+            format: NSLocalizedString("%@ 코드", comment: ""),
+            "\(state.chord.rawValue)"
+          ),
+          accessibilityHint: String(
+            format: NSLocalizedString(
+              state.isPermissionGranted
+                ? "ChordLessonView.Accessibility.Description"
+                : "ChordLessonView.Accessibility.Description.NoPermission",
+              comment: ""
+            ),
+            "\(state.chord.rawValue)"
+          ),
+          firstTrailing: {
+            IconButton("info") {
+              router.push(.chordLessonGuide)
+            }.accessibilityAddTraits(.isButton)
+              .accessibilityLabel("사용법 도움말")
+          },
+          secondTrailing: {
+            IconButton("gearshape", isSystemImage: true) {
+              router.push(.setting)
+            }.accessibilityAddTraits(.isButton)
+              .accessibilityHint("설정 화면으로 이동")
           }
-        }
-      ) {
-        VStack(spacing: 0) {
-          // MARK: Toolbar
-          Toolbar(
-            title: String(
-              format: NSLocalizedString("%@ 코드", comment: ""),
-              "\(state.chord.rawValue)"
-            ),
-            accessibilityHint: String(
-              format: NSLocalizedString(
-                state.isPermissionGranted ? "ChordLessonView.Accessibility.Description"
-                  : "ChordLessonView.Accessibility.Description.NoPermission",
-                comment: ""
-              ),
-              "\(state.chord.rawValue)"
-            ),
-            trailing: {
-              IconButton("info") {
-                router.push(.chordLessonGuide)
-              }.accessibilityAddTraits(.isButton)
-                .accessibilityLabel("사용법 도움말")
-            }
-          )
+        )
 
-          // MARK: Index
-          Text("\(state.index + 1)/\(state.totalStep) 단계")
+        // MARK: Index
+        HStack {
+          Spacer()
+          Text("\(state.index + 1)/\(state.totalStep)")
             .fontKoddi(22, color: .darkGrey)
             .padding(.top, 16)
+            .padding(.trailing, 10)
             .accessibilityHidden(true)
-          Spacer()
-
-          // MARK: Step description
-          Text(state.description)
-            .fontKoddi(26, color: .light, weight: .bold)
-            .lineSpacing(1.45)
-            .multilineTextAlignment(.center)
-            .accessibilityHidden(true)
-
-          Spacer()
-
-          // MARK: Controllers
-          HStack {
-            // MARK: Previous Button
-            IconButton("chevron-left", color: .light, size: 95, disabled: state.step == .introduction) {
-              viewModel.goPrevious()
-            }
-            .accessibilityLabel(
-              NSLocalizedString("ChordLesson.Button.Previous.Label", comment: "")
-            )
-            .accessibilityHint(
-              NSLocalizedString(state.step == .introduction ? "ChordLesson.Button.Previous.Hint.Inactive" : "", comment: "")
-            )
-
-            // MARK: Play Button
-            IconButton("play", color: .accent, size: 95) {
-              viewModel.play()
-            }
-            .accessibilityLabel(NSLocalizedString("ChordLesson.Button.Play.Label", comment: ""))
-            .accessibilityHint(
-              String(
-                format: NSLocalizedString("ChordLesson.Button.Play.Hint", comment: ""),
-                state.description
-              )
-            )
-
-            // MARK: Next Button
-            IconButton("chevron-right", size: 95) {
-              viewModel.goNext()
-            }
-            .accessibilityLabel(
-              NSLocalizedString("ChordLesson.Button.Next.Label", comment: "")
-            )
-            .accessibilityHint(state.nextChordAccessibilityHint)
-          }
         }
+
+        ChordStringGuideView(chord: state.chord)
+
+        // MARK: Step description
+        Text(state.description)
+          .fontKoddi(26, color: .light, weight: .bold)
+          .lineSpacing(1.45)
+          .padding(.top, 20)
+          .multilineTextAlignment(.center)
+          .accessibilityHidden(true)
+
+        Spacer()
+
+        // MARK: Controllers
+        BottomController(
+          previousDisabled: state.step == .introduction,
+          isIntroduction: state.step == .introduction,
+          description: state.description,
+          nextChordAccessibilityHint: state.nextChordAccessibilityHint,
+          goPrevious: { viewModel.goPrevious() },
+          play: { viewModel.play() },
+          goNext: { viewModel.goNext() }
+        )
       }
     }
   }
 }
+
+// }
 
 #Preview {
   BasePreview {

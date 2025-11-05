@@ -12,10 +12,18 @@ struct HomeView: View {
       VStack {
         // MARK: Toolbar
         Toolbar(
+          titlePrefix: {
+            Image("titleIcon")
+              .resizable()
+              .scaledToFit()
+              .frame(width: 44, height: 44)
+              .accessibilityHidden(true)
+          },
           title: NSLocalizedString("Guita", comment: ""),
           accessibilityHint: NSLocalizedString("귀로 치는 기타, 귀타가 시작되었습니다. 기타 학습을 시작하기 위해서는 기타 학습 버튼을 눌러주십시오.", comment: ""),
           isPopButton: false,
-          trailing: {
+          centerTitle: true,
+          firstTrailing: {
             // MARK: Dev Button
             Text("Dev")
               .opacity(0.01)
@@ -36,7 +44,7 @@ struct HomeView: View {
 
           // MARK: 기타 학습
           Button {
-            router.push(.curriculum)
+            router.push(.dashboard)
           } label: {
             Text("기타 학습")
               .fontKoddi(32, color: .light, weight: .bold)
@@ -45,17 +53,17 @@ struct HomeView: View {
           }
           .accessibilityHint("학습 목록 화면으로 이동")
 
-          // MARK: 설정
-          Button {
-            router.push(.setting)
-          } label: {
-            Text("설정")
-              .fontKoddi(32, color: .light, weight: .bold)
-              .frame(maxWidth: .infinity, alignment: .center)
-              .padding(16)
-          }
-          .padding(.top, 8)
-          .accessibilityHint("설정 화면으로 이동")
+//          // MARK: 설정
+//          Button {
+//            router.push(.setting)
+//          } label: {
+//            Text("설정")
+//              .fontKoddi(32, color: .light, weight: .bold)
+//              .frame(maxWidth: .infinity, alignment: .center)
+//              .padding(16)
+//          }
+//          .padding(.top, 8)
+//          .accessibilityHint("설정 화면으로 이동")
         }
         .offset(y: -80)
         .frame(maxWidth: .infinity, maxHeight: .infinity)

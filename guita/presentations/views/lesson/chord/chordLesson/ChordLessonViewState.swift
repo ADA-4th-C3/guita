@@ -25,6 +25,9 @@ struct ChordLessonViewState {
   /// 전체 레슨
   let steps: [ChordLessonStep]
 
+  /// 화면 텍스트
+//  var displayText: String
+
   /// 현재 레슨
   var step: ChordLessonStep { steps[index] }
   var nextStep: ChordLessonStep { index + 1 > totalStep ? .finish : steps[index + 1] }
