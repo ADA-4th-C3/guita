@@ -2209,6 +2209,16 @@
         }
       }
     },
+    "열" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ten"
+          }
+        }
+      }
+    },
     "여덟 번째" : {
       "localizations" : {
         "en" : {
