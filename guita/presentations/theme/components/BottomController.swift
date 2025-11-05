@@ -19,7 +19,7 @@ struct BottomController: View {
     nextChordAccessibilityHint: String,
     goPrevious: @escaping () -> Void,
     play: @escaping () -> Void,
-    goNext: @escaping () -> Void,
+    goNext: @escaping () -> Void
   ) {
     self.previousDisabled = previousDisabled
     self.isIntroduction = isIntroduction

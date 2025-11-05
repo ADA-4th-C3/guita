@@ -27,7 +27,6 @@ struct RouterView: View {
           // MARK: User
           case .setting: SettingView()
           case .dashboard: DashboardView()
-
           // MARK: Guitar Tunar
           //          case .guitarTunar: GuitarTunarView()
           // MARK: ChordCategoryView
